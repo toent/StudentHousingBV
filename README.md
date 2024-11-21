@@ -5,3 +5,4 @@ By Team Vestude (4.2)
 - Front-end Lead: **Realgi Hila**
 - Back-end Lead: **Tomas Lopes**
 - Data Storage Lead: **Mats van Liempd**
+- Quality Assurance Lead: **Seyf Debbabi**
