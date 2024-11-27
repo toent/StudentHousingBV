@@ -8,19 +8,24 @@
     "net8.0-windows7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\realg\\.nuget\\packages\\": {}
+    "C:\\Users\\mats\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\realg\\Source\\Repos\\StudentHousingBV\\StudentHousingBV\\StudentHousingBV.csproj",
+      "projectUniqueName": "C:\\Users\\mats\\source\\repos\\StudentHousingBV\\StudentHousingBV\\StudentHousingBV.csproj",
       "projectName": "StudentHousingBV",
-      "projectPath": "C:\\Users\\realg\\Source\\Repos\\StudentHousingBV\\StudentHousingBV\\StudentHousingBV.csproj",
-      "packagesPath": "C:\\Users\\realg\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\realg\\Source\\Repos\\StudentHousingBV\\StudentHousingBV\\obj\\",
+      "projectPath": "C:\\Users\\mats\\source\\repos\\StudentHousingBV\\StudentHousingBV\\StudentHousingBV.csproj",
+      "packagesPath": "C:\\Users\\mats\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\mats\\source\\repos\\StudentHousingBV\\StudentHousingBV\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\realg\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\mats\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
