@@ -70,6 +70,29 @@ namespace StudentHousingBV
         }
 
 
+        /// <summary>
+        /// Get the current highest ID assigned to a flat
+        /// </summary>
+        public int GetIdFromClass(Complaint complaint, int buildingId, int flatId)
+        {
+            int resultId = -1;
+
+            LoadFromStorage();
+
+            if (this.buildings[buildingId].Flats.Count > 0)
+            {
+                foreach (Complaint c in this.GetComplaints(buildingId, flatId))
+                {
+                    if (c.Id > resultId)
+                    {
+                        resultId = c.Id;
+                    }
+                }
+            }
+
+            return resultId;
+        }
+
         //----------------------------------------------------------------------------------------ALL OTHER METHODS----------------------------------------------------------------------------------------
 
 
@@ -84,6 +107,10 @@ namespace StudentHousingBV
         //get all students in a flat
         public List<Student> GetStudents(int buildingId, int flatId) 
         { return this.GetFlats(buildingId).FirstOrDefault(flat => flat.Id == flatId).Students; }
+
+        //get all complaints of a flat
+        public List<Complaint> GetComplaints(int buildingId, int flatId)
+        { return this.GetFlats(buildingId).FirstOrDefault(flat => flat.Id == flatId).Complaints;  }
 
 
         /// <summary>
