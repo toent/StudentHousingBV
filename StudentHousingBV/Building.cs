@@ -10,35 +10,35 @@ namespace StudentHousingBV
     {
         public int Id { get; set; }
         public string Address { get; set; }
-        //private List<Flat> flats;
-        //private List<Rule> buildingRules;
+        public List<Flat> Flats { get; set; }
+        //public List<Rule> BuildingRules { get; set; }
 
-        //parameterless constructor used for deserialization
+        //Empty constructor for deserialization
         public Building() { }
 
-        //constructor for regular usage
+        //constructors for regular usage
         public Building(string inputAddress, DataManager dataManager)
         {
             this.Address = inputAddress;
-            //this.flats = new List<Flat>();
-            //this.buildingRules = new List<Rule>();
+            this.Flats = new List<Flat>();
+            //this.BuildingRules = new List<Rule>();
             this.Id = dataManager.GetIdFromClass(this) + 1;
         }
 
-        /*public Building(string inputAddress, List<Flat> inputFlats)
+        public Building(string inputAddress, List<Flat> inputFlats, DataManager dataManager)
         {
-            this.address = inputAddress;
-            this.flats = inputFlats;
-            this.buildingRules = new List<Rule>();
-            this.id = dataManager.GetIdFromClass(this) + 1;
-        }*/
+            this.Address = inputAddress;
+            this.Flats = inputFlats;
+            //this.BuildingRules = new List<Rule>();
+            this.Id = dataManager.GetIdFromClass(this) + 1;
+        }
 
-        /*public Building(string inputAddress, List<Flat> inputFlats, List<Rule> inputBuildingRules)
+        /*public Building(string inputAddress, List<Flat> inputFlats, List<Rule> rules,DataManager dataManager)
         {
-            this.address = inputAddress;
-            this.flats = inputFlats;
-            this.buildingRules = inputBuildingRules;
-            this.id = dataManager.GetIdFromClass(this) + 1;
+            this.Address = inputAddress;
+            this.Flats = inputFlats;
+            this.BuildingRules = rules;
+            this.Id = dataManager.GetIdFromClass(this) + 1;
         }*/
     }
 }

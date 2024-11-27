@@ -18,7 +18,13 @@ namespace StudentHousingBV
             LoadFromStorage();
         }
 
-        //Class to get the latests id of a class from the storage
+
+        //-------------------------------------------------------------------------------------METHODS FOR GETTING IDs-------------------------------------------------------------------------------------
+
+
+        /// <summary>
+        /// Get the current highest ID assigned to a building
+        /// </summary>
         public int GetIdFromClass(Building building)
         {
             int resultId = -1;
@@ -39,20 +45,55 @@ namespace StudentHousingBV
             return resultId;
         }
 
-        //get all buildings aka all the available data
+
+        /// <summary>
+        /// Get the current highest ID assigned to a flat
+        /// </summary>
+        public int GetIdFromClass(Flat flat, int buildingId)
+        {
+            int resultId = -1;
+
+            LoadFromStorage();
+
+            if (this.buildings[buildingId].Flats.Count > 0)
+            {
+                foreach (Flat f in this.GetFlats(buildingId))
+                {
+                    if (f.Id > resultId)
+                    {
+                        resultId = f.Id;
+                    }
+                }
+            }
+
+            return resultId;
+        }
+
+
+        //----------------------------------------------------------------------------------------ALL OTHER METHODS----------------------------------------------------------------------------------------
+
+
+        //get all buildings
         public List<Building> GetBuildings() 
         { return this.buildings; }
 
-        //set the buildings in the datamanager
-        public void SetBuildings(List<Building> newBuildings)
-        { this.buildings = newBuildings; }
+        //get all flats in a building
+        public List<Flat> GetFlats(int buildingId)
+        { return this.buildings.FirstOrDefault(building => building.Id == buildingId).Flats; }
+
+        //get all students in a flat
+        public List<Student> GetStudents(int buildingId, int flatId) 
+        { return this.GetFlats(buildingId).FirstOrDefault(flat => flat.Id == flatId).Students; }
 
 
+        /// <summary>
+        /// Load the data that is currently in /Storage/data.json
+        /// </summary>
         public void LoadFromStorage()
         {
             //get the storage path
             string storagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Storage");
-            
+
             if (Directory.Exists(storagePath))
             {
                 //save json as string
@@ -62,23 +103,25 @@ namespace StudentHousingBV
                 {
                     //deserialize json and make it nullable
                     List<Building>? deserializedJson = JsonSerializer.Deserialize<List<Building>>(savedJsonText);
-                    if(deserializedJson != null)
+                    if (deserializedJson != null)
                     {
                         //if not null add to buildings
                         this.buildings = deserializedJson;
-                    } 
+                    }
                 }
                 catch (Exception ex)
                 {
                     //catch exception
                 }
             }
-
-
         }
 
+
+        /// <summary>
+        /// Save the current data in /Storage/data.json
+        /// </summary>
         public void SaveToStorage()
-        {    
+        {
             //set storage file path 
             string storagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Storage");
 
@@ -92,6 +135,10 @@ namespace StudentHousingBV
             File.WriteAllText(Path.Combine(storagePath, "data.json"), jsonBuilding);
         }
 
+
+        /// <summary>
+        /// Debug string that just get the entire text that is currently in the json file
+        /// </summary>
         public string GetJsonBuilding()
         {
             LoadFromStorage();
