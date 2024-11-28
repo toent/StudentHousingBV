@@ -28,12 +28,44 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "StudentHouserules";
+            label1 = new Label();
+            panelRules = new Panel();
+            SuspendLayout();
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 40.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.Location = new Point(137, 34);
+            label1.Name = "label1";
+            label1.Size = new Size(423, 89);
+            label1.TabIndex = 0;
+            label1.Text = "House Rules";
+            // 
+            // panelRules
+            // 
+            panelRules.Location = new Point(65, 141);
+            panelRules.Name = "panelRules";
+            panelRules.Size = new Size(568, 564);
+            panelRules.TabIndex = 1;
+            // 
+            // StudentHouserules
+            // 
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(1902, 1033);
+            Controls.Add(panelRules);
+            Controls.Add(label1);
+            Name = "StudentHouserules";
+            Text = "h";
+            Load += StudentHouserules_Load;
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
+
+        private Label label1;
+        private Panel panelRules;
     }
 }
