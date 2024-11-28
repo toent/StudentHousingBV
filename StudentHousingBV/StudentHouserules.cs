@@ -17,22 +17,24 @@ namespace StudentHousingBV
             DisplayRules();
         }
 
+        //displaying rules dynamically on the form
         private void DisplayRules()
         {
-            //take the rules from whenever we will take it 
-            List<string> rules = TakeRulesFromStorage();
+            List<Rule> rules = TakeRulesFromStorage();
 
-            panelRules.Controls.Clear();
+            panelRules.Controls.Clear(); //everytime i refresh the page new labels will be added without removing the old ones (CHATGPT generated)
 
-            int verticalPosition = 10; 
-            foreach (string rule in rules)
+            int verticalPosition = 10;
+            foreach (Rule rule in rules) //go through each rule and create a new label 
             {
                 Label ruleLabel = new Label
                 {
-                    Text = rule,               
-                    AutoSize = true,            
-                    Location = new Point(10, verticalPosition), 
-                    Font = new Font("Arial", 18, FontStyle.Regular)
+                    Text = $"{rule.Id}. {rule.Description} (Created on: {rule.CreateTime:yyyy-MM-dd})",
+
+                    //ignore these are just to make the text fit in the label so we dont have problems
+                    AutoSize = true,
+                    Location = new Point(10, verticalPosition),
+                    Font = new Font("Arial", 12, FontStyle.Regular)
                 };
 
                 verticalPosition += 30;
@@ -41,25 +43,26 @@ namespace StudentHousingBV
             }
         }
 
-        private List<string> TakeRulesFromStorage()
+        //simulates retrieving rules from database or whatever we gonna use
+        private List<Rule> TakeRulesFromStorage()
         {
-            //replace this thing with the data source wherever we get them
-            return new List<string>
-            {
-                "1. ",
-                "2. ",
-                "3. ",
-                "4. ",
-                "5. ",
-                "6. ",
-                "7. ",
-                "8. ",
-                "9. ",
-                "10. ",
-                "11. ",
-                "12.",
-                "13.",
-                "14"
+
+            return new List<Rule>
+        {
+        new Rule("No loud noises after 10 PM."),
+        new Rule("Keep common areas clean."),
+        new Rule("Guests must leave by midnight."),
+        new Rule("Report maintenance issues promptly."),
+        new Rule("No smoking in the building."),
+        new Rule("Respect others' privacy."),
+        new Rule("Pay rent by the 5th of each month."),
+        new Rule("Use of illegal substances is prohibited."),
+        new Rule("No pets without prior approval."),
+        new Rule("Keep emergency exits clear."),
+        new Rule("No tampering with fire alarms."),
+        new Rule("Utilities must be used responsibly."),
+        new Rule("No unauthorized room changes."),
+        new Rule("Follow all posted safety guidelines.")
             };
         }
     }

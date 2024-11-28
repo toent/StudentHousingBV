@@ -36,7 +36,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 40.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(137, 34);
+            label1.Location = new Point(229, 39);
             label1.Name = "label1";
             label1.Size = new Size(423, 89);
             label1.TabIndex = 0;
@@ -46,7 +46,7 @@
             // 
             panelRules.Location = new Point(65, 141);
             panelRules.Name = "panelRules";
-            panelRules.Size = new Size(568, 564);
+            panelRules.Size = new Size(712, 564);
             panelRules.TabIndex = 1;
             // 
             // StudentHouserules
