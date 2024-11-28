@@ -6,7 +6,9 @@ using System.Windows.Forms;
 namespace StudentHousingBV
 {
     public partial class StudentHouserules : Form
-    {
+    { 
+        DataManager dataManager = new DataManager();
+
         public StudentHouserules()
         {
             InitializeComponent();
@@ -14,9 +16,9 @@ namespace StudentHousingBV
 
         private void StudentHouserules_Load(object sender, EventArgs e)
         {
-            DisplayRules();
+            //DisplayRules();
         }
-
+/*
         //displaying rules dynamically on the form
         private void DisplayRules()
         {
@@ -49,22 +51,22 @@ namespace StudentHousingBV
 
             return new List<Rule>
         {
-        new Rule("No loud noises after 10 PM."),
-        new Rule("Keep common areas clean."),
-        new Rule("Guests must leave by midnight."),
-        new Rule("Report maintenance issues promptly."),
-        new Rule("No smoking in the building."),
-        new Rule("Respect others' privacy."),
-        new Rule("Pay rent by the 5th of each month."),
-        new Rule("Use of illegal substances is prohibited."),
-        new Rule("No pets without prior approval."),
-        new Rule("Keep emergency exits clear."),
-        new Rule("No tampering with fire alarms."),
-        new Rule("Utilities must be used responsibly."),
-        new Rule("No unauthorized room changes."),
-        new Rule("Follow all posted safety guidelines.")
+        new Rule("No loud noises after 10 PM.", dataManager),
+        new Rule("Keep common areas clean.", dataManager),
+        new Rule("Guests must leave by midnight.", dataManager),
+        new Rule("Report maintenance issues promptly.", dataManager),
+        new Rule("No smoking in the building.", dataManager),
+        new Rule("Respect others' privacy.", dataManager),
+        new Rule("Pay rent by the 5th of each month.", dataManager),
+        new Rule("Use of illegal substances is prohibited.", dataManager),
+        new Rule("No pets without prior approval.", dataManager),
+        new Rule("Keep emergency exits clear.", dataManager),
+        new Rule("No tampering with fire alarms.", dataManager),
+        new Rule("Utilities must be used responsibly.", dataManager),
+        new Rule("No unauthorized room changes.", dataManager),
+        new Rule("Follow all posted safety guidelines.", dataManager)
             };
-        }
+        }*/
     }
 }
 

@@ -33,13 +33,8 @@ namespace StudentHousingBV
 
             if (this.buildings.Count > 0)
             {
-                foreach (Building b in this.buildings)
-                {
-                    if (b.Id > resultId)
-                    {
-                        resultId = b.Id;
-                    }
-                }
+
+                resultId = this.buildings.Max(building => building.Id);
             }
 
             return resultId;
@@ -55,15 +50,9 @@ namespace StudentHousingBV
 
             LoadFromStorage();
 
-            if (this.buildings[buildingId].Flats.Count > 0)
+            if (this.GetFlats(buildingId).Count > 0)
             {
-                foreach (Flat f in this.GetFlats(buildingId))
-                {
-                    if (f.Id > resultId)
-                    {
-                        resultId = f.Id;
-                    }
-                }
+                resultId = this.GetFlats(buildingId).Max(flat => flat.Id);
             }
 
             return resultId;
@@ -81,17 +70,38 @@ namespace StudentHousingBV
 
             if (this.buildings[buildingId].Flats.Count > 0)
             {
-                foreach (Complaint c in this.GetComplaints(buildingId, flatId))
+
+                resultId = this.GetComplaints(buildingId,flatId).Max(complaint => complaint.Id);
+            }
+
+            return resultId;
+        }
+
+        /// <summary>
+        /// Get the current highest ID assigned to a building rule
+        /// </summary>
+        public int GetIdFromClass(Rule rule, int buildingId)
+        {
+            int resultId = -1;
+
+            LoadFromStorage();
+
+            if (this.buildings[buildingId].Flats.Count > 0)
+            {
+                resultId = this.buildings[buildingId].BuildingRules.Max(rule =>  rule.Id);
+
+                foreach (Flat f in this.GetFlats(buildingId))
                 {
-                    if (c.Id > resultId)
+                    if (f.FlatRules.Max(rule => rule.Id) > resultId)
                     {
-                        resultId = c.Id;
+                        resultId = f.FlatRules.Max(rule => rule.Id);
                     }
                 }
             }
 
             return resultId;
         }
+
 
         //----------------------------------------------------------------------------------------ALL OTHER METHODS----------------------------------------------------------------------------------------
 
@@ -110,7 +120,16 @@ namespace StudentHousingBV
 
         //get all complaints of a flat
         public List<Complaint> GetComplaints(int buildingId, int flatId)
-        { return this.GetFlats(buildingId).FirstOrDefault(flat => flat.Id == flatId).Complaints;  }
+        { return this.GetFlats(buildingId).FirstOrDefault(flat => flat.Id == flatId).Complaints; }
+
+        //get all rules
+        public List<Rule> GetAllRules(int buildingId, int flatId)
+        {
+            List<Rule> totalRules = new List<Rule>();
+            totalRules.AddRange(this.GetBuildings()[buildingId].BuildingRules);
+            totalRules.AddRange(this.GetFlats(buildingId)[flatId].FlatRules);
+            return totalRules;
+        }
 
 
         /// <summary>

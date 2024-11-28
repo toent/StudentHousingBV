@@ -12,7 +12,7 @@ namespace StudentHousingBV
         public int FlatNumber { get; set; }
         public List<Student> Students { get; set; }
         //public List<Chore> Chores { get; set; }
-        //public List<Rule> FlatRules { get; set; }
+        public List<Rule> FlatRules { get; set; }
         public List<Complaint> Complaints { get; set; }
         //public List<Agreement> Agreements { get; set; }
         //public List<Grocery> Groceries { get; set; }
@@ -37,29 +37,31 @@ namespace StudentHousingBV
             this.Id = dataManger.GetIdFromClass(this, buildingId);
         }
 
-        /*public Flat(int buildingId, int flatNumber, DataManager dataManager, List<Rule> rules)
+        public Flat(int buildingId, int flatNumber, DataManager dataManager, List<Rule> rules)
         {
             this.FlatNumber = flatNumber;
             this.Complaints = new List<Complaint>();
             this.FlatRules = rules;
             this.Id = dataManager.GetIdFromClass(this, buildingId);
-        }*/
+        }
 
-        /*public Flat(int buildingId, int flatNumber, DataManager dataManger, List<Student> students, List<Rule> rules)
+        public Flat(int buildingId, int flatNumber, DataManager dataManger, List<Student> students, List<Rule> rules)
         {
             this.FlatNumber = flatNumber;
             this.Complaints = new List<Complaint>();
             this.Students = students;
             this.FlatRules = rules;
             this.Id = dataManger.GetIdFromClass(this, buildingId);
-        }*/
-
-
-
+        }
 
         public void AddComplaint(Complaint complaint)
         {
             this.Complaints.Add(complaint);
+        }
+
+        public void AddFlatRule(Rule flatRule)
+        {
+            this.FlatRules.Add(flatRule);
         }
 
     }

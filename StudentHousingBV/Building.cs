@@ -11,7 +11,7 @@ namespace StudentHousingBV
         public int Id { get; set; }
         public string Address { get; set; }
         public List<Flat> Flats { get; set; }
-        //public List<Rule> BuildingRules { get; set; }
+        public List<Rule> BuildingRules { get; set; }
 
         //Empty constructor for deserialization
         public Building() { }
@@ -21,7 +21,7 @@ namespace StudentHousingBV
         {
             this.Address = inputAddress;
             this.Flats = new List<Flat>();
-            //this.BuildingRules = new List<Rule>();
+            this.BuildingRules = new List<Rule>();
             this.Id = dataManager.GetIdFromClass(this) + 1;
         }
 
@@ -29,16 +29,21 @@ namespace StudentHousingBV
         {
             this.Address = inputAddress;
             this.Flats = inputFlats;
-            //this.BuildingRules = new List<Rule>();
+            this.BuildingRules = new List<Rule>();
             this.Id = dataManager.GetIdFromClass(this) + 1;
         }
 
-        /*public Building(string inputAddress, List<Flat> inputFlats, List<Rule> rules,DataManager dataManager)
+        public Building(string inputAddress, List<Flat> inputFlats, List<Rule> rules, DataManager dataManager)
         {
             this.Address = inputAddress;
             this.Flats = inputFlats;
             this.BuildingRules = rules;
             this.Id = dataManager.GetIdFromClass(this) + 1;
-        }*/
+        }
+
+        public void AddBuildingRule(Rule buildingRule)
+        {
+            BuildingRules.Add(buildingRule);
+        }
     }
 }

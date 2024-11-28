@@ -5,35 +5,30 @@ namespace StudentHousingBV
 {
     public class Rule
     {
-        private static int idCounter = 1; //each rule gets a unique ID
-        private int id;
-        private string description;
-        private DateTime createTime;
+                                                                    //removed idCounter
+        public int Id { get; set; }                                 //made id a property
+        public string Description { get; set; }                     //made description a property
+        public DateTime CreateTime { get; set; }                    //made createTime a property
+
+        // Empty constructor for deserialization
+        public Rule() { }
 
         // Constructor  
-        public Rule(string description)
+        public Rule(string description, DataManager dataManager, int buildingId)
         {
-            this.id = idCounter++;
-            this.description = description;
-            this.createTime = DateTime.Now;
+            this.Description = description;
+            this.CreateTime = DateTime.Now;
+            this.Id = dataManager.GetIdFromClass(this, buildingId);
+            dataManager.GetBuildings()[buildingId].BuildingRules.Add(this);
         }
 
-        //property for accessing and modifying the description
-        public string Description
+        public Rule(string description, DataManager dataManager, int buildingId, int flatId)
         {
-            get { return description; }
-            set { description = value; }
+            this.Description = description;
+            this.CreateTime = DateTime.Now;
+            this.Id = dataManager.GetIdFromClass(this, buildingId);
+            dataManager.GetFlats(buildingId)[flatId].FlatRules.Add(this);
         }
 
-        //property for retrieving the unique ID
-        public int Id
-        {
-            get { return id; }
-        }
-        //property to create time
-        public DateTime CreateTime
-        {
-            get { return createTime; }
-        }
     }
 }
