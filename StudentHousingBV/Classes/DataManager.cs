@@ -55,7 +55,7 @@ namespace StudentHousingBV.Classes
 
 
         /// <summary>
-        /// Get the current highest ID assigned to a flat
+        /// Get the current highest ID assigned to a complaint
         /// </summary>
         public int GetIdFromClass(Complaint complaint, int buildingId, int flatId)
         {
@@ -73,7 +73,7 @@ namespace StudentHousingBV.Classes
         }
 
         /// <summary>
-        /// Get the current highest ID assigned to a building rule
+        /// Get the current highest ID assigned to a rule
         /// </summary>
         public int GetIdFromClass(Rule rule, int buildingId)
         {
@@ -109,7 +109,7 @@ namespace StudentHousingBV.Classes
         public List<Flat> GetFlats(int buildingId)
         { return this.buildings.FirstOrDefault(building => building.Id == buildingId).Flats; }
 
-
+        //get all students
         public List<Student> GetStudents()
         {
             List<Student> allStudents = new List<Student>();
@@ -125,6 +125,7 @@ namespace StudentHousingBV.Classes
             return allStudents;
         }
 
+        //get all students in a building
         public List<Student> GetStudents(int buildingId) 
         {
             List<Student> buildingStudents = new List<Student>();
@@ -136,6 +137,7 @@ namespace StudentHousingBV.Classes
 
             return buildingStudents;
         }
+
         //get all students in a flat
         public List<Student> GetStudents(int buildingId, int flatId)
         { return this.GetFlats(buildingId).FirstOrDefault(flat => flat.Id == flatId).Students; }
