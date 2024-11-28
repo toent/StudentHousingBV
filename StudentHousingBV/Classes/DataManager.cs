@@ -1,16 +1,41 @@
-﻿using System.Text.Json;
+﻿using System.Runtime.InteropServices;
+using System.Text.Json;
+using System.Reflection;
 using StudentHousingBV.Classes;
+using System.Linq.Expressions;
+using System.Security.Cryptography.X509Certificates;
 
 namespace StudentHousingBV.Classes
 {
     public class DataManager
     {
-        private List<Building> buildings;
+        private List<Building> buildings = new List<Building>();
+        private List<Flat> flats = new List<Flat>();
+        private List<Announcement> announcements = new List<Announcement>();
+        private List<Agreement> agreements = new List<Agreement>();
+        private List<Chore> chores = new List<Chore>();
+        private List<Complaint> complaints = new List<Complaint>();
+        private List<Student> students = new List<Student>();
+        private List<Rule> rules = new List<Rule>();
+        private List<Grocery> groceries = new List<Grocery>();
+
+
+        private string storagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Storage");
+        private bool directoryExists = false;
 
         public DataManager()
         {
-            buildings = new List<Building>();
-            LoadFromStorage();
+            Directory.CreateDirectory(storagePath);
+            if (Directory.Exists(storagePath))
+            {
+                directoryExists = true;
+            }
+            else
+            {
+                directoryExists = false;
+            }
+            SaveAllData();
+            LoadAllData();
         }
 
 
@@ -22,14 +47,14 @@ namespace StudentHousingBV.Classes
         /// </summary>
         public int GetIdFromClass(Building building)
         {
-            int resultId = -1;
+            int resultId = 0;
 
-            LoadFromStorage();
+            LoadAttribute(() => buildings);
 
             if (buildings.Count > 0)
             {
 
-                resultId = buildings.Max(building => building.Id);
+                resultId = buildings.Max(building => building.BuildingId);
             }
 
             return resultId;
@@ -41,13 +66,13 @@ namespace StudentHousingBV.Classes
         /// </summary>
         public int GetIdFromClass(Flat flat, int buildingId)
         {
-            int resultId = -1;
+            int resultId = 0;
 
-            LoadFromStorage();
+            LoadAttribute(() => flats);
 
             if (GetFlats(buildingId).Count > 0)
             {
-                resultId = GetFlats(buildingId).Max(flat => flat.Id);
+                resultId = GetFlats(buildingId).Max(flat => flat.FlatId);
             }
 
             return resultId;
@@ -59,14 +84,14 @@ namespace StudentHousingBV.Classes
         /// </summary>
         public int GetIdFromClass(Complaint complaint, int buildingId, int flatId)
         {
-            int resultId = -1;
+            int resultId = 0;
 
-            LoadFromStorage();
+            LoadAttribute(() => complaints);
 
-            if (buildings[buildingId].Flats.Count > 0)
+            if (buildings.FirstOrDefault(building => building.BuildingId == buildingId)?.Flats.Count > 0)
             {
 
-                resultId = GetComplaints(buildingId, flatId).Max(complaint => complaint.Id);
+                resultId = GetComplaints(buildingId, flatId).Max(complaint => complaint.ComplaintId);
             }
 
             return resultId;
@@ -77,19 +102,19 @@ namespace StudentHousingBV.Classes
         /// </summary>
         public int GetIdFromClass(Rule rule, int buildingId)
         {
-            int resultId = -1;
+            int resultId = 0;
 
-            LoadFromStorage();
+            LoadAttribute(() => rules);
 
-            if (buildings[buildingId].Flats.Count > 0)
+            if (GetFlats(buildingId).Count > 0)
             {
-                resultId = buildings[buildingId].BuildingRules.Max(rule => rule.Id);
+                resultId = GetRules(buildingId).Max(rule => rule.RuleId);
 
                 foreach (Flat f in GetFlats(buildingId))
                 {
-                    if (f.FlatRules.Max(rule => rule.Id) > resultId)
+                    if (GetRules(buildingId, f.FlatId).Max(rule => rule.RuleId) > resultId)
                     {
-                        resultId = f.FlatRules.Max(rule => rule.Id);
+                        resultId = GetRules(buildingId, f.FlatId).Max(rule => rule.RuleId);
                     }
                 }
             }
@@ -100,126 +125,137 @@ namespace StudentHousingBV.Classes
 
         //----------------------------------------------------------------------------------------ALL OTHER METHODS----------------------------------------------------------------------------------------
 
+        //get one building
+        public Building? GetBuilding(int buildingId)
+        { return this.buildings.FirstOrDefault(building => building.BuildingId == buildingId); }
 
         //get all buildings
-        public List<Building> GetBuildings()
+        public List<Building>? GetBuildings()
         { return this.buildings; }
 
+        //get one flat
+        public Flat? GetFlat(int buildingId, int flatId)
+        { return flats.FirstOrDefault(flat => flat.BuildingId == buildingId && flat.FlatId == flatId); }
+
         //get all flats in a building
-        public List<Flat> GetFlats(int buildingId)
-        { return this.buildings.FirstOrDefault(building => building.Id == buildingId).Flats; }
+        public ICollection<Flat> GetFlats(int buildingId)
+        { return flats.FindAll(flat => flat.BuildingId == buildingId); }
+
+        public ICollection<Flat> GetFlats() { return flats; }
 
         //get all students
-        public List<Student> GetStudents()
-        {
-            List<Student> allStudents = new List<Student>();
-
-            foreach (Building building in this.buildings)
-            {
-                foreach (Flat flat in building.Flats)
-                {
-                    allStudents.AddRange(flat.Students);
-                }
-            }
-
-            return allStudents;
-        }
+        public ICollection<Student> GetStudents()
+        { return students; }
 
         //get all students in a building
-        public List<Student> GetStudents(int buildingId) 
-        {
-            List<Student> buildingStudents = new List<Student>();
-
-            foreach (Flat flat in this.GetFlats(buildingId))
-            {
-                buildingStudents.AddRange(flat.Students);
-            }
-
-            return buildingStudents;
-        }
+        public ICollection<Student> GetStudents(int buildingId)
+        { return students.FindAll(student => student.BuildingId == buildingId); }
 
         //get all students in a flat
-        public List<Student> GetStudents(int buildingId, int flatId)
-        { return this.GetFlats(buildingId).FirstOrDefault(flat => flat.Id == flatId).Students; }
+        public ICollection<Student>? GetStudents(int buildingId, int flatId)
+        { return students.FindAll(student => student.BuildingId == buildingId && student.FlatId == flatId); }
 
         //get all complaints of a flat
-        public List<Complaint> GetComplaints(int buildingId, int flatId)
-        { return this.GetFlats(buildingId).FirstOrDefault(flat => flat.Id == flatId).Complaints; }
+        public ICollection<Complaint>? GetComplaints(int buildingId, int flatId)
+        { return this.GetFlat(buildingId, flatId)?.Complaints; }
 
-        //get all rules
-        public List<Rule> GetAllRules(int buildingId, int flatId)
+        //get rules of a building
+        public ICollection<Rule> GetRules(int buildingId)
+        { return rules.FindAll(rule => rule.BuildingId == buildingId); }
+
+        //get rules of a flat
+        public ICollection<Rule> GetRules(int buildingId, int flatId)
+        { return rules.FindAll(rule => rule.BuildingId == buildingId && rule.FlatId == flatId); }
+
+        //get all rules of flat and building
+        public ICollection<Rule> GetAllRules(int buildingId, int flatId)
+        { return rules.FindAll(rule => rule.BuildingId == buildingId || (rule.BuildingId == buildingId && rule.FlatId == flatId)); }
+
+        public void LoadAllData()
         {
-            List<Rule> totalRules = new List<Rule>();
-            totalRules.AddRange(GetBuildings()[buildingId].BuildingRules);
-            totalRules.AddRange(GetFlats(buildingId)[flatId].FlatRules);
-            return totalRules;
+            LoadAttribute(() => buildings);
+            LoadAttribute(() => flats);
+            LoadAttribute(() => groceries);
+            LoadAttribute(() => rules);
+            LoadAttribute(() => students);
+            LoadAttribute(() => complaints);
+            LoadAttribute(() => agreements);
+            LoadAttribute(() => announcements);
+            LoadAttribute(() => chores);
+        }
+
+        public void SaveAllData()
+        {
+            SaveAttribute(() => buildings);
+            SaveAttribute(() => flats);
+            SaveAttribute(() => groceries);
+            SaveAttribute(() => rules);
+            SaveAttribute(() => students);
+            SaveAttribute(() => complaints);
+            SaveAttribute(() => agreements);
+            SaveAttribute(() => announcements);
+            SaveAttribute(() => chores);
         }
 
 
-        /// <summary>
-        /// Load the data that is currently in /Storage/data.json
-        /// </summary>
-        public void LoadFromStorage()
+        public List<T>? LoadAttribute<T>(Expression<Func<List<T>>> listExpression)
         {
-            //get the storage path
-            string storagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Storage");
+            string jsonName = GetListName(listExpression);
 
-            if (Directory.Exists(storagePath))
+            if (directoryExists)
             {
-                //save json as string
-                string savedJsonText = File.ReadAllText(Path.Combine(storagePath, "data.json"));
+                string filePath = Path.Combine(storagePath, $"{jsonName}.json");
 
-                try
+                if (File.Exists(filePath))
                 {
-                    //deserialize json and make it nullable
-                    List<Building>? deserializedJson = JsonSerializer.Deserialize<List<Building>>(savedJsonText);
-                    if (deserializedJson != null)
+                    try
                     {
-                        //if not null add to buildings
-                        buildings = deserializedJson;
+                        string extractedJson = File.ReadAllText(filePath);
+
+                        List<T>? deserializedJson = JsonSerializer.Deserialize<List<T>>(extractedJson);
+                        return deserializedJson;
+                    }
+                    catch (Exception ex)
+                    {
+                        // Log the error or handle it as needed (e.g., deserialization issues)
+                        Console.WriteLine($"Error deserializing {jsonName}.json: {ex.Message}");
                     }
                 }
-                catch (Exception ex)
+                else
                 {
-                    //catch exception
+                    Console.WriteLine($"File {jsonName}.json not found.");
                 }
             }
+
+            // Return null if loading fails or the file doesn't exist
+            return null;
         }
 
-
-        /// <summary>
-        /// Save the current data in /Storage/data.json
-        /// </summary>
-        public void SaveToStorage()
+        public void SaveAttribute<T>(Expression<Func<List<T>>> listExpression)
         {
-            //set storage file path 
-            string storagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Storage");
+            string jsonName = GetListName(listExpression);
 
-            //create storage file path if it doesnt exist yet
-            Directory.CreateDirectory(storagePath);
+            string jsonData = JsonSerializer.Serialize(listExpression.Compile().Invoke());
 
-            //convert Buildings to json
-            string jsonBuilding = JsonSerializer.Serialize(buildings);
-
-            //write or create json file
-            File.WriteAllText(Path.Combine(storagePath, "data.json"), jsonBuilding);
-        }
-
-
-        /// <summary>
-        /// Debug string that just get the entire text that is currently in the json file
-        /// </summary>
-        public string GetJsonBuilding()
-        {
-            LoadFromStorage();
-            string savedJsonText = string.Empty;
-            string storagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Storage");
-            //save json as string
-            if (Directory.Exists(storagePath))
+            if (directoryExists)
             {
-                savedJsonText = File.ReadAllText(Path.Combine(storagePath, "data.json"));
+                string filePath = Path.Combine(storagePath, $"{jsonName}.json");
+
+                File.WriteAllText(filePath, jsonData);
             }
-            return savedJsonText;
         }
+
+        public static string GetListName<T>(Expression<Func<List<T>>> expression)
+        {
+            if (expression.Body is MemberExpression memberExpression)
+            {
+                return memberExpression.Member.Name;
+            }
+            throw new ArgumentException("");
+        }
+
+        public string GetFilePath() { return storagePath; }
     }
+            
+
 }

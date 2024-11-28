@@ -6,9 +6,11 @@
         public int RuleId { get; set; } // Primary Key
         public string Description { get; set; }
         public int BuildingId { get; set; } // Foreign Key 
+        public int FlatId { get; set; } // Foreign Key
 
         // Navigation property
         public Building Building { get; set; }
+        public Flat Flat {  get; set; }
         #endregion
 
         #region Constructors  
@@ -16,6 +18,7 @@
         {
             Description = "";
             Building = new Building();
+            Flat = new Flat();
         }
 
         public Rule(string description, DataManager dataManager, int buildingId)

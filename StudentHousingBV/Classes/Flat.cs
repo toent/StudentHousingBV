@@ -10,6 +10,7 @@
         // Navigation properties
         public Building Building { get; set; }
         public ICollection<Student> Students { get; set; }
+        public ICollection<Complaint> Complaints { get; set; }
         #endregion
 
         #region Constructors
@@ -25,7 +26,7 @@
             BuildingId = buildingId;
             FlatNumber = flatNumber;
             FlatId = dataManager.GetIdFromClass(this, buildingId) + 1;
-            Building = dataManager.GetBuildings()[buildingId];
+            Building = dataManager.GetBuilding(buildingId);
             Students = new List<Student>();
         }
 
@@ -34,7 +35,7 @@
             BuildingId = buildingId;
             FlatNumber = flatNumber;
             FlatId = dataManger.GetIdFromClass(this, buildingId) + 1;
-            Building = dataManger.GetBuildings()[buildingId];
+            Building = dataManger.GetBuilding(buildingId);
             Students = students;
         }
         #endregion

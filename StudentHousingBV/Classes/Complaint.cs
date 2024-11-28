@@ -5,12 +5,12 @@
         #region Properties
         public int ComplaintId { get; set; } // Primary Key
         public string Issue { get; set; }
-        public int StudentId { get; set; } // Foreign Key
         public int BuildingId { get; set; } // Foreign Key 
+        public int FlatId { get; set; } //Foreign Key
 
         // Navigation properties
-        public Student Student { get; set; }
-        public Building Building { get; set}
+        public Building Building { get; set; }
+        public Flat Flat { get; set; }
         #endregion
 
         #region Constructors
@@ -18,18 +18,18 @@
         {
             ComplaintId = -1;
             Issue = "";
-            Student = new Student();
             Building = new Building();
+            Flat = new Flat();
         }
 
         public Complaint(string description, int buildingId, int flatId, DataManager dataManager)
         {
-            ComplaintId = -1;
             Issue = description;
             BuildingId = buildingId;
-            StudentId = flatId;
-            Building = dataManager.GetBuildings()[buildingId];
-            Student = dataManager.GetStudents()[flatId];
+            FlatId = flatId;
+            Building = dataManager.GetBuilding(buildingId);
+            Flat = dataManager.GetFlat(buildingId, flatId);
+            ComplaintId = dataManager.GetIdFromClass(this, buildingId, flatId);
         }
         #endregion
     }
