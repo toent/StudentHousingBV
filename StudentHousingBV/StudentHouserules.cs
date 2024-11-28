@@ -14,7 +14,6 @@ namespace StudentHousingBV
 
         private void StudentHouserules_Load(object sender, EventArgs e)
         {
-            //calling the method for the rules to be displayed here i named it like this but u can change it
             DisplayRules();
         }
 
@@ -29,7 +28,6 @@ namespace StudentHousingBV
             foreach (string rule in rules)
             {
                 Label ruleLabel = new Label
-                //creating labels dynamically for each rules or whatever you also can change the font or whatever is these were already ready so i just copy pasted.
                 {
                     Text = rule,               
                     AutoSize = true,            
@@ -39,7 +37,6 @@ namespace StudentHousingBV
 
                 verticalPosition += 30;
 
-                // Add the label that is created dynamically to the panel
                 panelRules.Controls.Add(ruleLabel);
             }
         }
