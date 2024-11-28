@@ -4,6 +4,9 @@
     <Compile Update="DatamanagerTesting.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Student App\StudentLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Student App\StudentNavigator.cs">
       <SubType>Form</SubType>
     </Compile>

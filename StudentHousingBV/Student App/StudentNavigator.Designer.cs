@@ -29,123 +29,155 @@
         private void InitializeComponent()
         {
             pSideMenu = new Panel();
-            button6 = new Button();
-            button5 = new Button();
-            button4 = new Button();
-            button3 = new Button();
-            button2 = new Button();
-            button1 = new Button();
+            btnFileComplaint = new Button();
+            btnGroceries = new Button();
+            btnChores = new Button();
+            btnAgreements = new Button();
+            btnHouseRules = new Button();
+            btnAnnouncements = new Button();
             pFormTitle = new Panel();
+            lblContractId = new Label();
+            lblUserName = new Label();
+            btnLogout = new Button();
             pShowForm = new Panel();
-            button7 = new Button();
-            lblUserIdName = new Label();
             label1 = new Label();
+            lblTitle = new Label();
             pSideMenu.SuspendLayout();
             pFormTitle.SuspendLayout();
             SuspendLayout();
             // 
             // pSideMenu
             // 
-            pSideMenu.Controls.Add(button6);
-            pSideMenu.Controls.Add(button5);
-            pSideMenu.Controls.Add(button4);
-            pSideMenu.Controls.Add(button3);
-            pSideMenu.Controls.Add(button2);
-            pSideMenu.Controls.Add(button1);
+            pSideMenu.Controls.Add(btnFileComplaint);
+            pSideMenu.Controls.Add(btnGroceries);
+            pSideMenu.Controls.Add(btnChores);
+            pSideMenu.Controls.Add(btnAgreements);
+            pSideMenu.Controls.Add(btnHouseRules);
+            pSideMenu.Controls.Add(btnAnnouncements);
             pSideMenu.Dock = DockStyle.Left;
             pSideMenu.Location = new Point(0, 0);
             pSideMenu.Name = "pSideMenu";
             pSideMenu.Size = new Size(300, 1024);
             pSideMenu.TabIndex = 0;
             // 
-            // button6
+            // btnFileComplaint
             // 
-            button6.BackColor = Color.FromArgb(214, 223, 255);
-            button6.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button6.ForeColor = Color.FromArgb(26, 37, 47);
-            button6.Location = new Point(3, 818);
-            button6.Margin = new Padding(3, 20, 3, 20);
-            button6.Name = "button6";
-            button6.Size = new Size(294, 69);
-            button6.TabIndex = 5;
-            button6.Text = "File complaint";
-            button6.UseVisualStyleBackColor = false;
+            btnFileComplaint.BackColor = Color.FromArgb(214, 223, 255);
+            btnFileComplaint.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnFileComplaint.ForeColor = Color.FromArgb(26, 37, 47);
+            btnFileComplaint.Location = new Point(3, 818);
+            btnFileComplaint.Margin = new Padding(3, 20, 3, 20);
+            btnFileComplaint.Name = "btnFileComplaint";
+            btnFileComplaint.Size = new Size(294, 69);
+            btnFileComplaint.TabIndex = 5;
+            btnFileComplaint.Text = "File complaint";
+            btnFileComplaint.UseVisualStyleBackColor = false;
             // 
-            // button5
+            // btnGroceries
             // 
-            button5.BackColor = Color.FromArgb(214, 223, 255);
-            button5.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button5.ForeColor = Color.FromArgb(26, 37, 47);
-            button5.Location = new Point(3, 709);
-            button5.Margin = new Padding(3, 20, 3, 20);
-            button5.Name = "button5";
-            button5.Size = new Size(294, 69);
-            button5.TabIndex = 4;
-            button5.Text = "Groceries";
-            button5.UseVisualStyleBackColor = false;
+            btnGroceries.BackColor = Color.FromArgb(214, 223, 255);
+            btnGroceries.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnGroceries.ForeColor = Color.FromArgb(26, 37, 47);
+            btnGroceries.Location = new Point(3, 709);
+            btnGroceries.Margin = new Padding(3, 20, 3, 20);
+            btnGroceries.Name = "btnGroceries";
+            btnGroceries.Size = new Size(294, 69);
+            btnGroceries.TabIndex = 4;
+            btnGroceries.Text = "Groceries";
+            btnGroceries.UseVisualStyleBackColor = false;
             // 
-            // button4
+            // btnChores
             // 
-            button4.BackColor = Color.FromArgb(214, 223, 255);
-            button4.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button4.ForeColor = Color.FromArgb(26, 37, 47);
-            button4.Location = new Point(3, 600);
-            button4.Margin = new Padding(3, 20, 3, 20);
-            button4.Name = "button4";
-            button4.Size = new Size(294, 69);
-            button4.TabIndex = 3;
-            button4.Text = "Chores";
-            button4.UseVisualStyleBackColor = false;
+            btnChores.BackColor = Color.FromArgb(214, 223, 255);
+            btnChores.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnChores.ForeColor = Color.FromArgb(26, 37, 47);
+            btnChores.Location = new Point(3, 600);
+            btnChores.Margin = new Padding(3, 20, 3, 20);
+            btnChores.Name = "btnChores";
+            btnChores.Size = new Size(294, 69);
+            btnChores.TabIndex = 3;
+            btnChores.Text = "Chores";
+            btnChores.UseVisualStyleBackColor = false;
             // 
-            // button3
+            // btnAgreements
             // 
-            button3.BackColor = Color.FromArgb(214, 223, 255);
-            button3.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button3.ForeColor = Color.FromArgb(26, 37, 47);
-            button3.Location = new Point(3, 491);
-            button3.Margin = new Padding(3, 20, 3, 20);
-            button3.Name = "button3";
-            button3.Size = new Size(294, 69);
-            button3.TabIndex = 2;
-            button3.Text = "Agreements";
-            button3.UseVisualStyleBackColor = false;
+            btnAgreements.BackColor = Color.FromArgb(214, 223, 255);
+            btnAgreements.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnAgreements.ForeColor = Color.FromArgb(26, 37, 47);
+            btnAgreements.Location = new Point(3, 491);
+            btnAgreements.Margin = new Padding(3, 20, 3, 20);
+            btnAgreements.Name = "btnAgreements";
+            btnAgreements.Size = new Size(294, 69);
+            btnAgreements.TabIndex = 2;
+            btnAgreements.Text = "Agreements";
+            btnAgreements.UseVisualStyleBackColor = false;
             // 
-            // button2
+            // btnHouseRules
             // 
-            button2.BackColor = Color.FromArgb(214, 223, 255);
-            button2.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button2.ForeColor = Color.FromArgb(26, 37, 47);
-            button2.Location = new Point(3, 382);
-            button2.Margin = new Padding(3, 20, 3, 20);
-            button2.Name = "button2";
-            button2.Size = new Size(294, 69);
-            button2.TabIndex = 1;
-            button2.Text = "House rules";
-            button2.UseVisualStyleBackColor = false;
+            btnHouseRules.BackColor = Color.FromArgb(214, 223, 255);
+            btnHouseRules.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnHouseRules.ForeColor = Color.FromArgb(26, 37, 47);
+            btnHouseRules.Location = new Point(3, 382);
+            btnHouseRules.Margin = new Padding(3, 20, 3, 20);
+            btnHouseRules.Name = "btnHouseRules";
+            btnHouseRules.Size = new Size(294, 69);
+            btnHouseRules.TabIndex = 1;
+            btnHouseRules.Text = "House rules";
+            btnHouseRules.UseVisualStyleBackColor = false;
             // 
-            // button1
+            // btnAnnouncements
             // 
-            button1.BackColor = Color.FromArgb(214, 223, 255);
-            button1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button1.ForeColor = Color.FromArgb(26, 37, 47);
-            button1.Location = new Point(3, 273);
-            button1.Margin = new Padding(3, 20, 3, 20);
-            button1.Name = "button1";
-            button1.Size = new Size(294, 69);
-            button1.TabIndex = 0;
-            button1.Text = "Announcements";
-            button1.UseVisualStyleBackColor = false;
+            btnAnnouncements.BackColor = Color.FromArgb(214, 223, 255);
+            btnAnnouncements.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnAnnouncements.ForeColor = Color.FromArgb(26, 37, 47);
+            btnAnnouncements.Location = new Point(3, 273);
+            btnAnnouncements.Margin = new Padding(3, 20, 3, 20);
+            btnAnnouncements.Name = "btnAnnouncements";
+            btnAnnouncements.Size = new Size(294, 69);
+            btnAnnouncements.TabIndex = 0;
+            btnAnnouncements.Text = "Announcements";
+            btnAnnouncements.UseVisualStyleBackColor = false;
             // 
             // pFormTitle
             // 
+            pFormTitle.Controls.Add(lblTitle);
             pFormTitle.Controls.Add(label1);
-            pFormTitle.Controls.Add(lblUserIdName);
-            pFormTitle.Controls.Add(button7);
+            pFormTitle.Controls.Add(lblContractId);
+            pFormTitle.Controls.Add(lblUserName);
+            pFormTitle.Controls.Add(btnLogout);
             pFormTitle.Dock = DockStyle.Top;
             pFormTitle.Location = new Point(300, 0);
             pFormTitle.Name = "pFormTitle";
             pFormTitle.Size = new Size(1598, 150);
             pFormTitle.TabIndex = 1;
+            // 
+            // lblContractId
+            // 
+            lblContractId.AutoSize = true;
+            lblContractId.Location = new Point(6, 37);
+            lblContractId.Name = "lblContractId";
+            lblContractId.Size = new Size(152, 25);
+            lblContractId.TabIndex = 2;
+            lblContractId.Text = "F8364BFJ-235432";
+            // 
+            // lblUserName
+            // 
+            lblUserName.AutoSize = true;
+            lblUserName.Location = new Point(6, 12);
+            lblUserName.Name = "lblUserName";
+            lblUserName.Size = new Size(113, 25);
+            lblUserName.TabIndex = 1;
+            lblUserName.Text = "Aleix Urbano";
+            // 
+            // btnLogout
+            // 
+            btnLogout.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            btnLogout.Location = new Point(1418, 12);
+            btnLogout.Name = "btnLogout";
+            btnLogout.Size = new Size(168, 43);
+            btnLogout.TabIndex = 0;
+            btnLogout.Text = "Logout";
+            btnLogout.UseVisualStyleBackColor = true;
             // 
             // pShowForm
             // 
@@ -155,35 +187,26 @@
             pShowForm.Size = new Size(1598, 874);
             pShowForm.TabIndex = 2;
             // 
-            // button7
-            // 
-            button7.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            button7.Location = new Point(1418, 12);
-            button7.Name = "button7";
-            button7.Size = new Size(168, 43);
-            button7.TabIndex = 0;
-            button7.Text = "Logout";
-            button7.UseVisualStyleBackColor = true;
-            // 
-            // lblUserIdName
-            // 
-            lblUserIdName.AutoSize = true;
-            lblUserIdName.Location = new Point(1275, 23);
-            lblUserIdName.Name = "lblUserIdName";
-            lblUserIdName.Size = new Size(113, 25);
-            lblUserIdName.TabIndex = 1;
-            lblUserIdName.Text = "Aleix Urbano";
-            // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(1144, 23);
+            label1.Location = new Point(6, 62);
             label1.Name = "label1";
-            label1.Size = new Size(59, 25);
-            label1.TabIndex = 2;
-            label1.Text = "label1";
+            label1.Size = new Size(184, 25);
+            label1.TabIndex = 3;
+            label1.Text = "Lombokpad 1 - Flat 2";
             // 
-            // Form1
+            // lblTitle
+            // 
+            lblTitle.AutoSize = true;
+            lblTitle.Font = new Font("Segoe UI Semibold", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTitle.Location = new Point(607, 46);
+            lblTitle.Name = "lblTitle";
+            lblTitle.Size = new Size(385, 65);
+            lblTitle.TabIndex = 4;
+            lblTitle.Text = "Announcements";
+            // 
+            // StudentNavigator
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -192,7 +215,7 @@
             Controls.Add(pShowForm);
             Controls.Add(pFormTitle);
             Controls.Add(pSideMenu);
-            Name = "Form1";
+            Name = "StudentNavigator";
             Text = "Form1";
             pSideMenu.ResumeLayout(false);
             pFormTitle.ResumeLayout(false);
@@ -205,14 +228,16 @@
         private Panel pSideMenu;
         private Panel pFormTitle;
         private Panel pShowForm;
-        private Button button1;
-        private Button button6;
-        private Button button5;
-        private Button button4;
-        private Button button3;
-        private Button button2;
+        private Button btnAnnouncements;
+        private Button btnFileComplaint;
+        private Button btnGroceries;
+        private Button btnChores;
+        private Button btnAgreements;
+        private Button btnHouseRules;
+        private Label lblContractId;
+        private Label lblUserName;
+        private Button btnLogout;
         private Label label1;
-        private Label lblUserIdName;
-        private Button button7;
+        private Label lblTitle;
     }
 }

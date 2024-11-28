@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace StudentHousingBV.Classes
+﻿namespace StudentHousingBV.Classes
 {
     public class Student
     {
-        public string ContractId { get; set; }
-        public string Name { get; set; }
+        private string contractId;
+        private string name;
+        private int fkFlatId;
+
+        public string ContractId { get { return contractId; } set { contractId = value; } }
+        public string Name { get { return name; } set { name = value; } }
+        public int FkFlatId { get { return fkFlatId; } set { fkFlatId = value; } }
 
         //Empty constructor for deserialization
         public Student() { }
