@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\realg\\Source\\Repos\\StudentHousingBV\\StudentHousingBV\\StudentHousingBV.csproj": {}
+    "C:\\Users\\aleix\\Source\\Repos\\StudentHousingBV\\StudentHousingBV\\StudentHousingBV.csproj": {}
   },
   "projects": {
-    "C:\\Users\\realg\\Source\\Repos\\StudentHousingBV\\StudentHousingBV\\StudentHousingBV.csproj": {
+    "C:\\Users\\aleix\\Source\\Repos\\StudentHousingBV\\StudentHousingBV\\StudentHousingBV.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\realg\\Source\\Repos\\StudentHousingBV\\StudentHousingBV\\StudentHousingBV.csproj",
+        "projectUniqueName": "C:\\Users\\aleix\\Source\\Repos\\StudentHousingBV\\StudentHousingBV\\StudentHousingBV.csproj",
         "projectName": "StudentHousingBV",
-        "projectPath": "C:\\Users\\realg\\Source\\Repos\\StudentHousingBV\\StudentHousingBV\\StudentHousingBV.csproj",
-        "packagesPath": "C:\\Users\\realg\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\realg\\Source\\Repos\\StudentHousingBV\\StudentHousingBV\\obj\\",
+        "projectPath": "C:\\Users\\aleix\\Source\\Repos\\StudentHousingBV\\StudentHousingBV\\StudentHousingBV.csproj",
+        "packagesPath": "C:\\Users\\aleix\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\aleix\\Source\\Repos\\StudentHousingBV\\StudentHousingBV\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\realg\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\aleix\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -63,7 +68,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.404/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
