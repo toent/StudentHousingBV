@@ -103,19 +103,46 @@ namespace StudentHousingBV.Classes
 
         //get all buildings
         public List<Building> GetBuildings()
-        { return buildings; }
+        { return this.buildings; }
 
         //get all flats in a building
         public List<Flat> GetFlats(int buildingId)
-        { return buildings.FirstOrDefault(building => building.Id == buildingId).Flats; }
+        { return this.buildings.FirstOrDefault(building => building.Id == buildingId).Flats; }
 
+
+        public List<Student> GetStudents()
+        {
+            List<Student> allStudents = new List<Student>();
+
+            foreach (Building building in this.buildings)
+            {
+                foreach (Flat flat in building.Flats)
+                {
+                    allStudents.AddRange(flat.Students);
+                }
+            }
+
+            return allStudents;
+        }
+
+        public List<Student> GetStudents(int buildingId) 
+        {
+            List<Student> buildingStudents = new List<Student>();
+
+            foreach (Flat flat in this.GetFlats(buildingId))
+            {
+                buildingStudents.AddRange(flat.Students);
+            }
+
+            return buildingStudents;
+        }
         //get all students in a flat
         public List<Student> GetStudents(int buildingId, int flatId)
-        { return GetFlats(buildingId).FirstOrDefault(flat => flat.Id == flatId).Students; }
+        { return this.GetFlats(buildingId).FirstOrDefault(flat => flat.Id == flatId).Students; }
 
         //get all complaints of a flat
         public List<Complaint> GetComplaints(int buildingId, int flatId)
-        { return GetFlats(buildingId).FirstOrDefault(flat => flat.Id == flatId).Complaints; }
+        { return this.GetFlats(buildingId).FirstOrDefault(flat => flat.Id == flatId).Complaints; }
 
         //get all rules
         public List<Rule> GetAllRules(int buildingId, int flatId)
