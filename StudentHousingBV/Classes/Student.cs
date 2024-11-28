@@ -2,22 +2,29 @@
 {
     public class Student
     {
-        private string contractId;
-        private string name;
-        private int fkFlatId;
+        #region Properties
+        public string StudentId { get; set; } // Primary Key
+        public string Name { get; set; } 
+        public int FlatId { get; set; } // Foreign Key 
+        
+        // Navigation property
+        public Flat Flat { get; set; }
+        #endregion
 
-        public string ContractId { get { return contractId; } set { contractId = value; } }
-        public string Name { get { return name; } set { name = value; } }
-        public int FkFlatId { get { return fkFlatId; } set { fkFlatId = value; } }
-
-        //Empty constructor for deserialization
-        public Student() { }
-
-        //Constructor for normal usage
-        public Student(string contractId, string name)
+        #region Constructors
+        public Student()
         {
-            ContractId = contractId;
-            Name = name;
+            Name = "";
+            Flat = new Flat();
+            StudentId = "";
         }
+
+        public Student(string studentId, string name)
+        {
+            StudentId = studentId;
+            Name = name;
+            Flat = new Flat();
+        }
+        #endregion
     }
 }

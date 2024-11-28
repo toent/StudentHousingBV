@@ -1,34 +1,39 @@
-﻿using System;
-using System.Xml;
-
-namespace StudentHousingBV.Classes
+﻿namespace StudentHousingBV.Classes
 {
     public class Rule
     {
-        //removed idCounter
-        public int Id { get; set; }                                 //made id a property
-        public string Description { get; set; }                     //made description a property
-        public DateTime CreateTime { get; set; }                    //made createTime a property
+        #region Properties
+        public int RuleId { get; set; } // Primary Key
+        public string Description { get; set; }
+        public int BuildingId { get; set; } // Foreign Key 
 
-        // Empty constructor for deserialization
-        public Rule() { }
+        // Navigation property
+        public Building Building { get; set; }
+        #endregion
 
-        // Constructor  
+        #region Constructors  
+        public Rule()
+        {
+            Description = "";
+            Building = new Building();
+        }
+
         public Rule(string description, DataManager dataManager, int buildingId)
         {
             Description = description;
-            CreateTime = DateTime.Now;
-            Id = dataManager.GetIdFromClass(this, buildingId);
-            dataManager.GetBuildings()[buildingId].BuildingRules.Add(this);
+            RuleId = dataManager.GetIdFromClass(this, buildingId);
+            Building = dataManager.GetBuildings()[buildingId];
+            BuildingId = buildingId;
         }
 
         public Rule(string description, DataManager dataManager, int buildingId, int flatId)
         {
             Description = description;
-            CreateTime = DateTime.Now;
-            Id = dataManager.GetIdFromClass(this, buildingId);
-            dataManager.GetFlats(buildingId)[flatId].FlatRules.Add(this);
+            RuleId = dataManager.GetIdFromClass(this, buildingId);
+            Building = dataManager.GetBuildings()[buildingId];
+            BuildingId = buildingId;
         }
+        #endregion
 
     }
 }
