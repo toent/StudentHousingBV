@@ -1,4 +1,51 @@
+# Ignore Visual Studio specific files
 .vs/
-/StudentHousingBV/Program.cs
-obj
-bin
+*.user
+*.suo
+*.vcxproj.user
+*.pdb
+*.obj
+*.exe
+*.dll
+*.cache
+*.csproj.user
+*.aps
+
+# Ignore build output folders
+[Bb]in/
+[Oo]bj/
+[Dd]ebug*/
+[Rr]elease*/
+
+# Ignore NuGet packages folder
+packages/
+*.nupkg
+project.lock.json
+project.fragment.lock.json
+
+# Ignore publish output
+publish/
+
+# Ignore Resharper files
+_ReSharper*/
+*.DotSettings.user
+
+# Ignore Rider files
+.idea/
+*.sln.iml
+
+# Ignore temporary files and logs
+*.log
+*.tmp
+*.temp
+*.bak
+*.swp
+*.sln.docstates
+
+# Ignore macOS specific files
+.DS_Store
+
+# Ignore Windows specific files
+Thumbs.db
+desktop.ini
+``
