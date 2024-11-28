@@ -1,2 +1,4 @@
 .vs/
 /StudentHousingBV/Program.cs
+obj
+bin
