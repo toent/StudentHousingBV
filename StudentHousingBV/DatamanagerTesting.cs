@@ -32,7 +32,7 @@ namespace StudentHousingBV
                 // Save the updated list back to storage
                 dataManager.SaveAllData();
 
-                label1.Text = dataManager.GetFilePath();
+                lblJsonDebug.Text = dataManager.GetFilePath();
 
                 // Update the UI to reflect the new list of buildings
                 lbCurrentBuildings.Items.Clear();
@@ -57,6 +57,8 @@ namespace StudentHousingBV
             //Load avaiable buildings from storage
             dataManager.LoadAllData();
 
+            lblJsonDebug.Text = dataManager.GetFilePath();
+
             // Update the UI to show the saved buildings
             lbCurrentBuildings.Items.Clear();
             cbBuildingIdFlat.Items.Clear();
@@ -64,7 +66,7 @@ namespace StudentHousingBV
             cbBuildingIdStudent.Items.Clear();
             foreach (Building building in dataManager.GetBuildings())
             {
-                lbCurrentBuildings.Items.Add($"ID: {building.BuildingId} - Address: {building.Address}");
+                lbCurrentBuildings.Items.Add($"Building ID: {building.BuildingId} - Address: {building.Address}");
                 cbBuildingIdFlat.Items.Add(building.BuildingId);
                 cbBuildingIdRule.Items.Add(building.BuildingId);
                 cbBuildingIdStudent.Items.Add(building.BuildingId);
@@ -75,7 +77,7 @@ namespace StudentHousingBV
 
         private void btnCreateFlat_Click(object sender, EventArgs e)
         {
-            if(tbFlatNumber.Text != string.Empty)
+            if (tbFlatNumber.Text != string.Empty)
             {
                 int buildingId = int.Parse(cbBuildingIdFlat.GetItemText(cbBuildingIdFlat.SelectedItem));
                 Flat newFlat = new Flat(buildingId, int.Parse(tbFlatNumber.Text), dataManager);
@@ -87,7 +89,7 @@ namespace StudentHousingBV
                 lbCurrentFlats.Items.Clear();
                 foreach (Flat flat in dataManager.GetFlats(buildingId))
                 {
-                    lbCurrentFlats.Items.Add($"Building Id: {buildingId} - Flat Id: {flat.FlatId} - Flat Number: {flat.FlatNumber}");
+                    lbCurrentFlats.Items.Add($"Building ID: {buildingId} - Flat ID: {flat.FlatId} - Flat Number: {flat.FlatNumber}");
                 }
             }
 
@@ -101,7 +103,7 @@ namespace StudentHousingBV
             cbFlatIdStudent.Items.Clear();
             cbFlatIdStudent.SelectedValue = null;
             cbFlatIdStudent.Text = string.Empty;
-            foreach (Flat flat in dataManager.GetBuilding(selectedBuildingId).Flats)
+            foreach (Flat flat in dataManager.GetFlats(selectedBuildingId))
             {
                 cbFlatIdStudent.Items.Add(flat.FlatId);
             }
@@ -109,19 +111,84 @@ namespace StudentHousingBV
 
         private void btnCreateStudent_Click(object sender, EventArgs e)
         {
-            if(tbContractId.Text != string.Empty && tbStudentName.Text != string.Empty && 
+
+            if (tbContractId.Text != string.Empty && tbStudentName.Text != string.Empty &&
                 cbBuildingIdStudent.GetItemText(cbBuildingIdStudent.SelectedItem) != null &&
                 cbFlatIdStudent.GetItemText(cbFlatIdStudent.SelectedItem) != null)
             {
+                int selectedBuildingId = int.Parse(cbBuildingIdStudent.GetItemText(cbBuildingIdStudent.SelectedItem));
+                int selectedFlatId = int.Parse(cbFlatIdStudent.GetItemText(cbFlatIdStudent.SelectedItem));
+
                 Student newStudent = new Student(tbContractId.Text, tbStudentName.Text);
+                Flat selectedFlat = dataManager.GetFlat(selectedBuildingId, selectedFlatId);
+
+                selectedFlat.Students.Add(newStudent);
+
+                dataManager.SaveAllData();
+
+                lbCurrentStudents.Items.Clear();
+                foreach (Student student in selectedFlat.Students)
+                {
+                    lbCurrentStudents.Items.Add($"Contract ID: {student.StudentId} - Name: {student.Name}");
+                }
+
             }
+        }
 
-            int.Parse(cbBuildingIdStudent.GetItemText(cbBuildingIdStudent.SelectedItem));
-            cbFlatIdStudent.GetItemText(cbFlatIdStudent.SelectedItem);
+        private void cbBuildingIdRule_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int selectedBuildingId = int.Parse(cbBuildingIdRule.GetItemText(cbBuildingIdRule.SelectedItem));
 
-            dataManager.GetFlat(int.Parse(cbBuildingIdStudent.GetItemText(cbBuildingIdStudent.SelectedItem)), 
-                                int.Parse(cbFlatIdStudent.GetItemText(cbFlatIdStudent.SelectedItem)));
+            cbFlatIdRule.Items.Clear();
+            cbFlatIdRule.SelectedValue = null;
+            cbFlatIdRule.Text = string.Empty;
+            foreach (Flat flat in dataManager.GetFlats(selectedBuildingId))
+            {
+                cbFlatIdRule.Items.Add(flat.FlatId);
+            }
+        }
 
+        private void btnCreateRule_Click(object sender, EventArgs e)
+        {
+            if (tbRuleContent.Text != string.Empty &&
+            cbBuildingIdStudent.GetItemText(cbBuildingIdStudent.SelectedItem) != null &&
+            (cbFlatIdRule.GetItemText(cbFlatIdRule.SelectedItem) != null || cbRuleIsForBuilding.Checked))
+            {
+                int selectedBuildingId = int.Parse(cbBuildingIdStudent.GetItemText(cbBuildingIdRule.SelectedItem));
+                
+
+                if (cbRuleIsForBuilding.Checked)
+                {
+                    Classes.Rule newRule = new Classes.Rule(tbRuleContent.Text, dataManager, selectedBuildingId);
+
+                    dataManager.GetAllRules().Add(newRule);
+
+                    dataManager.SaveAllData();
+
+                    lbCurrentRules.Items.Clear();
+                    foreach (Classes.Rule rule in dataManager.GetRules(selectedBuildingId))
+                    {
+                        lbCurrentRules.Items.Add($"Rule ID: {rule.RuleId} - Content: {rule.Description} ");
+                    }
+                }
+                else
+                {
+                    int selectedFlatId = int.Parse(cbFlatIdRule.GetItemText(cbFlatIdRule.SelectedItem));
+
+                    Classes.Rule newRule = new Classes.Rule(tbRuleContent.Text, dataManager, selectedBuildingId, selectedFlatId);
+
+                    dataManager.GetAllRules().Add(newRule);
+
+                    dataManager.SaveAllData();
+
+                    lbCurrentRules.Items.Clear();
+                    foreach (Classes.Rule rule in dataManager.GetAllRules(selectedBuildingId, selectedFlatId))
+                    {
+                        lbCurrentRules.Items.Add($"Rule ID: {rule.RuleId} - Content: {rule.Description} ");
+                    }
+                }
+
+            }
         }
     }
 }

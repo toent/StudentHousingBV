@@ -24,17 +24,19 @@
         public Rule(string description, DataManager dataManager, int buildingId)
         {
             Description = description;
-            RuleId = dataManager.GetIdFromClass(this, buildingId);
-            Building = dataManager.GetBuildings()[buildingId];
+            RuleId = dataManager.GetIdFromClass(this, buildingId) + 1;
+            Building = dataManager.GetBuilding(buildingId);
             BuildingId = buildingId;
         }
 
         public Rule(string description, DataManager dataManager, int buildingId, int flatId)
         {
             Description = description;
-            RuleId = dataManager.GetIdFromClass(this, buildingId);
-            Building = dataManager.GetBuildings()[buildingId];
+            RuleId = dataManager.GetIdFromClass(this, buildingId) + 1;
+            Building = dataManager.GetBuilding(buildingId);
             BuildingId = buildingId;
+            Flat = dataManager.GetFlat(buildingId, flatId);
+            FlatId = flatId;
         }
         #endregion
 

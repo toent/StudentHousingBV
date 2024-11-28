@@ -52,7 +52,7 @@
             label5 = new Label();
             btnCreateStudent = new Button();
             tbStudentName = new TextBox();
-            lbCurrentStudent = new ListBox();
+            lbCurrentStudents = new ListBox();
             groupBox4 = new GroupBox();
             cbRuleIsForBuilding = new CheckBox();
             label8 = new Label();
@@ -214,7 +214,7 @@
             groupBox3.Controls.Add(label5);
             groupBox3.Controls.Add(btnCreateStudent);
             groupBox3.Controls.Add(tbStudentName);
-            groupBox3.Controls.Add(lbCurrentStudent);
+            groupBox3.Controls.Add(lbCurrentStudents);
             groupBox3.Location = new Point(12, 229);
             groupBox3.Name = "groupBox3";
             groupBox3.Size = new Size(795, 313);
@@ -299,14 +299,14 @@
             tbStudentName.Size = new Size(303, 31);
             tbStudentName.TabIndex = 1;
             // 
-            // lbCurrentStudent
+            // lbCurrentStudents
             // 
-            lbCurrentStudent.FormattingEnabled = true;
-            lbCurrentStudent.ItemHeight = 25;
-            lbCurrentStudent.Location = new Point(346, 30);
-            lbCurrentStudent.Name = "lbCurrentStudent";
-            lbCurrentStudent.Size = new Size(443, 254);
-            lbCurrentStudent.TabIndex = 3;
+            lbCurrentStudents.FormattingEnabled = true;
+            lbCurrentStudents.ItemHeight = 25;
+            lbCurrentStudents.Location = new Point(346, 30);
+            lbCurrentStudents.Name = "lbCurrentStudents";
+            lbCurrentStudents.Size = new Size(443, 254);
+            lbCurrentStudents.TabIndex = 3;
             // 
             // groupBox4
             // 
@@ -378,6 +378,7 @@
             cbBuildingIdRule.Name = "cbBuildingIdRule";
             cbBuildingIdRule.Size = new Size(182, 33);
             cbBuildingIdRule.TabIndex = 6;
+            cbBuildingIdRule.SelectedIndexChanged += cbBuildingIdRule_SelectedIndexChanged;
             // 
             // btnCreateRule
             // 
@@ -387,6 +388,7 @@
             btnCreateRule.TabIndex = 0;
             btnCreateRule.Text = "Create Rule";
             btnCreateRule.UseVisualStyleBackColor = true;
+            btnCreateRule.Click += btnCreateRule_Click;
             // 
             // tbRuleContent
             // 
@@ -452,7 +454,7 @@
         private Label label5;
         private Button btnCreateStudent;
         private TextBox tbStudentName;
-        private ListBox lbCurrentStudent;
+        private ListBox lbCurrentStudents;
         private ComboBox cbFlatIdStudent;
         private Label label6;
         private Label label7;

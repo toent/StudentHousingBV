@@ -3,7 +3,6 @@ using System.Text.Json;
 using System.Reflection;
 using StudentHousingBV.Classes;
 using System.Linq.Expressions;
-using System.Security.Cryptography.X509Certificates;
 
 namespace StudentHousingBV.Classes
 {
@@ -16,7 +15,7 @@ namespace StudentHousingBV.Classes
         private List<Chore> chores = new List<Chore>();
         private List<Complaint> complaints = new List<Complaint>();
         private List<Student> students = new List<Student>();
-        private List<Rule> rules = new List<Rule>();
+        private List<Classes.Rule> rules = new List<Classes.Rule>();
         private List<Grocery> groceries = new List<Grocery>();
 
 
@@ -34,8 +33,9 @@ namespace StudentHousingBV.Classes
             {
                 directoryExists = false;
             }
-            SaveAllData();
+
             LoadAllData();
+            SaveAllData();
         }
 
 
@@ -53,9 +53,9 @@ namespace StudentHousingBV.Classes
 
             if (buildings.Count > 0)
             {
-
                 resultId = buildings.Max(building => building.BuildingId);
             }
+
 
             return resultId;
         }
@@ -100,7 +100,7 @@ namespace StudentHousingBV.Classes
         /// <summary>
         /// Get the current highest ID assigned to a rule
         /// </summary>
-        public int GetIdFromClass(Rule rule, int buildingId)
+        public int GetIdFromClass(Classes.Rule rule, int buildingId)
         {
             int resultId = 0;
 
@@ -108,11 +108,15 @@ namespace StudentHousingBV.Classes
 
             if (GetFlats(buildingId).Count > 0)
             {
-                resultId = GetRules(buildingId).Max(rule => rule.RuleId);
-
+                if(GetRules(buildingId).Count > 0)
+                {
+                    resultId = GetRules(buildingId).Max(rule => rule.RuleId);
+                }
+                
                 foreach (Flat f in GetFlats(buildingId))
                 {
-                    if (GetRules(buildingId, f.FlatId).Max(rule => rule.RuleId) > resultId)
+
+                    if (GetRules(buildingId,f.FlatId).Count > 0 && GetRules(buildingId, f.FlatId).Max(rule => rule.RuleId) > resultId)
                     {
                         resultId = GetRules(buildingId, f.FlatId).Max(rule => rule.RuleId);
                     }
@@ -160,28 +164,35 @@ namespace StudentHousingBV.Classes
         { return this.GetFlat(buildingId, flatId)?.Complaints; }
 
         //get rules of a building
-        public ICollection<Rule> GetRules(int buildingId)
+        public ICollection<Classes.Rule> GetRules(int buildingId)
         { return rules.FindAll(rule => rule.BuildingId == buildingId); }
 
         //get rules of a flat
-        public ICollection<Rule> GetRules(int buildingId, int flatId)
+        public ICollection<Classes.Rule> GetRules(int buildingId, int flatId)
         { return rules.FindAll(rule => rule.BuildingId == buildingId && rule.FlatId == flatId); }
 
-        //get all rules of flat and building
-        public ICollection<Rule> GetAllRules(int buildingId, int flatId)
-        { return rules.FindAll(rule => rule.BuildingId == buildingId || (rule.BuildingId == buildingId && rule.FlatId == flatId)); }
+        //get all rules of a flat and building
+        public ICollection<Classes.Rule> GetAllRules(int buildingId, int flatId)
+        { return rules.FindAll(rule => (rule.BuildingId == buildingId && rule.FlatId <= 0) || (rule.BuildingId == buildingId && rule.FlatId == flatId)); }
+
+        //get all rules
+        public ICollection<Classes.Rule> GetAllRules()
+        { return rules; }
+        
+
+        //----------------------------------------------------------------------------------------SAVE/LOAD METHODS----------------------------------------------------------------------------------------
 
         public void LoadAllData()
         {
-            LoadAttribute(() => buildings);
-            LoadAttribute(() => flats);
-            LoadAttribute(() => groceries);
-            LoadAttribute(() => rules);
-            LoadAttribute(() => students);
-            LoadAttribute(() => complaints);
-            LoadAttribute(() => agreements);
-            LoadAttribute(() => announcements);
-            LoadAttribute(() => chores);
+            buildings = LoadAttribute(() => buildings);
+            flats = LoadAttribute(() => flats);
+            groceries = LoadAttribute(() => groceries);
+            rules = LoadAttribute(() => rules);
+            students = LoadAttribute(() => students);
+            complaints = LoadAttribute(() => complaints);
+            agreements = LoadAttribute(() => agreements);
+            announcements = LoadAttribute(() => announcements);
+            chores = LoadAttribute(() => chores);
         }
 
         public void SaveAllData()
