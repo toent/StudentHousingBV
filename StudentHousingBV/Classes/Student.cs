@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StudentHousingBV
+namespace StudentHousingBV.Classes
 {
     public class Student
     {
@@ -17,8 +17,8 @@ namespace StudentHousingBV
         //Constructor for normal usage
         public Student(string contractId, string name)
         {
-            this.ContractId = contractId;
-            this.Name = name;
+            ContractId = contractId;
+            Name = name;
         }
     }
 }

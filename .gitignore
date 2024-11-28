@@ -50,3 +50,18 @@ desktop.ini
 ``
 Ignore Program files
 /StudentHousingBV/Program.cs
+/StudentHousingBV/bin/Debug/net8.0-windows/StudentHousingBV.dll
+/StudentHousingBV/bin/Debug/net8.0-windows/StudentHousingBV.exe
+/StudentHousingBV/bin/Debug/net8.0-windows/StudentHousingBV.pdb
+/StudentHousingBV/obj/Debug/net8.0-windows/ref/StudentHousingBV.dll
+/StudentHousingBV/obj/Debug/net8.0-windows/refint/StudentHousingBV.dll
+/StudentHousingBV/obj/Debug/net8.0-windows/apphost.exe
+/StudentHousingBV/obj/Debug/net8.0-windows/StudentHousingBV.AssemblyInfo.cs
+/StudentHousingBV/obj/Debug/net8.0-windows/StudentHousingBV.AssemblyInfoInputs.cache
+/StudentHousingBV/obj/Debug/net8.0-windows/StudentHousingBV.csproj.CoreCompileInputs.cache
+/StudentHousingBV/obj/Debug/net8.0-windows/StudentHousingBV.csproj.FileListAbsolute.txt
+/StudentHousingBV/obj/Debug/net8.0-windows/StudentHousingBV.csproj.GenerateResource.cache
+/StudentHousingBV/obj/Debug/net8.0-windows/StudentHousingBV.dll
+/StudentHousingBV/obj/Debug/net8.0-windows/StudentHousingBV.Form1.resources
+/StudentHousingBV/obj/Debug/net8.0-windows/StudentHousingBV.pdb
+/StudentHousingBV/obj/Debug/net8.0-windows/StudentHousingBV.sourcelink.json

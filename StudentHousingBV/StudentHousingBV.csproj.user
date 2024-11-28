@@ -4,10 +4,10 @@
     <Compile Update="DatamanagerTesting.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Form1.cs">
+    <Compile Update="Student App\StudentNavigator.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="StudentHouserules.cs">
+    <Compile Update="Student App\StudentHouserules.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StudentHousingBV
+namespace StudentHousingBV.Classes
 {
     public class Building
     {
@@ -19,26 +19,26 @@ namespace StudentHousingBV
         //constructors for regular usage
         public Building(string inputAddress, DataManager dataManager)
         {
-            this.Address = inputAddress;
-            this.Flats = new List<Flat>();
-            this.BuildingRules = new List<Rule>();
-            this.Id = dataManager.GetIdFromClass(this) + 1;
+            Address = inputAddress;
+            Flats = new List<Flat>();
+            BuildingRules = new List<Rule>();
+            Id = dataManager.GetIdFromClass(this) + 1;
         }
 
         public Building(string inputAddress, List<Flat> inputFlats, DataManager dataManager)
         {
-            this.Address = inputAddress;
-            this.Flats = inputFlats;
-            this.BuildingRules = new List<Rule>();
-            this.Id = dataManager.GetIdFromClass(this) + 1;
+            Address = inputAddress;
+            Flats = inputFlats;
+            BuildingRules = new List<Rule>();
+            Id = dataManager.GetIdFromClass(this) + 1;
         }
 
         public Building(string inputAddress, List<Flat> inputFlats, List<Rule> rules, DataManager dataManager)
         {
-            this.Address = inputAddress;
-            this.Flats = inputFlats;
-            this.BuildingRules = rules;
-            this.Id = dataManager.GetIdFromClass(this) + 1;
+            Address = inputAddress;
+            Flats = inputFlats;
+            BuildingRules = rules;
+            Id = dataManager.GetIdFromClass(this) + 1;
         }
 
         public void AddBuildingRule(Rule buildingRule)

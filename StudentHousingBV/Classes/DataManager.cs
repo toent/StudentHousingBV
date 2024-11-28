@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Text.Json;
-using System.Runtime.CompilerServices;
+﻿using System.Text.Json;
+using StudentHousingBV.Classes;
 
-namespace StudentHousingBV
+namespace StudentHousingBV.Classes
 {
     public class DataManager
     {
         private List<Building> buildings;
 
-        public DataManager() 
+        public DataManager()
         {
-            this.buildings = new List<Building>();
+            buildings = new List<Building>();
             LoadFromStorage();
         }
 
@@ -31,10 +26,10 @@ namespace StudentHousingBV
 
             LoadFromStorage();
 
-            if (this.buildings.Count > 0)
+            if (buildings.Count > 0)
             {
 
-                resultId = this.buildings.Max(building => building.Id);
+                resultId = buildings.Max(building => building.Id);
             }
 
             return resultId;
@@ -50,9 +45,9 @@ namespace StudentHousingBV
 
             LoadFromStorage();
 
-            if (this.GetFlats(buildingId).Count > 0)
+            if (GetFlats(buildingId).Count > 0)
             {
-                resultId = this.GetFlats(buildingId).Max(flat => flat.Id);
+                resultId = GetFlats(buildingId).Max(flat => flat.Id);
             }
 
             return resultId;
@@ -68,10 +63,10 @@ namespace StudentHousingBV
 
             LoadFromStorage();
 
-            if (this.buildings[buildingId].Flats.Count > 0)
+            if (buildings[buildingId].Flats.Count > 0)
             {
 
-                resultId = this.GetComplaints(buildingId,flatId).Max(complaint => complaint.Id);
+                resultId = GetComplaints(buildingId, flatId).Max(complaint => complaint.Id);
             }
 
             return resultId;
@@ -86,11 +81,11 @@ namespace StudentHousingBV
 
             LoadFromStorage();
 
-            if (this.buildings[buildingId].Flats.Count > 0)
+            if (buildings[buildingId].Flats.Count > 0)
             {
-                resultId = this.buildings[buildingId].BuildingRules.Max(rule =>  rule.Id);
+                resultId = buildings[buildingId].BuildingRules.Max(rule => rule.Id);
 
-                foreach (Flat f in this.GetFlats(buildingId))
+                foreach (Flat f in GetFlats(buildingId))
                 {
                     if (f.FlatRules.Max(rule => rule.Id) > resultId)
                     {
@@ -107,27 +102,27 @@ namespace StudentHousingBV
 
 
         //get all buildings
-        public List<Building> GetBuildings() 
-        { return this.buildings; }
+        public List<Building> GetBuildings()
+        { return buildings; }
 
         //get all flats in a building
         public List<Flat> GetFlats(int buildingId)
-        { return this.buildings.FirstOrDefault(building => building.Id == buildingId).Flats; }
+        { return buildings.FirstOrDefault(building => building.Id == buildingId).Flats; }
 
         //get all students in a flat
-        public List<Student> GetStudents(int buildingId, int flatId) 
-        { return this.GetFlats(buildingId).FirstOrDefault(flat => flat.Id == flatId).Students; }
+        public List<Student> GetStudents(int buildingId, int flatId)
+        { return GetFlats(buildingId).FirstOrDefault(flat => flat.Id == flatId).Students; }
 
         //get all complaints of a flat
         public List<Complaint> GetComplaints(int buildingId, int flatId)
-        { return this.GetFlats(buildingId).FirstOrDefault(flat => flat.Id == flatId).Complaints; }
+        { return GetFlats(buildingId).FirstOrDefault(flat => flat.Id == flatId).Complaints; }
 
         //get all rules
         public List<Rule> GetAllRules(int buildingId, int flatId)
         {
             List<Rule> totalRules = new List<Rule>();
-            totalRules.AddRange(this.GetBuildings()[buildingId].BuildingRules);
-            totalRules.AddRange(this.GetFlats(buildingId)[flatId].FlatRules);
+            totalRules.AddRange(GetBuildings()[buildingId].BuildingRules);
+            totalRules.AddRange(GetFlats(buildingId)[flatId].FlatRules);
             return totalRules;
         }
 
@@ -152,7 +147,7 @@ namespace StudentHousingBV
                     if (deserializedJson != null)
                     {
                         //if not null add to buildings
-                        this.buildings = deserializedJson;
+                        buildings = deserializedJson;
                     }
                 }
                 catch (Exception ex)
@@ -175,7 +170,7 @@ namespace StudentHousingBV
             Directory.CreateDirectory(storagePath);
 
             //convert Buildings to json
-            string jsonBuilding = JsonSerializer.Serialize(this.buildings);
+            string jsonBuilding = JsonSerializer.Serialize(buildings);
 
             //write or create json file
             File.WriteAllText(Path.Combine(storagePath, "data.json"), jsonBuilding);

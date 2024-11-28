@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace StudentHousingBV
+﻿namespace StudentHousingBV.Classes
 {
     public class Flat
     {
@@ -22,46 +16,44 @@ namespace StudentHousingBV
         public Flat() { }
 
         //Constructors for regular usage
-        public Flat(int buildingId, int flatNumber, DataManager dataManager)   
+        public Flat(int buildingId, int flatNumber, DataManager dataManager)
         {
-            this.FlatNumber = flatNumber;
-            this.Complaints = new List<Complaint>();
-            this.Id = dataManager.GetIdFromClass(this, buildingId); 
+            FlatNumber = flatNumber;
+            Complaints = new List<Complaint>();
+            Id = dataManager.GetIdFromClass(this, buildingId);
         }
 
         public Flat(int buildingId, int flatNumber, DataManager dataManger, List<Student> students)
         {
-            this.FlatNumber = flatNumber;
-            this.Complaints = new List<Complaint>();
-            this.Students = students;
-            this.Id = dataManger.GetIdFromClass(this, buildingId);
+            FlatNumber = flatNumber;
+            Complaints = new List<Complaint>();
+            Students = students;
+            Id = dataManger.GetIdFromClass(this, buildingId);
         }
 
-        public Flat(int buildingId, int flatNumber, DataManager dataManager, List<Rule> rules)
+        /*public Flat(int buildingId, int flatNumber, DataManager dataManager, List<Rule> rules)
         {
             this.FlatNumber = flatNumber;
             this.Complaints = new List<Complaint>();
             this.FlatRules = rules;
             this.Id = dataManager.GetIdFromClass(this, buildingId);
-        }
+        }*/
 
-        public Flat(int buildingId, int flatNumber, DataManager dataManger, List<Student> students, List<Rule> rules)
+        /*public Flat(int buildingId, int flatNumber, DataManager dataManger, List<Student> students, List<Rule> rules)
         {
             this.FlatNumber = flatNumber;
             this.Complaints = new List<Complaint>();
             this.Students = students;
             this.FlatRules = rules;
             this.Id = dataManger.GetIdFromClass(this, buildingId);
-        }
+        }*/
+
+
+
 
         public void AddComplaint(Complaint complaint)
         {
-            this.Complaints.Add(complaint);
-        }
-
-        public void AddFlatRule(Rule flatRule)
-        {
-            this.FlatRules.Add(flatRule);
+            Complaints.Add(complaint);
         }
 
     }

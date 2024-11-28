@@ -1,6 +1,6 @@
 ﻿namespace StudentHousingBV
 {
-    partial class Form1
+    partial class StudentNavigator
     {
         /// <summary>
         ///  Required designer variable.

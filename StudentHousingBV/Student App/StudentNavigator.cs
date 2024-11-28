@@ -1,8 +1,8 @@
 namespace StudentHousingBV
 {
-    public partial class Form1 : Form
+    public partial class StudentNavigator : Form
     {
-        public Form1()
+        public StudentNavigator()
         {
             InitializeComponent();
         }
