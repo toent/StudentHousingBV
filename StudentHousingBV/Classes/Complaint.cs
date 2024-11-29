@@ -1,23 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace StudentHousingBV.Classes
+﻿namespace StudentHousingBV.Classes
 {
     public class Complaint
     {
-        public int Id { get; set; }
-        public string Description { get; set; }
-        public bool Read { get; set; }
+        #region Properties
+        public int ComplaintId { get; set; } // Primary Key
+        public string Issue { get; set; }
+        public int BuildingId { get; set; } // Foreign Key 
+        public int FlatId { get; set; } //Foreign Key
+
+        // Navigation properties
+        public Building Building { get; set; }
+        public Flat Flat { get; set; }
+        #endregion
+
+        #region Constructors
+        public Complaint()
+        {
+            ComplaintId = -1;
+            Issue = "";
+            Building = new Building();
+            Flat = new Flat();
+        }
 
         public Complaint(string description, int buildingId, int flatId, DataManager dataManager)
         {
-            Description = description;
-            Read = false;
-            Id = dataManager.GetIdFromClass(this, buildingId, flatId);
+            Issue = description;
+            BuildingId = buildingId;
+            FlatId = flatId;
+            Building = dataManager.GetBuilding(buildingId);
+            Flat = dataManager.GetFlat(buildingId, flatId);
+            ComplaintId = dataManager.GetIdFromClass(this, buildingId, flatId);
         }
-
+        #endregion
     }
 }

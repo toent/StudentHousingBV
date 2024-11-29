@@ -1,24 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace StudentHousingBV.Classes
+﻿namespace StudentHousingBV.Classes
 {
     public class Student
     {
-        public string ContractId { get; set; }
-        public string Name { get; set; }
+        #region Properties
+        public string StudentId { get; set; } // Primary Key
+        public string Name { get; set; } 
+        public int FlatId { get; set; } // Foreign Key 
+        public int BuildingId { get; set; } // Foreign Key
+        
+        // Navigation property
+        public Flat Flat { get; set; }
+        public Building Building { get; set; }
+        #endregion
 
-        //Empty constructor for deserialization
-        public Student() { }
-
-        //Constructor for normal usage
-        public Student(string contractId, string name)
+        #region Constructors
+        public Student()
         {
-            ContractId = contractId;
-            Name = name;
+            Name = "";
+            Flat = new Flat();
+            Building = new Building();
+            StudentId = "";
         }
+
+        public Student(string studentId, string name)
+        {
+            StudentId = studentId;
+            Name = name;
+            Flat = new Flat();
+            Building = new Building();
+        }
+        #endregion
     }
 }
