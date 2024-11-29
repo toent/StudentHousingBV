@@ -127,8 +127,68 @@ namespace StudentHousingBV.Classes
         }
 
 
-        //----------------------------------------------------------------------------------------ALL OTHER METHODS----------------------------------------------------------------------------------------
+        /// <summary>
+        /// Get the current highest ID assigned to an announcement
+        /// </summary>
+        public int GetIdFromClass(Announcement announcement, int buildingId)
+        {
+            int resultId = 0;
 
+            LoadAttribute(() => announcements);
+
+            if (GetFlats(buildingId).Count > 0)
+            {
+                if (GetGlobalAnnouncements().Count > 0)
+                {
+                    resultId = GetGlobalAnnouncements().Max(announcement => announcement.AnnouncementId);
+                }
+
+                foreach (Flat f in GetFlats(buildingId))
+                {
+                    if (GetAllAnnouncements(buildingId, f.FlatId).Count > 0 && GetAllAnnouncements(buildingId, f.FlatId).Max(announcement => announcement.AnnouncementId) > resultId)
+                    {
+                        resultId = GetAllAnnouncements(buildingId, f.FlatId).Max(announcement => announcement.AnnouncementId);
+                    }
+                }
+            }
+
+            return resultId;
+        }
+
+        /// <summary>
+        /// Get the current highest ID assigned to an announcement, when the announcement is global
+        /// </summary>
+        public int GetIdFromClass(Announcement announcement)
+        {
+            int resultId = 0;
+
+            LoadAttribute(() => announcements);
+
+            foreach(Building b in buildings)
+            {
+                if (GetFlats(b.BuildingId).Count > 0)
+                {
+                    if (GetGlobalAnnouncements().Count > 0)
+                    {
+                        resultId = GetGlobalAnnouncements().Max(announcement => announcement.AnnouncementId);
+                    }
+
+                    foreach (Flat f in GetFlats(b.BuildingId))
+                    {
+                        if (GetAllAnnouncements(b.BuildingId, f.FlatId).Count > 0 && GetAllAnnouncements(b.BuildingId, f.FlatId).Max(announcement => announcement.AnnouncementId) > resultId)
+                        {
+                            resultId = GetAllAnnouncements(b.BuildingId, f.FlatId).Max(announcement => announcement.AnnouncementId);
+                        }
+                    }
+                }
+            }
+
+            return resultId;
+        }
+
+        //----------------------------------------------------------------------------------------METHODS FOR RETRIEVING DATA----------------------------------------------------------------------------------------
+
+        #region Getting Buildings
         //get one building
         public Building? GetBuilding(int buildingId)
         { return this.buildings.FirstOrDefault(building => building.BuildingId == buildingId); }
@@ -136,7 +196,9 @@ namespace StudentHousingBV.Classes
         //get all buildings
         public List<Building>? GetBuildings()
         { return this.buildings; }
+        #endregion
 
+        #region Getting Flats
         //get one flat
         public Flat? GetFlat(int buildingId, int flatId)
         { return flats.FirstOrDefault(flat => flat.BuildingId == buildingId && flat.FlatId == flatId); }
@@ -146,7 +208,9 @@ namespace StudentHousingBV.Classes
         { return flats.FindAll(flat => flat.BuildingId == buildingId); }
 
         public ICollection<Flat> GetFlats() { return flats; }
+        #endregion
 
+        #region Getting Students
         //get all students
         public ICollection<Student> GetStudents()
         { return students; }
@@ -158,11 +222,15 @@ namespace StudentHousingBV.Classes
         //get all students in a flat
         public ICollection<Student>? GetStudents(int buildingId, int flatId)
         { return students.FindAll(student => student.BuildingId == buildingId && student.FlatId == flatId); }
+        #endregion
 
+        #region Getting Complaints
         //get all complaints of a flat
         public ICollection<Complaint>? GetComplaints(int buildingId, int flatId)
         { return this.GetFlat(buildingId, flatId)?.Complaints; }
+        #endregion
 
+        #region Getting Rules
         //get rules of a building
         public ICollection<Classes.Rule> GetRules(int buildingId)
         { return rules.FindAll(rule => rule.BuildingId == buildingId); }
@@ -178,9 +246,37 @@ namespace StudentHousingBV.Classes
         //get all rules
         public ICollection<Classes.Rule> GetAllRules()
         { return rules; }
-        
+        #endregion
 
-        //----------------------------------------------------------------------------------------SAVE/LOAD METHODS----------------------------------------------------------------------------------------
+        #region Getting Announcements
+        //get all announcements of a building
+        public ICollection<Announcement> GetAnnouncements(int buildingId)
+        { return announcements.FindAll(announcement => announcement.BuildingId == buildingId && announcement.AnnouncementId >= 0); }
+
+        //get all announcements of a flat 
+        public ICollection<Announcement> GetAnnouncements(int buildingId, int flatId)
+        { return announcements.FindAll(announcement => announcement.BuildingId == buildingId && announcement.FlatId == flatId && announcement.AnnouncementId >= 0); }
+
+        //get all global announcements
+        public ICollection<Announcement> GetGlobalAnnouncements() 
+        { return announcements.FindAll(announcement => announcement.IsGlobal == true && announcement.AnnouncementId >= 0); }
+
+        //get all announcements
+        public ICollection<Announcement> GetAllAnnouncements() 
+        { return announcements; }
+
+        //get building flat and global announcements
+        public ICollection<Announcement> GetAllAnnouncements(int buildingId, int flatId)
+        {
+            return announcements.FindAll(announcement => (announcement.IsGlobal == true ||
+            (announcement.BuildingId == buildingId && announcement.FlatId <= 0) ||
+            (announcement.BuildingId == buildingId && announcement.FlatId == flatId)) && 
+            announcement.AnnouncementId >= 0);
+        }
+        #endregion
+
+
+        //----------------------------------------------------------------------------------------METHODS FOR SAVING & LOADING----------------------------------------------------------------------------------------
 
         public void LoadAllData()
         {
@@ -197,6 +293,19 @@ namespace StudentHousingBV.Classes
 
         public void SaveAllData()
         {
+            //Deleting any possibly invalid announcements
+            if(announcements.Count > 0)
+            {
+                foreach (Announcement announcement in announcements)
+                {
+                    //Invalid announcements have an Id of -1
+                    if (announcement.AnnouncementId < 0)
+                    {
+                        announcements.RemoveAt(announcements.IndexOf(announcement));
+                    }
+                }
+            }
+
             SaveAttribute(() => buildings);
             SaveAttribute(() => flats);
             SaveAttribute(() => groceries);
@@ -226,19 +335,11 @@ namespace StudentHousingBV.Classes
                         List<T>? deserializedJson = JsonSerializer.Deserialize<List<T>>(extractedJson);
                         return deserializedJson;
                     }
-                    catch (Exception ex)
-                    {
-                        // Log the error or handle it as needed (e.g., deserialization issues)
-                        Console.WriteLine($"Error deserializing {jsonName}.json: {ex.Message}");
-                    }
+                    catch (Exception ex){}
                 }
-                else
-                {
-                    Console.WriteLine($"File {jsonName}.json not found.");
-                }
+
             }
 
-            // Return null if loading fails or the file doesn't exist
             return null;
         }
 
