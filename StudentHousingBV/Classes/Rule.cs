@@ -9,34 +9,33 @@
         public int FlatId { get; set; } // Foreign Key
 
         // Navigation property
-        public Building Building { get; set; }
-        public Flat Flat {  get; set; }
+        public Building? Building { get; set; }
+        public Flat? Flat {  get; set; }
         #endregion
 
         #region Constructors  
-        public Rule()
+        public Rule(DataManager dataManager)
         {
+            RuleId = dataManager.GetMaxIdRules() + 1;
             Description = "";
-            Building = new Building();
-            Flat = new Flat();
         }
 
         public Rule(string description, DataManager dataManager, int buildingId)
         {
-            Description = description;
-            RuleId = dataManager.GetIdFromClass(this, buildingId) + 1;
-            Building = dataManager.GetBuilding(buildingId);
+            RuleId = dataManager.GetMaxIdRules() + 1;
             BuildingId = buildingId;
+            Description = description;
+            Building = dataManager.GetBuilding(buildingId);
         }
 
         public Rule(string description, DataManager dataManager, int buildingId, int flatId)
         {
-            Description = description;
-            RuleId = dataManager.GetIdFromClass(this, buildingId) + 1;
-            Building = dataManager.GetBuilding(buildingId);
+            RuleId = dataManager.GetMaxIdRules() + 1;
             BuildingId = buildingId;
-            Flat = dataManager.GetFlat(buildingId, flatId);
             FlatId = flatId;
+            Description = description;
+            Building = dataManager.GetBuilding(buildingId);
+            Flat = dataManager.GetFlat(flatId);
         }
         #endregion
 

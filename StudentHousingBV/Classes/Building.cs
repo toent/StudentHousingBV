@@ -11,32 +11,26 @@
         #endregion
 
         #region Constructors
-        public Building()
+        public Building(DataManager dataManager)
         {
-            Flats = new List<Flat>();
+            BuildingId = dataManager.GetMaxIdBuildings() + 1;
+            Flats = [];
             Address = "";
         }
 
         //constructors for regular usage
         public Building(string inputAddress, DataManager dataManager)
         {
+            BuildingId = dataManager.GetMaxIdBuildings() + 1;
             Address = inputAddress;
-            Flats = new List<Flat>();
-            BuildingId = dataManager.GetIdFromClass(this) + 1;
+            Flats = [];
         }
 
         public Building(string inputAddress, List<Flat> inputFlats, DataManager dataManager)
         {
+            BuildingId = dataManager.GetMaxIdBuildings() + 1;
             Address = inputAddress;
             Flats = inputFlats;
-            BuildingId = dataManager.GetIdFromClass(this) + 1;
-        }
-
-        public Building(string inputAddress, List<Flat> inputFlats, List<Rule> rules, DataManager dataManager)
-        {
-            Address = inputAddress;
-            Flats = inputFlats;
-            BuildingId = dataManager.GetIdFromClass(this) + 1;
         }
         #endregion
     }

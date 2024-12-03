@@ -4,7 +4,7 @@ namespace StudentHousingBV.Student_App
 {
     public partial class StudentLogin : Form
     {
-        DataManager dataManager;
+        readonly DataManager dataManager;
 
         public StudentLogin()
         {
@@ -14,6 +14,7 @@ namespace StudentHousingBV.Student_App
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            
         }
     }
 }

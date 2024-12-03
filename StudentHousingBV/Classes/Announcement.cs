@@ -10,84 +10,61 @@
         public int FlatId { get; set; } //Foreign Key
 
         // Navigation property
-        public Building Building { get; set; }
-        public Flat Flat { get; set; }
+        public Building? Building { get; set; }
+        public Flat? Flat { get; set; }
         #endregion
 
         #region Constructors
-        public Announcement()
+        public Announcement(DataManager dataManager)
         {
+            AnnouncementId = dataManager.GetMaxIdAnnouncements() + 1;
             Message = "";
-            Building = new Building();
         }
 
-        public Announcement(int announcementId, string message, int buildingId, DataManager dataManager)
+        public Announcement(string message, int buildingId, DataManager dataManager)
         {
-            AnnouncementId = dataManager.GetIdFromClass(this, buildingId);
+            AnnouncementId = dataManager.GetMaxIdAnnouncements() + 1;
             Message = message;
             BuildingId = buildingId;
             Building = dataManager.GetBuilding(buildingId);
             IsGlobal = false;
         }
 
-        public Announcement(int announcementId, string message, int buildingId, int flatId, DataManager dataManager)
+        public Announcement(string message, int buildingId, int flatId, DataManager dataManager)
         {
-            AnnouncementId = dataManager.GetIdFromClass(this, buildingId);
+            AnnouncementId = dataManager.GetMaxIdAnnouncements() + 1;
             Message = message;
             BuildingId = buildingId;
             FlatId = flatId;
             Building = dataManager.GetBuilding(buildingId);
-            Flat = dataManager.GetFlat(buildingId, flatId);
+            Flat = dataManager.GetFlat(flatId);
             IsGlobal = false;
         }
 
-        public Announcement(int announcementId, string message, bool isGlobal, DataManager dataManager)
+        public Announcement(string message, bool isGlobal, DataManager dataManager)
         {
-            if(isGlobal == true)
-            {
-                AnnouncementId = dataManager.GetIdFromClass(this);
-                Message = message;
-                IsGlobal = isGlobal;
-            }
-            else
-            {
-                //set announcement to being invalid
-                this.AnnouncementId = -1;
-            }
+            AnnouncementId = dataManager.GetMaxIdAnnouncements() + 1;
+            Message = message;
+            IsGlobal = isGlobal;
         }
 
-        public Announcement(int announcementId, string message, int buildingId, bool isGlobal, DataManager dataManager)
+        public Announcement(string message, int buildingId, bool isGlobal, DataManager dataManager)
         {
-            if (isGlobal == true)
-            {
-                AnnouncementId = dataManager.GetIdFromClass(this);
-            }
-            else
-            {
-                AnnouncementId = dataManager.GetIdFromClass(this, buildingId);
-            }
-
+            AnnouncementId = dataManager.GetMaxIdAnnouncements() + 1;
             Message = message;
             BuildingId = buildingId;
             Building = dataManager.GetBuilding(buildingId);
             IsGlobal = isGlobal;
         }
 
-        public Announcement(int announcementId, string message, int buildingId, int flatId, bool isGlobal, DataManager dataManager)
+        public Announcement(string message, int buildingId, int flatId, bool isGlobal, DataManager dataManager)
         {
-            if (isGlobal == true)
-            {
-                AnnouncementId = dataManager.GetIdFromClass(this);
-            }
-            else
-            {
-                AnnouncementId = dataManager.GetIdFromClass(this, buildingId);
-            }
+            AnnouncementId = dataManager.GetMaxIdAnnouncements() + 1;
             Message = message;
             BuildingId = buildingId;
             FlatId = flatId;
             Building = dataManager.GetBuilding(buildingId);
-            Flat = dataManager.GetFlat(buildingId, flatId);
+            Flat = dataManager.GetFlat(flatId);
             IsGlobal = isGlobal;
         }
 

@@ -9,25 +9,21 @@
         public int BuildingId { get; set; } // Foreign Key
         
         // Navigation property
-        public Flat Flat { get; set; }
-        public Building Building { get; set; }
+        public Flat? Flat { get; set; }
+        public Building? Building { get; set; }
         #endregion
 
         #region Constructors
         public Student()
         {
-            Name = "";
-            Flat = new Flat();
-            Building = new Building();
             StudentId = "";
+            Name = "";
         }
 
         public Student(string studentId, string name)
         {
             StudentId = studentId;
             Name = name;
-            Flat = new Flat();
-            Building = new Building();
         }
         #endregion
     }

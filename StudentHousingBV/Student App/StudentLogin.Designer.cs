@@ -37,7 +37,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(168, 132);
+            label1.Location = new Point(168, 97);
             label1.Name = "label1";
             label1.Size = new Size(154, 25);
             label1.TabIndex = 0;
@@ -45,7 +45,7 @@
             // 
             // txtContractId
             // 
-            txtContractId.Location = new Point(168, 160);
+            txtContractId.Location = new Point(168, 125);
             txtContractId.Name = "txtContractId";
             txtContractId.Size = new Size(331, 31);
             txtContractId.TabIndex = 1;
@@ -54,7 +54,7 @@
             // 
             btnLogin.BackColor = Color.FromArgb(214, 223, 255);
             btnLogin.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnLogin.Location = new Point(168, 204);
+            btnLogin.Location = new Point(168, 169);
             btnLogin.Margin = new Padding(3, 10, 3, 3);
             btnLogin.Name = "btnLogin";
             btnLogin.Size = new Size(331, 34);

@@ -87,7 +87,7 @@ namespace StudentHousingBV
                 dataManager.SaveAllData();
 
                 lbCurrentFlats.Items.Clear();
-                foreach (Flat flat in dataManager.GetFlats(buildingId))
+                foreach (Flat flat in dataManager.GetFlatsFromBuilding(buildingId))
                 {
                     lbCurrentFlats.Items.Add($"Building ID: {buildingId} - Flat ID: {flat.FlatId} - Flat Number: {flat.FlatNumber}");
                 }
@@ -103,7 +103,7 @@ namespace StudentHousingBV
             cbFlatIdStudent.Items.Clear();
             cbFlatIdStudent.SelectedValue = null;
             cbFlatIdStudent.Text = string.Empty;
-            foreach (Flat flat in dataManager.GetFlats(selectedBuildingId))
+            foreach (Flat flat in dataManager.GetFlatsFromBuilding(selectedBuildingId))
             {
                 cbFlatIdStudent.Items.Add(flat.FlatId);
             }
@@ -120,7 +120,7 @@ namespace StudentHousingBV
                 int selectedFlatId = int.Parse(cbFlatIdStudent.GetItemText(cbFlatIdStudent.SelectedItem));
 
                 Student newStudent = new Student(tbContractId.Text, tbStudentName.Text);
-                Flat selectedFlat = dataManager.GetFlat(selectedBuildingId, selectedFlatId);
+                Flat selectedFlat = dataManager.GetFlat(selectedFlatId);
 
                 selectedFlat.Students.Add(newStudent);
 
@@ -142,7 +142,7 @@ namespace StudentHousingBV
             cbFlatIdRule.Items.Clear();
             cbFlatIdRule.SelectedValue = null;
             cbFlatIdRule.Text = string.Empty;
-            foreach (Flat flat in dataManager.GetFlats(selectedBuildingId))
+            foreach (Flat flat in dataManager.GetFlatsFromBuilding(selectedBuildingId))
             {
                 cbFlatIdRule.Items.Add(flat.FlatId);
             }
@@ -166,7 +166,7 @@ namespace StudentHousingBV
                     dataManager.SaveAllData();
 
                     lbCurrentRules.Items.Clear();
-                    foreach (Classes.Rule rule in dataManager.GetRules(selectedBuildingId))
+                    foreach (Classes.Rule rule in dataManager.GetRulesFlat(selectedBuildingId))
                     {
                         lbCurrentRules.Items.Add($"Rule ID: {rule.RuleId} - Content: {rule.Description} ");
                     }
@@ -182,7 +182,7 @@ namespace StudentHousingBV
                     dataManager.SaveAllData();
 
                     lbCurrentRules.Items.Clear();
-                    foreach (Classes.Rule rule in dataManager.GetAllRules(selectedBuildingId, selectedFlatId))
+                    foreach (Classes.Rule rule in dataManager.GetRulesFlatBuilding(selectedBuildingId, selectedFlatId))
                     {
                         lbCurrentRules.Items.Add($"Rule ID: {rule.RuleId} - Content: {rule.Description} ");
                     }
