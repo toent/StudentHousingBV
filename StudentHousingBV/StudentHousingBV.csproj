@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <Folder Include="Custom Controls\" />
-    <Folder Include="Company App\" />
     <Folder Include="Student App\" />
   </ItemGroup>
 
