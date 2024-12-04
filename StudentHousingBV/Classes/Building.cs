@@ -13,7 +13,7 @@
         #region Constructors
         public Building(DataManager dataManager)
         {
-            BuildingId = dataManager.GetMaxIdBuildings() + 1;
+            BuildingId = dataManager.GetNextBuildingId();
             Flats = [];
             Address = "";
         }
@@ -21,14 +21,14 @@
         //constructors for regular usage
         public Building(string inputAddress, DataManager dataManager)
         {
-            BuildingId = dataManager.GetMaxIdBuildings() + 1;
+            BuildingId = dataManager.GetNextBuildingId();
             Address = inputAddress;
             Flats = [];
         }
 
         public Building(string inputAddress, List<Flat> inputFlats, DataManager dataManager)
         {
-            BuildingId = dataManager.GetMaxIdBuildings() + 1;
+            BuildingId = dataManager.GetNextBuildingId();
             Address = inputAddress;
             Flats = inputFlats;
         }

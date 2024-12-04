@@ -3,7 +3,7 @@
     public class Chore(DataManager dataManager)
     {
         #region Properties
-        public int ChoreId { get; set; } = dataManager.GetMaxIdChores() + 1;
+        public int ChoreId { get; set; } = dataManager.GetNextChoreId();
         public string Description { get; set; } = "";
         public int StudentId { get; set; } = 0;
 

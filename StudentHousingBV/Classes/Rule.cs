@@ -16,13 +16,13 @@
         #region Constructors  
         public Rule(DataManager dataManager)
         {
-            RuleId = dataManager.GetMaxIdRules() + 1;
+            RuleId = dataManager.GetNextRuleId();
             Description = "";
         }
 
         public Rule(string description, DataManager dataManager, int buildingId)
         {
-            RuleId = dataManager.GetMaxIdRules() + 1;
+            RuleId = dataManager.GetNextRuleId();
             BuildingId = buildingId;
             Description = description;
             Building = dataManager.GetBuilding(buildingId);
@@ -30,7 +30,7 @@
 
         public Rule(string description, DataManager dataManager, int buildingId, int flatId)
         {
-            RuleId = dataManager.GetMaxIdRules() + 1;
+            RuleId = dataManager.GetNextRuleId();
             BuildingId = buildingId;
             FlatId = flatId;
             Description = description;
