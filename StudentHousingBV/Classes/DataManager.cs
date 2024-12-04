@@ -232,7 +232,7 @@ namespace StudentHousingBV.Classes
         }
         #endregion
 
-        #region Getting Complaints
+        #region Getting Complaint by flatId
 
         /// <summary>
         /// Get a complaint by its ID
@@ -242,6 +242,14 @@ namespace StudentHousingBV.Classes
         public ICollection<Complaint>? GetComplaints(int flatId)
         {
             return GetFlat(flatId)?.Complaints;
+        }
+        #endregion
+
+        #region Get all Complaints
+        
+        public List<Complaint> GetAllComplaints()
+        {
+            return complaints;
         }
         #endregion
 
