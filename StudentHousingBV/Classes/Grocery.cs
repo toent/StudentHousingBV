@@ -14,11 +14,17 @@
         public string ImagePath { get => imagePath; set => imagePath = value; }
         public string PaymentUrl { get => paymentUrl; set => paymentUrl = value; }
 
-        public Grocery(string creatorId, string imagePath, string paymentUrl, DataManager dataManager)
+        public int FlatId { get; set; } // Foreign Key
+
+        //Navigation Properties
+        public Flat Flat { get; set; }
+
+        public Grocery(string creatorId, string imagePath, string paymentUrl, int flatId , DataManager dataManager)
         {
             groceryId = dataManager.GetNextGroceryId();
             date = DateTime.Now;
             creator = dataManager.GetStudent(creatorId);
+            FlatId = flatId;
             this.imagePath = imagePath;
             this.paymentUrl = paymentUrl;
         }
