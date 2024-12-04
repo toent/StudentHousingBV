@@ -19,6 +19,18 @@ namespace StudentHousingBV.Classes
         private List<Grocery> groceries = [];
         #endregion
 
+        #region TestingProperties [TO DELETE] (Create accessor methods)
+        public List<Building> Buildings { get => buildings; set => buildings = value; }
+        public List<Flat> Flats { get => flats; set => flats = value; }
+        public List<Announcement> Announcements { get => announcements; set => announcements = value; }
+        public List<Agreement> Agreements { get => agreements; set => agreements = value; }
+        public List<Chore> Chores { get => chores; set => chores = value; }
+        public List<Complaint> Complaints { get => complaints; set => complaints = value; }
+        public List<Student> Students { get => students; set => students = value; }
+        public List<Rule> Rules { get => rules; set => rules = value; }
+        public List<Grocery> Groceries { get => groceries; set => groceries = value; }
+        #endregion
+
         #region Constructors
         public DataManager()
         {
