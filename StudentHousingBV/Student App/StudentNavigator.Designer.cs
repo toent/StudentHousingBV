@@ -36,12 +36,12 @@
             btnHouseRules = new Button();
             btnAnnouncements = new Button();
             pFormTitle = new Panel();
+            lblTitle = new Label();
+            lblLocation = new Label();
             lblContractId = new Label();
             lblUserName = new Label();
             btnLogout = new Button();
             pShowForm = new Panel();
-            label1 = new Label();
-            lblTitle = new Label();
             pSideMenu.SuspendLayout();
             pFormTitle.SuspendLayout();
             SuspendLayout();
@@ -72,6 +72,7 @@
             btnFileComplaint.TabIndex = 5;
             btnFileComplaint.Text = "File complaint";
             btnFileComplaint.UseVisualStyleBackColor = false;
+            btnFileComplaint.Click += Navigation_Click;
             // 
             // btnGroceries
             // 
@@ -85,6 +86,7 @@
             btnGroceries.TabIndex = 4;
             btnGroceries.Text = "Groceries";
             btnGroceries.UseVisualStyleBackColor = false;
+            btnGroceries.Click += Navigation_Click;
             // 
             // btnChores
             // 
@@ -98,6 +100,7 @@
             btnChores.TabIndex = 3;
             btnChores.Text = "Chores";
             btnChores.UseVisualStyleBackColor = false;
+            btnChores.Click += Navigation_Click;
             // 
             // btnAgreements
             // 
@@ -111,6 +114,7 @@
             btnAgreements.TabIndex = 2;
             btnAgreements.Text = "Agreements";
             btnAgreements.UseVisualStyleBackColor = false;
+            btnAgreements.Click += Navigation_Click;
             // 
             // btnHouseRules
             // 
@@ -124,6 +128,7 @@
             btnHouseRules.TabIndex = 1;
             btnHouseRules.Text = "House rules";
             btnHouseRules.UseVisualStyleBackColor = false;
+            btnHouseRules.Click += Navigation_Click;
             // 
             // btnAnnouncements
             // 
@@ -137,11 +142,12 @@
             btnAnnouncements.TabIndex = 0;
             btnAnnouncements.Text = "Announcements";
             btnAnnouncements.UseVisualStyleBackColor = false;
+            btnAnnouncements.Click += Navigation_Click;
             // 
             // pFormTitle
             // 
             pFormTitle.Controls.Add(lblTitle);
-            pFormTitle.Controls.Add(label1);
+            pFormTitle.Controls.Add(lblLocation);
             pFormTitle.Controls.Add(lblContractId);
             pFormTitle.Controls.Add(lblUserName);
             pFormTitle.Controls.Add(btnLogout);
@@ -150,6 +156,25 @@
             pFormTitle.Name = "pFormTitle";
             pFormTitle.Size = new Size(1598, 150);
             pFormTitle.TabIndex = 1;
+            // 
+            // lblTitle
+            // 
+            lblTitle.AutoSize = true;
+            lblTitle.Font = new Font("Segoe UI Semibold", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTitle.Location = new Point(607, 46);
+            lblTitle.Name = "lblTitle";
+            lblTitle.Size = new Size(385, 65);
+            lblTitle.TabIndex = 4;
+            lblTitle.Text = "Announcements";
+            // 
+            // lblLocation
+            // 
+            lblLocation.AutoSize = true;
+            lblLocation.Location = new Point(6, 62);
+            lblLocation.Name = "lblLocation";
+            lblLocation.Size = new Size(184, 25);
+            lblLocation.TabIndex = 3;
+            lblLocation.Text = "Lombokpad 1 - Flat 2";
             // 
             // lblContractId
             // 
@@ -178,6 +203,7 @@
             btnLogout.TabIndex = 0;
             btnLogout.Text = "Logout";
             btnLogout.UseVisualStyleBackColor = true;
+            btnLogout.Click += btnLogout_Click;
             // 
             // pShowForm
             // 
@@ -186,25 +212,6 @@
             pShowForm.Name = "pShowForm";
             pShowForm.Size = new Size(1598, 874);
             pShowForm.TabIndex = 2;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(6, 62);
-            label1.Name = "label1";
-            label1.Size = new Size(184, 25);
-            label1.TabIndex = 3;
-            label1.Text = "Lombokpad 1 - Flat 2";
-            // 
-            // lblTitle
-            // 
-            lblTitle.AutoSize = true;
-            lblTitle.Font = new Font("Segoe UI Semibold", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTitle.Location = new Point(607, 46);
-            lblTitle.Name = "lblTitle";
-            lblTitle.Size = new Size(385, 65);
-            lblTitle.TabIndex = 4;
-            lblTitle.Text = "Announcements";
             // 
             // StudentNavigator
             // 
@@ -237,7 +244,7 @@
         private Label lblContractId;
         private Label lblUserName;
         private Button btnLogout;
-        private Label label1;
+        private Label lblLocation;
         private Label lblTitle;
     }
 }

@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             label1 = new Label();
-            txtContractId = new TextBox();
+            txtStudentId = new TextBox();
             btnLogin = new Button();
             SuspendLayout();
             // 
@@ -43,12 +43,12 @@
             label1.TabIndex = 0;
             label1.Text = "Enter contract id:";
             // 
-            // txtContractId
+            // txtStudentId
             // 
-            txtContractId.Location = new Point(168, 125);
-            txtContractId.Name = "txtContractId";
-            txtContractId.Size = new Size(331, 31);
-            txtContractId.TabIndex = 1;
+            txtStudentId.Location = new Point(168, 125);
+            txtStudentId.Name = "txtStudentId";
+            txtStudentId.Size = new Size(331, 31);
+            txtStudentId.TabIndex = 1;
             // 
             // btnLogin
             // 
@@ -69,7 +69,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(676, 337);
             Controls.Add(btnLogin);
-            Controls.Add(txtContractId);
+            Controls.Add(txtStudentId);
             Controls.Add(label1);
             Name = "StudentLogin";
             Text = "StudentLogin";
@@ -80,7 +80,7 @@
         #endregion
 
         private Label label1;
-        private TextBox txtContractId;
+        private TextBox txtStudentId;
         private Button btnLogin;
     }
 }

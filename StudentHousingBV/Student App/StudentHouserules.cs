@@ -4,11 +4,12 @@ namespace StudentHousingBV
 {
     public partial class StudentHouserules : Form
     { 
-        DataManager dataManager = new DataManager();
+        private readonly DataManager dataManager;
 
-        public StudentHouserules()
+        public StudentHouserules(DataManager dataManager)
         {
             InitializeComponent();
+            this.dataManager = dataManager;
         }
 
         private void StudentHouserules_Load(object sender, EventArgs e)
