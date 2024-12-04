@@ -13,6 +13,8 @@
         public Building? Building { get; set; }
         #endregion
 
+        public Student() { }
+
         #region Constructors
         public Student(string studentId, string name, int buildingId, int flatId)
         {

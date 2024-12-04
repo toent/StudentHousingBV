@@ -55,8 +55,20 @@ namespace StudentHousingBV.Classes
         /// <returns> The next available ID for a building </returns>
         public int GetNextBuildingId()
         {
+            int resultId;
             LoadAttribute(() => buildings);
-            return buildings.Count > 0 ? buildings.Max(building => building.BuildingId) + 1 : 0;
+            if(buildings.Count > 0)
+            {
+                resultId = buildings.Max(building => building.BuildingId) + 1;
+            }else if (buildings.Count == 0)
+            {
+                resultId = 1;
+            }
+            else
+            {
+                resultId = 0;
+            }
+            return resultId;
         }
 
         /// <summary>
@@ -65,8 +77,21 @@ namespace StudentHousingBV.Classes
         /// <returns> The next available ID for a flat </returns>
         public int GetNextFlatId()
         {
+            int resultId;
             LoadAttribute(() => flats);
-            return flats.Count > 0 ? flats.Max(flat => flat.FlatId) + 1 : 0;
+            if (flats.Count > 0)
+            {
+                resultId = flats.Max(flat => flat.FlatId) + 1;
+            }
+            else if (flats.Count == 0)
+            {
+                resultId = 1;
+            }
+            else
+            {
+                resultId = 0;
+            }
+            return resultId;
         }
 
         /// <summary>
@@ -75,8 +100,21 @@ namespace StudentHousingBV.Classes
         /// <returns> The highest ID assigned to a complaint </returns>
         public int GetNextComplaintId()
         {
+            int resultId;
             LoadAttribute(() => complaints);
-            return complaints.Count > 0 ? complaints.Max(complaint => complaint.ComplaintId) + 1 : 0;
+            if (complaints.Count > 0)
+            {
+                resultId = complaints.Max(complaint => complaint.ComplaintId) + 1;
+            }
+            else if (complaints.Count == 0)
+            {
+                resultId = 1;
+            }
+            else
+            {
+                resultId = 0;
+            }
+            return resultId;
         }
 
         /// <summary>
@@ -85,8 +123,21 @@ namespace StudentHousingBV.Classes
         /// <returns> The next available ID for a rule </returns>
         public int GetNextRuleId()
         {
+            int resultId;
             LoadAttribute(() => rules);
-            return rules.Count > 0 ? rules.Max(rule => rule.RuleId) + 1 : 0;
+            if (rules.Count > 0)
+            {
+                resultId = rules.Max(rule => rule.RuleId) + 1;
+            }
+            else if (rules.Count == 0)
+            {
+                resultId = 1;
+            }
+            else
+            {
+                resultId = 0;
+            }
+            return resultId;
         }
 
         /// <summary>
@@ -95,8 +146,21 @@ namespace StudentHousingBV.Classes
         /// <returns> The next available ID for a announcement </returns>
         public int GetNextAnnouncementId()
         {
+            int resultId;
             LoadAttribute(() => announcements);
-            return announcements.Count > 0 ? announcements.Max(announcement => announcement.AnnouncementId) + 1 : 0;
+            if (announcements.Count > 0)
+            {
+                resultId = announcements.Max(announcement => announcement.AnnouncementId) + 1;
+            }
+            else if (announcements.Count == 0)
+            {
+                resultId = 1;
+            }
+            else
+            {
+                resultId = 0;
+            }
+            return resultId;
         }
 
         /// <summary>
@@ -105,8 +169,21 @@ namespace StudentHousingBV.Classes
         /// <returns> The next available ID for an agreement </returns>
         public int GetNextAgreementId()
         {
+            int resultId;
             LoadAttribute(() => agreements);
-            return agreements.Count > 0 ? agreements.Max(agreement => agreement.AgreementId) + 1 : 0;
+            if (agreements.Count > 0)
+            {
+                resultId = agreements.Max(agreement => agreement.AgreementId) + 1;
+            }
+            else if (agreements.Count == 0)
+            {
+                resultId = 1;
+            }
+            else
+            {
+                resultId = 0;
+            }
+            return resultId;
         }
 
         /// <summary>
@@ -115,8 +192,21 @@ namespace StudentHousingBV.Classes
         /// <returns> The next available ID for a chore </returns>
         public int GetNextChoreId()
         {
+            int resultId;
             LoadAttribute(() => chores);
-            return chores.Count > 0 ? chores.Max(chore => chore.ChoreId) + 1 : 0;
+            if (chores.Count > 0)
+            {
+                resultId = chores.Max(chore => chore.ChoreId) + 1;
+            }
+            else if (chores.Count == 0)
+            {
+                resultId = 1;
+            }
+            else
+            {
+                resultId = 0;
+            }
+            return resultId;
         }
 
         /// <summary>
@@ -125,8 +215,21 @@ namespace StudentHousingBV.Classes
         /// <returns> The next available ID for a grocery </returns>
         public int GetNextGroceryId()
         {
+            int resultId;
             LoadAttribute(() => groceries);
-            return groceries.Count > 0 ? groceries.Max(grocery => grocery.GroceryId) + 1 : 0;
+            if (groceries.Count > 0)
+            {
+                resultId = groceries.Max(grocery => grocery.GroceryId) + 1;
+            }
+            else if (groceries.Count == 0)
+            {
+                resultId = 1;
+            }
+            else
+            {
+                resultId = 0;
+            }
+            return resultId;
         }
         #endregion
 
