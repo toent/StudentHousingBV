@@ -11,28 +11,44 @@ using System.Windows.Forms;
 
 namespace StudentHousingBV.Company_App
 {
+    //private List<Complaint> complaints = new List<Complaint>
     public partial class DisplayComplaint : Form
     {
         private readonly DataManager dataManager;
         public DisplayComplaint()
         {
             InitializeComponent();
-            CreateDummyComplaints();
+            InitializeTestingDataset();
             UpdateListBoxComplaint();
-        }
 
-        private void CreateDummyComplaints()
-        {
-            //string description, int buildingId, int flatId, DataManager dataManager
-            Complaint complaint1 = new Complaint(1, "Mats annoyed me! he did this and that and bla bla bla.", 1, 1, dataManager);
-            Complaint complaint2 = new Complaint(2, "Aleix annoyed me! he did this and that and bla bla bla.", 1, 1, dataManager);
-            Complaint complaint3 = new Complaint(3, "Realgi annoyed me! he did this and that and bla bla bla.", 1, 2, dataManager);
         }
 
         private void UpdateListBoxComplaint()
         {
             lBoxComplaint.DataSource = null;
             lBoxComplaint.DataSource = dataManager.GetAllComplaints();
+        }
+
+        private void InitializeTestingDataset()
+        {
+            dataManager.Buildings.Add(new Building(dataManager)
+            {
+                BuildingId = 1,
+                Address = "123 Main St"
+            });
+            dataManager.Flats.Add(new Flat(dataManager)
+            {
+                BuildingId = 1,
+                FlatId = 1,
+                FlatNumber = 101
+            });
+            dataManager.Students.Add(new Student()
+            {
+                StudentId = "F93756",
+                BuildingId = 1,
+                FlatId = 1,
+                Name = "Jane Doe",
+            });
         }
     }
 }
