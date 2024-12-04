@@ -14,6 +14,12 @@
         #endregion
 
         public Student() { }
+        
+        public Student(string studentId, string name)
+        {
+            StudentId = studentId;
+            Name = name;
+        }
 
         #region Constructors
         public Student(string studentId, string name, int buildingId, int flatId)
