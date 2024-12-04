@@ -29,6 +29,16 @@
             Building = dataManager.GetBuilding(buildingId);
             Flat = dataManager.GetFlat(flatId);
         }
+
+        public Complaint(int id ,string description, int buildingId, int flatId, DataManager dataManager)
+        {
+            ComplaintId = id;
+            Issue = description;
+            BuildingId = buildingId;
+            FlatId = flatId;
+            Building = dataManager.GetBuilding(buildingId);
+            Flat = dataManager.GetFlat(flatId);
+        }
         #endregion
     }
 }
