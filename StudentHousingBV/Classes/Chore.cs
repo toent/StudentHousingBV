@@ -9,7 +9,7 @@ namespace StudentHousingBV.Classes
         public string Title { get; set; }
         public string Description { get; set; }
         public bool IsFinished { get; set; }
-        public Student Assignee { get; set; }
+        public Student? Assignee { get; set; }
         public DateTime Deadline { get; set; }
         public string StudentId { get; set; } // Foreign Key
         public int FlatId { get; set; } // Foreign Key

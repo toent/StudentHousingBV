@@ -36,7 +36,7 @@ namespace StudentHousingBV.Classes
         }
         #endregion
 
-        #region ID getters
+        #region ID Getters
         /// <summary>
         /// Get the next available ID for a building
         /// </summary>
@@ -117,6 +117,8 @@ namespace StudentHousingBV.Classes
             return groceries.Count > 0 ? groceries.Max(grocery => grocery.GroceryId) + 1 : 0;
         }
         #endregion
+
+        #region Class Getters
 
         #region Getting Buildings
 
@@ -324,6 +326,37 @@ namespace StudentHousingBV.Classes
                 (announcement.BuildingId == buildingId && (announcement.FlatId <= 0 || announcement.FlatId == flatId))
             );
         }
+        #endregion
+
+        #region Getting Agreements
+        public ICollection<Agreement> GetAgreements() 
+        { 
+            return agreements; 
+        }
+
+        public ICollection<Agreement> GetFlatAgreements(int flatId)
+        {
+            return agreements.FindAll(agreement => agreement.FlatId == flatId);
+        }
+        #endregion
+
+        #region Getting Chores
+        public ICollection<Chore> GetChores()
+        {
+            return chores;
+        }
+
+        public ICollection<Chore> GetFlatChores(int flatId)
+        {
+            return chores.FindAll(chores => chores.FlatId == flatId);
+        }
+
+        public ICollection<Chore> GetStudentChores(string assigneeId)
+        {
+            return chores.FindAll(chores=> chores.Assignee?.StudentId == assigneeId);
+        }
+        #endregion
+
         #endregion
 
         #region Serialization
