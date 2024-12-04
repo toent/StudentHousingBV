@@ -16,14 +16,14 @@
         #region Constructors
         public Flat(DataManager dataManager)
         {
-            FlatId = dataManager.GetMaxIdFlats() + 1;
+            FlatId = dataManager.GetNextFlatId();
             Students = [];
             Complaints = [];
         }
 
         public Flat(int buildingId, int flatNumber, DataManager dataManager)
         {
-            FlatId = dataManager.GetMaxIdFlats() + 1;
+            FlatId = dataManager.GetNextFlatId();
             BuildingId = buildingId;
             FlatNumber = flatNumber;
             Building = dataManager.GetBuilding(buildingId);
@@ -33,7 +33,7 @@
 
         public Flat(int buildingId, int flatNumber, DataManager dataManger, List<Student> students)
         {
-            FlatId = dataManger.GetMaxIdFlats() + 1;
+            FlatId = dataManger.GetNextFlatId();
             BuildingId = buildingId;
             FlatNumber = flatNumber;
             Building = dataManger.GetBuilding(buildingId);

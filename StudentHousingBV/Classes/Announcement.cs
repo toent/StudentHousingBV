@@ -17,13 +17,13 @@
         #region Constructors
         public Announcement(DataManager dataManager)
         {
-            AnnouncementId = dataManager.GetMaxIdAnnouncements() + 1;
+            AnnouncementId = dataManager.GetNextAnnouncementId();
             Message = "";
         }
 
         public Announcement(string message, int buildingId, DataManager dataManager)
         {
-            AnnouncementId = dataManager.GetMaxIdAnnouncements() + 1;
+            AnnouncementId = dataManager.GetNextAnnouncementId();
             Message = message;
             BuildingId = buildingId;
             Building = dataManager.GetBuilding(buildingId);
@@ -32,7 +32,7 @@
 
         public Announcement(string message, int buildingId, int flatId, DataManager dataManager)
         {
-            AnnouncementId = dataManager.GetMaxIdAnnouncements() + 1;
+            AnnouncementId = dataManager.GetNextAnnouncementId();
             Message = message;
             BuildingId = buildingId;
             FlatId = flatId;
@@ -43,14 +43,14 @@
 
         public Announcement(string message, bool isGlobal, DataManager dataManager)
         {
-            AnnouncementId = dataManager.GetMaxIdAnnouncements() + 1;
+            AnnouncementId = dataManager.GetNextAnnouncementId();
             Message = message;
             IsGlobal = isGlobal;
         }
 
         public Announcement(string message, int buildingId, bool isGlobal, DataManager dataManager)
         {
-            AnnouncementId = dataManager.GetMaxIdAnnouncements() + 1;
+            AnnouncementId = dataManager.GetNextAnnouncementId();
             Message = message;
             BuildingId = buildingId;
             Building = dataManager.GetBuilding(buildingId);
@@ -59,7 +59,7 @@
 
         public Announcement(string message, int buildingId, int flatId, bool isGlobal, DataManager dataManager)
         {
-            AnnouncementId = dataManager.GetMaxIdAnnouncements() + 1;
+            AnnouncementId = dataManager.GetNextAnnouncementId();
             Message = message;
             BuildingId = buildingId;
             FlatId = flatId;

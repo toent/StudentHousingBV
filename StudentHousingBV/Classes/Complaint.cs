@@ -16,13 +16,13 @@
         #region Constructors
         public Complaint(DataManager dataManager)
         {
-            ComplaintId = dataManager.GetMaxIdComplaints() + 1;
+            ComplaintId = dataManager.GetNextComplaintId();
             Issue = "";
         }
 
         public Complaint(string description, int buildingId, int flatId, DataManager dataManager)
         {
-            ComplaintId = dataManager.GetMaxIdComplaints() + 1;
+            ComplaintId = dataManager.GetNextComplaintId();
             Issue = description;
             BuildingId = buildingId;
             FlatId = flatId;

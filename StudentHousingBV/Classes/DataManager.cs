@@ -38,66 +38,83 @@ namespace StudentHousingBV.Classes
 
         #region ID getters
         /// <summary>
-        /// Get the current highest ID assigned to a building 
+        /// Get the next available ID for a building
         /// </summary>
-        /// <param name="building"> The building to get the ID from </param>
-        /// <returns> The highest ID assigned to a building </returns>
-        public int GetMaxIdBuildings()
+        /// <returns> The next available ID for a building </returns>
+        public int GetNextBuildingId()
         {
             LoadAttribute(() => buildings);
-            return buildings.Count > 0 ? buildings.Max(building => building.BuildingId) : 0;
+            return buildings.Count > 0 ? buildings.Max(building => building.BuildingId) + 1 : 0;
         }
 
         /// <summary>
-        /// Get the current highest ID assigned to a flat
+        /// Get the next available ID for a flat
         /// </summary>
-        /// <returns> The highest ID assigned to a student </returns>
-        public int GetMaxIdFlats()
+        /// <returns> The next available ID for a flat </returns>
+        public int GetNextFlatId()
         {
             LoadAttribute(() => flats);
-            return flats.Count > 0 ? flats.Max(flat => flat.FlatId) : 0;
+            return flats.Count > 0 ? flats.Max(flat => flat.FlatId) + 1 : 0;
         }
 
         /// <summary>
-        /// Get the current highest ID assigned to a complaint
+        /// Get the next available ID for complaints
         /// </summary>
         /// <returns> The highest ID assigned to a complaint </returns>
-        public int GetMaxIdComplaints()
+        public int GetNextComplaintId()
         {
             LoadAttribute(() => complaints);
-            return complaints.Count > 0 ? complaints.Max(complaint => complaint.ComplaintId) : 0;
+            return complaints.Count > 0 ? complaints.Max(complaint => complaint.ComplaintId) + 1 : 0;
         }
 
         /// <summary>
-        /// Get the current highest ID assigned to a rule
+        /// Get the next available ID for a rule
         /// </summary>
-        /// <returns> The highest ID assigned to a rule </returns>
-        public int GetMaxIdRules()
+        /// <returns> The next available ID for a rule </returns>
+        public int GetNextRuleId()
         {
             LoadAttribute(() => rules);
-            return rules.Count > 0 ? rules.Max(rule => rule.RuleId) : 0;
+            return rules.Count > 0 ? rules.Max(rule => rule.RuleId) + 1 : 0;
         }
 
         /// <summary>
-        /// Get the current highest ID assigned to an announcement
+        ///  Get the next available ID for an announcement
         /// </summary>
-        /// <returns> The highest ID assigned to an announcement </returns>
-        public int GetMaxIdAnnouncements()
+        /// <returns> The next available ID for a announcement </returns>
+        public int GetNextAnnouncementId()
         {
             LoadAttribute(() => announcements);
-            return announcements.Count > 0 ? announcements.Max(announcement => announcement.AnnouncementId) : 0;
+            return announcements.Count > 0 ? announcements.Max(announcement => announcement.AnnouncementId) + 1 : 0;
         }
 
-        public int GetMaxIdAgreements()
+        /// <summary>
+        /// Get the next available ID for an agreement
+        /// </summary>
+        /// <returns> The next available ID for an agreement </returns>
+        public int GetNextAgreementId()
         {
             LoadAttribute(() => agreements);
-            return agreements.Count > 0 ? agreements.Max(agreement => agreement.AgreementId) : 0;
+            return agreements.Count > 0 ? agreements.Max(agreement => agreement.AgreementId) + 1 : 0;
         }
 
-        public int GetMaxIdChores()
+        /// <summary>
+        /// Get the next available ID for a chore
+        /// </summary>
+        /// <returns> The next available ID for a chore </returns>
+        public int GetNextChoreId()
         {
             LoadAttribute(() => chores);
-            return chores.Count > 0 ? chores.Max(chore => chore.ChoreId) : 0;
+            return chores.Count > 0 ? chores.Max(chore => chore.ChoreId) + 1 : 0;
+        }
+
+        /// <summary>
+        /// Get the next available ID for a grocery
+        /// </summary>
+        /// <returns> The next available ID for a grocery </returns>
+        public int GetNextGroceryId()
+        {
+            LoadAttribute(() => groceries);
+            return groceries.Count > 0 ? groceries.Max(grocery => grocery.GroceryId) + 1 : 0;
         }
         #endregion
 

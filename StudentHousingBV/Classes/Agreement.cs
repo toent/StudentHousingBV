@@ -22,7 +22,7 @@
         public Agreement(string agreementTitle, string agreementDetails, List<Student> studentsInAgreement, 
                             string studentId, int flatId, int buildingId, DataManager dataManager)
         {
-            AgreementId = dataManager.GetMaxIdAgreements();
+            AgreementId = dataManager.GetNextAgreementId();
             Title = agreementTitle;
             Details = agreementDetails;
             AgreedBy = studentsInAgreement;

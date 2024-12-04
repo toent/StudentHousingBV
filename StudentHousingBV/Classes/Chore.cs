@@ -25,7 +25,7 @@ namespace StudentHousingBV.Classes
         #region Constructors
         public Chore(string choreTitle, string choreDescription, DateTime choreDeadline, string studentId, int flatId, int buildingId, DataManager dataManager)
         {
-            ChoreId = dataManager.GetMaxIdChores();
+            ChoreId = dataManager.GetNextChoreId();
             Title = choreTitle;
             Description = choreDescription;
             IsFinished = false;
@@ -38,7 +38,7 @@ namespace StudentHousingBV.Classes
         public Chore(string choreTitle, string choreDescription, Student choreAssignee, DateTime choreDeadline, 
                         string studentId, int flatId, int buildingId, DataManager dataManager)
         {
-            ChoreId = dataManager.GetMaxIdChores();
+            ChoreId = dataManager.GetNextChoreId();
             Title = choreTitle;
             Description = choreDescription;
             IsFinished = false;
