@@ -11,14 +11,17 @@
         #endregion
 
         #region Constructors
-        public Building(DataManager dataManager)
-        {
-            BuildingId = dataManager.GetNextBuildingId();
-            Flats = [];
-            Address = "";
-        }
+        //public Building(DataManager dataManager)
+        //{
+        //    BuildingId = dataManager.GetNextBuildingId();
+        //    Flats = [];
+        //    Address = "";
+        //}
 
         //constructors for regular usage
+
+        public Building() { }
+
         public Building(string inputAddress, DataManager dataManager)
         {
             BuildingId = dataManager.GetNextBuildingId();

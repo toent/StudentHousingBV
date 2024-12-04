@@ -19,6 +19,8 @@
         //Navigation Properties
         public Flat Flat { get; set; }
 
+        public Grocery() { }
+
         public Grocery(string creatorId, string imagePath, string paymentUrl, int flatId , DataManager dataManager)
         {
             groceryId = dataManager.GetNextGroceryId();

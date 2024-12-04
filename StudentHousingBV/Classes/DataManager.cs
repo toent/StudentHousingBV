@@ -215,6 +215,11 @@ namespace StudentHousingBV.Classes
             return students.FindAll(student => student.BuildingId == buildingId);
         }
 
+        public ICollection<Student> GetStudentsInFlat(int flatId)
+        {
+            return students.FindAll(student => student.FlatId == flatId);
+        }
+
         /// <summary>
         /// Get all students in a flat
         /// </summary>

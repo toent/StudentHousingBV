@@ -14,6 +14,8 @@
         #endregion
 
         #region Constructors
+        public Flat() { }
+
         public Flat(DataManager dataManager)
         {
             FlatId = dataManager.GetNextFlatId();
