@@ -1,27 +1,25 @@
-﻿using System.Runtime.InteropServices;
+﻿using System.Linq.Expressions;
 using System.Text.Json;
-using System.Reflection;
-using StudentHousingBV.Classes;
-using System.Linq.Expressions;
 
 namespace StudentHousingBV.Classes
 {
     public class DataManager
     {
-        private List<Building> buildings = new List<Building>();
-        private List<Flat> flats = new List<Flat>();
-        private List<Announcement> announcements = new List<Announcement>();
-        private List<Agreement> agreements = new List<Agreement>();
-        private List<Chore> chores = new List<Chore>();
-        private List<Complaint> complaints = new List<Complaint>();
-        private List<Student> students = new List<Student>();
-        private List<Classes.Rule> rules = new List<Classes.Rule>();
-        private List<Grocery> groceries = new List<Grocery>();
+        #region Fields
+        private readonly string storagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Storage");
+        private readonly bool directoryExists = false;
+        private List<Building> buildings = [];
+        private List<Flat> flats = [];
+        private List<Announcement> announcements = [];
+        private List<Agreement> agreements = [];
+        private List<Chore> chores = [];
+        private List<Complaint> complaints = [];
+        private List<Student> students = [];
+        private List<Rule> rules = [];
+        private List<Grocery> groceries = [];
+        #endregion
 
-
-        private string storagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Storage");
-        private bool directoryExists = false;
-
+        #region Constructors
         public DataManager()
         {
             Directory.CreateDirectory(storagePath);
@@ -33,279 +31,317 @@ namespace StudentHousingBV.Classes
             {
                 directoryExists = false;
             }
-
             LoadAllData();
             SaveAllData();
         }
+        #endregion
 
-
-        //-------------------------------------------------------------------------------------METHODS FOR GETTING IDs-------------------------------------------------------------------------------------
-
-
+        #region ID getters
         /// <summary>
-        /// Get the current highest ID assigned to a building
+        /// Get the current highest ID assigned to a building 
         /// </summary>
-        public int GetIdFromClass(Building building)
+        /// <param name="building"> The building to get the ID from </param>
+        /// <returns> The highest ID assigned to a building </returns>
+        public int GetMaxIdBuildings()
         {
-            int resultId = 0;
-
             LoadAttribute(() => buildings);
-
-            if (buildings.Count > 0)
-            {
-                resultId = buildings.Max(building => building.BuildingId);
-            }
-
-
-            return resultId;
+            return buildings.Count > 0 ? buildings.Max(building => building.BuildingId) : 0;
         }
-
 
         /// <summary>
         /// Get the current highest ID assigned to a flat
         /// </summary>
-        public int GetIdFromClass(Flat flat, int buildingId)
+        /// <returns> The highest ID assigned to a student </returns>
+        public int GetMaxIdFlats()
         {
-            int resultId = 0;
-
             LoadAttribute(() => flats);
-
-            if (GetFlats(buildingId).Count > 0)
-            {
-                resultId = GetFlats(buildingId).Max(flat => flat.FlatId);
-            }
-
-            return resultId;
+            return flats.Count > 0 ? flats.Max(flat => flat.FlatId) : 0;
         }
-
 
         /// <summary>
         /// Get the current highest ID assigned to a complaint
         /// </summary>
-        public int GetIdFromClass(Complaint complaint, int buildingId, int flatId)
+        /// <returns> The highest ID assigned to a complaint </returns>
+        public int GetMaxIdComplaints()
         {
-            int resultId = 0;
-
             LoadAttribute(() => complaints);
-
-            if (buildings.FirstOrDefault(building => building.BuildingId == buildingId)?.Flats.Count > 0)
-            {
-
-                resultId = GetComplaints(buildingId, flatId).Max(complaint => complaint.ComplaintId);
-            }
-
-            return resultId;
+            return complaints.Count > 0 ? complaints.Max(complaint => complaint.ComplaintId) : 0;
         }
 
         /// <summary>
         /// Get the current highest ID assigned to a rule
         /// </summary>
-        public int GetIdFromClass(Classes.Rule rule, int buildingId)
+        /// <returns> The highest ID assigned to a rule </returns>
+        public int GetMaxIdRules()
         {
-            int resultId = 0;
-
             LoadAttribute(() => rules);
-
-            if (GetFlats(buildingId).Count > 0)
-            {
-                if(GetRules(buildingId).Count > 0)
-                {
-                    resultId = GetRules(buildingId).Max(rule => rule.RuleId);
-                }
-                
-                foreach (Flat f in GetFlats(buildingId))
-                {
-
-                    if (GetRules(buildingId,f.FlatId).Count > 0 && GetRules(buildingId, f.FlatId).Max(rule => rule.RuleId) > resultId)
-                    {
-                        resultId = GetRules(buildingId, f.FlatId).Max(rule => rule.RuleId);
-                    }
-                }
-            }
-
-            return resultId;
+            return rules.Count > 0 ? rules.Max(rule => rule.RuleId) : 0;
         }
-
 
         /// <summary>
         /// Get the current highest ID assigned to an announcement
         /// </summary>
-        public int GetIdFromClass(Announcement announcement, int buildingId)
+        /// <returns> The highest ID assigned to an announcement </returns>
+        public int GetMaxIdAnnouncements()
         {
-            int resultId = 0;
-
             LoadAttribute(() => announcements);
+            return announcements.Count > 0 ? announcements.Max(announcement => announcement.AnnouncementId) : 0;
+        }
 
-            if (GetFlats(buildingId).Count > 0)
-            {
-                if (GetGlobalAnnouncements().Count > 0)
-                {
-                    resultId = GetGlobalAnnouncements().Max(announcement => announcement.AnnouncementId);
-                }
+        public int GetMaxIdAgreements()
+        {
+            LoadAttribute(() => agreements);
+            return agreements.Count > 0 ? agreements.Max(agreement => agreement.AgreementId) : 0;
+        }
 
-                foreach (Flat f in GetFlats(buildingId))
-                {
-                    if (GetAllAnnouncements(buildingId, f.FlatId).Count > 0 && GetAllAnnouncements(buildingId, f.FlatId).Max(announcement => announcement.AnnouncementId) > resultId)
-                    {
-                        resultId = GetAllAnnouncements(buildingId, f.FlatId).Max(announcement => announcement.AnnouncementId);
-                    }
-                }
-            }
+        public int GetMaxIdChores()
+        {
+            LoadAttribute(() => chores);
+            return chores.Count > 0 ? chores.Max(chore => chore.ChoreId) : 0;
+        }
+        #endregion
 
-            return resultId;
+        #region Getting Buildings
+
+        /// <summary>
+        /// Get a building by its ID
+        /// </summary>
+        /// <param name="buildingId"> The ID of the building to get </param>
+        /// <returns> The building with the specified ID if it exists, otherwise null </returns>
+        public Building? GetBuilding(int buildingId)
+        {
+            return buildings.FirstOrDefault(building => building.BuildingId == buildingId);
         }
 
         /// <summary>
-        /// Get the current highest ID assigned to an announcement, when the announcement is global
+        /// Get all buildings
         /// </summary>
-        public int GetIdFromClass(Announcement announcement)
-        {
-            int resultId = 0;
-
-            LoadAttribute(() => announcements);
-
-            foreach(Building b in buildings)
-            {
-                if (GetFlats(b.BuildingId).Count > 0)
-                {
-                    if (GetGlobalAnnouncements().Count > 0)
-                    {
-                        resultId = GetGlobalAnnouncements().Max(announcement => announcement.AnnouncementId);
-                    }
-
-                    foreach (Flat f in GetFlats(b.BuildingId))
-                    {
-                        if (GetAllAnnouncements(b.BuildingId, f.FlatId).Count > 0 && GetAllAnnouncements(b.BuildingId, f.FlatId).Max(announcement => announcement.AnnouncementId) > resultId)
-                        {
-                            resultId = GetAllAnnouncements(b.BuildingId, f.FlatId).Max(announcement => announcement.AnnouncementId);
-                        }
-                    }
-                }
-            }
-
-            return resultId;
-        }
-
-        //----------------------------------------------------------------------------------------METHODS FOR RETRIEVING DATA----------------------------------------------------------------------------------------
-
-        #region Getting Buildings
-        //get one building
-        public Building? GetBuilding(int buildingId)
-        { return this.buildings.FirstOrDefault(building => building.BuildingId == buildingId); }
-
-        //get all buildings
+        /// <returns> A list of all buildings if they exist, otherwise null </returns>
         public List<Building>? GetBuildings()
-        { return this.buildings; }
+        {
+            return buildings;
+        }
         #endregion
 
         #region Getting Flats
-        //get one flat
-        public Flat? GetFlat(int buildingId, int flatId)
-        { return flats.FirstOrDefault(flat => flat.BuildingId == buildingId && flat.FlatId == flatId); }
+        /// <summary>
+        /// Get a flat by its ID
+        /// </summary>
+        /// <param name="flatId"> The ID of the flat to get </param>
+        /// <returns> The flat with the specified ID if it exists, otherwise null </returns>
+        public Flat? GetFlat(int flatId)
+        {
+            return flats.FirstOrDefault(flat => flat.FlatId == flatId);
+        }
 
-        //get all flats in a building
-        public ICollection<Flat> GetFlats(int buildingId)
-        { return flats.FindAll(flat => flat.BuildingId == buildingId); }
+        /// <summary>
+        /// Get all flats
+        /// </summary>
+        /// <returns> A list of all flats if they exist, otherwise null </returns>
+        public ICollection<Flat> GetFlats()
+        {
+            return flats;
+        }
 
-        public ICollection<Flat> GetFlats() { return flats; }
+        /// <summary>
+        /// Get all flats in a building
+        /// </summary>
+        /// <param name="buildingId"> The ID of the building to get the flats from </param>
+        /// <returns> A list of all flats in the building if they exist, otherwise null </returns>
+        public ICollection<Flat> GetFlatsFromBuilding(int buildingId)
+        {
+            return flats.FindAll(flat => flat.BuildingId == buildingId);
+        }
         #endregion
 
         #region Getting Students
-        //get all students
+        /// <summary>
+        /// Get a student by their ID
+        /// </summary>
+        /// <param name="studentId"> The ID of the student to get </param>
+        /// <returns> The student with the specified ID if they exist, otherwise null </returns>
+        public Student? GetStudent(string studentId)
+        {
+            return students.FirstOrDefault(student => student.StudentId == studentId);
+        }
+
+        /// <summary>
+        /// Get all students
+        /// </summary>
+        /// <returns> A list of all students if they exist, otherwise null </returns>
         public ICollection<Student> GetStudents()
-        { return students; }
+        {
+            return students;
+        }
 
-        //get all students in a building
-        public ICollection<Student> GetStudents(int buildingId)
-        { return students.FindAll(student => student.BuildingId == buildingId); }
+        /// <summary>
+        /// Get all students in a building
+        /// </summary>
+        /// <param name="buildingId"> The ID of the building to get the students from </param>
+        /// <returns> A list of all students in the building if they exist, otherwise null </returns>
+        public ICollection<Student> GetStudentsInBuilding(int buildingId)
+        {
+            return students.FindAll(student => student.BuildingId == buildingId);
+        }
 
-        //get all students in a flat
+        /// <summary>
+        /// Get all students in a flat
+        /// </summary>
+        /// <param name="buildingId"> The ID of the building the flat is in </param>
+        /// <param name="flatId"> The ID of the flat to get the students from </param>
+        /// <returns> A list of all students in the flat if they exist, otherwise null </returns>
         public ICollection<Student>? GetStudents(int buildingId, int flatId)
-        { return students.FindAll(student => student.BuildingId == buildingId && student.FlatId == flatId); }
+        {
+            return students.FindAll(student => student.BuildingId == buildingId && student.FlatId == flatId);
+        }
         #endregion
 
         #region Getting Complaints
-        //get all complaints of a flat
-        public ICollection<Complaint>? GetComplaints(int buildingId, int flatId)
-        { return this.GetFlat(buildingId, flatId)?.Complaints; }
+
+        /// <summary>
+        /// Get a complaint by its ID
+        /// </summary>
+        /// <param name="flatId"> The ID of the flat the complaint is in </param>
+        /// <returns> The complaint with the specified ID if it exists, otherwise null </returns>
+        public ICollection<Complaint>? GetComplaints(int flatId)
+        {
+            return GetFlat(flatId)?.Complaints;
+        }
         #endregion
 
         #region Getting Rules
-        //get rules of a building
-        public ICollection<Classes.Rule> GetRules(int buildingId)
-        { return rules.FindAll(rule => rule.BuildingId == buildingId); }
+        /// <summary>
+        /// Get all rules
+        /// </summary>
+        /// <returns> A list of all rules if they exist, otherwise null </returns>
+        public ICollection<Rule> GetAllRules()
+        {
+            return rules;
+        }
 
-        //get rules of a flat
-        public ICollection<Classes.Rule> GetRules(int buildingId, int flatId)
-        { return rules.FindAll(rule => rule.BuildingId == buildingId && rule.FlatId == flatId); }
+        /// <summary>
+        /// Get all rules of a building
+        /// </summary>
+        /// <param name="buildingId"> The ID of the building to get the rules from </param>
+        /// <returns> A list of all rules in the building if they exist, otherwise null </returns>
+        public ICollection<Rule> GetRulesBuilding(int buildingId)
+        {
+            return rules.FindAll(rule => rule.BuildingId == buildingId);
+        }
 
-        //get all rules of a flat and building
-        public ICollection<Classes.Rule> GetAllRules(int buildingId, int flatId)
-        { return rules.FindAll(rule => (rule.BuildingId == buildingId && rule.FlatId <= 0) || (rule.BuildingId == buildingId && rule.FlatId == flatId)); }
+        /// <summary>
+        /// Get all rules of a flat and building
+        /// </summary>
+        /// <param name="buildingId"> The ID of the building to get the rules from </param>
+        /// <param name="flatId"> The ID of the flat to get the rules from </param>
+        /// <returns> A list of all rules in the flat and building if they exist, otherwise null </returns>
+        public ICollection<Rule> GetRulesFlat(int flatId)
+        {
+            return rules.FindAll(rule => rule.FlatId == flatId);
+        }
 
-        //get all rules
-        public ICollection<Classes.Rule> GetAllRules()
-        { return rules; }
+        /// <summary>
+        /// Get all rules
+        /// </summary>
+        /// <param name="buildingId"> The ID of the building to get the rules from </param>
+        /// <param name="flatId"> The ID of the flat to get the rules from </param>
+        /// <returns> A list of all rules if they exist, otherwise null </returns>
+        public ICollection<Rule> GetRulesFlatBuilding(int buildingId, int flatId)
+        {
+            return rules.FindAll(rule => rule.BuildingId == buildingId && (rule.FlatId <= 0 || rule.FlatId == flatId));
+        }
+
+
         #endregion
 
         #region Getting Announcements
-        //get all announcements of a building
-        public ICollection<Announcement> GetAnnouncements(int buildingId)
-        { return announcements.FindAll(announcement => announcement.BuildingId == buildingId && announcement.AnnouncementId >= 0); }
-
-        //get all announcements of a flat 
-        public ICollection<Announcement> GetAnnouncements(int buildingId, int flatId)
-        { return announcements.FindAll(announcement => announcement.BuildingId == buildingId && announcement.FlatId == flatId && announcement.AnnouncementId >= 0); }
-
-        //get all global announcements
-        public ICollection<Announcement> GetGlobalAnnouncements() 
-        { return announcements.FindAll(announcement => announcement.IsGlobal == true && announcement.AnnouncementId >= 0); }
-
-        //get all announcements
-        public ICollection<Announcement> GetAllAnnouncements() 
-        { return announcements; }
-
-        //get building flat and global announcements
-        public ICollection<Announcement> GetAllAnnouncements(int buildingId, int flatId)
+        /// <summary>
+        /// Get all announcements of a building
+        /// </summary>
+        /// <param name="buildingId"> The ID of the building to get the announcements from </param>
+        /// <returns> A list of all announcements in the building if they exist, otherwise null </returns>
+        public ICollection<Announcement> GetAnnouncementsFromBuilding(int buildingId)
         {
-            return announcements.FindAll(announcement => (announcement.IsGlobal == true ||
-            (announcement.BuildingId == buildingId && announcement.FlatId <= 0) ||
-            (announcement.BuildingId == buildingId && announcement.FlatId == flatId)) && 
-            announcement.AnnouncementId >= 0);
+            return announcements.FindAll(announcement => announcement.BuildingId == buildingId);
+        }
+
+        /// <summary>
+        /// Get all announcements of a flat and building
+        /// </summary>
+        /// <param name="buildingId"> The ID of the building to get the announcements from </param>
+        /// <param name="flatId"> The ID of the flat to get the announcements from </param>
+        /// <returns> A list of all announcements in the flat and building if they exist, otherwise null </returns>
+        public ICollection<Announcement> GetAnnouncementsFromFlat(int flatId)
+        {
+            return announcements.FindAll(announcement => announcement.FlatId == flatId);
+        }
+
+        /// <summary>
+        /// Get all global announcements
+        /// </summary>
+        /// <returns> A list of all global announcements if they exist, otherwise null </returns>
+        public ICollection<Announcement> GetGlobalAnnouncements()
+        {
+            return announcements.FindAll(announcement => announcement.IsGlobal);
+        }
+
+        /// <summary>
+        /// Get all announcements
+        /// </summary>
+        /// <returns> A list of all announcements if they exist, otherwise null </returns>
+        public ICollection<Announcement> GetAllAnnouncements()
+        {
+            return announcements;
+        }
+
+        /// <summary>
+        /// Get all announcements of a building and flat
+        /// </summary>
+        /// <param name="buildingId"> The ID of the building to get the announcements from </param>
+        /// <param name="flatId"> The ID of the flat to get the announcements from </param>
+        /// <returns> A list of all announcements in the building and flat if they exist, otherwise null </returns>
+        public ICollection<Announcement> GetAllAnnouncementsBuildingFlat(int buildingId, int flatId)
+        {
+            return announcements.FindAll(announcement =>
+                announcement.IsGlobal ||
+                (announcement.BuildingId == buildingId && (announcement.FlatId <= 0 || announcement.FlatId == flatId))
+            );
         }
         #endregion
 
+        #region Serialization
 
-        //----------------------------------------------------------------------------------------METHODS FOR SAVING & LOADING----------------------------------------------------------------------------------------
-
+        /// <summary>
+        /// Load all data from the storage directory
+        /// </summary>
         public void LoadAllData()
         {
-            buildings = LoadAttribute(() => buildings);
-            flats = LoadAttribute(() => flats);
-            groceries = LoadAttribute(() => groceries);
-            rules = LoadAttribute(() => rules);
-            students = LoadAttribute(() => students);
-            complaints = LoadAttribute(() => complaints);
-            agreements = LoadAttribute(() => agreements);
-            announcements = LoadAttribute(() => announcements);
-            chores = LoadAttribute(() => chores);
+            buildings = LoadAttribute(() => buildings) ?? [];
+            flats = LoadAttribute(() => flats) ?? [];
+            groceries = LoadAttribute(() => groceries) ?? [];
+            rules = LoadAttribute(() => rules) ?? [];
+            students = LoadAttribute(() => students) ?? [];
+            complaints = LoadAttribute(() => complaints) ?? [];
+            agreements = LoadAttribute(() => agreements) ?? [];
+            announcements = LoadAttribute(() => announcements) ?? [];
+            chores = LoadAttribute(() => chores) ?? [];
         }
 
+        /// <summary>
+        /// Save all data to the storage directory
+        /// </summary>
         public void SaveAllData()
         {
-            //Deleting any possibly invalid announcements
-            if(announcements.Count > 0)
-            {
-                foreach (Announcement announcement in announcements)
-                {
-                    //Invalid announcements have an Id of -1
-                    if (announcement.AnnouncementId < 0)
-                    {
-                        announcements.RemoveAt(announcements.IndexOf(announcement));
-                    }
-                }
-            }
+            // Deleting any possibly invalid announcements
+            announcements = announcements.Where(announcement => announcement.AnnouncementId >= 0).ToList();
+            SaveAttributes();
+        }
 
+        /// <summary>
+        /// Save all attributes
+        /// </summary>
+        public void SaveAttributes()
+        {
             SaveAttribute(() => buildings);
             SaveAttribute(() => flats);
             SaveAttribute(() => groceries);
@@ -318,56 +354,82 @@ namespace StudentHousingBV.Classes
         }
 
 
+
+        /// <summary>
+        /// Load a list from the storage directory
+        /// </summary>
+        /// <typeparam name="T"> The type of the list </typeparam>
+        /// <param name="listExpression"> The list to load </param>
+        /// <returns> The list if it exists, otherwise null </returns>
         public List<T>? LoadAttribute<T>(Expression<Func<List<T>>> listExpression)
         {
             string jsonName = GetListName(listExpression);
+            string filePath = Path.Combine(storagePath, $"{jsonName}.json");
 
-            if (directoryExists)
+            if (!directoryExists || !File.Exists(filePath))
             {
-                string filePath = Path.Combine(storagePath, $"{jsonName}.json");
+                return null;
+            }
 
-                if (File.Exists(filePath))
-                {
-                    try
-                    {
-                        string extractedJson = File.ReadAllText(filePath);
-
-                        List<T>? deserializedJson = JsonSerializer.Deserialize<List<T>>(extractedJson);
-                        return deserializedJson;
-                    }
-                    catch (Exception ex){}
-                }
-
+            try
+            {
+                string extractedJson = File.ReadAllText(filePath);
+                return JsonSerializer.Deserialize<List<T>>(extractedJson);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception or handle it as needed
+                Console.WriteLine($"Error loading {jsonName}: {ex.Message}");
             }
 
             return null;
         }
 
+
+        /// <summary>
+        /// Save a list to the storage directory
+        /// </summary>
+        /// <typeparam name="T"> The type of the list </typeparam>
+        /// <param name="listExpression"> The list to save </param>
         public void SaveAttribute<T>(Expression<Func<List<T>>> listExpression)
         {
             string jsonName = GetListName(listExpression);
-
             string jsonData = JsonSerializer.Serialize(listExpression.Compile().Invoke());
 
-            if (directoryExists)
-            {
-                string filePath = Path.Combine(storagePath, $"{jsonName}.json");
+            if (!directoryExists) return;
 
-                File.WriteAllText(filePath, jsonData);
-            }
+            string filePath = Path.Combine(storagePath, $"{jsonName}.json");
+
+            File.WriteAllText(filePath, jsonData);
         }
 
+
+        /// <summary>
+        /// Get the name of a list
+        /// </summary>
+        /// <typeparam name="T"> The type of the list </typeparam>
+        /// <param name="expression"> The list to get the name from </param>
+        /// <returns> The name of the list </returns>
+        /// <exception cref="ArgumentException"> Thrown when the expression is not a member expression </exception>
         public static string GetListName<T>(Expression<Func<List<T>>> expression)
         {
             if (expression.Body is MemberExpression memberExpression)
             {
                 return memberExpression.Member.Name;
             }
-            throw new ArgumentException("");
+            throw new ArgumentException("The expression does not specify a valid member.");
         }
 
-        public string GetFilePath() { return storagePath; }
+
+        /// <summary>
+        /// Get the path of the storage directory
+        /// </summary>
+        /// <returns> The path of the storage directory </returns>
+        public string GetFilePath()
+        {
+            return storagePath;
+        }
     }
-            
+    #endregion
 
 }

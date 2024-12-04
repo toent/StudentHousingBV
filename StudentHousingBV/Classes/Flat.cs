@@ -8,35 +8,37 @@
         public int FlatNumber { get; set; }
 
         // Navigation properties
-        public Building Building { get; set; }
+        public Building? Building { get; set; }
         public ICollection<Student> Students { get; set; }
         public ICollection<Complaint> Complaints { get; set; }
         #endregion
 
         #region Constructors
-        public Flat()
+        public Flat(DataManager dataManager)
         {
-            FlatId = -1;
-            Building = new Building();
-            Students = new List<Student>();
+            FlatId = dataManager.GetMaxIdFlats() + 1;
+            Students = [];
+            Complaints = [];
         }
 
         public Flat(int buildingId, int flatNumber, DataManager dataManager)
         {
+            FlatId = dataManager.GetMaxIdFlats() + 1;
             BuildingId = buildingId;
             FlatNumber = flatNumber;
-            FlatId = dataManager.GetIdFromClass(this, buildingId) + 1;
             Building = dataManager.GetBuilding(buildingId);
-            Students = new List<Student>();
+            Students = [];
+            Complaints = [];
         }
 
         public Flat(int buildingId, int flatNumber, DataManager dataManger, List<Student> students)
         {
+            FlatId = dataManger.GetMaxIdFlats() + 1;
             BuildingId = buildingId;
             FlatNumber = flatNumber;
-            FlatId = dataManger.GetIdFromClass(this, buildingId) + 1;
             Building = dataManger.GetBuilding(buildingId);
             Students = students;
+            Complaints = [];
         }
         #endregion
     }

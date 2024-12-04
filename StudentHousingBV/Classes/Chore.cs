@@ -1,23 +1,17 @@
 ﻿namespace StudentHousingBV.Classes
 {
-    public class Chore
+    public class Chore(DataManager dataManager)
     {
         #region Properties
-        public int ChoreId { get; set; } // Primary Key
-        public string Description { get; set; }
-        public int StudentId { get; set; } // Foreign Key 
+        public int ChoreId { get; set; } = dataManager.GetMaxIdChores() + 1;
+        public string Description { get; set; } = "";
+        public int StudentId { get; set; } = 0;
 
         // Navigation property
-        public Student Student { get; set; }
-        #endregion
+        public Student? Student { get; set; }
 
+        #endregion
         #region Constructors
-        public Chore()
-        {
-            StudentId = 0;
-            Student = new Student();
-            Description = "";
-        }
         #endregion
     }
 }
