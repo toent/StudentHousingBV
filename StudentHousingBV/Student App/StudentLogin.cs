@@ -10,12 +10,15 @@ namespace StudentHousingBV.Student_App
         {
             InitializeComponent();
             dataManager = new DataManager();
+            InitializeTestingDataset();
+            StartPosition = FormStartPosition.CenterScreen;
         }
 
         public StudentLogin(DataManager dataManager)
         {
             InitializeComponent();
             this.dataManager = dataManager;
+            StartPosition = FormStartPosition.CenterScreen;
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -24,7 +27,12 @@ namespace StudentHousingBV.Student_App
             {
                 StudentNavigator studentNavigator = new(dataManager, student);
                 studentNavigator.Show();
-                Close();
+                Hide();
+                studentNavigator.FormClosed += (s, args) => Close();
+            }
+            else
+            {
+                MessageBox.Show("Invalid contract id", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -37,6 +45,28 @@ namespace StudentHousingBV.Student_App
                 result = false;
             }
             return result;
+        }
+
+        private void InitializeTestingDataset()
+        {
+            dataManager.Buildings.Add(new Building(dataManager)
+            {
+                BuildingId = 1,
+                Address = "123 Main St"
+            });
+            dataManager.Flats.Add(new Flat(dataManager)
+            {
+                BuildingId = 1,
+                FlatId = 1,
+                FlatNumber = 101
+            });
+            dataManager.Students.Add(new Student()
+            {
+                StudentId = "F93756",
+                BuildingId = 1,
+                FlatId = 1,
+                Name = "Jane Doe",
+            });
         }
     }
 }

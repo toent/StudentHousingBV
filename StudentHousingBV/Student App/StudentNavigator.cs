@@ -11,6 +11,7 @@ namespace StudentHousingBV
         public StudentNavigator(DataManager dataManager, Student student)
         {
             InitializeComponent();
+            StartPosition = FormStartPosition.CenterScreen;
             this.dataManager = dataManager;
             this.student = student;
             LoadStudentNavigator();
@@ -27,7 +28,8 @@ namespace StudentHousingBV
         {
             StudentLogin studentLogin = new(dataManager);
             studentLogin.Show();
-            Close();
+            Hide();
+            studentLogin.FormClosed += (s, args) => Close();
         }
 
         private void Navigation_Click(object sender, EventArgs e)
@@ -37,25 +39,37 @@ namespace StudentHousingBV
                 switch (button.Name)
                 {
                     case "btnAnnouncements":
-                        
+                        MessageBox.Show("This feature is not implemented yet.");
+                        lblTitle.Text = "Announcements";
+                        pShowForm.Controls.Clear();
                         break;
                     case "btnHouseRules":
                         LoadFormIntoPanel(new StudentHouserules(dataManager));
+                        lblTitle.Text = "House Rules";
                         break;
                     case "btnAgreements":
                         MessageBox.Show("This feature is not implemented yet.");
+                        lblTitle.Text = "Agreements";
+                        pShowForm.Controls.Clear();
                         break;
                     case "btnChores":
                         MessageBox.Show("This feature is not implemented yet.");
+                        lblTitle.Text = "Chores";
+                        pShowForm.Controls.Clear();
                         break;
                     case "btnGroceries":
                         MessageBox.Show("This feature is not implemented yet.");
+                        lblTitle.Text = "Groceries";
+                        pShowForm.Controls.Clear();
                         break;
                     case "btnFileComplaint":
                         LoadFormIntoPanel(new StudentComplaint(dataManager));
+                        lblTitle.Text = "File Complaint";
                         break;
                     default:
                         MessageBox.Show("This feature is not implemented yet.");
+                        lblTitle.Text = "Home";
+                        pShowForm.Controls.Clear();
                         break;
                 }
             }
