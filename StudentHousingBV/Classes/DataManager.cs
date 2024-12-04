@@ -357,6 +357,20 @@ namespace StudentHousingBV.Classes
         }
         #endregion
 
+        #region Getting Groceries
+
+        public ICollection<Grocery> GetGroceries()
+        {
+            return groceries;
+        }
+
+        public ICollection<Grocery> GetFlatGroceries(int flatId)
+        {
+            return groceries.FindAll(grocery =>  grocery.FlatId == flatId);
+        }
+
+        #endregion
+
         #endregion
 
         #region Serialization
