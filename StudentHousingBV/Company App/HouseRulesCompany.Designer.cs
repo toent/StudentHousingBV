@@ -28,22 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new Label();
             label2 = new Label();
-            cbFlat = new ComboBox();
             panelRules = new Panel();
             btnCreate = new Button();
+            cbFlat = new ComboBox();
             SuspendLayout();
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 36F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(485, 9);
-            label1.Name = "label1";
-            label1.Size = new Size(379, 81);
-            label1.TabIndex = 0;
-            label1.Text = "House Rules";
             // 
             // label2
             // 
@@ -54,14 +43,6 @@
             label2.Size = new Size(44, 27);
             label2.TabIndex = 1;
             label2.Text = "Flat";
-            // 
-            // cbFlat
-            // 
-            cbFlat.FormattingEnabled = true;
-            cbFlat.Location = new Point(422, 149);
-            cbFlat.Name = "cbFlat";
-            cbFlat.Size = new Size(151, 28);
-            cbFlat.TabIndex = 2;
             // 
             // panelRules
             // 
@@ -80,16 +61,23 @@
             btnCreate.Text = "Create";
             btnCreate.UseVisualStyleBackColor = false;
             // 
+            // cbFlat
+            // 
+            cbFlat.FormattingEnabled = true;
+            cbFlat.Location = new Point(422, 145);
+            cbFlat.Name = "cbFlat";
+            cbFlat.Size = new Size(151, 28);
+            cbFlat.TabIndex = 5;
+            // 
             // HouseRulesCompany
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1902, 1033);
+            Controls.Add(cbFlat);
             Controls.Add(btnCreate);
             Controls.Add(panelRules);
-            Controls.Add(cbFlat);
             Controls.Add(label2);
-            Controls.Add(label1);
             Name = "HouseRulesCompany";
             Text = "HouseRulesCompany";
             ResumeLayout(false);
@@ -97,11 +85,9 @@
         }
 
         #endregion
-
-        private Label label1;
         private Label label2;
-        private ComboBox cbFlat;
         private Panel panelRules;
         private Button btnCreate;
+        private ComboBox cbFlat;
     }
 }
