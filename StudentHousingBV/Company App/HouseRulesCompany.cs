@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StudentHousingBV.Classes;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -9,13 +10,43 @@ namespace StudentHousingBV
     {
         private int ruleCount = 0;
         private List<Control> ruleControls = new List<Control>();
+        private DataManager dataManager = new DataManager();
 
         public HouseRulesCompany()
         {
             InitializeComponent();
+            InitializeTestingDataset();
+            UpdateComboBox();
             panelRules.AutoScroll = true;
             panelRules.BorderStyle = BorderStyle.FixedSingle;
             btnCreate.Click += (s, e) => CreateRule();
+
+        }
+        private void InitializeTestingDataset()
+        {
+            dataManager.Buildings.Add(new Building(dataManager)
+            {
+                BuildingId = 1,
+                Address = "123 Main St"
+            });
+            dataManager.Flats.Add(new Flat(dataManager)
+            {
+                BuildingId = 1,
+                FlatId = 1,
+                FlatNumber = 101
+            });
+            dataManager.Students.Add(new Student()
+            {
+                StudentId = "F93756",
+                BuildingId = 1,
+                FlatId = 1,
+                Name = "Jane Doe",
+            });
+        }
+
+        private void UpdateComboBox()
+        {
+            cbFlat.DataSource = dataManager.GetFlats();
         }
 
         private void CreateRule()
