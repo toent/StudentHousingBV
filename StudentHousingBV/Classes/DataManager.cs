@@ -66,7 +66,7 @@ namespace StudentHousingBV.Classes
         public int GetNextFlatId()
         {
             LoadAttribute(() => flats);
-            return flats.Count > 0 ? flats.Max(flat => flat.FlatId) + 1 : 0;
+            return flats.Count > 0 ? flats.Max(flat => flat.FlatId) + 1 : 1;
         }
 
         /// <summary>

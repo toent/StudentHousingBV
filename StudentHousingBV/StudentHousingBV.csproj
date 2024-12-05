@@ -9,9 +9,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Classes\Entities\" />
     <Folder Include="Custom Controls\" />
     <Folder Include="Company App\" />
-    <Folder Include="Student App\" />
   </ItemGroup>
 
 </Project>
