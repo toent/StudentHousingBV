@@ -67,6 +67,13 @@ namespace StudentHousingBV.Student_App
                 FlatId = 1,
                 Name = "Jane Doe",
             });
+            dataManager.Complaints.Add(new Complaint()
+            {
+                ComplaintId = 1,
+                Issue = "Realg was mean to the special kids. \nPunish him!",
+                BuildingId= 1,
+                FlatId= 1,
+            });
         }
     }
 }

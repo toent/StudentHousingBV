@@ -13,26 +13,66 @@ namespace StudentHousingBV.Company_App
 {
     public partial class DisplayComplaint : Form
     {
-        private readonly DataManager dataManager;
+        private readonly DataManager dataManager = new DataManager();
+        private List<Complaint> complaints = new List<Complaint>();
+        private Complaint? selectedComplaint;
         public DisplayComplaint()
         {
             InitializeComponent();
-            CreateDummyComplaints();
+            InitializeTestingDataset();
             UpdateListBoxComplaint();
-        }
 
-        private void CreateDummyComplaints()
-        {
-            //string description, int buildingId, int flatId, DataManager dataManager
-            Complaint complaint1 = new Complaint(1, "Mats annoyed me! he did this and that and bla bla bla.", 1, 1, dataManager);
-            Complaint complaint2 = new Complaint(2, "Aleix annoyed me! he did this and that and bla bla bla.", 1, 1, dataManager);
-            Complaint complaint3 = new Complaint(3, "Realgi annoyed me! he did this and that and bla bla bla.", 1, 2, dataManager);
         }
 
         private void UpdateListBoxComplaint()
         {
             lBoxComplaint.DataSource = null;
-            lBoxComplaint.DataSource = dataManager.GetAllComplaints();
+            lBoxComplaint.DataSource = GetComplaints();
+        }
+
+
+        private List<Complaint> GetComplaints()
+        {
+            complaints = dataManager.GetAllComplaints();
+            return complaints;
+        }
+
+        private void InitializeTestingDataset()
+        {
+            dataManager.Buildings.Add(new Building(dataManager)
+            {
+                BuildingId = 1,
+                Address = "123 Main St"
+            });
+            dataManager.Flats.Add(new Flat(dataManager)
+            {
+                BuildingId = 1,
+                FlatId = 1,
+                FlatNumber = 101
+            });
+            dataManager.Students.Add(new Student()
+            {
+                StudentId = "F93756",
+                BuildingId = 1,
+                FlatId = 1,
+                Name = "Jane Doe",
+            });
+            dataManager.Complaints.Add(new Complaint()
+            {
+                ComplaintId = 1,
+                Issue = "Realg was mean to the special kids. \nPunish him!",
+                BuildingId = 1,
+                FlatId = 1,
+            });
+        }
+
+        private void lBoxComplaint_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lBoxComplaint.SelectedIndex != -1)
+            {
+                selectedComplaint = (Complaint?)lBoxComplaint.SelectedItem;
+                richTextBoxComplaint.Text = selectedComplaint?.Issue;
+            }
         }
     }
 }

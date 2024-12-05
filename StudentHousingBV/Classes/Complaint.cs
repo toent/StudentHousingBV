@@ -14,6 +14,8 @@
         #endregion
 
         #region Constructors
+        public Complaint() { }
+
         public Complaint(DataManager dataManager)
         {
             ComplaintId = dataManager.GetNextComplaintId();

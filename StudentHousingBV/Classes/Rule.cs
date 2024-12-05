@@ -14,6 +14,8 @@
         #endregion
 
         #region Constructors  
+        public Rule() { }
+
         public Rule(DataManager dataManager)
         {
             RuleId = dataManager.GetNextRuleId();

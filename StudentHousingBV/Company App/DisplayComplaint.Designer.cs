@@ -35,13 +35,13 @@
             tBoxTime = new TextBox();
             label3 = new Label();
             lBoxComplaint = new ListBox();
-            rTBoxComplaintDescription = new RichTextBox();
+            richTextBoxComplaint = new RichTextBox();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(12, 57);
+            label1.Location = new Point(12, 25);
             label1.Name = "label1";
             label1.Size = new Size(36, 20);
             label1.TabIndex = 3;
@@ -50,7 +50,7 @@
             // cBoxFlat
             // 
             cBoxFlat.FormattingEnabled = true;
-            cBoxFlat.Location = new Point(72, 54);
+            cBoxFlat.Location = new Point(72, 22);
             cBoxFlat.Name = "cBoxFlat";
             cBoxFlat.Size = new Size(160, 28);
             cBoxFlat.TabIndex = 2;
@@ -58,7 +58,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(12, 119);
+            label2.Location = new Point(12, 87);
             label2.Name = "label2";
             label2.Size = new Size(44, 20);
             label2.TabIndex = 4;
@@ -66,14 +66,14 @@
             // 
             // tBoxDate
             // 
-            tBoxDate.Location = new Point(72, 119);
+            tBoxDate.Location = new Point(72, 87);
             tBoxDate.Name = "tBoxDate";
             tBoxDate.Size = new Size(160, 27);
             tBoxDate.TabIndex = 5;
             // 
             // tBoxTime
             // 
-            tBoxTime.Location = new Point(72, 185);
+            tBoxTime.Location = new Point(72, 153);
             tBoxTime.Name = "tBoxTime";
             tBoxTime.Size = new Size(160, 27);
             tBoxTime.TabIndex = 6;
@@ -81,7 +81,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(12, 188);
+            label3.Location = new Point(12, 156);
             label3.Name = "label3";
             label3.Size = new Size(45, 20);
             label3.TabIndex = 7;
@@ -90,25 +90,26 @@
             // lBoxComplaint
             // 
             lBoxComplaint.FormattingEnabled = true;
-            lBoxComplaint.Location = new Point(314, 54);
+            lBoxComplaint.Location = new Point(314, 22);
             lBoxComplaint.Name = "lBoxComplaint";
-            lBoxComplaint.Size = new Size(457, 164);
+            lBoxComplaint.Size = new Size(538, 164);
             lBoxComplaint.TabIndex = 8;
+            lBoxComplaint.SelectedIndexChanged += lBoxComplaint_SelectedIndexChanged;
             // 
-            // rTBoxComplaintDescription
+            // richTextBoxComplaint
             // 
-            rTBoxComplaintDescription.Location = new Point(314, 259);
-            rTBoxComplaintDescription.Name = "rTBoxComplaintDescription";
-            rTBoxComplaintDescription.Size = new Size(457, 179);
-            rTBoxComplaintDescription.TabIndex = 9;
-            rTBoxComplaintDescription.Text = "";
+            richTextBoxComplaint.Location = new Point(314, 221);
+            richTextBoxComplaint.Name = "richTextBoxComplaint";
+            richTextBoxComplaint.Size = new Size(538, 289);
+            richTextBoxComplaint.TabIndex = 9;
+            richTextBoxComplaint.Text = "";
             // 
             // DisplayComplaint
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(rTBoxComplaintDescription);
+            ClientSize = new Size(874, 522);
+            Controls.Add(richTextBoxComplaint);
             Controls.Add(lBoxComplaint);
             Controls.Add(label3);
             Controls.Add(tBoxTime);
@@ -131,6 +132,6 @@
         private TextBox tBoxTime;
         private Label label3;
         private ListBox lBoxComplaint;
-        private RichTextBox rTBoxComplaintDescription;
+        private RichTextBox richTextBoxComplaint;
     }
 }

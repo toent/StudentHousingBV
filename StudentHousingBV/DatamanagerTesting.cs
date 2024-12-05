@@ -17,6 +17,7 @@ namespace StudentHousingBV
         public DatamanagerTesting()
         {
             InitializeComponent();
+            dataManager.LoadAllData();
         }
 
         private void btnCreateBuilding_Click(object sender, EventArgs e)
@@ -27,7 +28,7 @@ namespace StudentHousingBV
                 Building newBuilding = new Building(tbBuildingAddress.Text, dataManager);
 
                 // Add the new building to the list of buildings
-                dataManager.GetBuildings().Add(newBuilding);
+                dataManager.Buildings.Add(newBuilding);
 
                 // Save the updated list back to storage
                 dataManager.SaveAllData();
@@ -82,7 +83,7 @@ namespace StudentHousingBV
                 int buildingId = int.Parse(cbBuildingIdFlat.GetItemText(cbBuildingIdFlat.SelectedItem));
                 Flat newFlat = new Flat(buildingId, int.Parse(tbFlatNumber.Text), dataManager);
 
-                dataManager.GetFlats().Add(newFlat);
+                dataManager.Flats.Add(newFlat);
 
                 dataManager.SaveAllData();
 
@@ -119,15 +120,14 @@ namespace StudentHousingBV
                 int selectedBuildingId = int.Parse(cbBuildingIdStudent.GetItemText(cbBuildingIdStudent.SelectedItem));
                 int selectedFlatId = int.Parse(cbFlatIdStudent.GetItemText(cbFlatIdStudent.SelectedItem));
 
-                Student newStudent = new Student(tbContractId.Text, tbStudentName.Text);
-                Flat selectedFlat = dataManager.GetFlat(selectedFlatId);
+                Student newStudent = new Student(tbContractId.Text, tbStudentName.Text, selectedBuildingId, selectedFlatId);
 
-                selectedFlat.Students.Add(newStudent);
+                dataManager.Students.Add(newStudent);
 
                 dataManager.SaveAllData();
 
                 lbCurrentStudents.Items.Clear();
-                foreach (Student student in selectedFlat.Students)
+                foreach (Student student in dataManager.GetStudentsInFlat(selectedFlatId))
                 {
                     lbCurrentStudents.Items.Add($"Contract ID: {student.StudentId} - Name: {student.Name}");
                 }
@@ -161,12 +161,12 @@ namespace StudentHousingBV
                 {
                     Classes.Rule newRule = new Classes.Rule(tbRuleContent.Text, dataManager, selectedBuildingId);
 
-                    dataManager.GetAllRules().Add(newRule);
+                    dataManager.Rules.Add(newRule);
 
                     dataManager.SaveAllData();
 
                     lbCurrentRules.Items.Clear();
-                    foreach (Classes.Rule rule in dataManager.GetRulesFlat(selectedBuildingId))
+                    foreach (Classes.Rule rule in dataManager.GetRulesBuilding(selectedBuildingId))
                     {
                         lbCurrentRules.Items.Add($"Rule ID: {rule.RuleId} - Content: {rule.Description} ");
                     }
@@ -177,7 +177,7 @@ namespace StudentHousingBV
 
                     Classes.Rule newRule = new Classes.Rule(tbRuleContent.Text, dataManager, selectedBuildingId, selectedFlatId);
 
-                    dataManager.GetAllRules().Add(newRule);
+                    dataManager.Rules.Add(newRule);
 
                     dataManager.SaveAllData();
 

@@ -23,6 +23,8 @@ namespace StudentHousingBV.Classes
         #endregion
 
         #region Constructors
+        public Chore() { }
+
         public Chore(string choreTitle, string choreDescription, DateTime choreDeadline, string studentId, int flatId, int buildingId, DataManager dataManager)
         {
             ChoreId = dataManager.GetNextChoreId();
