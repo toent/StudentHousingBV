@@ -19,6 +19,8 @@
         #endregion
 
         #region Constructor
+        public Agreement() { }
+
         public Agreement(string agreementTitle, string agreementDetails, List<Student> studentsInAgreement, 
                             string studentId, int flatId, int buildingId, DataManager dataManager)
         {

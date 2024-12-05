@@ -11,6 +11,8 @@
         #endregion
 
         #region Constructors
+        public Building() { }
+
         public Building(DataManager dataManager)
         {
             BuildingId = dataManager.GetNextBuildingId();
@@ -19,6 +21,7 @@
         }
 
         //constructors for regular usage
+
         public Building(string inputAddress, DataManager dataManager)
         {
             BuildingId = dataManager.GetNextBuildingId();

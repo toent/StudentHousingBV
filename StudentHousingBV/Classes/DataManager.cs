@@ -56,7 +56,7 @@ namespace StudentHousingBV.Classes
         public int GetNextBuildingId()
         {
             LoadAttribute(() => buildings);
-            return buildings.Count > 0 ? buildings.Max(building => building.BuildingId) + 1 : 0;
+            return buildings.Count > 0 ? buildings.Max(building => building.BuildingId) + 1 : 1;
         }
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace StudentHousingBV.Classes
         public int GetNextFlatId()
         {
             LoadAttribute(() => flats);
-            return flats.Count > 0 ? flats.Max(flat => flat.FlatId) + 1 : 0;
+            return flats.Count > 0 ? flats.Max(flat => flat.FlatId) + 1 : 1;
         }
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace StudentHousingBV.Classes
         public int GetNextComplaintId()
         {
             LoadAttribute(() => complaints);
-            return complaints.Count > 0 ? complaints.Max(complaint => complaint.ComplaintId) + 1 : 0;
+            return complaints.Count > 0 ? complaints.Max(complaint => complaint.ComplaintId) + 1 : 1;
         }
 
         /// <summary>
@@ -86,7 +86,7 @@ namespace StudentHousingBV.Classes
         public int GetNextRuleId()
         {
             LoadAttribute(() => rules);
-            return rules.Count > 0 ? rules.Max(rule => rule.RuleId) + 1 : 0;
+            return rules.Count > 0 ? rules.Max(rule => rule.RuleId) + 1 : 1;
         }
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace StudentHousingBV.Classes
         public int GetNextAnnouncementId()
         {
             LoadAttribute(() => announcements);
-            return announcements.Count > 0 ? announcements.Max(announcement => announcement.AnnouncementId) + 1 : 0;
+            return announcements.Count > 0 ? announcements.Max(announcement => announcement.AnnouncementId) + 1 : 1;
         }
 
         /// <summary>
@@ -106,7 +106,7 @@ namespace StudentHousingBV.Classes
         public int GetNextAgreementId()
         {
             LoadAttribute(() => agreements);
-            return agreements.Count > 0 ? agreements.Max(agreement => agreement.AgreementId) + 1 : 0;
+            return agreements.Count > 0 ? agreements.Max(agreement => agreement.AgreementId) + 1 : 1;
         }
 
         /// <summary>
@@ -116,7 +116,7 @@ namespace StudentHousingBV.Classes
         public int GetNextChoreId()
         {
             LoadAttribute(() => chores);
-            return chores.Count > 0 ? chores.Max(chore => chore.ChoreId) + 1 : 0;
+            return chores.Count > 0 ? chores.Max(chore => chore.ChoreId) + 1 : 1;
         }
 
         /// <summary>
@@ -126,7 +126,7 @@ namespace StudentHousingBV.Classes
         public int GetNextGroceryId()
         {
             LoadAttribute(() => groceries);
-            return groceries.Count > 0 ? groceries.Max(grocery => grocery.GroceryId) + 1 : 0;
+            return groceries.Count > 0 ? groceries.Max(grocery => grocery.GroceryId) + 1 : 1;
         }
         #endregion
 
@@ -213,6 +213,11 @@ namespace StudentHousingBV.Classes
         public ICollection<Student> GetStudentsInBuilding(int buildingId)
         {
             return students.FindAll(student => student.BuildingId == buildingId);
+        }
+
+        public ICollection<Student> GetStudentsInFlat(int flatId)
+        {
+            return students.FindAll(student => student.FlatId == flatId);
         }
 
         /// <summary>

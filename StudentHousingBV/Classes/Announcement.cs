@@ -15,6 +15,8 @@
         #endregion
 
         #region Constructors
+        public Announcement() { }
+
         public Announcement(DataManager dataManager)
         {
             AnnouncementId = dataManager.GetNextAnnouncementId();
