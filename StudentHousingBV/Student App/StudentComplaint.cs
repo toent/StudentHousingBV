@@ -14,6 +14,8 @@ namespace StudentHousingBV.Student_App
 
         private void btnSubmitComplaint_Click(object sender, EventArgs e)
         {
+            string description = richTBoxComplaint.Text;
+            Complaint complaint = new Complaint(description, 1, 1, dataManager);
             MessageBox.Show("Complaint submitted successfully!");
         }
 

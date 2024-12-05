@@ -11,10 +11,11 @@ using System.Windows.Forms;
 
 namespace StudentHousingBV.Company_App
 {
-    //private List<Complaint> complaints = new List<Complaint>
     public partial class DisplayComplaint : Form
     {
-        private readonly DataManager dataManager;
+        private readonly DataManager dataManager = new DataManager();
+        private List<Complaint> complaints = new List<Complaint>();
+        private Complaint selectedComplaint;
         public DisplayComplaint()
         {
             InitializeComponent();
@@ -26,7 +27,14 @@ namespace StudentHousingBV.Company_App
         private void UpdateListBoxComplaint()
         {
             lBoxComplaint.DataSource = null;
-            lBoxComplaint.DataSource = dataManager.GetAllComplaints();
+            lBoxComplaint.DataSource = GetComplaints();
+        }
+
+
+        private List<Complaint> GetComplaints()
+        {
+            complaints = dataManager.GetAllComplaints();
+            return complaints;
         }
 
         private void InitializeTestingDataset()
@@ -49,6 +57,19 @@ namespace StudentHousingBV.Company_App
                 FlatId = 1,
                 Name = "Jane Doe",
             });
+            dataManager.Complaints.Add(new Complaint()
+            {
+                ComplaintId = 1,
+                Issue = "Realg was mean to the special kids. \nPunish him!",
+                BuildingId = 1,
+                FlatId = 1,
+            });
+        }
+
+        private void lBoxComplaint_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            selectedComplaint = (Complaint)lBoxComplaint.SelectedItem;
+            richTextBoxComplaint.Text = selectedComplaint.Issue;
         }
     }
 }
