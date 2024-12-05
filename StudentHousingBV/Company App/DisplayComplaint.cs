@@ -15,7 +15,7 @@ namespace StudentHousingBV.Company_App
     {
         private readonly DataManager dataManager = new DataManager();
         private List<Complaint> complaints = new List<Complaint>();
-        private Complaint selectedComplaint;
+        private Complaint? selectedComplaint;
         public DisplayComplaint()
         {
             InitializeComponent();
@@ -68,8 +68,11 @@ namespace StudentHousingBV.Company_App
 
         private void lBoxComplaint_SelectedIndexChanged(object sender, EventArgs e)
         {
-            selectedComplaint = (Complaint)lBoxComplaint.SelectedItem;
-            richTextBoxComplaint.Text = selectedComplaint.Issue;
+            if (lBoxComplaint.SelectedIndex != -1)
+            {
+                selectedComplaint = (Complaint?)lBoxComplaint.SelectedItem;
+                richTextBoxComplaint.Text = selectedComplaint?.Issue;
+            }
         }
     }
 }
