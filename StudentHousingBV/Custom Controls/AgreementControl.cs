@@ -75,6 +75,7 @@ namespace StudentHousingBV.Custom_Controls
                 if (this.agreementToControl.AgreedBy.Count <= 0)
                 {
                     //Delete Agreement
+                    agreementToControl.HousingManager.GetAllAgreements().Remove(agreementToControl);
                 }
                 else
                 {

@@ -16,8 +16,10 @@ namespace StudentHousingBV.Classes.Entities
         public ICollection<Rule> Rules { get; set; }
         public Building AssignedBuilding { get; set; } // Cross-Reference
         #endregion
-
+        
         #region Constructors
+        public Flat() { }
+
         public Flat(HousingManager housingManager, Building assignedBuilding)
         {
             FlatId = housingManager.GetNextFlatId();

@@ -12,6 +12,8 @@ namespace StudentHousingBV.Classes.Entities
         #endregion
 
         #region Constructors
+        public Building() { }
+
         public Building(HousingManager housingManager)
         {
             BuildingId = housingManager.GetNextBuildingId();

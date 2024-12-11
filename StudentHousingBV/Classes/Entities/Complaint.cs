@@ -11,6 +11,8 @@ namespace StudentHousingBV.Classes.Entities
         #endregion
 
         #region Constructors
+        public Complaint() { }
+
         public Complaint(HousingManager housingManager, Flat assignedFlat)
         {
             ComplaintId = housingManager.GetNextComplaintId();

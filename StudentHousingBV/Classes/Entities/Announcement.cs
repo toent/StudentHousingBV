@@ -12,6 +12,7 @@ namespace StudentHousingBV.Classes.Entities
         #endregion
 
         #region Constructors
+        public Announcement() { }
         public Announcement(HousingManager housingManager)
         {
             AnnouncementId = housingManager.GetNextAnnouncementId();

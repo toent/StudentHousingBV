@@ -10,6 +10,8 @@
 
 
         #region Constructors
+        public Student () { }
+
         public Student(string studentId, string name)
         {
             StudentId = studentId;

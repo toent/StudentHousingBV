@@ -16,6 +16,8 @@ namespace StudentHousingBV.Classes.Entities
         #endregion
 
         #region Constructors
+        public Chore() { }
+
         public Chore(string choreTitle, string choreDescription, DateTime choreDeadline, HousingManager housingManager, Flat assignedFlat)
         {
             ChoreId = housingManager.GetNextChoreId();
