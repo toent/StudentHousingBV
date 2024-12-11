@@ -223,7 +223,7 @@
             Controls.Add(pFormTitle);
             Controls.Add(pSideMenu);
             Name = "StudentNavigator";
-            Text = "Form1";
+            Text = "Students - Student Housing B.V.";
             pSideMenu.ResumeLayout(false);
             pFormTitle.ResumeLayout(false);
             pFormTitle.PerformLayout();
