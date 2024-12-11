@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Net;
-using StudentHousingBV.Classes;
+﻿using StudentHousingBV.Classes.Entities;
 
 namespace StudentHousingBV.Custom_Controls
 {
@@ -27,7 +17,7 @@ namespace StudentHousingBV.Custom_Controls
             lblName.Text = grocery.GroceryId.ToString();
             lblDate.Text = grocery.Date.ToShortDateString();
             pictureBoxGrocery.Image = Image.FromFile(grocery.ImagePath);
-            
+
         }
     }
 }

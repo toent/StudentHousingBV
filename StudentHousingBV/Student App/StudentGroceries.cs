@@ -1,25 +1,17 @@
-﻿using StudentHousingBV.Classes;
+﻿using StudentHousingBV.Classes.Entities;
+using StudentHousingBV.Classes.Managers;
 using StudentHousingBV.Custom_Controls;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace StudentHousingBV.Student_App
 {
     public partial class StudentGroceries : Form
     {
-        //private readonly DataManager dataManager;
-        private List<Grocery> groceries;
-        public StudentGroceries()
+        private readonly HousingManager housingManager;
+        private readonly List<Grocery> groceries;
+        public StudentGroceries(HousingManager housingManager)
         {
             InitializeComponent();
-            //this.dataManager = dataManager;
+            this.housingManager = housingManager;
         }
 
         private void btnAddGrocery_Click(object sender, EventArgs e)
@@ -29,9 +21,9 @@ namespace StudentHousingBV.Student_App
             string imgPath = tBoxImgPath.Text;
             string paymentURL = tBoxPaymentURL.Text;
 
-            if (imgPath != string.Empty && paymentURL != string.Empty)
+            if (imgPath != string.Empty && paymentURL != string.Empty && housingManager.LoggedStudent is Student student)
             {
-                Grocery grocery = new Grocery("test_student", imgPath, paymentURL, 1);
+                Grocery grocery = new(housingManager.LoggedStudent, imgPath, paymentURL, housingManager, student.AssignedFlat!);
                 groceries.Add(grocery);
                 MessageBox.Show("Grocery created successfully!");
                 UpdateGroceryControl();
@@ -49,9 +41,9 @@ namespace StudentHousingBV.Student_App
                 // Clear existing controls to avoid duplicates
                 flowLayoutPanelGrocery.Controls.Clear();
 
-                foreach (var grocery in groceries)
+                foreach (Grocery grocery in groceries)
                 {
-                    GroceryControl groceryControl = new GroceryControl();
+                    GroceryControl groceryControl = new();
                     groceryControl.SetGrocery(grocery); // Pass Grocery object to the control
                     groceryControl.Margin = new Padding(5);
 

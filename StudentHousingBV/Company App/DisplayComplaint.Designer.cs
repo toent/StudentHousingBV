@@ -94,7 +94,6 @@
             lBoxComplaint.Name = "lBoxComplaint";
             lBoxComplaint.Size = new Size(538, 164);
             lBoxComplaint.TabIndex = 8;
-            lBoxComplaint.SelectedIndexChanged += lBoxComplaint_SelectedIndexChanged;
             // 
             // richTextBoxComplaint
             // 

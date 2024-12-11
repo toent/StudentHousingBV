@@ -64,7 +64,7 @@ namespace StudentHousingBV
                         lblTitle.Text = "Chores";
                         break;
                     case "btnGroceries":
-                        LoadFormIntoPanel(new StudentGroceries(dataManager));
+                        LoadFormIntoPanel(new StudentGroceries(housingManager));
                         lblTitle.Text = "Groceries";
                         pShowForm.Controls.Clear();
                         break;
