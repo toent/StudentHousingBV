@@ -1,15 +1,15 @@
-﻿using StudentHousingBV.Classes;
+﻿using StudentHousingBV.Classes.Managers;
 
 namespace StudentHousingBV.Student_App
 {
     public partial class StudentChores : Form
     {
-        private readonly DataManager dataManager;
+        private readonly HousingManager housingManager;
 
-        public StudentChores(DataManager dataManager)
+        public StudentChores(HousingManager housingManager)
         {
             InitializeComponent();
-            this.dataManager = dataManager;
+            this.housingManager = housingManager;
         }
     }
 }

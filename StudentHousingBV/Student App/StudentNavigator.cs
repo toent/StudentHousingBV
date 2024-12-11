@@ -1,32 +1,39 @@
-using StudentHousingBV.Classes;
+using StudentHousingBV.Classes.Entities;
+using StudentHousingBV.Classes.Managers;
 using StudentHousingBV.Student_App;
 
 namespace StudentHousingBV
 {
     public partial class StudentNavigator : Form
     {
-        private readonly DataManager dataManager;
-        private readonly Student student;
+        private readonly HousingManager housingManager;
 
-        public StudentNavigator(DataManager dataManager, Student student)
+        public StudentNavigator(HousingManager housingManager)
         {
             InitializeComponent();
             StartPosition = FormStartPosition.CenterScreen;
-            this.dataManager = dataManager;
-            this.student = student;
+            this.housingManager = housingManager;
             LoadStudentNavigator();
         }
 
         private void LoadStudentNavigator()
         {
-            lblContractId.Text = student.StudentId;
-            lblUserName.Text = student.Name;
-            lblLocation.Text = $"{dataManager.GetBuilding(student.BuildingId)?.Address} - Flat {dataManager.GetFlat(student.FlatId)?.FlatNumber}";
+            if (housingManager.LoggedStudent is Student student)
+            {
+                lblContractId.Text = housingManager.LoggedStudent.StudentId;
+                lblUserName.Text = student.Name;
+                lblLocation.Text = $"{student.AssignedFlat?.AssignedBuilding.Address} - Flat {student.AssignedFlat?.FlatNumber}";
+            }
+            else
+            {
+                MessageBox.Show("Invalid contract id", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
 
         private void btnLogout_Click(object sender, EventArgs e)
         {
-            StudentLogin studentLogin = new(dataManager);
+            StudentLogin studentLogin = new(housingManager);
             studentLogin.Show();
             Hide();
             studentLogin.FormClosed += (s, args) => Close();
@@ -44,7 +51,7 @@ namespace StudentHousingBV
                         pShowForm.Controls.Clear();
                         break;
                     case "btnHouseRules":
-                        LoadFormIntoPanel(new StudentHouserules(dataManager));
+                        LoadFormIntoPanel(new StudentHouserules(housingManager));
                         lblTitle.Text = "House Rules";
                         break;
                     case "btnAgreements":
@@ -53,7 +60,7 @@ namespace StudentHousingBV
                         pShowForm.Controls.Clear();
                         break;
                     case "btnChores":
-                        LoadFormIntoPanel(new StudentChores(dataManager));
+                        LoadFormIntoPanel(new StudentChores(housingManager));
                         lblTitle.Text = "Chores";
                         break;
                     case "btnGroceries":
@@ -62,7 +69,7 @@ namespace StudentHousingBV
                         pShowForm.Controls.Clear();
                         break;
                     case "btnFileComplaint":
-                        LoadFormIntoPanel(new StudentComplaint(dataManager));
+                        LoadFormIntoPanel(new StudentComplaint(housingManager));
                         lblTitle.Text = "File Complaint";
                         break;
                     default:

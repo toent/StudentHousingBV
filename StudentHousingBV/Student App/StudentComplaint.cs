@@ -1,21 +1,19 @@
-﻿using StudentHousingBV.Classes;
+﻿using StudentHousingBV.Classes.Managers;
 
 namespace StudentHousingBV.Student_App
 {
     public partial class StudentComplaint : Form
     {
-        private readonly DataManager dataManager;
+        private readonly HousingManager housingManager;
 
-        public StudentComplaint(DataManager dataManager)
+        public StudentComplaint(HousingManager housingManager)
         {
             InitializeComponent();
-            this.dataManager = dataManager;
+            this.housingManager = housingManager;
         }
 
         private void btnSubmitComplaint_Click(object sender, EventArgs e)
         {
-            string description = richTBoxComplaint.Text;
-            Complaint complaint = new Complaint(description, 1, 1, dataManager);
             MessageBox.Show("Complaint submitted successfully!");
         }
 

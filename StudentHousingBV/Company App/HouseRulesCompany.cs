@@ -1,52 +1,26 @@
-﻿using StudentHousingBV.Classes;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Windows.Forms;
+﻿using StudentHousingBV.Classes.Managers;
 
 namespace StudentHousingBV
 {
     public partial class HouseRulesCompany : Form
     {
         private int ruleCount = 0;
-        private List<Control> ruleControls = new List<Control>();
-        private DataManager dataManager = new DataManager();
+        private readonly List<Control> ruleControls = [];
+        private readonly HousingManager housingManager;
 
-        public HouseRulesCompany()
+        public HouseRulesCompany(HousingManager housingManager)
         {
             InitializeComponent();
-            InitializeTestingDataset();
+            this.housingManager = housingManager;
             UpdateComboBox();
             panelRules.AutoScroll = true;
             panelRules.BorderStyle = BorderStyle.FixedSingle;
             btnCreate.Click += (s, e) => CreateRule();
-
-        }
-        private void InitializeTestingDataset()
-        {
-            dataManager.Buildings.Add(new Building(dataManager)
-            {
-                BuildingId = 1,
-                Address = "123 Main St"
-            });
-            dataManager.Flats.Add(new Flat(dataManager)
-            {
-                BuildingId = 1,
-                FlatId = 1,
-                FlatNumber = 101
-            });
-            dataManager.Students.Add(new Student()
-            {
-                StudentId = "F93756",
-                BuildingId = 1,
-                FlatId = 1,
-                Name = "Jane Doe",
-            });
         }
 
         private void UpdateComboBox()
         {
-            cbFlat.DataSource = dataManager.GetFlats();
+            cbFlat.DataSource = housingManager.GetAllFlats();
         }
 
         private void CreateRule()

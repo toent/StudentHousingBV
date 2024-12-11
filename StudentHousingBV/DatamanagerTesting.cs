@@ -7,7 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using StudentHousingBV.Classes;
+using StudentHousingBV.Classes.Entities;
+using StudentHousingBV.Classes.Managers;
 
 namespace StudentHousingBV
 {
@@ -17,7 +18,6 @@ namespace StudentHousingBV
         public DatamanagerTesting()
         {
             InitializeComponent();
-            dataManager.LoadAllData();
         }
 
         private void btnCreateBuilding_Click(object sender, EventArgs e)
@@ -28,7 +28,7 @@ namespace StudentHousingBV
                 Building newBuilding = new Building(tbBuildingAddress.Text, dataManager);
 
                 // Add the new building to the list of buildings
-                dataManager.Buildings.Add(newBuilding);
+                dataManager.GetBuildings().Add(newBuilding);
 
                 // Save the updated list back to storage
                 dataManager.SaveAllData();
@@ -83,7 +83,7 @@ namespace StudentHousingBV
                 int buildingId = int.Parse(cbBuildingIdFlat.GetItemText(cbBuildingIdFlat.SelectedItem));
                 Flat newFlat = new Flat(buildingId, int.Parse(tbFlatNumber.Text), dataManager);
 
-                dataManager.Flats.Add(newFlat);
+                dataManager.GetFlats().Add(newFlat);
 
                 dataManager.SaveAllData();
 
@@ -120,14 +120,15 @@ namespace StudentHousingBV
                 int selectedBuildingId = int.Parse(cbBuildingIdStudent.GetItemText(cbBuildingIdStudent.SelectedItem));
                 int selectedFlatId = int.Parse(cbFlatIdStudent.GetItemText(cbFlatIdStudent.SelectedItem));
 
-                Student newStudent = new Student(tbContractId.Text, tbStudentName.Text, selectedBuildingId, selectedFlatId);
+                Student newStudent = new Student(tbContractId.Text, tbStudentName.Text);
+                Flat selectedFlat = dataManager.GetFlat(selectedFlatId);
 
-                dataManager.Students.Add(newStudent);
+                selectedFlat.Students.Add(newStudent);
 
                 dataManager.SaveAllData();
 
                 lbCurrentStudents.Items.Clear();
-                foreach (Student student in dataManager.GetStudentsInFlat(selectedFlatId))
+                foreach (Student student in selectedFlat.Students)
                 {
                     lbCurrentStudents.Items.Add($"Contract ID: {student.StudentId} - Name: {student.Name}");
                 }
@@ -159,14 +160,14 @@ namespace StudentHousingBV
 
                 if (cbRuleIsForBuilding.Checked)
                 {
-                    Classes.Rule newRule = new Classes.Rule(tbRuleContent.Text, dataManager, selectedBuildingId);
+                    Classes.Entities.Rule newRule = new Classes.Rule(tbRuleContent.Text, dataManager, selectedBuildingId);
 
-                    dataManager.Rules.Add(newRule);
+                    dataManager.GetAllRules().Add(newRule);
 
                     dataManager.SaveAllData();
 
                     lbCurrentRules.Items.Clear();
-                    foreach (Classes.Rule rule in dataManager.GetRulesBuilding(selectedBuildingId))
+                    foreach (Classes.Entities.Rule rule in dataManager.GetRulesFlat(selectedBuildingId))
                     {
                         lbCurrentRules.Items.Add($"Rule ID: {rule.RuleId} - Content: {rule.Description} ");
                     }
@@ -175,14 +176,14 @@ namespace StudentHousingBV
                 {
                     int selectedFlatId = int.Parse(cbFlatIdRule.GetItemText(cbFlatIdRule.SelectedItem));
 
-                    Classes.Rule newRule = new Classes.Rule(tbRuleContent.Text, dataManager, selectedBuildingId, selectedFlatId);
+                    Classes.Entities.Rule newRule = new Classes.Rule(tbRuleContent.Text, dataManager, selectedBuildingId, selectedFlatId);
 
-                    dataManager.Rules.Add(newRule);
+                    dataManager.GetAllRules().Add(newRule);
 
                     dataManager.SaveAllData();
 
                     lbCurrentRules.Items.Clear();
-                    foreach (Classes.Rule rule in dataManager.GetRulesFlatBuilding(selectedBuildingId, selectedFlatId))
+                    foreach (Classes.Entities.Rule rule in dataManager.GetRulesFlatBuilding(selectedBuildingId, selectedFlatId))
                     {
                         lbCurrentRules.Items.Add($"Rule ID: {rule.RuleId} - Content: {rule.Description} ");
                     }

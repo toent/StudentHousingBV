@@ -1,31 +1,32 @@
-﻿using StudentHousingBV.Classes;
+﻿using StudentHousingBV.Classes.Entities;
+using StudentHousingBV.Classes.Managers;
 
 namespace StudentHousingBV.Student_App
 {
     public partial class StudentLogin : Form
     {
-        readonly DataManager dataManager;
+        readonly HousingManager housingManager;
 
         public StudentLogin()
         {
             InitializeComponent();
-            dataManager = new DataManager();
+            housingManager = new HousingManager();
             InitializeTestingDataset();
             StartPosition = FormStartPosition.CenterScreen;
         }
 
-        public StudentLogin(DataManager dataManager)
+        public StudentLogin(HousingManager housingManager)
         {
             InitializeComponent();
-            this.dataManager = dataManager;
+            this.housingManager = housingManager;
             StartPosition = FormStartPosition.CenterScreen;
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            if (ValidateInput() && dataManager.GetStudent(txtStudentId.Text) is Student student)
+            if (ValidateInput() && housingManager.GetStudent(txtStudentId.Text) is Student student)
             {
-                StudentNavigator studentNavigator = new(dataManager, student);
+                StudentNavigator studentNavigator = new(housingManager);
                 studentNavigator.Show();
                 Hide();
                 studentNavigator.FormClosed += (s, args) => Close();
@@ -49,31 +50,12 @@ namespace StudentHousingBV.Student_App
 
         private void InitializeTestingDataset()
         {
-            dataManager.Buildings.Add(new Building(dataManager)
+            housingManager.Buildings.Add(new Building(housingManager)
             {
-                BuildingId = 1,
                 Address = "123 Main St"
             });
-            dataManager.Flats.Add(new Flat(dataManager)
-            {
-                BuildingId = 1,
-                FlatId = 1,
-                FlatNumber = 101
-            });
-            dataManager.Students.Add(new Student()
-            {
-                StudentId = "F93756",
-                BuildingId = 1,
-                FlatId = 1,
-                Name = "Jane Doe",
-            });
-            dataManager.Complaints.Add(new Complaint()
-            {
-                ComplaintId = 1,
-                Issue = "Realg was mean to the special kids. \nPunish him!",
-                BuildingId= 1,
-                FlatId= 1,
-            });
+            housingManager.Buildings[0].Flats.Add(new Flat(101, housingManager, housingManager.Buildings[0]));
+            housingManager.Buildings[0].Flats[0].Students.Add(new Student("F12345", "John Doe", housingManager.Buildings[0].Flats[0]));
         }
     }
 }
