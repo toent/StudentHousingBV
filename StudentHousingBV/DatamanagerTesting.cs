@@ -92,7 +92,7 @@ namespace StudentHousingBV
                 housingManager.SaveAllData();
 
                 lbCurrentFlats.Items.Clear();
-                foreach (Flat flat in housingManager.GetAllFlats())
+                foreach (Flat flat in selectedBuilding.Flats)
                 {
                     lbCurrentFlats.Items.Add($"Building ID: {flat.AssignedBuilding.BuildingId} - Flat ID: {flat.FlatId} - Flat Number: {flat.FlatNumber}");
                 }
@@ -109,7 +109,7 @@ namespace StudentHousingBV
             cbFlatIdStudent.Items.Clear();
             cbFlatIdStudent.SelectedValue = null;
             cbFlatIdStudent.Text = string.Empty;
-            foreach (Flat flat in housingManager.GetAllFlats().Where(flat => flat.AssignedBuilding == selectedBuilding))
+            foreach (Flat flat in selectedBuilding.Flats)
             {
                 cbFlatIdStudent.Items.Add(flat.FlatId);
             }
@@ -125,11 +125,12 @@ namespace StudentHousingBV
                 int selectedBuildingId = int.Parse(cbBuildingIdStudent.GetItemText(cbBuildingIdStudent.SelectedItem));
                 int selectedFlatId = int.Parse(cbFlatIdStudent.GetItemText(cbFlatIdStudent.SelectedItem));
 
-                Student newStudent = new Student(tbContractId.Text, tbStudentName.Text);
                 Flat selectedFlat = housingManager.Buildings.FirstOrDefault(building => building.BuildingId == selectedBuildingId)
                     .Flats.FirstOrDefault(flat => flat.FlatId == selectedFlatId);
 
-                selectedFlat.Students.Add(newStudent);
+                Student newStudent = new Student(tbContractId.Text, tbStudentName.Text, selectedFlat);
+
+                housingManager.GetStudents().Add(newStudent);
 
                 housingManager.SaveAllData();
 
@@ -190,8 +191,8 @@ namespace StudentHousingBV
                     housingManager.SaveAllData();
 
                     lbCurrentRules.Items.Clear();
-                    List<Classes.Entities.Rule> combineRuleList = selectedBuilding.Rules.Concat(selectedFlat.Rules).ToList();
-                    foreach (Classes.Entities.Rule rule in combineRuleList)
+                    List<Classes.Entities.Rule> combinedRuleList = selectedBuilding.Rules.Concat(selectedFlat.Rules).ToList();
+                    foreach (Classes.Entities.Rule rule in combinedRuleList)
                     {
                         lbCurrentRules.Items.Add($"Rule ID: {rule.RuleId} - Content: {rule.Description} ");
                     }
