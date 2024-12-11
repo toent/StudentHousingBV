@@ -57,7 +57,7 @@ namespace StudentHousingBV
                         lblTitle.Text = "Chores";
                         break;
                     case "btnGroceries":
-                        MessageBox.Show("This feature is not implemented yet.");
+                        LoadFormIntoPanel(new StudentGroceries(dataManager));
                         lblTitle.Text = "Groceries";
                         pShowForm.Controls.Clear();
                         break;
