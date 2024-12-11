@@ -1,4 +1,6 @@
-﻿namespace StudentHousingBV.Classes
+﻿using System.Xml.Linq;
+
+namespace StudentHousingBV.Classes
 {
     public class Grocery
     {
@@ -21,11 +23,24 @@
 
         public Grocery() { }
 
-        public Grocery(string creatorId, string imagePath, string paymentUrl, int flatId , DataManager dataManager)
+        public Grocery(string creatorId, string imagePath, string paymentUrl, int flatId, DataManager dataManager)
         {
             groceryId = dataManager.GetNextGroceryId();
             date = DateTime.Now;
             creator = dataManager.GetStudent(creatorId);
+            FlatId = flatId;
+            this.imagePath = imagePath;
+            this.paymentUrl = paymentUrl;
+        }
+
+
+        // temporary constructor that doesnt take the datamanager
+        Student studentExample = new Student("F93756", "Jane Doe");
+        public Grocery(string creatorId, string imagePath, string paymentUrl, int flatId)
+        {
+            groceryId = 1;
+            date = DateTime.Now;
+            creator = studentExample;
             FlatId = flatId;
             this.imagePath = imagePath;
             this.paymentUrl = paymentUrl;

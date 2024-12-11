@@ -30,17 +30,20 @@
         {
             groupBox1 = new GroupBox();
             groupBox2 = new GroupBox();
-            btnAddGrocery = new Button();
-            tBoxPaymentURL = new TextBox();
-            label1 = new Label();
+            richTextBoxGroceryItems = new RichTextBox();
             label2 = new Label();
             tBoxImgPath = new TextBox();
-            richTextBoxGroceryItems = new RichTextBox();
+            label1 = new Label();
+            tBoxPaymentURL = new TextBox();
+            btnAddGrocery = new Button();
+            flowLayoutPanelGrocery = new FlowLayoutPanel();
+            groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             SuspendLayout();
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(flowLayoutPanelGrocery);
             groupBox1.Location = new Point(332, 12);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(456, 426);
@@ -63,32 +66,13 @@
             groupBox2.TabStop = false;
             groupBox2.Text = "Add groceries";
             // 
-            // btnAddGrocery
+            // richTextBoxGroceryItems
             // 
-            btnAddGrocery.Location = new Point(16, 380);
-            btnAddGrocery.Name = "btnAddGrocery";
-            btnAddGrocery.Size = new Size(269, 29);
-            btnAddGrocery.TabIndex = 0;
-            btnAddGrocery.Text = "Add grocery";
-            btnAddGrocery.UseVisualStyleBackColor = true;
-            btnAddGrocery.Click += btnAddGrocery_Click;
-            // 
-            // tBoxPaymentURL
-            // 
-            tBoxPaymentURL.Location = new Point(16, 63);
-            tBoxPaymentURL.Name = "tBoxPaymentURL";
-            tBoxPaymentURL.Size = new Size(269, 27);
-            tBoxPaymentURL.TabIndex = 1;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(16, 32);
-            label1.Name = "label1";
-            label1.Size = new Size(131, 28);
-            label1.TabIndex = 2;
-            label1.Text = "Payment URL:";
+            richTextBoxGroceryItems.Location = new Point(16, 180);
+            richTextBoxGroceryItems.Name = "richTextBoxGroceryItems";
+            richTextBoxGroceryItems.Size = new Size(269, 185);
+            richTextBoxGroceryItems.TabIndex = 5;
+            richTextBoxGroceryItems.Text = "";
             // 
             // label2
             // 
@@ -107,13 +91,39 @@
             tBoxImgPath.Size = new Size(269, 27);
             tBoxImgPath.TabIndex = 3;
             // 
-            // richTextBoxGroceryItems
+            // label1
             // 
-            richTextBoxGroceryItems.Location = new Point(16, 180);
-            richTextBoxGroceryItems.Name = "richTextBoxGroceryItems";
-            richTextBoxGroceryItems.Size = new Size(269, 185);
-            richTextBoxGroceryItems.TabIndex = 5;
-            richTextBoxGroceryItems.Text = "";
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.Location = new Point(16, 32);
+            label1.Name = "label1";
+            label1.Size = new Size(131, 28);
+            label1.TabIndex = 2;
+            label1.Text = "Payment URL:";
+            // 
+            // tBoxPaymentURL
+            // 
+            tBoxPaymentURL.Location = new Point(16, 63);
+            tBoxPaymentURL.Name = "tBoxPaymentURL";
+            tBoxPaymentURL.Size = new Size(269, 27);
+            tBoxPaymentURL.TabIndex = 1;
+            // 
+            // btnAddGrocery
+            // 
+            btnAddGrocery.Location = new Point(16, 380);
+            btnAddGrocery.Name = "btnAddGrocery";
+            btnAddGrocery.Size = new Size(269, 29);
+            btnAddGrocery.TabIndex = 0;
+            btnAddGrocery.Text = "Add grocery";
+            btnAddGrocery.UseVisualStyleBackColor = true;
+            btnAddGrocery.Click += btnAddGrocery_Click;
+            // 
+            // flowLayoutPanelGrocery
+            // 
+            flowLayoutPanelGrocery.Location = new Point(6, 26);
+            flowLayoutPanelGrocery.Name = "flowLayoutPanelGrocery";
+            flowLayoutPanelGrocery.Size = new Size(444, 187);
+            flowLayoutPanelGrocery.TabIndex = 0;
             // 
             // StudentGroceries
             // 
@@ -124,6 +134,7 @@
             Controls.Add(groupBox1);
             Name = "StudentGroceries";
             Text = "StudentGroceries";
+            groupBox1.ResumeLayout(false);
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
             ResumeLayout(false);
@@ -139,5 +150,6 @@
         private Label label2;
         private TextBox tBoxImgPath;
         private RichTextBox richTextBoxGroceryItems;
+        private FlowLayoutPanel flowLayoutPanelGrocery;
     }
 }
