@@ -122,7 +122,7 @@
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-            Color borderColor = Color.Black;
+            Color borderColor = Color.RebeccaPurple ;
             int borderWidth = 2;
             Rectangle borderRectangle = new Rectangle(0, 0, this.Width - 1, this.Height - 1);
 
