@@ -12,10 +12,4 @@
     <Folder Include="Classes\Entities\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="Company App\CompanyNavigator.cs">
-      <SubType>Form</SubType>
-    </Compile>
-  </ItemGroup>
-
 </Project>
