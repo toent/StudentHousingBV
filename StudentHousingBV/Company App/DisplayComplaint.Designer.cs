@@ -100,6 +100,7 @@
             // 
             richTextBoxComplaint.Location = new Point(314, 221);
             richTextBoxComplaint.Name = "richTextBoxComplaint";
+            richTextBoxComplaint.ReadOnly = true;
             richTextBoxComplaint.Size = new Size(538, 289);
             richTextBoxComplaint.TabIndex = 9;
             richTextBoxComplaint.Text = "";
