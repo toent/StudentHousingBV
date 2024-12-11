@@ -3,7 +3,7 @@ using StudentHousingBV.Student_App;
 
 namespace StudentHousingBV
 {
-    public partial class StudentNavigator : Form
+    public partial class CompanyNavigator : Form
     {
         private readonly DataManager dataManager;
         private readonly Student student;
