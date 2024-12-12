@@ -1,4 +1,5 @@
 ﻿using StudentHousingBV.Classes.Managers;
+using System.Text.Json.Serialization;
 
 namespace StudentHousingBV.Classes.Entities
 {
@@ -7,6 +8,7 @@ namespace StudentHousingBV.Classes.Entities
         #region Properties
         public int ComplaintId { get; set; } // Primary Key
         public string Issue { get; set; }
+        [JsonIgnore]
         public Flat AssignedFlat { get; set; } // Cross-reference
         #endregion
 

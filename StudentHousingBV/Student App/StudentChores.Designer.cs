@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             btnAddChore = new Button();
+            panel1 = new Panel();
             SuspendLayout();
             // 
             // btnAddChore
@@ -41,12 +42,21 @@
             btnAddChore.Text = "Add Chore";
             btnAddChore.UseVisualStyleBackColor = true;
             // 
+            // panel1
+            // 
+            panel1.AutoScroll = true;
+            panel1.Location = new Point(12, 67);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(1552, 739);
+            panel1.TabIndex = 1;
+            // 
             // StudentChores
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(1576, 818);
+            Controls.Add(panel1);
             Controls.Add(btnAddChore);
             Name = "StudentChores";
             Text = "StudentChores";
@@ -56,5 +66,6 @@
         #endregion
 
         private Button btnAddChore;
+        private Panel panel1;
     }
 }

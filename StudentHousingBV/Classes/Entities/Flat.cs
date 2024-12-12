@@ -1,4 +1,5 @@
 ﻿using StudentHousingBV.Classes.Managers;
+using System.Text.Json.Serialization;
 
 namespace StudentHousingBV.Classes.Entities
 {
@@ -14,6 +15,7 @@ namespace StudentHousingBV.Classes.Entities
         public ICollection<Chore> Chores { get; set; }
         public ICollection<Grocery> Groceries { get; set; }
         public ICollection<Rule> Rules { get; set; }
+        [JsonIgnore]
         public Building AssignedBuilding { get; set; } // Cross-Reference
         #endregion
         

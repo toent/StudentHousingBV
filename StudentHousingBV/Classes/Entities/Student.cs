@@ -1,10 +1,13 @@
-﻿namespace StudentHousingBV.Classes.Entities
+﻿using System.Text.Json.Serialization;
+
+namespace StudentHousingBV.Classes.Entities
 {
     public class Student
     {
         #region Properties
         public string StudentId { get; set; } // Primary Key
         public string Name { get; set; }
+        [JsonIgnore]
         public Flat? AssignedFlat { get; set; } // Cross-reference
         #endregion
 

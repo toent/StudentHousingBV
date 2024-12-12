@@ -1,6 +1,7 @@
 ﻿using StudentHousingBV.Classes.Entities;
 using System.Linq.Expressions;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace StudentHousingBV.Classes.Managers
 {
@@ -9,20 +10,19 @@ namespace StudentHousingBV.Classes.Managers
         #region Fields
         private readonly string storagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Storage");
         private readonly bool directoryExists = false;
+        private const string JSON_NAME = "Data";
+        private readonly JsonSerializerOptions jsonOptions = new()
+        {
+            ReferenceHandler = ReferenceHandler.Preserve,
+            WriteIndented = true
+        };
         #endregion
 
         #region Constructors
         public DataManager()
         {
             Directory.CreateDirectory(storagePath);
-            if (Directory.Exists(storagePath))
-            {
-                directoryExists = true;
-            }
-            else
-            {
-                directoryExists = false;
-            }
+            directoryExists = Directory.Exists(storagePath);
         }
         #endregion
 
@@ -31,19 +31,37 @@ namespace StudentHousingBV.Classes.Managers
         /// <summary>
         /// Load all data from the storage directory
         /// </summary>
-        public List<Building> GetAllData()
+        public List<Building>? GetAllData()
         {
-            List<Building> data = [];
-            data = LoadAttribute(() => data) ?? [];
-            return data;
+            string filePath = Path.Combine(storagePath, "buildings.json");
+            if (!directoryExists || !File.Exists(filePath))
+            {
+                return null;
+            }
+            try
+            {
+                string extractedJson = File.ReadAllText(filePath);
+                return JsonSerializer.Deserialize<List<Building>>(extractedJson, jsonOptions);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error loading buildings: {ex.Message}");
+                return null;
+            }
         }
+
 
         /// <summary>
         /// Save all data to the storage directory
         /// </summary>
         public void SaveAllData(List<Building> buildings)
         {
-            SaveAttribute(() => buildings);
+            if (directoryExists)
+            {
+                string jsonData = JsonSerializer.Serialize(buildings, jsonOptions);
+                string filePath = Path.Combine(storagePath, $"{JSON_NAME}.json");
+                File.WriteAllText(filePath, jsonData);
+            }
         }
 
         /// <summary>
@@ -85,6 +103,11 @@ namespace StudentHousingBV.Classes.Managers
         public void SaveAttribute<T>(Expression<Func<List<T>>> listExpression)
         {
             string jsonName = GetListName(listExpression);
+            var jsonOptions = new
+            {
+                ReferenceHandler = ReferenceHandler.Preserve,
+                WriteIndented = true
+            };
             string jsonData = JsonSerializer.Serialize(listExpression.Compile().Invoke());
 
             if (!directoryExists) return;

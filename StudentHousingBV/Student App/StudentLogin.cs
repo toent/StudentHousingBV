@@ -11,7 +11,7 @@ namespace StudentHousingBV.Student_App
         {
             InitializeComponent();
             housingManager = new HousingManager();
-            InitializeTestingDataset();
+            //InitializeTestingDataset();
             StartPosition = FormStartPosition.CenterScreen;
         }
 

@@ -1,4 +1,5 @@
 ﻿using StudentHousingBV.Classes.Managers;
+using System.Text.Json.Serialization;
 
 namespace StudentHousingBV.Classes.Entities
 {
@@ -7,7 +8,9 @@ namespace StudentHousingBV.Classes.Entities
         #region Properties
         public int RuleId { get; set; } // Primary Key
         public string Description { get; set; }
+        [JsonIgnore]
         public Flat? AssignedFlat { get; set; } // Cross-Reference
+        [JsonIgnore]
         public Building? AssignedBuilding { get; set; } // Cross-Reference
         #endregion
 

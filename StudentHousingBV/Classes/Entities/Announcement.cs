@@ -1,4 +1,6 @@
-﻿namespace StudentHousingBV.Classes.Entities
+﻿using System.Text.Json.Serialization;
+
+namespace StudentHousingBV.Classes.Entities
 {
     public class Announcement
     {
@@ -6,6 +8,7 @@
         public int AnnouncementId { get; set; } // Primary key
         public string Message { get; set; }
         public bool IsGlobal { get; set; }
+        [JsonIgnore]
         public Flat? AssignedFlat { get; set; } // Cross-reference
         #endregion
 

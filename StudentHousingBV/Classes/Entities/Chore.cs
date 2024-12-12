@@ -1,4 +1,5 @@
 ﻿using StudentHousingBV.Classes.Managers;
+using System.Text.Json.Serialization;
 
 namespace StudentHousingBV.Classes.Entities
 {
@@ -12,6 +13,7 @@ namespace StudentHousingBV.Classes.Entities
         public Student? Assignee { get; set; }
         public DateTime Deadline { get; set; }
         public Student? Student { get; set; }
+        [JsonIgnore]
         public Flat AssignedFlat { get; set; } // Cross-reference
         #endregion
 

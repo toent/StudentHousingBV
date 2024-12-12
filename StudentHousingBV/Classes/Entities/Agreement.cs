@@ -1,4 +1,6 @@
-﻿namespace StudentHousingBV.Classes.Entities
+﻿using System.Text.Json.Serialization;
+
+namespace StudentHousingBV.Classes.Entities
 {
     public class Agreement
     {
@@ -9,6 +11,7 @@
         public List<Student> AgreedBy { get; set; }
         public Student? Student { get; set; }
         public DateTime DateCreated { get; set; }
+        [JsonIgnore]
         public Flat AssignedFlat { get; set; } // Cross-reference
         #endregion
 
