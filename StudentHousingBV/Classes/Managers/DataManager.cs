@@ -33,7 +33,7 @@ namespace StudentHousingBV.Classes.Managers
         /// </summary>
         public List<Building>? GetAllData()
         {
-            string filePath = Path.Combine(storagePath, "buildings.json");
+            string filePath = Path.Combine(storagePath, "Data.json");
             if (!directoryExists || !File.Exists(filePath))
             {
                 return null;
