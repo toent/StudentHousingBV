@@ -1,6 +1,4 @@
-﻿using StudentHousingBV.Classes.Managers;
-
-namespace StudentHousingBV.Classes.Entities
+﻿namespace StudentHousingBV.Classes.Entities
 {
     public class Agreement
     {
@@ -12,23 +10,28 @@ namespace StudentHousingBV.Classes.Entities
         public Student? Student { get; set; }
         public DateTime DateCreated { get; set; }
         public Flat AssignedFlat { get; set; } // Cross-reference
-        public HousingManager HousingManager { get; set; }
         #endregion
 
         #region Constructor
-        public Agreement() { }
-
-        public Agreement(string agreementTitle, string agreementDetails, List<Student> studentsInAgreement, Student student, HousingManager housingManager, Flat assignedFlat) 
+        public Agreement() 
         {
-            AgreementId = housingManager.GetNextAgreementId();
+            Title = "Agreement";
+            Details = "Details";
+            AgreedBy = [];
+            AssignedFlat = new();
+        }
+
+        public Agreement(int id, string agreementTitle, string agreementDetails, List<Student> studentsInAgreement, Student student, Flat assignedFlat)
+        {
+            AgreementId = id;
             Title = agreementTitle;
             Details = agreementDetails;
             Student = student;
-            HousingManager = housingManager;
             AssignedFlat = assignedFlat;
             DateCreated = DateTime.Now;
+            AgreedBy = studentsInAgreement;
         }
-        
+
         #endregion
 
         #region Methods

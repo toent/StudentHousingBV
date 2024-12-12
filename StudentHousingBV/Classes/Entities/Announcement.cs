@@ -1,6 +1,4 @@
-﻿using StudentHousingBV.Classes.Managers;
-
-namespace StudentHousingBV.Classes.Entities
+﻿namespace StudentHousingBV.Classes.Entities
 {
     public class Announcement
     {
@@ -12,33 +10,36 @@ namespace StudentHousingBV.Classes.Entities
         #endregion
 
         #region Constructors
-        public Announcement() { }
-        public Announcement(HousingManager housingManager)
+        public Announcement()
         {
-            AnnouncementId = housingManager.GetNextAnnouncementId();
+            Message = "";
+        }
+        public Announcement(int id)
+        {
+            AnnouncementId = id;
             Message = "";
             IsGlobal = false;
         }
 
-        public Announcement(HousingManager housingManager, Flat assignedFlat)
+        public Announcement(int id, Flat assignedFlat)
         {
-            AnnouncementId = housingManager.GetNextAnnouncementId();
+            AnnouncementId = id;
             Message = "";
             IsGlobal = false;
             AssignedFlat = assignedFlat;
         }
 
-        public Announcement(string message, HousingManager housingManager, Flat assignedFlat)
+        public Announcement(int id, Flat assignedFlat, string message)
         {
-            AnnouncementId = housingManager.GetNextAnnouncementId();
+            AnnouncementId = id;
             Message = message;
             IsGlobal = false;
             AssignedFlat = assignedFlat;
         }
 
-        public Announcement(string message, bool isGlobal, HousingManager housingManager, Flat assignedFlat)
+        public Announcement(int id, Flat assignedFlat, string message, bool isGlobal)
         {
-            AnnouncementId = housingManager.GetNextAnnouncementId();
+            AnnouncementId = id;
             Message = message;
             IsGlobal = isGlobal;
             AssignedFlat = assignedFlat;

@@ -18,11 +18,21 @@ namespace StudentHousingBV.Classes.Entities
         #endregion
         
         #region Constructors
-        public Flat() { }
-
-        public Flat(HousingManager housingManager, Building assignedBuilding)
+        public Flat()
         {
-            FlatId = housingManager.GetNextFlatId();
+            Students = [];
+            Complaints = [];
+            Agreements = [];
+            Announcements = [];
+            Chores = [];
+            Groceries = [];
+            Rules = [];
+            AssignedBuilding = new();
+        }
+
+        public Flat(int id, Building assignedBuilding)
+        {
+            FlatId = id;
             Students = [];
             Complaints = [];
             Agreements = [];
@@ -33,9 +43,9 @@ namespace StudentHousingBV.Classes.Entities
             AssignedBuilding = assignedBuilding;
         }
 
-        public Flat(int flatNumber, HousingManager housingManager, Building assignedBuilding)
+        public Flat(int id, int flatNumber, Building assignedBuilding)
         {
-            FlatId = housingManager.GetNextFlatId();
+            FlatId = id;
             FlatNumber = flatNumber;
             Students = [];
             Complaints = [];
@@ -47,9 +57,9 @@ namespace StudentHousingBV.Classes.Entities
             AssignedBuilding = assignedBuilding;
         }
 
-        public Flat(int flatNumber, List<Student> students, HousingManager housingManager, Building assignedBuilding)
+        public Flat(int id, int flatNumber, Building assignedBuilding, List<Student> students)
         {
-            FlatId = housingManager.GetNextFlatId();
+            FlatId = id;
             FlatNumber = flatNumber;
             Students = students;
             Complaints = [];

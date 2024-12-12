@@ -14,15 +14,15 @@ namespace StudentHousingBV.Classes.Entities
         #region Constructors
         public Building() { }
 
-        public Building(HousingManager housingManager)
+        public Building(int id)
         {
-            BuildingId = housingManager.GetNextBuildingId();
+            BuildingId = id;
             Address = "";
             Rules = [];
             Flats = [];
         }
 
-        public Building(string inputAddress, int id)
+        public Building(int id, string inputAddress)
         {
             BuildingId = id;
             Address = inputAddress;
@@ -30,9 +30,9 @@ namespace StudentHousingBV.Classes.Entities
             Flats = [];
         }
 
-        public Building(string inputAddress, List<Rule> rules, List<Flat> flats, HousingManager housingManager)
+        public Building(int id, string inputAddress, List<Rule> rules, List<Flat> flats)
         {
-            BuildingId = housingManager.GetNextBuildingId();
+            BuildingId = id;
             Address = inputAddress;
             Rules = rules;
             Flats = flats;

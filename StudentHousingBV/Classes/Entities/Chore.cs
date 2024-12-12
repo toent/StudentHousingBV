@@ -16,11 +16,16 @@ namespace StudentHousingBV.Classes.Entities
         #endregion
 
         #region Constructors
-        public Chore() { }
-
-        public Chore(string choreTitle, string choreDescription, DateTime choreDeadline, HousingManager housingManager, Flat assignedFlat)
+        public Chore() 
         {
-            ChoreId = housingManager.GetNextChoreId();
+            Title = "New chore";
+            Description = "New chore description";
+            AssignedFlat = new();
+        }
+
+        public Chore(int id, string choreTitle, string choreDescription, DateTime choreDeadline, Flat assignedFlat)
+        {
+            ChoreId = id;
             Title = choreTitle;
             Description = choreDescription;
             IsFinished = false;
@@ -28,9 +33,9 @@ namespace StudentHousingBV.Classes.Entities
             AssignedFlat = assignedFlat;
         }
 
-        public Chore(string choreTitle, string choreDescription, Student choreAssignee, DateTime choreDeadline, HousingManager housingManager, Flat assignedFlat)
+        public Chore(int id, string choreTitle, string choreDescription, DateTime choreDeadline, Flat assignedFlat, Student choreAssignee)
         {
-            ChoreId = housingManager.GetNextChoreId();
+            ChoreId = id;
             Title = choreTitle;
             Description = choreDescription;
             IsFinished = false;

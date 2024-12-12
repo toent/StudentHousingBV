@@ -50,8 +50,8 @@ namespace StudentHousingBV.Student_App
 
         private void InitializeTestingDataset()
         {
-            housingManager.Buildings.Add(new Building("123 Main St", housingManager.GetNextBuildingId()));
-            housingManager.Buildings[0].Flats.Add(new Flat(101, housingManager, housingManager.Buildings[0]));
+            housingManager.Buildings.Add(new Building(housingManager.GetNextBuildingId(), "123 Main St"));
+            housingManager.Buildings[0].Flats.Add(new Flat(housingManager.GetNextFlatId(), 101, housingManager.Buildings[0]));
             housingManager.Buildings[0].Flats[0].Students.Add(new Student("F12345", "John Doe", housingManager.Buildings[0].Flats[0]));
             housingManager.SaveAllData();
         }

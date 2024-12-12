@@ -11,18 +11,22 @@ namespace StudentHousingBV.Classes.Entities
         #endregion
 
         #region Constructors
-        public Complaint() { }
-
-        public Complaint(HousingManager housingManager, Flat assignedFlat)
+        public Complaint()
         {
-            ComplaintId = housingManager.GetNextComplaintId();
+            Issue = "";
+            AssignedFlat = new();
+        }
+
+        public Complaint(int id, Flat assignedFlat)
+        {
+            ComplaintId = id;
             Issue = "";
             AssignedFlat = assignedFlat;
         }
 
-        public Complaint(string description, HousingManager housingManager, Flat assignedFlat)
+        public Complaint(int id, Flat assignedFlat, string description)
         {
-            ComplaintId = housingManager.GetNextComplaintId();
+            ComplaintId = id;
             Issue = description;
             AssignedFlat = assignedFlat;
         }

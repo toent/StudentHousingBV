@@ -4,7 +4,7 @@ namespace StudentHousingBV.Custom_Controls
 {
     public partial class GroceryControl : UserControl
     {
-        private Grocery grocery;
+        private Grocery? grocery;
         public GroceryControl()
         {
             InitializeComponent();

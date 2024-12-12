@@ -8,9 +8,12 @@
         public Flat? AssignedFlat { get; set; } // Cross-reference
         #endregion
 
-
         #region Constructors
-        public Student () { }
+        public Student ()
+        {
+            StudentId = "";
+            Name = "";
+        }
 
         public Student(string studentId, string name)
         {

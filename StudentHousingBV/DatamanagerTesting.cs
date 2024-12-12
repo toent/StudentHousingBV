@@ -14,9 +14,9 @@ namespace StudentHousingBV
 {
     public partial class DatamanagerTesting : Form
     {
-        DataManager dataManager = new DataManager();
+        readonly DataManager dataManager = new();
 
-        HousingManager housingManager = new HousingManager();
+        readonly HousingManager housingManager = new();
 
         public DatamanagerTesting()
         {
@@ -28,7 +28,7 @@ namespace StudentHousingBV
             if (tbBuildingAddress.Text != string.Empty)
             {
                 // Create a new building with the current address and the DataManager instance
-                Building newBuilding = new Building(tbBuildingAddress.Text, housingManager);
+                Building newBuilding = new(housingManager.GetNextBuildingId(), tbBuildingAddress.Text);
 
                 // Add the new building to the list of buildings
                 housingManager.Buildings.Add(newBuilding);
@@ -85,7 +85,7 @@ namespace StudentHousingBV
             {
                 int selectedBuildingId = int.Parse(cbBuildingIdFlat.GetItemText(cbBuildingIdFlat.SelectedItem));
                 Building selectedBuilding = housingManager.Buildings.FirstOrDefault(building => building.BuildingId == selectedBuildingId);
-                Flat newFlat = new Flat(housingManager, selectedBuilding);
+                Flat newFlat = new(housingManager.GetNextFlatId(), selectedBuilding);
 
                 housingManager.GetAllFlats().Add(newFlat);
 
@@ -128,7 +128,7 @@ namespace StudentHousingBV
                 Flat selectedFlat = housingManager.Buildings.FirstOrDefault(building => building.BuildingId == selectedBuildingId)
                     .Flats.FirstOrDefault(flat => flat.FlatId == selectedFlatId);
 
-                Student newStudent = new Student(tbContractId.Text, tbStudentName.Text, selectedFlat);
+                Student newStudent = new(tbContractId.Text, tbStudentName.Text, selectedFlat);
 
                 housingManager.GetStudents().Add(newStudent);
 
@@ -167,7 +167,7 @@ namespace StudentHousingBV
 
                 if (cbRuleIsForBuilding.Checked)
                 {
-                    Classes.Entities.Rule newRule = new Classes.Entities.Rule(tbRuleContent.Text ,housingManager, selectedBuilding);
+                    Classes.Entities.Rule newRule = new(housingManager.GetNextRuleId(), selectedBuilding, tbRuleContent.Text);
 
                     housingManager.GetAllRules().Add(newRule);
 
@@ -184,14 +184,14 @@ namespace StudentHousingBV
                     int selectedFlatId = int.Parse(cbFlatIdRule.GetItemText(cbFlatIdRule.SelectedItem));
                     Flat selectedFlat = selectedBuilding.Flats.FirstOrDefault(flat => flat.FlatId == selectedFlatId);
 
-                    Classes.Entities.Rule newRule = new Classes.Entities.Rule(tbRuleContent.Text, housingManager, selectedFlat);
+                    Classes.Entities.Rule newRule = new(housingManager.GetNextRuleId(), selectedFlat, tbRuleContent.Text);
 
                     housingManager.GetAllRules().Add(newRule);
 
                     housingManager.SaveAllData();
 
                     lbCurrentRules.Items.Clear();
-                    List<Classes.Entities.Rule> combinedRuleList = selectedBuilding.Rules.Concat(selectedFlat.Rules).ToList();
+                    List<Classes.Entities.Rule> combinedRuleList = [.. selectedBuilding.Rules, .. selectedFlat.Rules];
                     foreach (Classes.Entities.Rule rule in combinedRuleList)
                     {
                         lbCurrentRules.Items.Add($"Rule ID: {rule.RuleId} - Content: {rule.Description} ");

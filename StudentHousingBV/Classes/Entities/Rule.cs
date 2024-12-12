@@ -12,32 +12,35 @@ namespace StudentHousingBV.Classes.Entities
         #endregion
 
         #region Constructors  
-        public Rule() { }
-
-        public Rule (HousingManager housingManager, Building assignedBuilding)
+        public Rule() 
         {
-            RuleId = housingManager.GetNextRuleId();
+            Description = "";
+        }
+
+        public Rule (int id, Building assignedBuilding)
+        {
+            RuleId = id;
             Description = "";
             AssignedBuilding = assignedBuilding;
         }
 
-        public Rule(HousingManager housingManager, Flat assignedFlat)
+        public Rule(int id, Flat assignedFlat)
         {
-            RuleId = housingManager.GetNextRuleId();
+            RuleId = id;
             Description = "";
             AssignedFlat = assignedFlat;
         }
 
-        public Rule(string description, HousingManager housingManager, Flat assignedFlat)
+        public Rule(int id, Flat assignedFlat, string description)
         {
-            RuleId = housingManager.GetNextRuleId();
+            RuleId = id;
             Description = description;
             AssignedFlat = assignedFlat;
         }
 
-        public Rule(string description, HousingManager housingManager, Building assignedBuilding)
+        public Rule(int id, Building assignedBuilding, string description)
         {
-            RuleId = housingManager.GetNextRuleId();
+            RuleId = id;
             Description = description;
             AssignedBuilding = assignedBuilding;
         }
