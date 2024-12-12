@@ -26,7 +26,7 @@ namespace StudentHousingBV.Student_App
         {
             if (ValidateInput() && housingManager.GetStudent(txtStudentId.Text) is Student student)
             {
-                StudentNavigator studentNavigator = new(housingManager);
+                StudentNavigator studentNavigator = new(housingManager, student);
                 studentNavigator.Show();
                 Hide();
                 studentNavigator.FormClosed += (s, args) => Close();
@@ -50,12 +50,10 @@ namespace StudentHousingBV.Student_App
 
         private void InitializeTestingDataset()
         {
-            housingManager.Buildings.Add(new Building(housingManager)
-            {
-                Address = "123 Main St"
-            });
+            housingManager.Buildings.Add(new Building("123 Main St", housingManager.GetNextBuildingId()));
             housingManager.Buildings[0].Flats.Add(new Flat(101, housingManager, housingManager.Buildings[0]));
             housingManager.Buildings[0].Flats[0].Students.Add(new Student("F12345", "John Doe", housingManager.Buildings[0].Flats[0]));
+            housingManager.SaveAllData();
         }
     }
 }

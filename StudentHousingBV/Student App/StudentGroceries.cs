@@ -8,10 +8,14 @@ namespace StudentHousingBV.Student_App
     {
         private readonly HousingManager housingManager;
         private readonly List<Grocery> groceries;
-        public StudentGroceries(HousingManager housingManager)
+        private readonly Student student;
+
+        public StudentGroceries(HousingManager housingManager, Student student)
         {
             InitializeComponent();
             this.housingManager = housingManager;
+            this.student = student;
+            groceries = [];
         }
 
         private void btnAddGrocery_Click(object sender, EventArgs e)
@@ -21,9 +25,9 @@ namespace StudentHousingBV.Student_App
             string imgPath = tBoxImgPath.Text;
             string paymentURL = tBoxPaymentURL.Text;
 
-            if (imgPath != string.Empty && paymentURL != string.Empty && housingManager.LoggedStudent is Student student)
+            if (imgPath != string.Empty && paymentURL != string.Empty)
             {
-                Grocery grocery = new(housingManager.LoggedStudent, imgPath, paymentURL, housingManager, student.AssignedFlat!);
+                Grocery grocery = new(student, imgPath, paymentURL, housingManager, student.AssignedFlat!);
                 groceries.Add(grocery);
                 MessageBox.Show("Grocery created successfully!");
                 UpdateGroceryControl();

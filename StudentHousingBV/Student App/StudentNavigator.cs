@@ -7,28 +7,22 @@ namespace StudentHousingBV
     public partial class StudentNavigator : Form
     {
         private readonly HousingManager housingManager;
+        private readonly Student student;
 
-        public StudentNavigator(HousingManager housingManager)
+        public StudentNavigator(HousingManager housingManager, Student student)
         {
             InitializeComponent();
             StartPosition = FormStartPosition.CenterScreen;
             this.housingManager = housingManager;
+            this.student = student;
             LoadStudentNavigator();
         }
 
         private void LoadStudentNavigator()
         {
-            if (housingManager.LoggedStudent is Student student)
-            {
-                lblContractId.Text = housingManager.LoggedStudent.StudentId;
-                lblUserName.Text = student.Name;
-                lblLocation.Text = $"{student.AssignedFlat?.AssignedBuilding.Address} - Flat {student.AssignedFlat?.FlatNumber}";
-            }
-            else
-            {
-                MessageBox.Show("Invalid contract id", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
+            lblContractId.Text = student.StudentId;
+            lblUserName.Text = student.Name;
+            lblLocation.Text = $"{student.AssignedFlat?.AssignedBuilding.Address} - Flat {student.AssignedFlat?.FlatNumber}";
         }
 
         private void btnLogout_Click(object sender, EventArgs e)
@@ -64,7 +58,7 @@ namespace StudentHousingBV
                         lblTitle.Text = "Chores";
                         break;
                     case "btnGroceries":
-                        LoadFormIntoPanel(new StudentGroceries(housingManager));
+                        LoadFormIntoPanel(new StudentGroceries(housingManager, student));
                         lblTitle.Text = "Groceries";
                         pShowForm.Controls.Clear();
                         break;

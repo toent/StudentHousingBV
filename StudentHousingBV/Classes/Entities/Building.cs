@@ -22,9 +22,9 @@ namespace StudentHousingBV.Classes.Entities
             Flats = [];
         }
 
-        public Building(string inputAddress, HousingManager housingManager)
+        public Building(string inputAddress, int id)
         {
-            BuildingId = housingManager.GetNextBuildingId();
+            BuildingId = id;
             Address = inputAddress;
             Rules = [];
             Flats = [];
