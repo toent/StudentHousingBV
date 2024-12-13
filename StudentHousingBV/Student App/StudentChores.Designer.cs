@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             btnAddChore = new Button();
-            panel1 = new Panel();
+            pChores = new FlowLayoutPanel();
             SuspendLayout();
             // 
             // btnAddChore
@@ -42,13 +42,13 @@
             btnAddChore.Text = "Add Chore";
             btnAddChore.UseVisualStyleBackColor = true;
             // 
-            // panel1
+            // pChores
             // 
-            panel1.AutoScroll = true;
-            panel1.Location = new Point(12, 67);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(1552, 739);
-            panel1.TabIndex = 1;
+            pChores.AutoScroll = true;
+            pChores.Location = new Point(12, 67);
+            pChores.Name = "pChores";
+            pChores.Size = new Size(1552, 739);
+            pChores.TabIndex = 0;
             // 
             // StudentChores
             // 
@@ -56,7 +56,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(1576, 818);
-            Controls.Add(panel1);
+            Controls.Add(pChores);
             Controls.Add(btnAddChore);
             Name = "StudentChores";
             Text = "StudentChores";
@@ -66,6 +66,6 @@
         #endregion
 
         private Button btnAddChore;
-        private Panel panel1;
+        private FlowLayoutPanel pChores;
     }
 }

@@ -17,7 +17,7 @@ namespace StudentHousingBV.Classes.Managers
         public HousingManager()
         {
             dataManager = new();
-            buildings = dataManager.GetAllData();
+            buildings = dataManager.GetAllData() ?? [];
         }
         #endregion
 
@@ -29,7 +29,7 @@ namespace StudentHousingBV.Classes.Managers
 
         public void LoadAllData()
         {
-            buildings = dataManager.GetAllData();
+            buildings = dataManager.GetAllData() ?? [];
         }
         #endregion
 
