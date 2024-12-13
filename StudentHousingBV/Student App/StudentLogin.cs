@@ -11,7 +11,7 @@ namespace StudentHousingBV.Student_App
         {
             InitializeComponent();
             housingManager = new HousingManager();
-            //InitializeTestingDataset();
+            InitializeTestingDataset();
             StartPosition = FormStartPosition.CenterScreen;
         }
 
@@ -54,6 +54,15 @@ namespace StudentHousingBV.Student_App
             housingManager.Buildings[0].Flats.Add(new Flat(housingManager.GetNextFlatId(), 101, housingManager.Buildings[0]));
             housingManager.Buildings[0].Flats[0].Students.Add(new Student("F12345", "John Doe", housingManager.Buildings[0].Flats[0]));
             housingManager.SaveAllData();
+            housingManager.Buildings[0].Flats[0].Chores.Add(new Chore(housingManager.GetNextChoreId(), "Clean the bathroom", "Clean the bathroom with the broom.", DateTime.Now.AddDays(1), housingManager.Buildings[0].Flats[0]));
+            housingManager.Buildings[0].Flats[0].Chores.Add(new Chore(housingManager.GetNextChoreId(), "Clean the kitchen", "Clean the kitchen with the mop.", DateTime.Now.AddDays(2), housingManager.Buildings[0].Flats[0]));
+            housingManager.Buildings[0].Flats[0].Chores.Add(new Chore(housingManager.GetNextChoreId(), "Clean the living room", "Clean the living room with the vacuum cleaner.", DateTime.Now.AddDays(3), housingManager.Buildings[0].Flats[0]));
+            housingManager.Buildings[0].Flats[0].Chores.Add(new Chore(housingManager.GetNextChoreId(), "Clean the bedroom", "Clean the bedroom with the duster.", DateTime.Now.AddDays(4), housingManager.Buildings[0].Flats[0]));
+            housingManager.Buildings[0].Flats[0].Chores.Add(new Chore(housingManager.GetNextChoreId(), "Clean the hallway", "Clean the hallway with the broom.", DateTime.Now.AddDays(5), housingManager.Buildings[0].Flats[0]));
+            housingManager.Buildings[0].Flats[0].Chores.Add(new Chore(housingManager.GetNextChoreId(), "Clean the balcony", "Clean the balcony with the mop.", DateTime.Now.AddDays(6), housingManager.Buildings[0].Flats[0]));
+            housingManager.Buildings[0].Flats[0].Chores.Add(new Chore(housingManager.GetNextChoreId(), "Clean the garden", "Clean the garden with the vacuum cleaner.", DateTime.Now.AddDays(7), housingManager.Buildings[0].Flats[0]));
+            housingManager.Buildings[0].Flats[0].Chores.Add(new Chore(housingManager.GetNextChoreId(), "Clean the garage", "Clean the garage with the duster.", DateTime.Now.AddDays(8), housingManager.Buildings[0].Flats[0]));
+            housingManager.Buildings[0].Flats[0].Chores.Add(new Chore(housingManager.GetNextChoreId(), "Clean the attic", "Clean the attic with the broom.", DateTime.Now.AddDays(9), housingManager.Buildings[0].Flats[0]));
         }
     }
 }

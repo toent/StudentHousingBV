@@ -1,21 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using StudentHousingBV.Classes.Managers;
 
 
 namespace StudentHousingBV.Student_App
 {
     public partial class StudentAnnouncements : Form
     {
-        public StudentAnnouncements()
+        private readonly HousingManager housingManager;
+
+        public StudentAnnouncements(HousingManager housingManager)
         {
             InitializeComponent();
+            this.housingManager = housingManager;
             LoadAnnouncements();
         }
 
@@ -36,7 +31,7 @@ namespace StudentHousingBV.Student_App
 
     };
 
-            int yOffset = 10; 
+            int yOffset = 10;
 
             foreach (var announcement in announcements)
             {

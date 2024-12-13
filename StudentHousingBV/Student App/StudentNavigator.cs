@@ -40,9 +40,8 @@ namespace StudentHousingBV
                 switch (button.Name)
                 {
                     case "btnAnnouncements":
-                        MessageBox.Show("This feature is not implemented yet.");
+                        LoadFormIntoPanel(new StudentAnnouncements(housingManager));
                         lblTitle.Text = "Announcements";
-                        pShowForm.Controls.Clear();
                         break;
                     case "btnHouseRules":
                         LoadFormIntoPanel(new StudentHouserules(housingManager));
@@ -60,7 +59,6 @@ namespace StudentHousingBV
                     case "btnGroceries":
                         LoadFormIntoPanel(new StudentGroceries(housingManager, student));
                         lblTitle.Text = "Groceries";
-                        pShowForm.Controls.Clear();
                         break;
                     case "btnFileComplaint":
                         LoadFormIntoPanel(new StudentComplaint(housingManager));

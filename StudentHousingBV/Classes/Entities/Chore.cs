@@ -1,5 +1,4 @@
-﻿using StudentHousingBV.Classes.Managers;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace StudentHousingBV.Classes.Entities
 {
@@ -18,7 +17,7 @@ namespace StudentHousingBV.Classes.Entities
         #endregion
 
         #region Constructors
-        public Chore() 
+        public Chore()
         {
             Title = "New chore";
             Description = "New chore description";
