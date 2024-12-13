@@ -24,10 +24,16 @@ namespace StudentHousingBV.Student_App
 
             string imgPath = tBoxImgPath.Text;
             string paymentURL = tBoxPaymentURL.Text;
+            string groceryItems = richTextBoxGroceryItems.Text;
 
-            if (imgPath != string.Empty && paymentURL != string.Empty)
+            if(imgPath == string.Empty)
             {
-                Grocery grocery = new(housingManager.GetNextGroceryId(), student, imgPath, paymentURL, student.AssignedFlat!);
+                imgPath = "C:\\Users\\tomas\\source\\repos\\StudentHousingBV\\StudentHousingBV\\bin\\Debug\\net8.0-windows\\Storage\\grocery.jpg";
+            }
+
+            if (paymentURL != string.Empty && imgPath != string.Empty && groceryItems != string.Empty)
+            {
+                Grocery grocery = new(housingManager.GetNextGroceryId(), student, imgPath, paymentURL, student.AssignedFlat!, groceryItems);
                 groceries.Add(grocery);
                 MessageBox.Show("Grocery created successfully!");
                 UpdateGroceryControl();

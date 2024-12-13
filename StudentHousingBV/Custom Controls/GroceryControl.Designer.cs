@@ -45,6 +45,7 @@
             btnDetails.TabIndex = 0;
             btnDetails.Text = "View details";
             btnDetails.UseVisualStyleBackColor = true;
+            btnDetails.Click += btnDetails_Click;
             // 
             // btnPaymentLink
             // 
@@ -55,6 +56,7 @@
             btnPaymentLink.TabIndex = 1;
             btnPaymentLink.Text = "Payment link";
             btnPaymentLink.UseVisualStyleBackColor = false;
+            btnPaymentLink.Click += btnPaymentLink_Click;
             // 
             // label1
             // 
@@ -70,7 +72,7 @@
             // 
             lblDate.AutoSize = true;
             lblDate.Font = new Font("Segoe UI", 12F);
-            lblDate.Location = new Point(530, 18);
+            lblDate.Location = new Point(495, 18);
             lblDate.Name = "lblDate";
             lblDate.Size = new Size(65, 28);
             lblDate.TabIndex = 3;
@@ -93,7 +95,7 @@
             pictureBoxGrocery.TabIndex = 5;
             pictureBoxGrocery.TabStop = false;
             // 
-            // Grocery
+            // GroceryControl
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -103,7 +105,7 @@
             Controls.Add(label1);
             Controls.Add(btnPaymentLink);
             Controls.Add(btnDetails);
-            Name = "Grocery";
+            Name = "GroceryControl";
             Size = new Size(618, 150);
             ((System.ComponentModel.ISupportInitialize)pictureBoxGrocery).EndInit();
             ResumeLayout(false);
