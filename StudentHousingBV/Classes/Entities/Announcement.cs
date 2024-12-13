@@ -15,19 +15,20 @@ namespace StudentHousingBV.Classes.Entities
         #region Constructors
         public Announcement()
         {
-            Message = "";
+            Message = "New Announcement";
         }
+
         public Announcement(int id)
         {
             AnnouncementId = id;
-            Message = "";
+            Message = "New Announcement";
             IsGlobal = false;
         }
 
         public Announcement(int id, Flat assignedFlat)
         {
             AnnouncementId = id;
-            Message = "";
+            Message = "New Announcement";
             IsGlobal = false;
             AssignedFlat = assignedFlat;
         }
