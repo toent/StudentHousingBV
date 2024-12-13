@@ -1,4 +1,5 @@
-﻿using StudentHousingBV.Classes.Managers;
+﻿using StudentHousingBV.Classes.Entities;
+using StudentHousingBV.Classes.Managers;
 
 namespace StudentHousingBV.Company_App
 {
@@ -8,9 +9,10 @@ namespace StudentHousingBV.Company_App
         public DisplayComplaint(HousingManager housingManager)
         {
             InitializeComponent();
+            this.housingManager = housingManager;
             CreateDummyComplaints();
             UpdateListBoxComplaint();
-            this.housingManager = housingManager;
+            
         }
 
         private void CreateDummyComplaints()
@@ -23,8 +25,11 @@ namespace StudentHousingBV.Company_App
 
         private void UpdateListBoxComplaint()
         {
-            lBoxComplaint.DataSource = null;
-            lBoxComplaint.DataSource = housingManager.GetAllComplaints();
+            List<Complaint> complaints = housingManager.GetAllComplaints();
+            if (complaints.Count > 0) {
+                lBoxComplaint.DataSource = null;
+                lBoxComplaint.DataSource = complaints;
+            }
         }
     }
 }
