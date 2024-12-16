@@ -50,7 +50,7 @@ namespace StudentHousingBV
                         lblTitle.Text = "House Rules";
                         break;
                     case "btnAgreements":
-                        MessageBox.Show("This feature is not implemented yet.");
+                        LoadFormIntoPanel(new StudentAgreements());
                         lblTitle.Text = "Agreements";
                         pShowForm.Controls.Clear();
                         break;

@@ -28,43 +28,43 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button1 = new Button();
-            panelAgreementControls = new Panel();
+            pAgreements = new Panel();
+            btnAddAgreement = new Button();
             SuspendLayout();
             // 
-            // button1
+            // pAgreements
             // 
-            button1.Font = new Font("Segoe UI", 12F);
-            button1.Location = new Point(1376, 12);
-            button1.Name = "button1";
-            button1.Size = new Size(210, 80);
-            button1.TabIndex = 1;
-            button1.Text = "Add Agreement";
-            button1.UseVisualStyleBackColor = true;
+            pAgreements.AutoScroll = true;
+            pAgreements.Location = new Point(12, 61);
+            pAgreements.Name = "pAgreements";
+            pAgreements.Size = new Size(1552, 745);
+            pAgreements.TabIndex = 2;
             // 
-            // panelAgreementControls
+            // btnAddAgreement
             // 
-            panelAgreementControls.AutoScroll = true;
-            panelAgreementControls.Location = new Point(12, 98);
-            panelAgreementControls.Name = "panelAgreementControls";
-            panelAgreementControls.Size = new Size(1574, 764);
-            panelAgreementControls.TabIndex = 2;
+            btnAddAgreement.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnAddAgreement.Location = new Point(1391, 12);
+            btnAddAgreement.Name = "btnAddAgreement";
+            btnAddAgreement.Size = new Size(173, 43);
+            btnAddAgreement.TabIndex = 3;
+            btnAddAgreement.Text = "Add Agreement";
+            btnAddAgreement.UseVisualStyleBackColor = true;
             // 
             // StudentAgreements
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1598, 874);
-            Controls.Add(panelAgreementControls);
-            Controls.Add(button1);
+            BackColor = Color.White;
+            ClientSize = new Size(1576, 818);
+            Controls.Add(btnAddAgreement);
+            Controls.Add(pAgreements);
             Name = "StudentAgreements";
             Text = "StudentAgreements";
             ResumeLayout(false);
         }
 
         #endregion
-
-        private Button button1;
-        private Panel panelAgreementControls;
+        private Panel pAgreements;
+        private Button btnAddAgreement;
     }
 }
