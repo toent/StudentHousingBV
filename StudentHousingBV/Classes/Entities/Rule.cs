@@ -14,24 +14,11 @@ namespace StudentHousingBV.Classes.Entities
         public Building? AssignedBuilding { get; set; } // Cross-Reference
         #endregion
 
-        #region Constructors  
-        public Rule() 
-        {
-            Description = "";
-        }
+        #region Constructors
 
-        public Rule (int id, Building assignedBuilding)
+        public Rule()
         {
-            RuleId = id;
             Description = "";
-            AssignedBuilding = assignedBuilding;
-        }
-
-        public Rule(int id, Flat assignedFlat)
-        {
-            RuleId = id;
-            Description = "";
-            AssignedFlat = assignedFlat;
         }
 
         public Rule(int id, Flat assignedFlat, string description)

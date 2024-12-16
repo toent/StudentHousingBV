@@ -1,6 +1,6 @@
 ﻿namespace StudentHousingBV.Student_App
 {
-    partial class Form1
+    partial class StudentAnnouncements
     {
         /// <summary>
         /// Required designer variable.
@@ -11,7 +11,14 @@
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
 
         #region Windows Form Designer generated code
 
@@ -21,23 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
-            panel1 = new Panel();
-
+            pAnnouncements = new FlowLayoutPanel();
+            SuspendLayout();
             // 
-            // panel1
+            // pAnnouncements
             // 
-            panel1.Location = new Point(277, 90);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(1160, 565);
-            panel1.TabIndex = 0;
+            pAnnouncements.AutoScroll = true;
+            pAnnouncements.Location = new Point(12, 12);
+            pAnnouncements.Name = "pAnnouncements";
+            pAnnouncements.Size = new Size(1552, 794);
+            pAnnouncements.TabIndex = 1;
             // 
-            // Form1
+            // StudentAnnouncements
             // 
-
+            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.White;
+            ClientSize = new Size(1576, 818);
+            Controls.Add(pAnnouncements);
+            Name = "StudentAnnouncements";
+            Text = "StudentAnnouncements";
+            ResumeLayout(false);
         }
 
         #endregion
 
-        private Panel panel1;
+        private FlowLayoutPanel pAnnouncements;
     }
 }

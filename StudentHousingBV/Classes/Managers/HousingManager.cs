@@ -22,6 +22,7 @@ namespace StudentHousingBV.Classes.Managers
         #endregion
 
         #region Methods
+        #region Serialization
         public void SaveAllData()
         {
             dataManager.SaveAllData(buildings);
@@ -33,7 +34,7 @@ namespace StudentHousingBV.Classes.Managers
         }
         #endregion
 
-        #region ID Getters
+        #region Building
         /// <summary>
         /// Get the next available ID for a building
         /// </summary>
@@ -44,73 +45,6 @@ namespace StudentHousingBV.Classes.Managers
         }
 
         /// <summary>
-        /// Get the next available ID for a flat
-        /// </summary>
-        /// <returns> The next available ID for a flat </returns>
-        public int GetNextFlatId()
-        {
-            return GetAllFlats().Count > 0 ? GetAllFlats().Max(flat => flat.FlatId) + 1 : 1;
-        }
-
-        /// <summary>
-        /// Get the next available ID for complaints
-        /// </summary>
-        /// <returns> The highest ID assigned to a complaint </returns>
-        public int GetNextComplaintId()
-        {
-            return GetAllComplaints().Count > 0 ? GetAllComplaints().Max(complaint => complaint.ComplaintId) + 1 : 1;
-        }
-
-        /// <summary>
-        /// Get the next available ID for a rule
-        /// </summary>
-        /// <returns> The next available ID for a rule </returns>
-        public int GetNextRuleId()
-        {
-            return GetAllRules().Count > 0 ? GetAllRules().Max(rule => rule.RuleId) + 1 : 1;
-        }
-
-        /// <summary>
-        ///  Get the next available ID for an announcement
-        /// </summary>
-        /// <returns> The next available ID for a announcement </returns>
-        public int GetNextAnnouncementId()
-        {
-            return GetAllAnnouncements().Count > 0 ? GetAllAnnouncements().Max(announcement => announcement.AnnouncementId) + 1 : 1;
-        }
-
-        /// <summary>
-        /// Get the next available ID for an agreement
-        /// </summary>
-        /// <returns> The next available ID for an agreement </returns>
-        public int GetNextAgreementId()
-        {
-            return GetAllAgreements().Count > 0 ? GetAllAgreements().Max(agreement => agreement.AgreementId) + 1 : 1;
-        }
-
-        /// <summary>
-        /// Get the next available ID for a chore
-        /// </summary>
-        /// <returns> The next available ID for a chore </returns>
-        public int GetNextChoreId()
-        {
-            return GetAllChores().Count > 0 ? GetAllChores().Max(chore => chore.ChoreId) + 1 : 1;
-        }
-
-        /// <summary>
-        /// Get the next available ID for a grocery
-        /// </summary>
-        /// <returns> The next available ID for a grocery </returns>
-        public int GetNextGroceryId()
-        {
-            return GetAllGroceries().Count > 0 ? GetAllGroceries().Max(grocery => grocery.GroceryId) + 1 : 1;
-        }
-        #endregion
-
-        #region Class Getters
-
-        #region Getting Buildings
-        /// <summary>
         /// Get all buildings
         /// </summary>
         /// <returns> A list of all buildings if they exist, otherwise null </returns>
@@ -120,7 +54,16 @@ namespace StudentHousingBV.Classes.Managers
         }
         #endregion
 
-        #region Getting Flats
+        #region Flat
+        /// <summary>
+        /// Get the next available ID for a flat
+        /// </summary>
+        /// <returns> The next available ID for a flat </returns>
+        public int GetNextFlatId()
+        {
+            return GetAllFlats().Count > 0 ? GetAllFlats().Max(flat => flat.FlatId) + 1 : 1;
+        }
+
         /// <summary>
         /// Get all flats
         /// </summary>
@@ -131,7 +74,7 @@ namespace StudentHousingBV.Classes.Managers
         }
         #endregion
 
-        #region Getting Students
+        #region Student
         /// <summary>
         /// Get all students
         /// </summary>
@@ -149,9 +92,28 @@ namespace StudentHousingBV.Classes.Managers
                             .SelectMany(flat => flat.Students)
                             .FirstOrDefault(student => student.StudentId == studentId);
         }
+
+        public bool AddStudent(Student student)
+        {
+            bool result = false;
+            if (GetStudent(student.StudentId) is null)
+            {
+                student.AssignedFlat.Students.Add(student);
+                result = true;
+            }
+            return result;
+        }
         #endregion
 
-        #region Get all Complaints
+        #region Complaint
+        /// <summary>
+        /// Get the next available ID for complaints
+        /// </summary>
+        /// <returns> The highest ID assigned to a complaint </returns>
+        public int GetNextComplaintId()
+        {
+            return GetAllComplaints().Count > 0 ? GetAllComplaints().Max(complaint => complaint.ComplaintId) + 1 : 1;
+        }
 
         /// <summary>
         /// Get all complaints
@@ -165,7 +127,16 @@ namespace StudentHousingBV.Classes.Managers
         }
         #endregion
 
-        #region Getting Rules
+        #region Rule
+        /// <summary>
+        /// Get the next available ID for a rule
+        /// </summary>
+        /// <returns> The next available ID for a rule </returns>
+        public int GetNextRuleId()
+        {
+            return GetAllRules().Count > 0 ? GetAllRules().Max(rule => rule.RuleId) + 1 : 1;
+        }
+
         /// <summary>
         /// Get all rules
         /// </summary>
@@ -179,7 +150,15 @@ namespace StudentHousingBV.Classes.Managers
         }
         #endregion
 
-        #region Getting Announcements
+        #region Announcement
+        /// <summary>
+        ///  Get the next available ID for an announcement
+        /// </summary>
+        /// <returns> The next available ID for a announcement </returns>
+        public int GetNextAnnouncementId()
+        {
+            return GetAllAnnouncements().Count > 0 ? GetAllAnnouncements().Max(announcement => announcement.AnnouncementId) + 1 : 1;
+        }
 
         /// <summary>
         /// Get all global announcements
@@ -205,7 +184,16 @@ namespace StudentHousingBV.Classes.Managers
         }
         #endregion
 
-        #region Getting Agreements
+        #region Agreement
+        /// <summary>
+        /// Get the next available ID for an agreement
+        /// </summary>
+        /// <returns> The next available ID for an agreement </returns>
+        public int GetNextAgreementId()
+        {
+            return GetAllAgreements().Count > 0 ? GetAllAgreements().Max(agreement => agreement.AgreementId) + 1 : 1;
+        }
+
         /// <summary>
         /// Get all agreements
         /// </summary>
@@ -218,7 +206,16 @@ namespace StudentHousingBV.Classes.Managers
         }
         #endregion
 
-        #region Getting Chores
+        #region Chore
+        /// <summary>
+        /// Get the next available ID for a chore
+        /// </summary>
+        /// <returns> The next available ID for a chore </returns>
+        public int GetNextChoreId()
+        {
+            return GetAllChores().Count > 0 ? GetAllChores().Max(chore => chore.ChoreId) + 1 : 1;
+        }
+
         /// <summary>
         /// Get all chores
         /// </summary>
@@ -231,7 +228,16 @@ namespace StudentHousingBV.Classes.Managers
         }
         #endregion
 
-        #region Getting Groceries
+        #region Grocery
+        /// <summary>
+        /// Get the next available ID for a grocery
+        /// </summary>
+        /// <returns> The next available ID for a grocery </returns>
+        public int GetNextGroceryId()
+        {
+            return GetAllGroceries().Count > 0 ? GetAllGroceries().Max(grocery => grocery.GroceryId) + 1 : 1;
+        }
+
         /// <summary>
         /// Get all groceries
         /// </summary>
@@ -243,7 +249,6 @@ namespace StudentHousingBV.Classes.Managers
                             .ToList();
         }
         #endregion
-
         #endregion
     }
 }

@@ -1,5 +1,4 @@
 ﻿using StudentHousingBV.Classes.Entities;
-using System.Linq.Expressions;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -41,12 +40,56 @@ namespace StudentHousingBV.Classes.Managers
             try
             {
                 string extractedJson = File.ReadAllText(filePath);
-                return JsonSerializer.Deserialize<List<Building>>(extractedJson, jsonOptions);
+                var buildings = JsonSerializer.Deserialize<List<Building>>(extractedJson, jsonOptions);
+                ReLinkAllData(buildings);
+                return buildings;
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error loading buildings: {ex.Message}");
                 return null;
+            }
+        }
+
+        private static void ReLinkAllData(List<Building>? buildings)
+        {
+            if (buildings != null)
+            {
+                foreach (Building building in buildings)
+                {
+                    foreach (Flat flat in building.Flats)
+                    {
+                        flat.AssignedBuilding = building;
+                        foreach (Chore chore in flat.Chores)
+                        {
+                            chore.AssignedFlat = flat;
+                        }
+                        foreach (Student student in flat.Students)
+                        {
+                            student.AssignedFlat = flat;
+                        }
+                        foreach (Agreement agreement in flat.Agreements)
+                        {
+                            agreement.AssignedFlat = flat;
+                        }
+                        foreach (Grocery grocery in flat.Groceries)
+                        {
+                            grocery.AssignedFlat = flat;
+                        }
+                        foreach (Announcement announcement in flat.Announcements)
+                        {
+                            announcement.AssignedFlat = flat;
+                        }
+                        foreach (Rule rule in flat.Rules)
+                        {
+                            rule.AssignedFlat = flat;
+                        }
+                        foreach (Complaint complaint in flat.Complaints)
+                        {
+                            complaint.AssignedFlat = flat;
+                        }
+                    }
+                }
             }
         }
 
@@ -63,77 +106,6 @@ namespace StudentHousingBV.Classes.Managers
                 File.WriteAllText(filePath, jsonData);
             }
         }
-
-        /// <summary>
-        /// Load a list from the storage directory
-        /// </summary>
-        /// <typeparam name="T"> The type of the list </typeparam>
-        /// <param name="listExpression"> The list to load </param>
-        /// <returns> The list if it exists, otherwise null </returns>
-        public List<T>? LoadAttribute<T>(Expression<Func<List<T>>> listExpression)
-        {
-            string jsonName = GetListName(listExpression);
-            string filePath = Path.Combine(storagePath, $"{jsonName}.json");
-
-            if (!directoryExists || !File.Exists(filePath))
-            {
-                return null;
-            }
-
-            try
-            {
-                string extractedJson = File.ReadAllText(filePath);
-                return JsonSerializer.Deserialize<List<T>>(extractedJson);
-            }
-            catch (Exception ex)
-            {
-                // Log the exception or handle it as needed
-                Console.WriteLine($"Error loading {jsonName}: {ex.Message}");
-            }
-
-            return null;
-        }
-
-
-        /// <summary>
-        /// Save a list to the storage directory
-        /// </summary>
-        /// <typeparam name="T"> The type of the list </typeparam>
-        /// <param name="listExpression"> The list to save </param>
-        public void SaveAttribute<T>(Expression<Func<List<T>>> listExpression)
-        {
-            string jsonName = GetListName(listExpression);
-            var jsonOptions = new
-            {
-                ReferenceHandler = ReferenceHandler.Preserve,
-                WriteIndented = true
-            };
-            string jsonData = JsonSerializer.Serialize(listExpression.Compile().Invoke());
-
-            if (!directoryExists) return;
-
-            string filePath = Path.Combine(storagePath, $"{jsonName}.json");
-
-            File.WriteAllText(filePath, jsonData);
-        }
-
-
-        /// <summary>
-        /// Get the name of a list
-        /// </summary>
-        /// <typeparam name="T"> The type of the list </typeparam>
-        /// <param name="expression"> The list to get the name from </param>
-        /// <returns> The name of the list </returns>
-        /// <exception cref="ArgumentException"> Thrown when the expression is not a member expression </exception>
-        public static string GetListName<T>(Expression<Func<List<T>>> expression)
-        {
-            if (expression.Body is MemberExpression memberExpression)
-            {
-                return memberExpression.Member.Name;
-            }
-            throw new ArgumentException("The expression does not specify a valid member.");
-        }
-
 
         /// <summary>
         /// Get the path of the storage directory

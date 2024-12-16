@@ -1,13 +1,13 @@
-﻿namespace StudentHousingBV.Student_App
+﻿namespace StudentHousingBV.Custom_Controls
 {
-    partial class StudentHouserules
+    partial class HouserulesControl
     {
-        /// <summary>
+        /// <summary> 
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
+        /// <summary> 
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
@@ -20,39 +20,39 @@
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
+        #region Component Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
+        /// <summary> 
+        /// Required method for Designer support - do not modify 
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
-            pHouserules = new FlowLayoutPanel();
+            lblDescription = new Label();
             SuspendLayout();
             // 
-            // pHouserules
+            // lblDescription
             // 
-            pHouserules.AutoScroll = true;
-            pHouserules.Location = new Point(12, 12);
-            pHouserules.Name = "pHouserules";
-            pHouserules.Size = new Size(1552, 794);
-            pHouserules.TabIndex = 2;
+            lblDescription.Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblDescription.Location = new Point(27, 36);
+            lblDescription.Name = "lblDescription";
+            lblDescription.Size = new Size(1441, 52);
+            lblDescription.TabIndex = 0;
+            lblDescription.Text = "[Description]";
             // 
-            // StudentHouserules
+            // HouserulesControl
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.White;
-            ClientSize = new Size(1576, 818);
-            Controls.Add(pHouserules);
-            Name = "StudentHouserules";
-            Text = "StudentHouserules";
+            BackColor = Color.WhiteSmoke;
+            Controls.Add(lblDescription);
+            Name = "HouserulesControl";
+            Size = new Size(1499, 120);
             ResumeLayout(false);
         }
 
         #endregion
 
-        private FlowLayoutPanel pHouserules;
+        private Label lblDescription;
     }
 }

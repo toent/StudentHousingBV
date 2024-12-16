@@ -8,7 +8,7 @@ namespace StudentHousingBV.Classes.Entities
         public string StudentId { get; set; } // Primary Key
         public string Name { get; set; }
         [JsonIgnore]
-        public Flat? AssignedFlat { get; set; } // Cross-reference
+        public Flat AssignedFlat { get; set; } // Cross-reference
         #endregion
 
         #region Constructors
@@ -29,6 +29,13 @@ namespace StudentHousingBV.Classes.Entities
             StudentId = studentId;
             Name = name;
             AssignedFlat = assignedFlat;
+        }
+        #endregion
+
+        #region Methods
+        public override string ToString()
+        {
+            return Name;
         }
         #endregion
     }

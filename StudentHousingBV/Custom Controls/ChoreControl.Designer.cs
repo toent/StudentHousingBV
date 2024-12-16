@@ -49,7 +49,7 @@
             panel1.Location = new Point(0, 0);
             panel1.Margin = new Padding(0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1493, 59);
+            panel1.Size = new Size(1499, 59);
             panel1.TabIndex = 0;
             // 
             // lblAssignee

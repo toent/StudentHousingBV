@@ -11,7 +11,6 @@ namespace StudentHousingBV.Classes.Entities
         public bool IsFinished { get; set; }
         public Student? Assignee { get; set; }
         public DateTime Deadline { get; set; }
-        public Student? Student { get; set; }
         [JsonIgnore]
         public Flat AssignedFlat { get; set; } // Cross-reference
         #endregion

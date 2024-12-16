@@ -23,6 +23,8 @@ namespace StudentHousingBV
             lblContractId.Text = student.StudentId;
             lblUserName.Text = student.Name;
             lblLocation.Text = $"{student.AssignedFlat?.AssignedBuilding.Address} - Flat {student.AssignedFlat?.FlatNumber}";
+            LoadFormIntoPanel(new StudentAnnouncements([.. student.AssignedFlat.Announcements]));
+            lblTitle.Text = "Announcements";
         }
 
         private void btnLogout_Click(object sender, EventArgs e)
@@ -40,11 +42,11 @@ namespace StudentHousingBV
                 switch (button.Name)
                 {
                     case "btnAnnouncements":
-                        LoadFormIntoPanel(new StudentAnnouncements(housingManager));
+                        LoadFormIntoPanel(new StudentAnnouncements([.. student.AssignedFlat.Announcements]));
                         lblTitle.Text = "Announcements";
                         break;
                     case "btnHouseRules":
-                        LoadFormIntoPanel(new StudentHouserules(housingManager));
+                        LoadFormIntoPanel(new StudentHouserules([.. student.AssignedFlat.Rules]));
                         lblTitle.Text = "House Rules";
                         break;
                     case "btnAgreements":
@@ -53,7 +55,7 @@ namespace StudentHousingBV
                         pShowForm.Controls.Clear();
                         break;
                     case "btnChores":
-                        LoadFormIntoPanel(new StudentChores(housingManager));
+                        LoadFormIntoPanel(new StudentChores(housingManager, student));
                         lblTitle.Text = "Chores";
                         break;
                     case "btnGroceries":

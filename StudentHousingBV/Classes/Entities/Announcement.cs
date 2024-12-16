@@ -5,48 +5,24 @@ namespace StudentHousingBV.Classes.Entities
     public class Announcement
     {
         #region Properties
-        public int AnnouncementId { get; set; } // Primary key
+        public int AnnouncementId { get; set; }
+        public string Title { get; set; }
         public string Message { get; set; }
+        public DateTime Date { get; set; }
         public bool IsGlobal { get; set; }
         [JsonIgnore]
-        public Flat? AssignedFlat { get; set; } // Cross-reference
+        public Flat? AssignedFlat { get; set; }
+
         #endregion
 
         #region Constructors
-        public Announcement()
-        {
-            Message = "New Announcement";
-        }
-
-        public Announcement(int id)
-        {
-            AnnouncementId = id;
-            Message = "New Announcement";
-            IsGlobal = false;
-        }
-
-        public Announcement(int id, Flat assignedFlat)
-        {
-            AnnouncementId = id;
-            Message = "New Announcement";
-            IsGlobal = false;
-            AssignedFlat = assignedFlat;
-        }
-
-        public Announcement(int id, Flat assignedFlat, string message)
-        {
-            AnnouncementId = id;
-            Message = message;
-            IsGlobal = false;
-            AssignedFlat = assignedFlat;
-        }
-
-        public Announcement(int id, Flat assignedFlat, string message, bool isGlobal)
-        {
-            AnnouncementId = id;
-            Message = message;
-            IsGlobal = isGlobal;
-            AssignedFlat = assignedFlat;
+        public Announcement(int announcementId, string title, string message, bool isGlobal, Flat? assignedFlat) 
+        { 
+            AnnouncementId = announcementId; 
+            Title = title; 
+            Message = message; 
+            IsGlobal = isGlobal; 
+            AssignedFlat = assignedFlat; 
         }
         #endregion
     }
