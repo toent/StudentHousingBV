@@ -50,9 +50,8 @@ namespace StudentHousingBV
                         lblTitle.Text = "House Rules";
                         break;
                     case "btnAgreements":
-                        LoadFormIntoPanel(new StudentAgreements());
+                        LoadFormIntoPanel(new StudentAgreements(student, housingManager));
                         lblTitle.Text = "Agreements";
-                        
                         break;
                     case "btnChores":
                         LoadFormIntoPanel(new StudentChores(housingManager, student));

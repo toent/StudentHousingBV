@@ -49,6 +49,7 @@
             btnAddAgreement.TabIndex = 3;
             btnAddAgreement.Text = "Add Agreement";
             btnAddAgreement.UseVisualStyleBackColor = true;
+            btnAddAgreement.Click += btnAddAgreement_Click;
             // 
             // StudentAgreements
             // 
