@@ -15,32 +15,19 @@ namespace StudentHousingBV.Student_App
             InitializeComponent();
             this.housingManager = housingManager;
             this.student = student;
-            groceries = [];
+            groceries = new List<Grocery>(); // Correctly initialize the list
+            UpdateGroceryControl();
         }
+
 
         private void btnAddGrocery_Click(object sender, EventArgs e)
         {
-            //https://cdn.apartmenttherapy.info/image/upload/v1559186495/k/archive/2d4ea32ed14a1f75cf1b454748dfa99cd4a1fa62.jpg
 
-            string imgPath = tBoxImgPath.Text;
-            string paymentURL = tBoxPaymentURL.Text;
-            string groceryItems = richTextBoxGroceryItems.Text;
-
-            if(imgPath == string.Empty)
+            StudentAddGrocery studentAddGrocery = new StudentAddGrocery(groceries, housingManager, student);
+            studentAddGrocery.ShowDialog();
+            if (studentAddGrocery.DialogResult == DialogResult.OK)
             {
-                imgPath = "C:\\Users\\tomas\\source\\repos\\StudentHousingBV\\StudentHousingBV\\bin\\Debug\\net8.0-windows\\Storage\\grocery.jpg";
-            }
-
-            if (paymentURL != string.Empty && imgPath != string.Empty && groceryItems != string.Empty)
-            {
-                Grocery grocery = new(housingManager.GetNextGroceryId(), student, imgPath, paymentURL, student.AssignedFlat!, groceryItems);
-                groceries.Add(grocery);
-                MessageBox.Show("Grocery created successfully!");
                 UpdateGroceryControl();
-            }
-            else
-            {
-                MessageBox.Show("Please fill in all fields!");
             }
         }
 
@@ -56,6 +43,7 @@ namespace StudentHousingBV.Student_App
                     GroceryControl groceryControl = new();
                     groceryControl.SetGrocery(grocery); // Pass Grocery object to the control
                     groceryControl.Margin = new Padding(5);
+                    MessageBox.Show(groceries.Count().ToString());
 
                     // Add the control to the FlowLayoutPanel
                     flowLayoutPanelGrocery.Controls.Add(groceryControl);
