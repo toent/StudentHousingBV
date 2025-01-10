@@ -17,45 +17,61 @@ namespace StudentHousingBV.Student_App
     {
         private readonly HousingManager housingManager;
         private readonly Student student;
-        private List<Grocery> groceries;
+        private string imgPath;
 
-        public StudentAddGrocery(List<Grocery> groceries, HousingManager housingManager, Student student)
+        internal EventHandler<Grocery> NewGrocery;
+
+        public StudentAddGrocery(HousingManager housingManager, Student student)
         {
             InitializeComponent();
             this.housingManager = housingManager;
             this.student = student;
-            this.groceries = groceries;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            //https://cdn.apartmenttherapy.info/image/upload/v1559186495/k/archive/2d4ea32ed14a1f75cf1b454748dfa99cd4a1fa62.jpg
-
-            string imgPath = tBoxImgPath.Text;
             string paymentURL = tBoxPaymentURL.Text;
             string groceryItems = richTextBoxGroceryItems.Text;
 
-            if (imgPath == string.Empty)
-            {
-                imgPath = "C:\\Users\\tomas\\source\\repos\\StudentHousingBV\\StudentHousingBV\\bin\\Debug\\net8.0-windows\\Storage\\grocery.jpg";
-            }
-
-            if (paymentURL != string.Empty && imgPath != string.Empty && groceryItems != string.Empty)
+            if (paymentURL != string.Empty && imgPath != string.Empty)
             {
                 Grocery grocery = new(housingManager.GetNextGroceryId(), student, imgPath, paymentURL, student.AssignedFlat!, groceryItems);
-                groceries.Add(grocery);
                 DialogResult = DialogResult.OK;
+
+                NewGrocery?.Invoke(this, grocery);
             }
             else
             {
                 MessageBox.Show("Please fill in all fields!");
-                DialogResult = DialogResult.Cancel;
             }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
+        }
+
+        private void btnAddReceipt_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.InitialDirectory = "C:\\";
+                openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp|All Files|*.*"; // File filters
+                openFileDialog.FilterIndex = 1; // Default filter
+                openFileDialog.RestoreDirectory = true;
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    // Get the selected file path
+                    imgPath = openFileDialog.FileName;
+                    pictureBoxReceipt.Image = Image.FromFile(imgPath);
+                }
+            }
+        }
+
+        private void btnRemoveRecepit_Click(object sender, EventArgs e)
+        {
+            imgPath = string.Empty;
         }
     }
 }

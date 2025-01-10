@@ -326,6 +326,23 @@ namespace StudentHousingBV.Classes.Managers
         }
 
         /// <summary>
+        /// Add a grocery to the list of groceries
+        /// </summary>
+        /// <param name="grocery"></param>
+        /// <returns></returns>
+        public bool AddGrocery(Grocery grocery)
+        {
+            bool result = false;
+            if (GetAllGroceries().FirstOrDefault(g => g.GroceryId == grocery.GroceryId) is null)
+            {
+                grocery.AssignedFlat.Groceries.Add(grocery);
+                result = true;
+                dataManager.SaveAllData(buildings);
+            }
+            return result;
+        }
+
+        /// <summary>
         /// Get all groceries
         /// </summary>
         /// <returns> A list of all groceries </returns>

@@ -60,6 +60,7 @@
             ClientSize = new Size(1261, 654);
             Controls.Add(btnAddChore);
             Controls.Add(flowLayoutPanelGrocery);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "StudentGroceries";
             Text = "StudentGroceries";
             ResumeLayout(false);
