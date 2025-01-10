@@ -1,5 +1,4 @@
-﻿using StudentHousingBV.Classes.Managers;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace StudentHousingBV.Classes.Entities
 {
@@ -18,7 +17,7 @@ namespace StudentHousingBV.Classes.Entities
         [JsonIgnore]
         public Building AssignedBuilding { get; set; } // Cross-Reference
         #endregion
-        
+
         #region Constructors
         public Flat()
         {
@@ -71,6 +70,13 @@ namespace StudentHousingBV.Classes.Entities
             Groceries = [];
             Rules = [];
             AssignedBuilding = assignedBuilding;
+        }
+        #endregion
+
+        #region Methods
+        public override string ToString()
+        {
+            return $"Flat {FlatNumber} - Students: {Students.Count}";
         }
         #endregion
     }

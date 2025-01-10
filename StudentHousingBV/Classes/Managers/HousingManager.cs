@@ -52,6 +52,64 @@ namespace StudentHousingBV.Classes.Managers
         {
             return buildings;
         }
+
+        public Building? GetBuilding(int buildingId) =>  buildings.FirstOrDefault(building => building.BuildingId == buildingId);
+
+        public bool AddBuilding(Building building)
+        {
+            bool result = false;
+            try
+            {
+                if (GetBuilding(building.BuildingId) is null)
+                {
+                    buildings.Add(building);
+                    dataManager.SaveAllData(buildings);
+                    result = true;
+                }
+            }
+            catch
+            {
+                MessageBox.Show("There was an error adding the building.");
+            }
+
+            return result;
+        }
+
+        public bool DeleteBuilding(Building building)
+        {
+            bool result;
+            if (!buildings.Contains(building))
+            {
+                throw new Exception("Building does not exist.");
+            }
+            else if (building.Flats.Count > 0)
+            {
+                throw new Exception("Building has flats assigned to it. Cannot remove.");
+            }
+            else
+            {
+                buildings.Remove(building);
+                dataManager.SaveAllData(buildings);
+                result = true;
+            }
+
+            return result;
+        }
+
+        public bool UpdateBuilding(Building building) {
+            bool result = false;
+            if (!buildings.Contains(building))
+            {
+                throw new Exception("Building does not exist.");
+            }
+            else
+            {
+                dataManager.SaveAllData(buildings);
+                result = true;
+            }
+            return result;
+        }
+
         #endregion
 
         #region Flat
@@ -265,6 +323,23 @@ namespace StudentHousingBV.Classes.Managers
         public int GetNextGroceryId()
         {
             return GetAllGroceries().Count > 0 ? GetAllGroceries().Max(grocery => grocery.GroceryId) + 1 : 1;
+        }
+
+        /// <summary>
+        /// Add a grocery to the list of groceries
+        /// </summary>
+        /// <param name="grocery"></param>
+        /// <returns></returns>
+        public bool AddGrocery(Grocery grocery)
+        {
+            bool result = false;
+            if (GetAllGroceries().FirstOrDefault(g => g.GroceryId == grocery.GroceryId) is null)
+            {
+                grocery.AssignedFlat.Groceries.Add(grocery);
+                result = true;
+                dataManager.SaveAllData(buildings);
+            }
+            return result;
         }
 
         /// <summary>

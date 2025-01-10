@@ -7,33 +7,23 @@ namespace StudentHousingBV.Student_App
     public partial class StudentGroceries : Form
     {
         private readonly HousingManager housingManager;
-        private readonly List<Grocery> groceries;
         private readonly Student student;
+        private List<Grocery> groceries;
 
         public StudentGroceries(HousingManager housingManager, Student student)
         {
             InitializeComponent();
             this.housingManager = housingManager;
             this.student = student;
-            groceries = new List<Grocery>(); // Correctly initialize the list
-            UpdateGroceryControl();
+            LoadGroceries();
         }
 
-
-        private void btnAddGrocery_Click(object sender, EventArgs e)
+        private void LoadGroceries()
         {
+            groceries = housingManager.GetAllGroceries().ToList();
+            //groceries = housingManager.GetAllGroceries().Where(g => g.AssignedFlat == student.AssignedFlat).ToList();
 
-            StudentAddGrocery studentAddGrocery = new StudentAddGrocery(groceries, housingManager, student);
-            studentAddGrocery.ShowDialog();
-            if (studentAddGrocery.DialogResult == DialogResult.OK)
-            {
-                UpdateGroceryControl();
-            }
-        }
-
-        private void UpdateGroceryControl()
-        {
-            if (flowLayoutPanelGrocery != null)
+            if (flowLayoutPanelGrocery != null && groceries != null)
             {
                 // Clear existing controls to avoid duplicates
                 flowLayoutPanelGrocery.Controls.Clear();
@@ -41,7 +31,7 @@ namespace StudentHousingBV.Student_App
                 foreach (Grocery grocery in groceries)
                 {
                     GroceryControl groceryControl = new();
-                    groceryControl.SetGrocery(grocery); // Pass Grocery object to the control
+                    groceryControl.SetGrocery(grocery); 
                     groceryControl.Margin = new Padding(5);
                     MessageBox.Show(groceries.Count().ToString());
 
@@ -51,6 +41,23 @@ namespace StudentHousingBV.Student_App
             }
         }
 
+        private void btnAddGrocery_Click(object sender, EventArgs e)
+        {
 
+            StudentAddGrocery studentAddGrocery = new StudentAddGrocery(housingManager, student);
+
+            studentAddGrocery.NewGrocery += (sender, grocery) =>
+            {
+                housingManager.AddGrocery(grocery);
+                housingManager.GetAllGroceries();
+            };
+
+            studentAddGrocery.ShowDialog();
+
+            if (studentAddGrocery.DialogResult == DialogResult.OK)
+            {
+                LoadGroceries();
+            }
+        }
     }
 }

@@ -31,20 +31,22 @@
             btnCancel = new Button();
             btnAdd = new Button();
             label4 = new Label();
-            label2 = new Label();
             tBoxPaymentURL = new TextBox();
             label1 = new Label();
-            tBoxImgPath = new TextBox();
-            label3 = new Label();
+            label2 = new Label();
+            btnAddReceipt = new Button();
+            pictureBoxReceipt = new PictureBox();
+            btnRemoveRecepit = new Button();
             richTextBoxGroceryItems = new RichTextBox();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxReceipt).BeginInit();
             SuspendLayout();
             // 
             // btnCancel
             // 
-            btnCancel.Location = new Point(21, 350);
+            btnCancel.Location = new Point(20, 430);
             btnCancel.Margin = new Padding(2);
             btnCancel.Name = "btnCancel";
-            btnCancel.Size = new Size(90, 27);
+            btnCancel.Size = new Size(107, 27);
             btnCancel.TabIndex = 19;
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = true;
@@ -52,10 +54,10 @@
             // 
             // btnAdd
             // 
-            btnAdd.Location = new Point(115, 350);
+            btnAdd.Location = new Point(145, 430);
             btnAdd.Margin = new Padding(2);
             btnAdd.Name = "btnAdd";
-            btnAdd.Size = new Size(142, 27);
+            btnAdd.Size = new Size(113, 27);
             btnAdd.TabIndex = 18;
             btnAdd.Text = "Add";
             btnAdd.UseVisualStyleBackColor = true;
@@ -64,22 +66,12 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(22, 155);
+            label4.Location = new Point(22, 224);
             label4.Margin = new Padding(2, 0, 2, 0);
             label4.Name = "label4";
-            label4.Size = new Size(45, 20);
+            label4.Size = new Size(48, 20);
             label4.TabIndex = 16;
-            label4.Text = "Items";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(20, 69);
-            label2.Margin = new Padding(2, 0, 2, 0);
-            label2.Name = "label2";
-            label2.Size = new Size(83, 20);
-            label2.TabIndex = 12;
-            label2.Text = "Image Path";
+            label4.Text = "Items:";
             // 
             // tBoxPaymentURL
             // 
@@ -95,30 +87,51 @@
             label1.Location = new Point(20, 8);
             label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(95, 20);
+            label1.Size = new Size(98, 20);
             label1.TabIndex = 10;
-            label1.Text = "Payment URL";
+            label1.Text = "Payment URL:";
             // 
-            // tBoxImgPath
+            // label2
             // 
-            tBoxImgPath.Location = new Point(22, 92);
-            tBoxImgPath.Name = "tBoxImgPath";
-            tBoxImgPath.Size = new Size(236, 27);
-            tBoxImgPath.TabIndex = 20;
+            label2.AutoSize = true;
+            label2.Location = new Point(22, 89);
+            label2.Margin = new Padding(2, 0, 2, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(62, 20);
+            label2.TabIndex = 23;
+            label2.Text = "Receipt:";
             // 
-            // label3
+            // btnAddReceipt
             // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 7.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(22, 122);
-            label3.Name = "label3";
-            label3.Size = new Size(232, 17);
-            label3.TabIndex = 21;
-            label3.Text = "Leave blank for auto-generated image";
+            btnAddReceipt.Location = new Point(21, 112);
+            btnAddReceipt.Name = "btnAddReceipt";
+            btnAddReceipt.Size = new Size(106, 29);
+            btnAddReceipt.TabIndex = 24;
+            btnAddReceipt.Text = "Add";
+            btnAddReceipt.UseVisualStyleBackColor = true;
+            btnAddReceipt.Click += btnAddReceipt_Click;
+            // 
+            // pictureBoxReceipt
+            // 
+            pictureBoxReceipt.Location = new Point(144, 112);
+            pictureBoxReceipt.Name = "pictureBoxReceipt";
+            pictureBoxReceipt.Size = new Size(114, 114);
+            pictureBoxReceipt.TabIndex = 25;
+            pictureBoxReceipt.TabStop = false;
+            // 
+            // btnRemoveRecepit
+            // 
+            btnRemoveRecepit.Location = new Point(23, 147);
+            btnRemoveRecepit.Name = "btnRemoveRecepit";
+            btnRemoveRecepit.Size = new Size(104, 29);
+            btnRemoveRecepit.TabIndex = 26;
+            btnRemoveRecepit.Text = "Remove";
+            btnRemoveRecepit.UseVisualStyleBackColor = true;
+            btnRemoveRecepit.Click += btnRemoveRecepit_Click;
             // 
             // richTextBoxGroceryItems
             // 
-            richTextBoxGroceryItems.Location = new Point(22, 178);
+            richTextBoxGroceryItems.Location = new Point(22, 247);
             richTextBoxGroceryItems.Name = "richTextBoxGroceryItems";
             richTextBoxGroceryItems.Size = new Size(236, 167);
             richTextBoxGroceryItems.TabIndex = 22;
@@ -128,18 +141,20 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(281, 397);
+            ClientSize = new Size(281, 470);
+            Controls.Add(btnRemoveRecepit);
+            Controls.Add(pictureBoxReceipt);
+            Controls.Add(btnAddReceipt);
+            Controls.Add(label2);
             Controls.Add(richTextBoxGroceryItems);
-            Controls.Add(label3);
-            Controls.Add(tBoxImgPath);
             Controls.Add(btnCancel);
             Controls.Add(btnAdd);
             Controls.Add(label4);
-            Controls.Add(label2);
             Controls.Add(tBoxPaymentURL);
             Controls.Add(label1);
             Name = "StudentAddGrocery";
             Text = "StudentAddGrocery";
+            ((System.ComponentModel.ISupportInitialize)pictureBoxReceipt).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -149,11 +164,12 @@
         private Button btnCancel;
         private Button btnAdd;
         private Label label4;
-        private Label label2;
         private TextBox tBoxPaymentURL;
         private Label label1;
-        private TextBox tBoxImgPath;
-        private Label label3;
+        private Label label2;
+        private Button btnAddReceipt;
+        private PictureBox pictureBoxReceipt;
+        private Button btnRemoveRecepit;
         private RichTextBox richTextBoxGroceryItems;
     }
 }

@@ -38,5 +38,22 @@ namespace StudentHousingBV.Classes.Entities
             Flats = flats;
         }
         #endregion
+
+        #region Methods
+        public override string ToString()
+        {
+            return $"{BuildingId} - {Address}";
+        }
+
+        public override bool Equals(object? obj)
+        {
+            if (obj is Building building)
+            {
+                return BuildingId == building.BuildingId;
+            }
+            return false;
+        }
+
+        #endregion
     }
 }
