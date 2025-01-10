@@ -62,7 +62,7 @@ namespace StudentHousingBV
                         lblTitle.Text = "Groceries";
                         break;
                     case "btnFileComplaint":
-                        LoadFormIntoPanel(new StudentComplaint(housingManager));
+                        LoadFormIntoPanel(new StudentComplaint(housingManager, student));
                         lblTitle.Text = "File Complaint";
                         break;
                     default:

@@ -115,6 +115,11 @@ namespace StudentHousingBV.Classes.Managers
             return GetAllComplaints().Count > 0 ? GetAllComplaints().Max(complaint => complaint.ComplaintId) + 1 : 1;
         }
 
+        public void SubmitComplaint(Complaint complaint)
+        {
+            complaint.AssignedFlat.Complaints.Add(complaint);
+        }
+
         /// <summary>
         /// Get all complaints
         /// </summary>
