@@ -28,50 +28,40 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StudentComplaint));
             btnSubmitComplaint = new Button();
-            richTBoxComplaint = new RichTextBox();
+            rtbComplaint = new RichTextBox();
             label1 = new Label();
             SuspendLayout();
             // 
             // btnSubmitComplaint
             // 
-            btnSubmitComplaint.Location = new Point(39, 370);
+            resources.ApplyResources(btnSubmitComplaint, "btnSubmitComplaint");
             btnSubmitComplaint.Name = "btnSubmitComplaint";
-            btnSubmitComplaint.Size = new Size(723, 29);
-            btnSubmitComplaint.TabIndex = 5;
-            btnSubmitComplaint.Text = "Submit";
             btnSubmitComplaint.UseVisualStyleBackColor = true;
-            btnSubmitComplaint.UseWaitCursor = true;
+            btnSubmitComplaint.Click += btnSubmitComplaint_Click;
             // 
-            // richTBoxComplaint
+            // rtbComplaint
             // 
-            richTBoxComplaint.Location = new Point(39, 93);
-            richTBoxComplaint.Name = "richTBoxComplaint";
-            richTBoxComplaint.Size = new Size(723, 262);
-            richTBoxComplaint.TabIndex = 4;
-            richTBoxComplaint.Text = "";
-            richTBoxComplaint.UseWaitCursor = true;
+            rtbComplaint.BackColor = Color.White;
+            resources.ApplyResources(rtbComplaint, "rtbComplaint");
+            rtbComplaint.Name = "rtbComplaint";
             // 
             // label1
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(39, 52);
+            resources.ApplyResources(label1, "label1");
             label1.Name = "label1";
-            label1.Size = new Size(256, 20);
-            label1.TabIndex = 3;
-            label1.Text = "Please describe what's bothering you:";
             label1.UseWaitCursor = true;
             // 
             // StudentComplaint
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            resources.ApplyResources(this, "$this");
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            BackColor = Color.White;
             Controls.Add(btnSubmitComplaint);
-            Controls.Add(richTBoxComplaint);
+            Controls.Add(rtbComplaint);
             Controls.Add(label1);
             Name = "StudentComplaint";
-            Text = "StudentComplaint";
             ResumeLayout(false);
             PerformLayout();
         }
@@ -79,7 +69,7 @@
         #endregion
 
         private Button btnSubmitComplaint;
-        private RichTextBox richTBoxComplaint;
+        private RichTextBox rtbComplaint;
         private Label label1;
     }
 }
