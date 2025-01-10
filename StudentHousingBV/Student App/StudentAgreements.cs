@@ -32,6 +32,7 @@ namespace StudentHousingBV.Student_App
 
         private void GetAgreements()
         {
+            pAgreements.Controls.Clear();
             this.agreements = housingManager.GetAllAgreements().Where(agreement => agreement.AssignedFlat == loggedStudent.AssignedFlat).ToList();
             foreach (Agreement agreement in agreements)
             {
@@ -48,8 +49,9 @@ namespace StudentHousingBV.Student_App
             {
                 Agreement selectedAgreement = selectedControl.agreementToControl;
                 if (selectedAgreement.AgreedBy.Count() <= 0)
-                { 
-                    housingManager.GetAllAgreements().Remove(selectedAgreement);
+                {
+                    housingManager.DeleteAgreement(selectedAgreement);
+                    this.agreements.Remove(selectedAgreement);
                     GetAgreements();
                 }
                 else
@@ -65,6 +67,7 @@ namespace StudentHousingBV.Student_App
             {
                 this.loggedStudent.AssignedFlat.Agreements.Add(fetchedAgreement);
                 this.housingManager.SaveAllData();
+                this.agreements.Add(fetchedAgreement);
                 GetAgreements();
             }
         }

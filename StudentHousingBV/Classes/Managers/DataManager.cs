@@ -120,5 +120,15 @@ namespace StudentHousingBV.Classes.Managers
             return storagePath;
         }
         #endregion
+
+        #region Methods
+
+        public static bool CheckIfDataExists()
+        {
+            string filePath = Path.Combine(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Storage"), "Data.json");
+            return File.Exists(filePath);
+        }
+
+        #endregion
     }
 }

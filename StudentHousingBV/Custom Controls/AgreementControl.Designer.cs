@@ -36,6 +36,7 @@
             btnAgreeTo = new Button();
             lblAgreedBy = new Label();
             lblAgreementContent = new Label();
+            lblAgreementTitle = new Label();
             gbAgreementProperties.SuspendLayout();
             gbAgreementContent.SuspendLayout();
             SuspendLayout();
@@ -44,7 +45,7 @@
             // 
             lblAgreementCreator.AutoSize = true;
             lblAgreementCreator.Font = new Font("Segoe UI", 15F);
-            lblAgreementCreator.Location = new Point(6, 27);
+            lblAgreementCreator.Location = new Point(6, 247);
             lblAgreementCreator.Name = "lblAgreementCreator";
             lblAgreementCreator.Size = new Size(265, 41);
             lblAgreementCreator.TabIndex = 0;
@@ -52,6 +53,7 @@
             // 
             // gbAgreementProperties
             // 
+            gbAgreementProperties.Controls.Add(lblAgreementTitle);
             gbAgreementProperties.Controls.Add(btnDeleteAgreement);
             gbAgreementProperties.Controls.Add(lblCreationDateTime);
             gbAgreementProperties.Controls.Add(lblAgreementCreator);
@@ -77,7 +79,7 @@
             // 
             lblCreationDateTime.AutoSize = true;
             lblCreationDateTime.Font = new Font("Segoe UI", 15F);
-            lblCreationDateTime.Location = new Point(6, 82);
+            lblCreationDateTime.Location = new Point(6, 302);
             lblCreationDateTime.Name = "lblCreationDateTime";
             lblCreationDateTime.Size = new Size(163, 41);
             lblCreationDateTime.TabIndex = 1;
@@ -123,6 +125,15 @@
             lblAgreementContent.TabIndex = 4;
             lblAgreementContent.Text = "[Content]";
             // 
+            // lblAgreementTitle
+            // 
+            lblAgreementTitle.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
+            lblAgreementTitle.Location = new Point(6, 30);
+            lblAgreementTitle.Name = "lblAgreementTitle";
+            lblAgreementTitle.Size = new Size(402, 217);
+            lblAgreementTitle.TabIndex = 5;
+            lblAgreementTitle.Text = "[Title]";
+            // 
             // AgreementControl
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -147,5 +158,6 @@
         private Label lblAgreedBy;
         private Label lblAgreementContent;
         private Button btnDeleteAgreement;
+        private Label lblAgreementTitle;
     }
 }

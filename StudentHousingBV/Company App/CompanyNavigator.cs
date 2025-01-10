@@ -20,6 +20,14 @@ namespace StudentHousingBV.Company_App
             {
                 switch (button.Name)
                 {
+                    case "btnBuildings":
+                        LoadFormIntoPanel(new CompanyBuildings(housingManager));
+                        lblTitle.Text = "Buildings";
+                        break;
+                    case "btnFlats":
+                        LoadFormIntoPanel(new CompanyFlats(housingManager));
+                        lblTitle.Text = "Flats";
+                        break;
                     case "btnAnnouncements":
                         LoadFormIntoPanel(new CompanyAnnouncements(housingManager));
                         lblTitle.Text = "Announcements";
