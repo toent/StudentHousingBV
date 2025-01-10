@@ -30,6 +30,7 @@ namespace StudentHousingBV.Custom_Controls
             btnAgreeTo.Enabled = !isOwner;
             btnDeleteAgreement.Visible = isOwner;
             btnDeleteAgreement.Enabled = isOwner;
+            lblAgreementTitle.Text = agreementToControl.Title;
             lblAgreementCreator.Text = Creator.Name;
             lblCreationDateTime.Text = agreementToControl.DateCreated.ToString();
             lblAgreementContent.Text = agreementToControl.Details;
