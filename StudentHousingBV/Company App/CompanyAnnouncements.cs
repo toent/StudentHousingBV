@@ -9,6 +9,7 @@ namespace StudentHousingBV.Company_App
     {
         private List<Announcement> announcements;
         private readonly HousingManager housingManager;
+        private Building selectedBuilding;
 
         public CompanyAnnouncements(HousingManager housingManager)
         {
@@ -58,9 +59,11 @@ namespace StudentHousingBV.Company_App
         {
             if (cbBuilding.SelectedItem is Building building)
             {
+                selectedBuilding = building;
                 cbFlat.DataSource = building.Flats;
                 cbFlat.DisplayMember = "FlatNumber";
             }
+            LoadAnnouncements();
         }
 
         private void cbFlat_SelectedIndexChanged(object sender, EventArgs e)
@@ -73,7 +76,16 @@ namespace StudentHousingBV.Company_App
 
         private void btnAddAnnouncement_Click(object sender, EventArgs e)
         {
+            CompanyAddAnnouncement companyAddAnnouncement = new(housingManager);
+            companyAddAnnouncement.NewAnnouncement += AddAnnouncement;
+            companyAddAnnouncement.ShowDialog();
+        }
 
+        private void AddAnnouncement(object sender, Announcement announcement)
+        {
+            housingManager.AddAnnouncement(announcement);
+            housingManager.SaveAllData();
+            LoadAnnouncements();
         }
     }
 }

@@ -257,6 +257,30 @@ namespace StudentHousingBV.Classes.Managers
             }
             return result;
         }
+
+        public bool AddAnnouncement(Announcement announcement)
+        {
+            bool result = false;
+            if (GetAllAnnouncements().FirstOrDefault(a => a.AnnouncementId == announcement.AnnouncementId) is null)
+            {
+                announcement.AssignedFlat.Announcements.Add(announcement);
+                result = true;
+                dataManager.SaveAllData(buildings);
+            }
+            return result;
+        }
+
+        public bool AddGlobalAnnouncement(Announcement announcement)
+        {
+            bool result = false;
+            if (GetGlobalAnnouncements().FirstOrDefault(a => a.AnnouncementId == announcement.AnnouncementId) is null)
+            {
+                buildings.SelectMany(building => building.Flats).ToList().ForEach(flat => flat.Announcements.Add(announcement));
+                result = true;
+                dataManager.SaveAllData(buildings);
+            }
+            return result;
+        }
         #endregion
 
         #region Agreement
