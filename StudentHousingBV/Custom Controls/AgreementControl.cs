@@ -40,7 +40,7 @@ namespace StudentHousingBV.Custom_Controls
         private void UpdateAgreedByVisual()
         {
             string agreedByString = string.Empty;
-            Students.Select(student => student.Name).ToList().ForEach(name => { agreedByString = $"{agreedByString}, {name}"; });
+            agreedByString = string.Join(", ", Students.Select(student => student.Name));
             lblAgreedBy.Text = $"Agreed By: {agreedByString}";
 
             if (agreementToControl.AgreedBy.Contains(StudentLookingAt))

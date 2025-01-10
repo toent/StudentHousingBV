@@ -26,14 +26,31 @@ namespace StudentHousingBV.Student_App
             this.loggedStudent = LoggedStudent;
             this.housingManager = HousingManager;
             this.agreements = new List<Agreement>();
-            this.controls = new List<AgreementControl>();
             GetAgreements();
+            SetUI_Elements();
+        }
+
+        private void SetUI_Elements()
+        {
+            dtpStartDate.Value = DateTime.Now.AddYears(-1);
+            dtpEndDate.Value = DateTime.Now.AddMonths(1);
+
+            GetAllAgreementCreators();
+            cbxSelectAgreementCreator.SelectedIndex = 0;
         }
 
         private void GetAgreements()
         {
-            pAgreements.Controls.Clear();
+
             this.agreements = housingManager.GetAllAgreements().Where(agreement => agreement.AssignedFlat == loggedStudent.AssignedFlat).ToList();
+            LiveFilter(cbxSelectAgreementCreator.SelectedItem as Student, cbUnagreedOnly.Checked, dtpStartDate.Value, dtpEndDate.Value);
+            UpdateAgreementVisual();
+        }
+
+        private void UpdateAgreementVisual()
+        {
+            pAgreements.Controls.Clear();
+            this.controls = new List<AgreementControl>();
             foreach (Agreement agreement in agreements)
             {
                 AgreementControl newControl = new AgreementControl(agreement, loggedStudent);
@@ -41,6 +58,26 @@ namespace StudentHousingBV.Student_App
                 newControl.deleteAgreement += AgreementControl_deleteAgreement!;
             }
             pAgreements.Controls.AddRange(controls.ToArray());
+        }
+
+        private void GetAllAgreementCreators()
+        {
+            List<Student> creators = new List<Student>();
+            creators = housingManager.GetAllAgreements().Select(agreement => agreement.Student).Distinct().ToList();
+            creators.Insert(0, new Student("-1", "All"));
+
+            if(!creators.Any(student => student.StudentId == loggedStudent.StudentId))
+            {
+                btnShowMine.Enabled = false;
+            }
+            else
+            {
+                btnShowMine.Enabled = true;
+            }
+
+            cbxSelectAgreementCreator.DataSource = creators;
+            cbxSelectAgreementCreator.DisplayMember = "Name";
+            cbxSelectAgreementCreator.ValueMember = "StudentId";
         }
 
         private void AgreementControl_deleteAgreement(object sender, EventArgs e)
@@ -69,7 +106,54 @@ namespace StudentHousingBV.Student_App
                 this.housingManager.SaveAllData();
                 this.agreements.Add(fetchedAgreement);
                 GetAgreements();
+                GetAllAgreementCreators();
             }
+        }
+
+        private void cbxSelectAgreementCreator_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            GetAgreements();
+        }
+
+        private void cbUnagreedOnly_CheckedChanged(object sender, EventArgs e)
+        {
+            GetAgreements();
+        }
+
+        private void dtpStartDate_ValueChanged(object sender, EventArgs e)
+        {
+            GetAgreements();
+        }
+
+        private void dtpEndDate_ValueChanged(object sender, EventArgs e)
+        {
+            GetAgreements();
+        }
+
+        private void LiveFilter(Student? creator, bool unagreedOnly, DateTime startDate, DateTime endDate)
+        {
+            List<Agreement> filteredAgreements = agreements;
+
+            if (creator is not null && creator.StudentId != "-1")
+            {
+                filteredAgreements = agreements.Where(agreement => agreement.Student == creator).ToList();
+            }
+            if (unagreedOnly)
+            {
+                filteredAgreements = filteredAgreements.Where(agreement => !agreement.AgreedBy.Any(student => student.StudentId == loggedStudent.StudentId)).ToList();
+            }
+
+            filteredAgreements = filteredAgreements.Where(agreement => agreement.DateCreated >= startDate && agreement.DateCreated <= endDate).ToList();
+
+            this.agreements = filteredAgreements;
+        }
+
+        private void btnShowMine_Click(object sender, EventArgs e)
+        {
+            GetAllAgreementCreators();
+            cbUnagreedOnly.Checked = false;
+            cbxSelectAgreementCreator.SelectedValue = loggedStudent.StudentId; ;
+            GetAgreements();
         }
     }
 }
