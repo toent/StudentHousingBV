@@ -36,9 +36,9 @@
             groupBox1 = new GroupBox();
             lbFlatOverview = new ListBox();
             label4 = new Label();
-            tbAddressId = new TextBox();
+            tbAddress = new TextBox();
             label3 = new Label();
-            tbFlatId = new TextBox();
+            tbBuildingId = new TextBox();
             label2 = new Label();
             groupBox1.SuspendLayout();
             SuspendLayout();
@@ -51,6 +51,7 @@
             lbBuildings.Name = "lbBuildings";
             lbBuildings.Size = new Size(736, 729);
             lbBuildings.TabIndex = 0;
+            lbBuildings.SelectedIndexChanged += lbBuildings_SelectedIndexChanged;
             // 
             // label1
             // 
@@ -82,6 +83,7 @@
             btnModifyBuilding.TabIndex = 3;
             btnModifyBuilding.Text = "Modify building";
             btnModifyBuilding.UseVisualStyleBackColor = true;
+            btnModifyBuilding.Click += btnModifyBuilding_Click;
             // 
             // btnDeleteBuilding
             // 
@@ -98,9 +100,9 @@
             // 
             groupBox1.Controls.Add(lbFlatOverview);
             groupBox1.Controls.Add(label4);
-            groupBox1.Controls.Add(tbAddressId);
+            groupBox1.Controls.Add(tbAddress);
             groupBox1.Controls.Add(label3);
-            groupBox1.Controls.Add(tbFlatId);
+            groupBox1.Controls.Add(tbBuildingId);
             groupBox1.Controls.Add(label2);
             groupBox1.Location = new Point(1096, 62);
             groupBox1.Name = "groupBox1";
@@ -127,12 +129,12 @@
             label4.TabIndex = 4;
             label4.Text = "Flat overview";
             // 
-            // tbAddressId
+            // tbAddress
             // 
-            tbAddressId.Location = new Point(19, 154);
-            tbAddressId.Name = "tbAddressId";
-            tbAddressId.Size = new Size(428, 31);
-            tbAddressId.TabIndex = 3;
+            tbAddress.Location = new Point(19, 154);
+            tbAddress.Name = "tbAddress";
+            tbAddress.Size = new Size(428, 31);
+            tbAddress.TabIndex = 3;
             // 
             // label3
             // 
@@ -143,13 +145,13 @@
             label3.TabIndex = 2;
             label3.Text = "Address";
             // 
-            // tbFlatId
+            // tbBuildingId
             // 
-            tbFlatId.Enabled = false;
-            tbFlatId.Location = new Point(19, 77);
-            tbFlatId.Name = "tbFlatId";
-            tbFlatId.Size = new Size(428, 31);
-            tbFlatId.TabIndex = 1;
+            tbBuildingId.Enabled = false;
+            tbBuildingId.Location = new Point(19, 77);
+            tbBuildingId.Name = "tbBuildingId";
+            tbBuildingId.Size = new Size(428, 31);
+            tbBuildingId.TabIndex = 1;
             // 
             // label2
             // 
@@ -188,9 +190,9 @@
         private Button btnModifyBuilding;
         private Button btnDeleteBuilding;
         private GroupBox groupBox1;
-        private TextBox tbFlatId;
+        private TextBox tbBuildingId;
         private Label label2;
-        private TextBox tbAddressId;
+        private TextBox tbAddress;
         private Label label3;
         private Label label4;
         private ListBox lbFlatOverview;

@@ -78,7 +78,7 @@ namespace StudentHousingBV.Classes.Managers
         public bool DeleteBuilding(Building building)
         {
             bool result;
-            if (buildings.Contains(building))
+            if (!buildings.Contains(building))
             {
                 throw new Exception("Building does not exist.");
             }
@@ -95,6 +95,21 @@ namespace StudentHousingBV.Classes.Managers
 
             return result;
         }
+
+        public bool UpdateBuilding(Building building) {
+            bool result = false;
+            if (!buildings.Contains(building))
+            {
+                throw new Exception("Building does not exist.");
+            }
+            else
+            {
+                dataManager.SaveAllData(buildings);
+                result = true;
+            }
+            return result;
+        }
+
         #endregion
 
         #region Flat
