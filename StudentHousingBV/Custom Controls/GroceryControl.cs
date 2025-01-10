@@ -15,7 +15,6 @@ namespace StudentHousingBV.Custom_Controls
         {
             this.grocery = grocery;
 
-            lblName.Text = grocery.GroceryId.ToString();
             lblDate.Text = grocery.Date.ToShortDateString();
             pictureBoxGrocery.Image = Image.FromFile(grocery.ImagePath);
 

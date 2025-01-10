@@ -6,14 +6,14 @@ namespace StudentHousingBV.Custom_Controls
 {
     public partial class AgreementControl : UserControl
     {
-        private readonly Agreement agreementToControl;
+        public readonly Agreement agreementToControl;
         private readonly Student StudentLookingAt;
         private readonly Student Creator;
         private List<Student> Students = [];
         private readonly bool isOwner;
-        private readonly HousingManager housingManager;
+        public event EventHandler deleteAgreement;
 
-        public AgreementControl(Agreement agreement, Student studentLookingAt, HousingManager housingManager)
+        public AgreementControl(Agreement agreement, Student studentLookingAt)
         {
             InitializeComponent();
             StudentLookingAt = studentLookingAt;
@@ -21,7 +21,6 @@ namespace StudentHousingBV.Custom_Controls
             Creator = agreement.Student ?? new();
             Students = agreement.AgreedBy;
             isOwner = (Creator == StudentLookingAt);
-            this.housingManager = housingManager;
             SetupVisuals();
         }
 
@@ -74,17 +73,7 @@ namespace StudentHousingBV.Custom_Controls
         private void btnDeleteAgreement_Click(object sender, EventArgs e)
         {
             if (isOwner)
-            {
-                if (agreementToControl.AgreedBy.Count <= 0)
-                {
-                    //Delete Agreement
-                    housingManager.GetAllAgreements().Remove(agreementToControl);
-                }
-                else
-                {
-                    MessageBox.Show("Cannot delete an agreement that has active agreeing students!");
-                }
-            }
+            { deleteAgreement?.Invoke(this, EventArgs.Empty); }
         }
     }
 }
