@@ -189,6 +189,7 @@ namespace StudentHousingBV.Classes.Managers
             if (announcement.AssignedFlat is not null)
             {
                 announcement.AssignedFlat.Announcements.Remove(announcement);
+                SaveAllData();
                 result = true;
             }
             return result;
@@ -214,6 +215,18 @@ namespace StudentHousingBV.Classes.Managers
             return buildings.SelectMany(building => building.Flats)
                             .SelectMany(flat => flat.Agreements)
                             .ToList();
+        }
+
+        public bool DeleteAgreement(Agreement agreement)
+        {
+            bool result = false;
+            if (agreement.AssignedFlat is not null)
+            {
+                agreement.AssignedFlat.Agreements.Remove(agreement);
+                SaveAllData();
+                result = true;
+            }
+            return result;
         }
         #endregion
 

@@ -28,17 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            pAgreements = new Panel();
             btnAddAgreement = new Button();
+            pAgreements = new FlowLayoutPanel();
             SuspendLayout();
-            // 
-            // pAgreements
-            // 
-            pAgreements.AutoScroll = true;
-            pAgreements.Location = new Point(12, 61);
-            pAgreements.Name = "pAgreements";
-            pAgreements.Size = new Size(1552, 745);
-            pAgreements.TabIndex = 2;
             // 
             // btnAddAgreement
             // 
@@ -51,21 +43,29 @@
             btnAddAgreement.UseVisualStyleBackColor = true;
             btnAddAgreement.Click += btnAddAgreement_Click;
             // 
+            // pAgreements
+            // 
+            pAgreements.AutoScroll = true;
+            pAgreements.Location = new Point(12, 61);
+            pAgreements.Name = "pAgreements";
+            pAgreements.Size = new Size(1552, 745);
+            pAgreements.TabIndex = 4;
+            // 
             // StudentAgreements
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(1576, 818);
-            Controls.Add(btnAddAgreement);
             Controls.Add(pAgreements);
+            Controls.Add(btnAddAgreement);
             Name = "StudentAgreements";
             Text = "StudentAgreements";
             ResumeLayout(false);
         }
 
         #endregion
-        private Panel pAgreements;
         private Button btnAddAgreement;
+        private FlowLayoutPanel pAgreements;
     }
 }
