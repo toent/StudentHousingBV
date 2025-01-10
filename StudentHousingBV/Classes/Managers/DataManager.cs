@@ -51,6 +51,10 @@ namespace StudentHousingBV.Classes.Managers
             }
         }
 
+        /// <summary>
+        /// Re-link all data after deserialization
+        /// </summary>
+        /// <param name="buildings"> The list of buildings to re-link </param>
         private static void ReLinkAllData(List<Building>? buildings)
         {
             if (buildings != null)
@@ -115,7 +119,6 @@ namespace StudentHousingBV.Classes.Managers
         {
             return storagePath;
         }
+        #endregion
     }
-    #endregion
-
 }

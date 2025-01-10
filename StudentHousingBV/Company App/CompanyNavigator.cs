@@ -11,6 +11,7 @@ namespace StudentHousingBV.Company_App
             InitializeComponent();
             StartPosition = FormStartPosition.CenterScreen;
             housingManager = new HousingManager();
+            LoadFormIntoPanel(new CompanyAnnouncements(housingManager));
         }
 
         private void Navigation_Click(object sender, EventArgs e)
@@ -20,9 +21,8 @@ namespace StudentHousingBV.Company_App
                 switch (button.Name)
                 {
                     case "btnAnnouncements":
-                        MessageBox.Show("This feature is not implemented yet.");
+                        LoadFormIntoPanel(new CompanyAnnouncements(housingManager));
                         lblTitle.Text = "Announcements";
-                        pShowForm.Controls.Clear();
                         break;
                     case "btnHouseRules":
                         LoadFormIntoPanel(new HouseRulesCompany(housingManager));

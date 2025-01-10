@@ -53,6 +53,9 @@ namespace StudentHousingBV.Student_App
             housingManager.Buildings.Add(new Building(housingManager.GetNextBuildingId(), "123 Main St"));
             housingManager.Buildings[0].Flats.Add(new Flat(housingManager.GetNextFlatId(), 101, housingManager.Buildings[0]));
             housingManager.AddStudent(new Student("F12345", "John Doe", housingManager.Buildings[0].Flats[0]));
+            housingManager.AddStudent(new Student("F54321", "Doe Doe", housingManager.Buildings[0].Flats[0]));
+
+
             housingManager.Buildings[0].Flats[0].Chores.Add(new Chore(housingManager.GetNextChoreId(), "Clean the bathroom", "Clean the bathroom with the broom.", DateTime.Now.AddDays(1), housingManager.Buildings[0].Flats[0], housingManager.GetStudent("F12345")));
             housingManager.Buildings[0].Flats[0].Chores.Add(new Chore(housingManager.GetNextChoreId(), "Clean the kitchen", "Clean the kitchen with the mop.", DateTime.Now.AddDays(2), housingManager.Buildings[0].Flats[0], housingManager.GetStudent("F12345")));
             housingManager.Buildings[0].Flats[0].Chores.Add(new Chore(housingManager.GetNextChoreId(), "Clean the living room", "Clean the living room with the vacuum cleaner.", DateTime.Now.AddDays(3), housingManager.Buildings[0].Flats[0], housingManager.GetStudent("F12345")));
@@ -74,6 +77,11 @@ namespace StudentHousingBV.Student_App
             housingManager.Buildings[0].Flats[0].Rules.Add(new Rule(housingManager.GetNextRuleId(), housingManager.Buildings[0].Flats[0], "Garbage must be thrown away in the designated area."));
             housingManager.Buildings[0].Flats[0].Rules.Add(new Rule(housingManager.GetNextRuleId(), housingManager.Buildings[0].Flats[0], "Bikes must be parked in the designated area."));
             housingManager.Buildings[0].Flats[0].Rules.Add(new Rule(housingManager.GetNextRuleId(), housingManager.Buildings[0].Flats[0], "Cars must be parked in the designated area."));
+            // Add agreements
+            housingManager.Buildings[0].Flats[0].Agreements.Add(new Agreement(housingManager.GetNextAgreementId(), "House rules", "I agree to follow the house rules.", [housingManager.GetStudent("F12345"), housingManager.GetStudent("F54321")], housingManager.GetStudent("F12345"),  housingManager.Buildings[0].Flats[0]));
+            housingManager.Buildings[0].Flats[0].Agreements.Add(new Agreement(housingManager.GetNextAgreementId(), "Chores", "I agree to do the chores.", [housingManager.GetStudent("F12345")], housingManager.GetStudent("F12345"), housingManager.Buildings[0].Flats[0]));
+            housingManager.Buildings[0].Flats[0].Agreements.Add(new Agreement(housingManager.GetNextAgreementId(), "Garbage collection", "I agree to throw the garbage away correctly.", [housingManager.GetStudent("F12345")], housingManager.GetStudent("F12345"), housingManager.Buildings[0].Flats[0]));
+            housingManager.Buildings[0].Flats[0].Agreements.Add(new Agreement(housingManager.GetNextAgreementId(), "Quiet hours", "I agree to be quiet during quiet hours.", [housingManager.GetStudent("F12345")], housingManager.GetStudent("F12345"), housingManager.Buildings[0].Flats[0]));
             housingManager.SaveAllData();
         }
     }

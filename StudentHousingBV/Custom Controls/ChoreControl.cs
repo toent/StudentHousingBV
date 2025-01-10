@@ -5,7 +5,7 @@ namespace StudentHousingBV.Custom_Controls
     public partial class ChoreControl : UserControl
     {
         private readonly Chore chore;
-        public event EventHandler StatusChanged;
+        public event EventHandler? StatusChanged;
 
         public ChoreControl(Chore chore)
         {

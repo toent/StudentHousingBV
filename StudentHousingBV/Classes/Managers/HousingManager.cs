@@ -17,7 +17,7 @@ namespace StudentHousingBV.Classes.Managers
         public HousingManager()
         {
             dataManager = new();
-            buildings = dataManager.GetAllData() ?? [];
+            buildings = dataManager.GetAllData() ?? []; //Flagged as modify
         }
         #endregion
 
@@ -181,6 +181,17 @@ namespace StudentHousingBV.Classes.Managers
             return buildings.SelectMany(building => building.Flats)
                             .SelectMany(flat => flat.Announcements)
                             .ToList();
+        }
+
+        public bool DeleteAnnouncement(Announcement announcement)
+        {
+            bool result = false;
+            if (announcement.AssignedFlat is not null)
+            {
+                announcement.AssignedFlat.Announcements.Remove(announcement);
+                result = true;
+            }
+            return result;
         }
         #endregion
 

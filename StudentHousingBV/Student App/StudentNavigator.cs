@@ -52,7 +52,6 @@ namespace StudentHousingBV
                     case "btnAgreements":
                         LoadFormIntoPanel(new StudentAgreements());
                         lblTitle.Text = "Agreements";
-                        pShowForm.Controls.Clear();
                         break;
                     case "btnChores":
                         LoadFormIntoPanel(new StudentChores(housingManager, student));

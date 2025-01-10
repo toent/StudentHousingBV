@@ -31,7 +31,6 @@
             pShowForm = new Panel();
             pFormTitle = new Panel();
             lblTitle = new Label();
-            btnLogout = new Button();
             pSideMenu = new Panel();
             btnFiledComplaint = new Button();
             btnRegisterStudents = new Button();
@@ -53,7 +52,6 @@
             // pFormTitle
             // 
             pFormTitle.Controls.Add(lblTitle);
-            pFormTitle.Controls.Add(btnLogout);
             pFormTitle.Dock = DockStyle.Top;
             pFormTitle.Location = new Point(300, 0);
             pFormTitle.Name = "pFormTitle";
@@ -69,16 +67,6 @@
             lblTitle.Size = new Size(385, 65);
             lblTitle.TabIndex = 4;
             lblTitle.Text = "Announcements";
-            // 
-            // btnLogout
-            // 
-            btnLogout.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            btnLogout.Location = new Point(1418, 12);
-            btnLogout.Name = "btnLogout";
-            btnLogout.Size = new Size(168, 43);
-            btnLogout.TabIndex = 0;
-            btnLogout.Text = "Logout";
-            btnLogout.UseVisualStyleBackColor = true;
             // 
             // pSideMenu
             // 
@@ -167,6 +155,7 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.White;
             ClientSize = new Size(1898, 1024);
             Controls.Add(pShowForm);
             Controls.Add(pFormTitle);
@@ -184,7 +173,6 @@
         private Panel pShowForm;
         private Panel pFormTitle;
         private Label lblTitle;
-        private Button btnLogout;
         private Panel pSideMenu;
         private Button btnFiledComplaint;
         private Button btnRegisterStudents;
