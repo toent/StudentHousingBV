@@ -31,16 +31,17 @@
             btnDetails = new Button();
             btnPaymentLink = new Button();
             label1 = new Label();
-            lblDate = new Label();
             pictureBoxGrocery = new PictureBox();
             panel1 = new Panel();
+            lblDate = new Label();
+            label5 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBoxGrocery).BeginInit();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
             // btnDetails
             // 
-            btnDetails.Location = new Point(698, 105);
+            btnDetails.Location = new Point(698, 169);
             btnDetails.Name = "btnDetails";
             btnDetails.Size = new Size(453, 29);
             btnDetails.TabIndex = 0;
@@ -51,7 +52,7 @@
             // btnPaymentLink
             // 
             btnPaymentLink.BackColor = Color.Transparent;
-            btnPaymentLink.Location = new Point(197, 105);
+            btnPaymentLink.Location = new Point(197, 169);
             btnPaymentLink.Name = "btnPaymentLink";
             btnPaymentLink.Size = new Size(453, 29);
             btnPaymentLink.TabIndex = 1;
@@ -62,41 +63,54 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(197, 7);
+            label1.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold);
+            label1.Location = new Point(17, 14);
             label1.Name = "label1";
-            label1.Size = new Size(111, 28);
+            label1.Size = new Size(173, 41);
             label1.TabIndex = 2;
             label1.Text = "Grocery list";
             // 
-            // lblDate
-            // 
-            lblDate.AutoSize = true;
-            lblDate.Font = new Font("Segoe UI", 12F);
-            lblDate.Location = new Point(14, 7);
-            lblDate.Name = "lblDate";
-            lblDate.Size = new Size(65, 28);
-            lblDate.TabIndex = 3;
-            lblDate.Text = "label2";
-            // 
             // pictureBoxGrocery
             // 
-            pictureBoxGrocery.Location = new Point(19, 50);
+            pictureBoxGrocery.Location = new Point(17, 87);
             pictureBoxGrocery.Name = "pictureBoxGrocery";
-            pictureBoxGrocery.Size = new Size(100, 84);
+            pictureBoxGrocery.Size = new Size(138, 111);
+            pictureBoxGrocery.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBoxGrocery.TabIndex = 5;
             pictureBoxGrocery.TabStop = false;
+            pictureBoxGrocery.Click += pictureBoxGrocery_Click;
             // 
             // panel1
             // 
             panel1.BackColor = Color.WhiteSmoke;
             panel1.Controls.Add(lblDate);
+            panel1.Controls.Add(label5);
             panel1.Controls.Add(label1);
             panel1.Location = new Point(0, 0);
             panel1.Margin = new Padding(0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1199, 47);
+            panel1.Size = new Size(1199, 69);
             panel1.TabIndex = 6;
+            // 
+            // lblDate
+            // 
+            lblDate.AutoSize = true;
+            lblDate.Location = new Point(1058, 34);
+            lblDate.Margin = new Padding(2, 0, 2, 0);
+            lblDate.Name = "lblDate";
+            lblDate.Size = new Size(119, 20);
+            lblDate.TabIndex = 7;
+            lblDate.Text = "[Published Date]";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(1058, 14);
+            label5.Margin = new Padding(2, 0, 2, 0);
+            label5.Name = "label5";
+            label5.Size = new Size(73, 20);
+            label5.TabIndex = 6;
+            label5.Text = "Published";
             // 
             // GroceryControl
             // 
@@ -107,7 +121,7 @@
             Controls.Add(btnPaymentLink);
             Controls.Add(btnDetails);
             Name = "GroceryControl";
-            Size = new Size(1199, 150);
+            Size = new Size(1199, 215);
             ((System.ComponentModel.ISupportInitialize)pictureBoxGrocery).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
@@ -119,23 +133,10 @@
         private Button btnDetails;
         private Button btnPaymentLink;
         private Label label1;
-        private Label lblDate;
         private PictureBox pictureBoxGrocery;
-
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            base.OnPaint(e);
-            Color borderColor = Color.RebeccaPurple;
-            int borderWidth = 2;
-            Rectangle borderRectangle = new Rectangle(0, 0, this.Width - 1, this.Height - 1);
-
-            using (Pen pen = new Pen(borderColor, borderWidth))
-            {
-                e.Graphics.DrawRectangle(pen, borderRectangle);
-            }
-        }
-
         private Panel panel1;
+        private Label lblDate;
+        private Label label5;
     }
 
 

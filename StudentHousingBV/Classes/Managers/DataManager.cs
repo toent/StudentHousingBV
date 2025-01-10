@@ -46,7 +46,7 @@ namespace StudentHousingBV.Classes.Managers
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error loading buildings: {ex.Message}");
+                MessageBox.Show($"Error loading buildings: {ex.Message}");
                 return null;
             }
         }
