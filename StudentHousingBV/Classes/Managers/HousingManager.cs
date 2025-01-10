@@ -52,6 +52,49 @@ namespace StudentHousingBV.Classes.Managers
         {
             return buildings;
         }
+
+        public Building? GetBuilding(int buildingId) =>  buildings.FirstOrDefault(building => building.BuildingId == buildingId);
+
+        public bool AddBuilding(Building building)
+        {
+            bool result = false;
+            try
+            {
+                if (GetBuilding(building.BuildingId) is null)
+                {
+                    buildings.Add(building);
+                    dataManager.SaveAllData(buildings);
+                    result = true;
+                }
+            }
+            catch
+            {
+                MessageBox.Show("There was an error adding the building.");
+            }
+
+            return result;
+        }
+
+        public bool DeleteBuilding(Building building)
+        {
+            bool result;
+            if (buildings.Contains(building))
+            {
+                throw new Exception("Building does not exist.");
+            }
+            else if (building.Flats.Count > 0)
+            {
+                throw new Exception("Building has flats assigned to it. Cannot remove.");
+            }
+            else
+            {
+                buildings.Remove(building);
+                dataManager.SaveAllData(buildings);
+                result = true;
+            }
+
+            return result;
+        }
         #endregion
 
         #region Flat
