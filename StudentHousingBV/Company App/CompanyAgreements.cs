@@ -89,7 +89,6 @@ namespace StudentHousingBV.Company_App
             if(flat != null)
             {
                 this.agreements = housingManager.GetAllAgreements().Where(agreement => agreement.AssignedFlat.FlatId == flat.FlatId).ToList();
-                LiveFilter(cbxSelectedCreator.SelectedItem as Student, dtpStartDate.Value, dtpEndDate.Value);
             }
             else
             {
@@ -117,7 +116,6 @@ namespace StudentHousingBV.Company_App
         private void cbxSelectedBuilding_SelectedIndexChanged(object sender, EventArgs e)
         {
             ResetCbxSelectedFlat();
-            ResetCbxSelectedCreator();
         }
 
         private void cbxSelectedFlat_SelectedIndexChanged(object sender, EventArgs e)
