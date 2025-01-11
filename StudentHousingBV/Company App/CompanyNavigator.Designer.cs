@@ -32,13 +32,13 @@
             pFormTitle = new Panel();
             lblTitle = new Label();
             pSideMenu = new Panel();
+            btnFlats = new Button();
+            btnBuildings = new Button();
             btnFiledComplaint = new Button();
             btnRegisterStudents = new Button();
             btnAgreements = new Button();
             btnHouseRules = new Button();
             btnAnnouncements = new Button();
-            btnFlats = new Button();
-            btnBuildings = new Button();
             pFormTitle.SuspendLayout();
             pSideMenu.SuspendLayout();
             SuspendLayout();
@@ -66,9 +66,9 @@
             lblTitle.Font = new Font("Segoe UI Semibold", 24F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblTitle.Location = new Point(607, 46);
             lblTitle.Name = "lblTitle";
-            lblTitle.Size = new Size(385, 65);
+            lblTitle.Size = new Size(231, 65);
             lblTitle.TabIndex = 4;
-            lblTitle.Text = "Announcements";
+            lblTitle.Text = "Buildings";
             // 
             // pSideMenu
             // 
@@ -84,6 +84,34 @@
             pSideMenu.Name = "pSideMenu";
             pSideMenu.Size = new Size(300, 1024);
             pSideMenu.TabIndex = 3;
+            // 
+            // btnFlats
+            // 
+            btnFlats.BackColor = Color.FromArgb(214, 223, 255);
+            btnFlats.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnFlats.ForeColor = Color.FromArgb(26, 37, 47);
+            btnFlats.Location = new Point(3, 279);
+            btnFlats.Margin = new Padding(3, 20, 3, 20);
+            btnFlats.Name = "btnFlats";
+            btnFlats.Size = new Size(294, 69);
+            btnFlats.TabIndex = 7;
+            btnFlats.Text = "Flats";
+            btnFlats.UseVisualStyleBackColor = false;
+            btnFlats.Click += Navigation_Click;
+            // 
+            // btnBuildings
+            // 
+            btnBuildings.BackColor = Color.FromArgb(214, 223, 255);
+            btnBuildings.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnBuildings.ForeColor = Color.FromArgb(26, 37, 47);
+            btnBuildings.Location = new Point(3, 170);
+            btnBuildings.Margin = new Padding(3, 20, 3, 20);
+            btnBuildings.Name = "btnBuildings";
+            btnBuildings.Size = new Size(294, 69);
+            btnBuildings.TabIndex = 6;
+            btnBuildings.Text = "Buildings";
+            btnBuildings.UseVisualStyleBackColor = false;
+            btnBuildings.Click += Navigation_Click;
             // 
             // btnFiledComplaint
             // 
@@ -104,12 +132,12 @@
             btnRegisterStudents.BackColor = Color.FromArgb(214, 223, 255);
             btnRegisterStudents.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnRegisterStudents.ForeColor = Color.FromArgb(26, 37, 47);
-            btnRegisterStudents.Location = new Point(3, 828);
+            btnRegisterStudents.Location = new Point(3, 388);
             btnRegisterStudents.Margin = new Padding(3, 20, 3, 20);
             btnRegisterStudents.Name = "btnRegisterStudents";
             btnRegisterStudents.Size = new Size(294, 69);
             btnRegisterStudents.TabIndex = 4;
-            btnRegisterStudents.Text = "Register students";
+            btnRegisterStudents.Text = "Students";
             btnRegisterStudents.UseVisualStyleBackColor = false;
             btnRegisterStudents.Click += Navigation_Click;
             // 
@@ -146,7 +174,7 @@
             btnAnnouncements.BackColor = Color.FromArgb(214, 223, 255);
             btnAnnouncements.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnAnnouncements.ForeColor = Color.FromArgb(26, 37, 47);
-            btnAnnouncements.Location = new Point(3, 392);
+            btnAnnouncements.Location = new Point(3, 828);
             btnAnnouncements.Margin = new Padding(3, 20, 3, 20);
             btnAnnouncements.Name = "btnAnnouncements";
             btnAnnouncements.Size = new Size(294, 69);
@@ -154,34 +182,6 @@
             btnAnnouncements.Text = "Announcements";
             btnAnnouncements.UseVisualStyleBackColor = false;
             btnAnnouncements.Click += Navigation_Click;
-            // 
-            // btnFlats
-            // 
-            btnFlats.BackColor = Color.FromArgb(214, 223, 255);
-            btnFlats.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnFlats.ForeColor = Color.FromArgb(26, 37, 47);
-            btnFlats.Location = new Point(3, 279);
-            btnFlats.Margin = new Padding(3, 20, 3, 20);
-            btnFlats.Name = "btnFlats";
-            btnFlats.Size = new Size(294, 69);
-            btnFlats.TabIndex = 7;
-            btnFlats.Text = "Flats";
-            btnFlats.UseVisualStyleBackColor = false;
-            btnFlats.Click += Navigation_Click;
-            // 
-            // btnBuildings
-            // 
-            btnBuildings.BackColor = Color.FromArgb(214, 223, 255);
-            btnBuildings.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnBuildings.ForeColor = Color.FromArgb(26, 37, 47);
-            btnBuildings.Location = new Point(3, 170);
-            btnBuildings.Margin = new Padding(3, 20, 3, 20);
-            btnBuildings.Name = "btnBuildings";
-            btnBuildings.Size = new Size(294, 69);
-            btnBuildings.TabIndex = 6;
-            btnBuildings.Text = "Buildings";
-            btnBuildings.UseVisualStyleBackColor = false;
-            btnBuildings.Click += Navigation_Click;
             // 
             // CompanyNavigator
             // 

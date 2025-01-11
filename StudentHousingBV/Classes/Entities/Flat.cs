@@ -78,6 +78,12 @@ namespace StudentHousingBV.Classes.Entities
         {
             return $"Flat {FlatNumber} - Students: {Students.Count}";
         }
+
+        public override bool Equals(object? obj)
+        {
+            return obj is Flat flat && FlatId == flat.FlatId;
+        }
+
         #endregion
     }
 }

@@ -11,7 +11,7 @@ namespace StudentHousingBV.Company_App
             InitializeComponent();
             StartPosition = FormStartPosition.CenterScreen;
             housingManager = new HousingManager();
-            LoadFormIntoPanel(new CompanyAnnouncements(housingManager));
+            LoadFormIntoPanel(new CompanyBuildings(housingManager));
         }
 
         private void Navigation_Click(object sender, EventArgs e)
@@ -47,7 +47,7 @@ namespace StudentHousingBV.Company_App
                         break;
                     case "btnRegisterStudents":
                         MessageBox.Show("This feature is not implemented yet.");
-                        lblTitle.Text = "Register Students";
+                        lblTitle.Text = "Students";
                         pShowForm.Controls.Clear();
                         break;
                     default:

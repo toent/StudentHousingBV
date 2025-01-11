@@ -29,9 +29,8 @@
         private void InitializeComponent()
         {
             gbFlatInfo = new GroupBox();
-            lbFlatOverview = new ListBox();
+            lbStudentOverview = new ListBox();
             label4 = new Label();
-            tbFlatNum = new TextBox();
             label3 = new Label();
             tbFlatId = new TextBox();
             label2 = new Label();
@@ -43,14 +42,16 @@
             tbBuildingFilter = new TextBox();
             lbBuildingFilter = new ListBox();
             label5 = new Label();
+            nudFlatNumber = new NumericUpDown();
             gbFlatInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)nudFlatNumber).BeginInit();
             SuspendLayout();
             // 
             // gbFlatInfo
             // 
-            gbFlatInfo.Controls.Add(lbFlatOverview);
+            gbFlatInfo.Controls.Add(nudFlatNumber);
+            gbFlatInfo.Controls.Add(lbStudentOverview);
             gbFlatInfo.Controls.Add(label4);
-            gbFlatInfo.Controls.Add(tbFlatNum);
             gbFlatInfo.Controls.Add(label3);
             gbFlatInfo.Controls.Add(tbFlatId);
             gbFlatInfo.Controls.Add(label2);
@@ -59,16 +60,16 @@
             gbFlatInfo.Size = new Size(468, 695);
             gbFlatInfo.TabIndex = 11;
             gbFlatInfo.TabStop = false;
-            gbFlatInfo.Text = "Building information";
+            gbFlatInfo.Text = "Flat information";
             // 
-            // lbFlatOverview
+            // lbStudentOverview
             // 
-            lbFlatOverview.FormattingEnabled = true;
-            lbFlatOverview.ItemHeight = 25;
-            lbFlatOverview.Location = new Point(19, 245);
-            lbFlatOverview.Name = "lbFlatOverview";
-            lbFlatOverview.Size = new Size(428, 429);
-            lbFlatOverview.TabIndex = 5;
+            lbStudentOverview.FormattingEnabled = true;
+            lbStudentOverview.ItemHeight = 25;
+            lbStudentOverview.Location = new Point(19, 245);
+            lbStudentOverview.Name = "lbStudentOverview";
+            lbStudentOverview.Size = new Size(428, 429);
+            lbStudentOverview.TabIndex = 5;
             // 
             // label4
             // 
@@ -78,13 +79,6 @@
             label4.Size = new Size(148, 25);
             label4.TabIndex = 4;
             label4.Text = "Student overview";
-            // 
-            // tbFlatNum
-            // 
-            tbFlatNum.Location = new Point(19, 154);
-            tbFlatNum.Name = "tbFlatNum";
-            tbFlatNum.Size = new Size(428, 31);
-            tbFlatNum.TabIndex = 3;
             // 
             // label3
             // 
@@ -121,6 +115,7 @@
             btnDeleteFlat.TabIndex = 10;
             btnDeleteFlat.Text = "Delete flat";
             btnDeleteFlat.UseVisualStyleBackColor = true;
+            btnDeleteFlat.Click += btnDeleteFlat_Click;
             // 
             // btnModifyFlat
             // 
@@ -131,6 +126,7 @@
             btnModifyFlat.TabIndex = 9;
             btnModifyFlat.Text = "Modify flat";
             btnModifyFlat.UseVisualStyleBackColor = true;
+            btnModifyFlat.Click += btnModifyFlat_Click;
             // 
             // btnAddFlat
             // 
@@ -141,6 +137,7 @@
             btnAddFlat.TabIndex = 8;
             btnAddFlat.Text = "Add flat";
             btnAddFlat.UseVisualStyleBackColor = true;
+            btnAddFlat.Click += btnAddFlat_Click;
             // 
             // label1
             // 
@@ -160,6 +157,7 @@
             lbFlats.Name = "lbFlats";
             lbFlats.Size = new Size(736, 729);
             lbFlats.TabIndex = 6;
+            lbFlats.SelectedIndexChanged += lbFlats_SelectedIndexChanged;
             // 
             // tbBuildingFilter
             // 
@@ -167,6 +165,7 @@
             tbBuildingFilter.Name = "tbBuildingFilter";
             tbBuildingFilter.Size = new Size(228, 31);
             tbBuildingFilter.TabIndex = 13;
+            tbBuildingFilter.TextChanged += tbBuildingFilter_TextChanged;
             // 
             // lbBuildingFilter
             // 
@@ -176,6 +175,7 @@
             lbBuildingFilter.Name = "lbBuildingFilter";
             lbBuildingFilter.Size = new Size(228, 504);
             lbBuildingFilter.TabIndex = 14;
+            lbBuildingFilter.SelectedIndexChanged += lbBuildingFilter_SelectedIndexChanged;
             // 
             // label5
             // 
@@ -185,6 +185,14 @@
             label5.Size = new Size(142, 25);
             label5.TabIndex = 15;
             label5.Text = "Select a building";
+            // 
+            // nudFlatNumber
+            // 
+            nudFlatNumber.Location = new Point(19, 154);
+            nudFlatNumber.Maximum = new decimal(new int[] { 9999, 0, 0, 0 });
+            nudFlatNumber.Name = "nudFlatNumber";
+            nudFlatNumber.Size = new Size(161, 31);
+            nudFlatNumber.TabIndex = 6;
             // 
             // CompanyFlats
             // 
@@ -205,6 +213,7 @@
             Text = "CompanyFlats";
             gbFlatInfo.ResumeLayout(false);
             gbFlatInfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)nudFlatNumber).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -212,9 +221,8 @@
         #endregion
 
         private GroupBox gbFlatInfo;
-        private ListBox lbFlatOverview;
+        private ListBox lbStudentOverview;
         private Label label4;
-        private TextBox tbFlatNum;
         private Label label3;
         private TextBox tbFlatId;
         private Label label2;
@@ -226,5 +234,6 @@
         private TextBox tbBuildingFilter;
         private ListBox lbBuildingFilter;
         private Label label5;
+        private NumericUpDown nudFlatNumber;
     }
 }

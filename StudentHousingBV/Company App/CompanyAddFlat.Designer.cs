@@ -30,8 +30,9 @@
         {
             btnCancel = new Button();
             btnAdd = new Button();
-            tbAddress = new TextBox();
             label3 = new Label();
+            nudFlatNumber = new NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)nudFlatNumber).BeginInit();
             SuspendLayout();
             // 
             // btnCancel
@@ -56,34 +57,36 @@
             btnAdd.UseVisualStyleBackColor = true;
             btnAdd.Click += btnAdd_Click;
             // 
-            // tbAddress
-            // 
-            tbAddress.Location = new Point(22, 49);
-            tbAddress.Name = "tbAddress";
-            tbAddress.Size = new Size(363, 31);
-            tbAddress.TabIndex = 11;
-            // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Location = new Point(22, 21);
             label3.Name = "label3";
-            label3.Size = new Size(77, 25);
+            label3.Size = new Size(107, 25);
             label3.TabIndex = 10;
-            label3.Text = "Address";
+            label3.Text = "Flat number";
+            // 
+            // nudFlatNumber
+            // 
+            nudFlatNumber.Location = new Point(22, 49);
+            nudFlatNumber.Maximum = new decimal(new int[] { 500, 0, 0, 0 });
+            nudFlatNumber.Name = "nudFlatNumber";
+            nudFlatNumber.Size = new Size(258, 31);
+            nudFlatNumber.TabIndex = 14;
             // 
             // CompanyAddFlat
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(407, 196);
+            ClientSize = new Size(403, 184);
+            Controls.Add(nudFlatNumber);
             Controls.Add(btnCancel);
             Controls.Add(btnAdd);
-            Controls.Add(tbAddress);
             Controls.Add(label3);
             Name = "CompanyAddFlat";
             Text = "CompanyAddFlat";
+            ((System.ComponentModel.ISupportInitialize)nudFlatNumber).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -92,7 +95,7 @@
 
         private Button btnCancel;
         private Button btnAdd;
-        private TextBox tbAddress;
         private Label label3;
+        private NumericUpDown nudFlatNumber;
     }
 }

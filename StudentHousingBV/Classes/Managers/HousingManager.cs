@@ -130,6 +130,52 @@ namespace StudentHousingBV.Classes.Managers
         {
             return buildings.SelectMany(building => building.Flats).ToList();
         }
+
+        public bool AddFlat(Flat flat) {
+            bool result;
+            if (GetAllFlats().Contains(flat))
+            {
+                throw new Exception("Flat already exists.");
+            }
+            else
+            {
+                flat.AssignedBuilding.Flats.Add(flat);
+                dataManager.SaveAllData(buildings);
+                result = true;
+            }
+            return result;
+        }
+
+        public bool UpdateFlat(Flat flat)
+        {
+            bool result;
+            if (!GetAllFlats().Contains(flat))
+            {
+                throw new Exception("Flat does not exist.");
+            }
+            else
+            {
+                dataManager.SaveAllData(buildings);
+                result = true;
+            }
+            return result;
+        }
+
+        public bool DeleteFlat(Flat flat)
+        {
+            bool result;
+            if (flat.Students.Count > 0)
+            {
+                throw new Exception("Flat has students assigned to it. Cannot remove.");
+            }
+            else
+            {
+                flat.AssignedBuilding.Flats.Remove(flat);
+                dataManager.SaveAllData(buildings);
+                result = true;
+            }
+            return result;
+        }
         #endregion
 
         #region Student
