@@ -62,7 +62,7 @@ namespace StudentHousingBV.Company_App
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            Announcement announcement;
+           /* Announcement announcement;
 
             if (cbGlobal.Checked)
             {
@@ -75,7 +75,7 @@ namespace StudentHousingBV.Company_App
                 housingManager.AddAnnouncement(announcement);
             }
 
-            NewAnnouncement?.Invoke(this, announcement);
+            NewAnnouncement?.Invoke(this, announcement);*/
         }
     }
 }
