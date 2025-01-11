@@ -29,55 +29,88 @@
         private void InitializeComponent()
         {
             label2 = new Label();
-            panelRules = new Panel();
             btnCreate = new Button();
-            cbFlat = new ComboBox();
+            cbxFlat = new ComboBox();
+            cbxBuilding = new ComboBox();
+            label1 = new Label();
+            flpRules = new FlowLayoutPanel();
             SuspendLayout();
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI Emoji", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(372, 146);
+            label2.Location = new Point(235, 12);
             label2.Name = "label2";
-            label2.Size = new Size(44, 27);
+            label2.Size = new Size(35, 21);
             label2.TabIndex = 1;
             label2.Text = "Flat";
             // 
-            // panelRules
-            // 
-            panelRules.Location = new Point(372, 227);
-            panelRules.Name = "panelRules";
-            panelRules.Size = new Size(863, 157);
-            panelRules.TabIndex = 3;
-            // 
             // btnCreate
             // 
-            btnCreate.BackColor = SystemColors.ActiveCaption;
-            btnCreate.Location = new Point(794, 149);
+            btnCreate.BackColor = Color.WhiteSmoke;
+            btnCreate.FlatStyle = FlatStyle.System;
+            btnCreate.Font = new Font("Segoe UI", 12F);
+            btnCreate.Location = new Point(943, 8);
+            btnCreate.Margin = new Padding(3, 2, 3, 2);
             btnCreate.Name = "btnCreate";
-            btnCreate.Size = new Size(170, 29);
+            btnCreate.Size = new Size(148, 29);
             btnCreate.TabIndex = 4;
             btnCreate.Text = "Create";
             btnCreate.UseVisualStyleBackColor = false;
+            btnCreate.Click += btnCreate_Click;
             // 
-            // cbFlat
+            // cbxFlat
             // 
-            cbFlat.FormattingEnabled = true;
-            cbFlat.Location = new Point(422, 145);
-            cbFlat.Name = "cbFlat";
-            cbFlat.Size = new Size(151, 28);
-            cbFlat.TabIndex = 5;
+            cbxFlat.FormattingEnabled = true;
+            cbxFlat.Location = new Point(276, 11);
+            cbxFlat.Margin = new Padding(3, 2, 3, 2);
+            cbxFlat.Name = "cbxFlat";
+            cbxFlat.Size = new Size(133, 23);
+            cbxFlat.TabIndex = 5;
+            cbxFlat.SelectedIndexChanged += cbxFlat_SelectedIndexChanged;
+            // 
+            // cbxBuilding
+            // 
+            cbxBuilding.FormattingEnabled = true;
+            cbxBuilding.Location = new Point(85, 12);
+            cbxBuilding.Margin = new Padding(3, 2, 3, 2);
+            cbxBuilding.Name = "cbxBuilding";
+            cbxBuilding.Size = new Size(133, 23);
+            cbxBuilding.TabIndex = 7;
+            cbxBuilding.SelectedIndexChanged += cbxBuilding_SelectedIndexChanged;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI Emoji", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label1.Location = new Point(12, 12);
+            label1.Name = "label1";
+            label1.Size = new Size(67, 21);
+            label1.TabIndex = 6;
+            label1.Text = "Building";
+            // 
+            // flpRules
+            // 
+            flpRules.AutoScroll = true;
+            flpRules.Location = new Point(12, 40);
+            flpRules.Name = "flpRules";
+            flpRules.Size = new Size(1079, 439);
+            flpRules.TabIndex = 8;
             // 
             // HouseRulesCompany
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1902, 1033);
-            Controls.Add(cbFlat);
+            BackColor = Color.White;
+            ClientSize = new Size(1103, 491);
+            Controls.Add(flpRules);
+            Controls.Add(cbxBuilding);
+            Controls.Add(label1);
+            Controls.Add(cbxFlat);
             Controls.Add(btnCreate);
-            Controls.Add(panelRules);
             Controls.Add(label2);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "HouseRulesCompany";
             Text = "HouseRulesCompany";
             ResumeLayout(false);
@@ -86,8 +119,10 @@
 
         #endregion
         private Label label2;
-        private Panel panelRules;
         private Button btnCreate;
-        private ComboBox cbFlat;
+        private ComboBox cbxFlat;
+        private ComboBox cbxBuilding;
+        private Label label1;
+        private FlowLayoutPanel flpRules;
     }
 }
