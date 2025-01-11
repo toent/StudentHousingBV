@@ -21,8 +21,8 @@ namespace StudentHousingBV.Classes.Entities
             AnnouncementId = announcementId; 
             Title = title; 
             Message = message; 
-            IsGlobal = isGlobal; 
-            AssignedFlat = assignedFlat; 
+            IsGlobal = isGlobal;
+            AssignedFlat = assignedFlat;
         }
         #endregion
     }

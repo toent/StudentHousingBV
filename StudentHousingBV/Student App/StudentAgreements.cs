@@ -56,14 +56,16 @@ namespace StudentHousingBV.Student_App
                 AgreementControl newControl = new AgreementControl(agreement, loggedStudent);
                 controls.Add(newControl);
                 newControl.deleteAgreement += AgreementControl_deleteAgreement!;
+                newControl.agreeToAgreement += AgreementControl_agreeToAgreement!;
             }
             pAgreements.Controls.AddRange(controls.ToArray());
         }
 
         private void GetAllAgreementCreators()
         {
+            List<Agreement> allAgreements = housingManager.GetAllAgreements().Where(agreement => agreement.AssignedFlat == loggedStudent.AssignedFlat).ToList();
             List<Student> creators = new List<Student>();
-            creators = housingManager.GetAllAgreements().Select(agreement => agreement.Student).Distinct().ToList();
+            creators = allAgreements.Select(agreement => agreement.Student).Distinct().ToList();
             creators.Insert(0, new Student("-1", "All"));
 
             if(!creators.Any(student => student.StudentId == loggedStudent.StudentId))
@@ -96,6 +98,14 @@ namespace StudentHousingBV.Student_App
             }
         }
 
+        private void AgreementControl_agreeToAgreement(object sender, EventArgs e)
+        {
+            if(sender is AgreementControl)
+            {
+                housingManager.SaveAllData();
+            }
+        }
+
         private void btnAddAgreement_Click(object sender, EventArgs e)
         {
             StudentAddAgreement creationPage = new StudentAddAgreement(housingManager, loggedStudent);
@@ -123,11 +133,19 @@ namespace StudentHousingBV.Student_App
         private void dtpStartDate_ValueChanged(object sender, EventArgs e)
         {
             GetAgreements();
+            if(dtpStartDate.Value >= dtpEndDate.Value)
+            {
+                dtpStartDate.Value = dtpEndDate.Value.AddDays(-1);
+            }
         }
 
         private void dtpEndDate_ValueChanged(object sender, EventArgs e)
         {
             GetAgreements();
+            if (dtpStartDate.Value >= dtpEndDate.Value)
+            {
+                dtpStartDate.Value = dtpEndDate.Value.AddDays(-1);
+            }
         }
 
         private void LiveFilter(Student? creator, bool unagreedOnly, DateTime startDate, DateTime endDate)

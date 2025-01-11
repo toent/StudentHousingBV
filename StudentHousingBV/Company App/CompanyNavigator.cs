@@ -37,9 +37,8 @@ namespace StudentHousingBV.Company_App
                         lblTitle.Text = "House Rules";
                         break;
                     case "btnAgreements":
-                        MessageBox.Show("This feature is not implemented yet.");
+                        LoadFormIntoPanel(new CompanyAgreements(housingManager));
                         lblTitle.Text = "Agreements";
-                        pShowForm.Controls.Clear();
                         break;
                     case "btnFiledComplaint":
                         LoadFormIntoPanel(new DisplayComplaint(housingManager));
