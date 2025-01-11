@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             gbFlatInfo = new GroupBox();
+            nudFlatNumber = new NumericUpDown();
             lbStudentOverview = new ListBox();
             label4 = new Label();
             label3 = new Label();
@@ -42,7 +43,6 @@
             tbBuildingFilter = new TextBox();
             lbBuildingFilter = new ListBox();
             label5 = new Label();
-            nudFlatNumber = new NumericUpDown();
             gbFlatInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nudFlatNumber).BeginInit();
             SuspendLayout();
@@ -61,6 +61,14 @@
             gbFlatInfo.TabIndex = 11;
             gbFlatInfo.TabStop = false;
             gbFlatInfo.Text = "Flat information";
+            // 
+            // nudFlatNumber
+            // 
+            nudFlatNumber.Location = new Point(19, 154);
+            nudFlatNumber.Maximum = new decimal(new int[] { 9999, 0, 0, 0 });
+            nudFlatNumber.Name = "nudFlatNumber";
+            nudFlatNumber.Size = new Size(161, 31);
+            nudFlatNumber.TabIndex = 6;
             // 
             // lbStudentOverview
             // 
@@ -185,14 +193,6 @@
             label5.Size = new Size(142, 25);
             label5.TabIndex = 15;
             label5.Text = "Select a building";
-            // 
-            // nudFlatNumber
-            // 
-            nudFlatNumber.Location = new Point(19, 154);
-            nudFlatNumber.Maximum = new decimal(new int[] { 9999, 0, 0, 0 });
-            nudFlatNumber.Name = "nudFlatNumber";
-            nudFlatNumber.Size = new Size(161, 31);
-            nudFlatNumber.TabIndex = 6;
             // 
             // CompanyFlats
             // 

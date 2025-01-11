@@ -7,13 +7,13 @@ namespace StudentHousingBV.Classes.Entities
         #region Properties
         public int FlatId { get; set; } // Primary Key
         public int FlatNumber { get; set; }
-        public ICollection<Student> Students { get; set; }
-        public ICollection<Complaint> Complaints { get; set; }
-        public ICollection<Agreement> Agreements { get; set; }
-        public ICollection<Announcement> Announcements { get; set; }
-        public ICollection<Chore> Chores { get; set; }
-        public ICollection<Grocery> Groceries { get; set; }
-        public ICollection<Rule> Rules { get; set; }
+        public List<Student> Students { get; set; }
+        public List<Complaint> Complaints { get; set; }
+        public List<Agreement> Agreements { get; set; }
+        public List<Announcement> Announcements { get; set; }
+        public List<Chore> Chores { get; set; }
+        public List<Grocery> Groceries { get; set; }
+        public List<Rule> Rules { get; set; }
         [JsonIgnore]
         public Building AssignedBuilding { get; set; } // Cross-Reference
         #endregion

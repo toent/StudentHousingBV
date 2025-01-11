@@ -35,7 +35,7 @@
             btnFlats = new Button();
             btnBuildings = new Button();
             btnFiledComplaint = new Button();
-            btnRegisterStudents = new Button();
+            btnStudents = new Button();
             btnAgreements = new Button();
             btnHouseRules = new Button();
             btnAnnouncements = new Button();
@@ -75,7 +75,7 @@
             pSideMenu.Controls.Add(btnFlats);
             pSideMenu.Controls.Add(btnBuildings);
             pSideMenu.Controls.Add(btnFiledComplaint);
-            pSideMenu.Controls.Add(btnRegisterStudents);
+            pSideMenu.Controls.Add(btnStudents);
             pSideMenu.Controls.Add(btnAgreements);
             pSideMenu.Controls.Add(btnHouseRules);
             pSideMenu.Controls.Add(btnAnnouncements);
@@ -127,19 +127,19 @@
             btnFiledComplaint.UseVisualStyleBackColor = false;
             btnFiledComplaint.Click += Navigation_Click;
             // 
-            // btnRegisterStudents
+            // btnStudents
             // 
-            btnRegisterStudents.BackColor = Color.FromArgb(214, 223, 255);
-            btnRegisterStudents.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnRegisterStudents.ForeColor = Color.FromArgb(26, 37, 47);
-            btnRegisterStudents.Location = new Point(3, 388);
-            btnRegisterStudents.Margin = new Padding(3, 20, 3, 20);
-            btnRegisterStudents.Name = "btnRegisterStudents";
-            btnRegisterStudents.Size = new Size(294, 69);
-            btnRegisterStudents.TabIndex = 4;
-            btnRegisterStudents.Text = "Students";
-            btnRegisterStudents.UseVisualStyleBackColor = false;
-            btnRegisterStudents.Click += Navigation_Click;
+            btnStudents.BackColor = Color.FromArgb(214, 223, 255);
+            btnStudents.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnStudents.ForeColor = Color.FromArgb(26, 37, 47);
+            btnStudents.Location = new Point(3, 388);
+            btnStudents.Margin = new Padding(3, 20, 3, 20);
+            btnStudents.Name = "btnStudents";
+            btnStudents.Size = new Size(294, 69);
+            btnStudents.TabIndex = 4;
+            btnStudents.Text = "Students";
+            btnStudents.UseVisualStyleBackColor = false;
+            btnStudents.Click += Navigation_Click;
             // 
             // btnAgreements
             // 
@@ -207,7 +207,7 @@
         private Label lblTitle;
         private Panel pSideMenu;
         private Button btnFiledComplaint;
-        private Button btnRegisterStudents;
+        private Button btnStudents;
         private Button btnAgreements;
         private Button btnHouseRules;
         private Button btnAnnouncements;

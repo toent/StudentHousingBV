@@ -37,6 +37,11 @@ namespace StudentHousingBV.Classes.Entities
         {
             return Name;
         }
+
+        public override bool Equals(object? obj)
+        {
+            return obj is Student student && StudentId == student.StudentId;
+        }
         #endregion
     }
 }

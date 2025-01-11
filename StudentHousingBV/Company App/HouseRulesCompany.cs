@@ -20,7 +20,7 @@ namespace StudentHousingBV
 
         private void UpdateComboBox()
         {
-            cbFlat.DataSource = housingManager.GetAllFlats();
+            cbFlat.DataSource = housingManager.GetFlats();
         }
 
         private void CreateRule()
