@@ -53,6 +53,11 @@ namespace StudentHousingBV.Classes.Managers
             return buildings;
         }
 
+        public List<Building> GetBuildings(string filter)
+        {
+            return buildings.Where(building => building.Address.Contains(filter, StringComparison.CurrentCultureIgnoreCase)).ToList();
+        }
+
         public Building? GetBuilding(int buildingId) =>  buildings.FirstOrDefault(building => building.BuildingId == buildingId);
 
         public bool AddBuilding(Building building)
@@ -97,7 +102,7 @@ namespace StudentHousingBV.Classes.Managers
         }
 
         public bool UpdateBuilding(Building building) {
-            bool result = false;
+            bool result;
             if (!buildings.Contains(building))
             {
                 throw new Exception("Building does not exist.");
@@ -119,21 +124,26 @@ namespace StudentHousingBV.Classes.Managers
         /// <returns> The next available ID for a flat </returns>
         public int GetNextFlatId()
         {
-            return GetAllFlats().Count > 0 ? GetAllFlats().Max(flat => flat.FlatId) + 1 : 1;
+            return GetFlats().Count > 0 ? GetFlats().Max(flat => flat.FlatId) + 1 : 1;
         }
 
         /// <summary>
         /// Get all flats
         /// </summary>
         /// <returns> A list of all flats if they exist, otherwise null </returns>
-        public ICollection<Flat> GetAllFlats()
+        public ICollection<Flat> GetFlats()
         {
             return buildings.SelectMany(building => building.Flats).ToList();
         }
 
+        public static ICollection<Flat> GetFlats(Building building, string filter)
+        {
+            return building.Flats.Where(flat => flat.FlatNumber.ToString().Contains(filter, StringComparison.CurrentCultureIgnoreCase)).ToList();
+        }
+
         public bool AddFlat(Flat flat) {
             bool result;
-            if (GetAllFlats().Contains(flat))
+            if (GetFlats().Contains(flat))
             {
                 throw new Exception("Flat already exists.");
             }
@@ -149,7 +159,7 @@ namespace StudentHousingBV.Classes.Managers
         public bool UpdateFlat(Flat flat)
         {
             bool result;
-            if (!GetAllFlats().Contains(flat))
+            if (!GetFlats().Contains(flat))
             {
                 throw new Exception("Flat does not exist.");
             }
@@ -179,11 +189,12 @@ namespace StudentHousingBV.Classes.Managers
         #endregion
 
         #region Student
+
         /// <summary>
         /// Get all students
         /// </summary>
         /// <returns> A list of all students if they exist, otherwise null </returns>
-        public ICollection<Student> GetStudents()
+        public ICollection<Student> GetAllStudents()
         {
             return buildings.SelectMany(building => building.Flats)
                             .SelectMany(flat => flat.Students)
@@ -197,14 +208,64 @@ namespace StudentHousingBV.Classes.Managers
                             .FirstOrDefault(student => student.StudentId == studentId);
         }
 
+        public ICollection<Student> GetStudents(string filter)
+        {
+            return buildings.SelectMany(building => building.Flats)
+                            .SelectMany(flat => flat.Students)
+                            .Where(student => student.Name.Contains(filter, StringComparison.CurrentCultureIgnoreCase))
+                            .ToList();
+        }
+
         public bool AddStudent(Student student)
         {
             bool result = false;
             if (GetStudent(student.StudentId) is null)
             {
                 student.AssignedFlat.Students.Add(student);
+                dataManager.SaveAllData(buildings);
                 result = true;
             }
+            return result;
+        }
+
+        public bool UpdateStudent(Student student)
+        {
+            bool result = false;
+            if (GetStudent(student.StudentId) is not null)
+            {
+                dataManager.SaveAllData(buildings);
+                result = true;
+            }
+            return result;
+        }
+
+        // Remove student from flat and all related data
+        public bool DeleteStudent(Student student)
+        {
+            bool result = false;
+
+            try
+            {
+                if (GetStudent(student.StudentId) is not null)
+                {
+                    // Remove all related data from agreements, chores and groceries.
+                    student.AssignedFlat.Agreements.RemoveAll(agreement => agreement.Student == student);
+                    student.AssignedFlat.Chores.RemoveAll(chore => chore.Assignee == student);
+                    student.AssignedFlat.Groceries.RemoveAll(grocery => grocery.Creator == student);
+
+                    // Remove student from flat
+                    student.AssignedFlat.Students.Remove(student);
+
+                    // Save data
+                    dataManager.SaveAllData(buildings);
+                    result = true;
+                }
+            }
+            catch
+            {
+                MessageBox.Show("There was an error deleting the student.");
+            }
+
             return result;
         }
         #endregion

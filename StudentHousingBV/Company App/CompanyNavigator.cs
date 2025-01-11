@@ -44,10 +44,9 @@ namespace StudentHousingBV.Company_App
                         LoadFormIntoPanel(new DisplayComplaint(housingManager));
                         lblTitle.Text = "Filed Complaints";
                         break;
-                    case "btnRegisterStudents":
-                        MessageBox.Show("This feature is not implemented yet.");
+                    case "btnStudents":
+                        LoadFormIntoPanel(new CompanyStudents(housingManager));
                         lblTitle.Text = "Students";
-                        pShowForm.Controls.Clear();
                         break;
                     default:
                         MessageBox.Show("This feature is not implemented yet.");
