@@ -1,7 +1,15 @@
 ﻿using Microsoft.Data.SqlClient;
 using StudentHousingBV.Classes.Entities;
+using System.Data;
+using System.Net;
+using System.Security.Cryptography.Xml;
+using System.Security.Principal;
+using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
+using System.Windows.Forms;
 
 namespace StudentHousingBV.Classes.Managers
 {
@@ -372,7 +380,7 @@ namespace StudentHousingBV.Classes.Managers
                 SqlDataReader reader = command.ExecuteReader();
                 if (reader.Read())
                 {
-                    chore = new(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetBoolean(3), reader.GetDateTime(5), GetFlat(reader.GetInt32(6)), GetStudent(reader.GetInt32(4)));
+                    chore = new(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetBoolean(3), reader.GetDateTime(5), GetFlat(reader.GetInt32(6)), GetStudent(reader.GetString(4)));
                 }
             }
             catch (Exception ex)
@@ -443,7 +451,7 @@ namespace StudentHousingBV.Classes.Managers
             }
             return result;
         }
-        public Student? GetStudent(int studentId)
+        public Student? GetStudent(string studentId)
         {
             Student? student = null;
             try
@@ -546,7 +554,7 @@ namespace StudentHousingBV.Classes.Managers
                 SqlDataReader reader = command.ExecuteReader();
                 if (reader.Read())
                 {
-                    agreement = new(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), GetStudent(reader.GetInt32(3)), reader.GetDateTime(4), GetFlat(reader.GetInt32(5)));
+                    agreement = new(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), GetAgreeingStudents(reader.GetInt32(0)), GetStudent(reader.GetString(3)), reader.GetDateTime(4), GetFlat(reader.GetInt32(5)));
                 }
             }
             catch (Exception ex)
@@ -554,6 +562,31 @@ namespace StudentHousingBV.Classes.Managers
                 MessageBox.Show($"Error getting agreement: {ex.Message}");
             }
             return agreement;
+        }
+
+        private List<Student> GetAgreeingStudents(int agreementId)
+        {
+            List<Student> result = new List<Student>();
+            try
+            {
+                using SqlConnection connection = new(CONNECTION_STRING);
+                connection.Open();
+                string query = "SELECT Student.StudentId, Student.Name, Student.AssignedFlatId FROM Agreement_Student " +
+                                "INNER JOIN Student ON Student.StudentId = Agreement_Student.StudentId WHERE AgreementId = @AgreementId";
+                SqlCommand command = new(query, connection);
+                command.Parameters.AddWithValue("@AgreementId", agreementId);
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    result.Add(new(reader.GetString(0), reader.GetString(1), GetFlat(reader.GetInt32(2))));
+                }
+
+            }catch (Exception ex)
+            {
+                MessageBox.Show($"Error getting agreeing students: {ex.Message}");
+            }
+
+            return result;
         }
 
         // CRUD for Grocery
@@ -636,7 +669,7 @@ namespace StudentHousingBV.Classes.Managers
                 SqlDataReader reader = command.ExecuteReader();
                 if (reader.Read())
                 {
-                    grocery = new(reader.GetInt32(0), reader.GetDateTime(1), GetStudent(reader.GetInt32(2)), reader.GetString(3), reader.GetString(4), reader.GetString(5), GetFlat(reader.GetInt32(6)));
+                    grocery = new(reader.GetInt32(0), reader.GetDateTime(1), GetStudent(reader.GetString(2)), reader.GetString(3), reader.GetString(4), reader.GetString(5), GetFlat(reader.GetInt32(6)));
                 }
             }
             catch (Exception ex)

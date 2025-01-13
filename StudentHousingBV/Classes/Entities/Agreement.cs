@@ -35,6 +35,17 @@ namespace StudentHousingBV.Classes.Entities
             AgreedBy = studentsInAgreement;
         }
 
+        public Agreement(int id, string agreementTitle, string agreementDetails, List<Student> studentsInAgreement, Student student, DateTime dateCreated, Flat assignedFlat)
+        {
+            AgreementId = id;
+            Title = agreementTitle;
+            Details = agreementDetails;
+            Student = student;
+            AssignedFlat = assignedFlat;
+            DateCreated = dateCreated;
+            AgreedBy = studentsInAgreement;
+        }
+
         #endregion
 
         #region Methods
