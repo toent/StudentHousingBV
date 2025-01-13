@@ -94,7 +94,7 @@ namespace StudentHousingBV.Classes.Managers
                         {
                             announcement.AssignedFlat = flat;
                         }
-                        foreach (Rule rule in flat.Rules)
+                        foreach (Classes.Entities.Rule rule in flat.Rules)
                         {
                             rule.AssignedFlat = flat;
                         }
@@ -768,7 +768,7 @@ namespace StudentHousingBV.Classes.Managers
         }
 
         // CRUD for Rule
-        public bool AddRule(Rule rule)
+        public bool AddRule(Classes.Entities.Rule rule)
         {
             bool result = false;
             try
@@ -789,7 +789,7 @@ namespace StudentHousingBV.Classes.Managers
             }
             return result;
         }
-        public bool UpdateRule(Rule rule)
+        public bool UpdateRule(Classes.Entities.Rule rule)
         {
             bool result = false;
             try
@@ -830,9 +830,9 @@ namespace StudentHousingBV.Classes.Managers
             }
             return result;
         }
-        public Rule? GetRule(int ruleId)
+        public Classes.Entities.Rule? GetRule(int ruleId)
         {
-            Rule? rule = null;
+            Classes.Entities.Rule? rule = null;
             try
             {
                 using SqlConnection connection = new(CONNECTION_STRING);
@@ -843,7 +843,7 @@ namespace StudentHousingBV.Classes.Managers
                 SqlDataReader reader = command.ExecuteReader();
                 if (reader.Read())
                 {
-                    rule = new(reader.GetInt32(0), reader.GetString(1), GetFlat(reader.GetInt32(2)));
+                    rule = new(reader.GetInt32(0), reader.GetString(1), GetFlat(reader.GetInt32(2)), GetBuilding(reader.GetInt32(3)));
                 }
             }
             catch (Exception ex)

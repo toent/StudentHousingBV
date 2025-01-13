@@ -34,6 +34,14 @@ namespace StudentHousingBV.Classes.Entities
             Description = description;
             AssignedBuilding = assignedBuilding;
         }
+
+        public Rule(int id, string description, Flat? assignedFlat, Building? assignedBuilding)
+        {
+            RuleId = id;
+            Description = description;
+            AssignedFlat = assignedFlat;
+            AssignedBuilding = assignedBuilding;
+        }
         #endregion
 
     }
