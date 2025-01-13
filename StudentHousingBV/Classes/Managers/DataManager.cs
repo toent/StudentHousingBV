@@ -1,4 +1,5 @@
-﻿using StudentHousingBV.Classes.Entities;
+﻿using Microsoft.Data.SqlClient;
+using StudentHousingBV.Classes.Entities;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -15,6 +16,7 @@ namespace StudentHousingBV.Classes.Managers
             ReferenceHandler = ReferenceHandler.Preserve,
             WriteIndented = true
         };
+        private readonly string CONNECTION_STRING = "Server=tcp:s1aurbano.database.windows.net,1433;Initial Catalog=StudentHousing;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;Authentication=\"Active Directory Default\";";
         #endregion
 
         #region Constructors
@@ -118,6 +120,788 @@ namespace StudentHousingBV.Classes.Managers
         public string GetFilePath()
         {
             return storagePath;
+        }
+        #endregion
+
+        #region Database
+        // CRUD for Building
+        public bool AddBuilding(Building building)
+        {
+            bool result = false;
+            try
+            {
+                using SqlConnection connection = new(CONNECTION_STRING);
+                connection.Open();
+                string query = "INSERT INTO Building (Address) VALUES (@Address)";
+                SqlCommand command = new(query, connection);
+                command.Parameters.AddWithValue("@Address", building.Address);
+                command.ExecuteNonQuery();
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error adding building: {ex.Message}");
+            }
+            return result;
+        }
+        public bool UpdateBuilding(Building building)
+        {
+            bool result = false;
+            try
+            {
+                using SqlConnection connection = new(CONNECTION_STRING);
+                connection.Open();
+                string query = "UPDATE Building SET Address = @Address WHERE BuildingId = @BuildingId";
+                SqlCommand command = new(query, connection);
+                command.Parameters.AddWithValue("@Address", building.Address);
+                command.Parameters.AddWithValue("@BuildingId", building.BuildingId);
+                command.ExecuteNonQuery();
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error updating building: {ex.Message}");
+            }
+            return result;
+        }
+        public bool DeleteBuilding(int buildingId)
+        {
+            bool result = false;
+            try
+            {
+                using SqlConnection connection = new(CONNECTION_STRING);
+                connection.Open();
+                string query = "DELETE FROM Building WHERE BuildingId = @BuildingId";
+                SqlCommand command = new(query, connection);
+                command.Parameters.AddWithValue("@BuildingId", buildingId);
+                command.ExecuteNonQuery();
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error deleting building: {ex.Message}");
+            }
+            return result;
+        }
+        public Building? GetBuilding(int buildingId)
+        {
+            Building? result = null;
+            try
+            {
+                using SqlConnection connection = new(CONNECTION_STRING);
+                connection.Open();
+                string query = "SELECT * FROM Building WHERE BuildingId = @BuildingId";
+                SqlCommand command = new(query, connection);
+                command.Parameters.AddWithValue("@BuildingId", buildingId);
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    result = new Building(reader.GetInt32(0), reader.GetString(1));
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error getting building: {ex.Message}");
+            }
+            return result;
+        }
+
+        // CRUD for Flat
+        public bool AddFlat(Flat flat)
+        {
+            bool result = false;
+            try
+            {
+                using SqlConnection connection = new(CONNECTION_STRING);
+                connection.Open();
+                string query = "INSERT INTO Flat (FlatNumber, AssignedBuildingId) VALUES (@FlatNumber, @BuildingId)";
+                SqlCommand command = new(query, connection);
+                command.Parameters.AddWithValue("@FlatNumber", flat.FlatNumber);
+                command.Parameters.AddWithValue("@BuildingId", flat.AssignedBuilding.BuildingId);
+                command.ExecuteNonQuery();
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error adding flat: {ex.Message}");
+            }
+            return result;
+        }
+        public bool UpdateFlat(Flat flat)
+        {
+            bool result = false;
+            try
+            {
+                using SqlConnection connection = new(CONNECTION_STRING);
+                connection.Open();
+                string query = "UPDATE Flat SET FlatNumber = @FlatNumber, AssignedBuildingId = @BuildingId WHERE FlatId = @FlatId";
+                SqlCommand command = new(query, connection);
+                command.Parameters.AddWithValue("@FlatNumber", flat.FlatNumber);
+                command.Parameters.AddWithValue("@BuildingId", flat.AssignedBuilding.BuildingId);
+                command.Parameters.AddWithValue("@FlatId", flat.FlatId);
+                command.ExecuteNonQuery();
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error updating flat: {ex.Message}");
+            }
+            return result;
+        }
+        public bool DeleteFlat(int flatId)
+        {
+            bool result = false;
+            try
+            {
+                using SqlConnection connection = new(CONNECTION_STRING);
+                connection.Open();
+                string query = "DELETE FROM Flat WHERE FlatId = @FlatId";
+                SqlCommand command = new(query, connection);
+                command.Parameters.AddWithValue("@FlatId", flatId);
+                command.ExecuteNonQuery();
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error deleting flat: {ex.Message}");
+            }
+            return result;
+        }
+        public Flat? GetFlat(int flatId)
+        {
+            Flat? result = null;
+            try
+            {
+                using SqlConnection connection = new(CONNECTION_STRING);
+                connection.Open();
+                string query = "SELECT * FROM Flat WHERE FlatId = @FlatId";
+                SqlCommand command = new(query, connection);
+                command.Parameters.AddWithValue("@FlatId", flatId);
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    result = new Flat(reader.GetInt32(0), reader.GetInt32(1), GetBuilding(reader.GetInt32(2)));
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error getting flat: {ex.Message}");
+            }
+            return result;
+        }
+
+        // CRUD for Chore
+        public bool AddChore(Chore chore)
+        {
+            bool result = false;
+            try
+            {
+                using SqlConnection connection = new(CONNECTION_STRING);
+                connection.Open();
+                string query = "INSERT INTO Chore (Title, Description, IsFinished, AssigneeId, Deadline, AssignedFlatId) VALUES (@Title, @Description, @IsFinished, @AssigneeId, @Deadline, @FlatId)";
+                SqlCommand command = new(query, connection);
+                command.Parameters.AddWithValue("@Title", chore.Title);
+                command.Parameters.AddWithValue("@Description", chore.Description);
+                command.Parameters.AddWithValue("@IsFinished", chore.IsFinished);
+                command.Parameters.AddWithValue("@AssigneeId", chore.Assignee?.StudentId);
+                command.Parameters.AddWithValue("@Deadline", chore.Deadline);
+                command.Parameters.AddWithValue("@FlatId", chore.AssignedFlat.FlatId);
+                command.ExecuteNonQuery();
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error adding chore: {ex.Message}");
+            }
+            return result;
+        }
+        public bool UpdateChore(Chore chore)
+        {
+            bool result = false;
+            try
+            {
+                using SqlConnection connection = new(CONNECTION_STRING);
+                connection.Open();
+                string query = "UPDATE Chore SET Title = @Title, Description = @Description, IsFinished = @IsFinished, AssigneeId = @AssigneeId, Deadline = @Deadline, AssignedFlatId = @FlatId WHERE ChoreId = @ChoreId";
+                SqlCommand command = new(query, connection);
+                command.Parameters.AddWithValue("@Title", chore.Title);
+                command.Parameters.AddWithValue("@Description", chore.Description);
+                command.Parameters.AddWithValue("@IsFinished", chore.IsFinished);
+                command.Parameters.AddWithValue("@AssigneeId", chore.Assignee?.StudentId);
+                command.Parameters.AddWithValue("@Deadline", chore.Deadline);
+                command.Parameters.AddWithValue("@FlatId", chore.AssignedFlat.FlatId);
+                command.Parameters.AddWithValue("@ChoreId", chore.ChoreId);
+                command.ExecuteNonQuery();
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error updating chore: {ex.Message}");
+            }
+            return result;
+        }
+        public bool DeleteChore(int choreId)
+        {
+            bool result = false;
+            try
+            {
+                using SqlConnection connection = new(CONNECTION_STRING);
+                connection.Open();
+                string query = "DELETE FROM Chore WHERE ChoreId = @ChoreId";
+                SqlCommand command = new(query, connection);
+                command.Parameters.AddWithValue("@ChoreId", choreId);
+                command.ExecuteNonQuery();
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error deleting chore: {ex.Message}");
+            }
+            return result;
+        }
+        public Chore? GetChore(int choreId)
+        {
+            Chore? chore = null;
+            try
+            {
+                using SqlConnection connection = new(CONNECTION_STRING);
+                connection.Open();
+                string query = "SELECT * FROM Chore WHERE ChoreId = @ChoreId";
+                SqlCommand command = new(query, connection);
+                command.Parameters.AddWithValue("@ChoreId", choreId);
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    chore = new(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetBoolean(3), reader.GetDateTime(5), GetFlat(reader.GetInt32(6)), GetStudent(reader.GetInt32(4)));
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error getting chore: {ex.Message}");
+            }
+            return chore;
+        }
+
+        // CRUD for Student
+        public bool AddStudent(Student student)
+        {
+            bool result = false;
+            try
+            {
+                using SqlConnection connection = new(CONNECTION_STRING);
+                connection.Open();
+                string query = "INSERT INTO Student (Name, AssignedFlatId) VALUES (@Name, @FlatId)";
+                SqlCommand command = new(query, connection);
+                command.Parameters.AddWithValue("@Name", student.Name);
+                command.Parameters.AddWithValue("@FlatId", student.AssignedFlat.FlatId);
+                command.ExecuteNonQuery();
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error adding student: {ex.Message}");
+            }
+            return result;
+        }
+        public bool UpdateStudent(Student student)
+        {
+            bool result = false;
+            try
+            {
+                using SqlConnection connection = new(CONNECTION_STRING);
+                connection.Open();
+                string query = "UPDATE Student SET Name = @Name, AssignedFlatId = @FlatId WHERE StudentId = @StudentId";
+                SqlCommand command = new(query, connection);
+                command.Parameters.AddWithValue("@Name", student.Name);
+                command.Parameters.AddWithValue("@FlatId", student.AssignedFlat.FlatId);
+                command.Parameters.AddWithValue("@StudentId", student.StudentId);
+                command.ExecuteNonQuery();
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error updating student: {ex.Message}");
+            }
+            return result;
+        }
+        public bool DeleteStudent(int studentId)
+        {
+            bool result = false;
+            try
+            {
+                using SqlConnection connection = new(CONNECTION_STRING);
+                connection.Open();
+                string query = "DELETE FROM Student WHERE StudentId = @StudentId";
+                SqlCommand command = new(query, connection);
+                command.Parameters.AddWithValue("@StudentId", studentId);
+                command.ExecuteNonQuery();
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error deleting student: {ex.Message}");
+            }
+            return result;
+        }
+        public Student? GetStudent(int studentId)
+        {
+            Student? student = null;
+            try
+            {
+                using SqlConnection connection = new(CONNECTION_STRING);
+                connection.Open();
+                string query = "SELECT * FROM Student WHERE StudentId = @StudentId";
+                SqlCommand command = new(query, connection);
+                command.Parameters.AddWithValue("@StudentId", studentId);
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    student = new Student(reader.GetString(0), reader.GetString(1), GetFlat(reader.GetInt32(2)));
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error getting student: {ex.Message}");
+            }
+            return student;
+        }
+
+        // CRUD for Agreement
+        public bool AddAgreement(Agreement agreement)
+        {
+            bool result = false;
+            try
+            {
+                using SqlConnection connection = new(CONNECTION_STRING);
+                connection.Open();
+                string query = "INSERT INTO Agreement (Title, Details, StudentId, DateCreated, AssignedFlatId) VALUES (@Title, @Details, @StudentId, @DateCreated, @FlatId)";
+                SqlCommand command = new(query, connection);
+                command.Parameters.AddWithValue("@Title", agreement.Title);
+                command.Parameters.AddWithValue("@Details", agreement.Details);
+                command.Parameters.AddWithValue("@StudentId", agreement.Student.StudentId);
+                command.Parameters.AddWithValue("@DateCreated", agreement.DateCreated);
+                command.Parameters.AddWithValue("@FlatId", agreement.AssignedFlat.FlatId);
+                command.ExecuteNonQuery();
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error adding agreement: {ex.Message}");
+            }
+            return result;
+        }
+        public bool UpdateAgreement(Agreement agreement)
+        {
+            bool result = false;
+            try
+            {
+                using SqlConnection connection = new(CONNECTION_STRING);
+                connection.Open();
+                string query = "UPDATE Agreement SET Title = @Title, Details = @Details, StudentId = @StudentId, DateCreated = @DateCreated, AssignedFlatId = @FlatId WHERE AgreementId = @AgreementId";
+                SqlCommand command = new(query, connection);
+                command.Parameters.AddWithValue("@Title", agreement.Title);
+                command.Parameters.AddWithValue("@Details", agreement.Details);
+                command.Parameters.AddWithValue("@StudentId", agreement.Student.StudentId);
+                command.Parameters.AddWithValue("@DateCreated", agreement.DateCreated);
+                command.Parameters.AddWithValue("@FlatId", agreement.AssignedFlat.FlatId);
+                command.Parameters.AddWithValue("@AgreementId", agreement.AgreementId);
+                command.ExecuteNonQuery();
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error updating agreement: {ex.Message}");
+            }
+            return result;
+        }
+        public bool DeleteAgreement(int agreementId)
+        {
+            bool result = false;
+            try
+            {
+                using SqlConnection connection = new(CONNECTION_STRING);
+                connection.Open();
+                string query = "DELETE FROM Agreement WHERE AgreementId = @AgreementId";
+                SqlCommand command = new(query, connection);
+                command.Parameters.AddWithValue("@AgreementId", agreementId);
+                command.ExecuteNonQuery();
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error deleting agreement: {ex.Message}");
+            }
+            return result;
+        }
+        public Agreement? GetAgreement(int agreementId)
+        {
+            Agreement? agreement = null;
+            try
+            {
+                using SqlConnection connection = new(CONNECTION_STRING);
+                connection.Open();
+                string query = "SELECT * FROM Agreement WHERE AgreementId = @AgreementId";
+                SqlCommand command = new(query, connection);
+                command.Parameters.AddWithValue("@AgreementId", agreementId);
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    agreement = new(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), GetStudent(reader.GetInt32(3)), reader.GetDateTime(4), GetFlat(reader.GetInt32(5)));
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error getting agreement: {ex.Message}");
+            }
+            return agreement;
+        }
+
+        // CRUD for Grocery
+        public bool AddGrocery(Grocery grocery)
+        {
+            bool result = false;
+            try
+            {
+                using SqlConnection connection = new(CONNECTION_STRING);
+                connection.Open();
+                string query = "INSERT INTO Grocery (Date, CreatorId, ImagePath, PaymentUrl, GroceryItems, AssignedFlatId) VALUES (@Date, @CreatorId, @ImagePath, @PaymentUrl, @GroceryItems, @FlatId)";
+                SqlCommand command = new(query, connection);
+                command.Parameters.AddWithValue("@Date", grocery.Date);
+                command.Parameters.AddWithValue("@CreatorId", grocery.Creator.StudentId);
+                command.Parameters.AddWithValue("@ImagePath", grocery.ImagePath);
+                command.Parameters.AddWithValue("@PaymentUrl", grocery.PaymentUrl);
+                command.Parameters.AddWithValue("@GroceryItems", grocery.GroceryItems);
+                command.Parameters.AddWithValue("@FlatId", grocery.AssignedFlat.FlatId);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error adding grocery: {ex.Message}");
+            }
+            return result;
+        }
+        public bool UpdateGrocery(Grocery grocery)
+        {
+            bool result = false;
+            try
+            {
+                using SqlConnection connection = new(CONNECTION_STRING);
+                connection.Open();
+                string query = "UPDATE Grocery SET Date = @Date, CreatorId = @CreatorId, ImagePath = @ImagePath, PaymentUrl = @PaymentUrl, GroceryItems = @GroceryItems, AssignedFlatId = @FlatId WHERE GroceryId = @GroceryId";
+                SqlCommand command = new(query, connection);
+                command.Parameters.AddWithValue("@Date", grocery.Date);
+                command.Parameters.AddWithValue("@CreatorId", grocery.Creator.StudentId);
+                command.Parameters.AddWithValue("@ImagePath", grocery.ImagePath);
+                command.Parameters.AddWithValue("@PaymentUrl", grocery.PaymentUrl);
+                command.Parameters.AddWithValue("@GroceryItems", grocery.GroceryItems);
+                command.Parameters.AddWithValue("@FlatId", grocery.AssignedFlat.FlatId);
+                command.Parameters.AddWithValue("@GroceryId", grocery.GroceryId);
+                command.ExecuteNonQuery();
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error updating grocery: {ex.Message}");
+            }
+            return result;
+        }
+        public bool DeleteGrocery(int groceryId)
+        {
+            bool result = false;
+            try
+            {
+                using SqlConnection connection = new(CONNECTION_STRING);
+                connection.Open();
+                string query = "DELETE FROM Grocery WHERE GroceryId = @GroceryId";
+                SqlCommand command = new(query, connection);
+                command.Parameters.AddWithValue("@GroceryId", groceryId);
+                command.ExecuteNonQuery();
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error deleting grocery: {ex.Message}");
+            }
+            return result;
+        }
+        public Grocery? GetGrocery(int groceryId)
+        {
+            Grocery? grocery = null;
+            try
+            {
+                using SqlConnection connection = new(CONNECTION_STRING);
+                connection.Open();
+                string query = "SELECT * FROM Grocery WHERE GroceryId = @GroceryId";
+                SqlCommand command = new(query, connection);
+                command.Parameters.AddWithValue("@GroceryId", groceryId);
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    grocery = new(reader.GetInt32(0), reader.GetDateTime(1), GetStudent(reader.GetInt32(2)), reader.GetString(3), reader.GetString(4), reader.GetString(5), GetFlat(reader.GetInt32(6)));
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error getting grocery: {ex.Message}");
+            }
+            return grocery;
+        }
+
+        // CRUD for Announcement
+        public bool AddAnnouncement(Announcement announcement)
+        {
+            bool result = false;
+            try
+            {
+                using SqlConnection connection = new(CONNECTION_STRING);
+                connection.Open();
+                string query = "INSERT INTO Announcement (Title, Content, Date, AssignedFlatId) VALUES (@Title, @Content, @Date, @FlatId)";
+                SqlCommand command = new(query, connection);
+                command.Parameters.AddWithValue("@Title", announcement.Title);
+                command.Parameters.AddWithValue("@Content", announcement.Content);
+                command.Parameters.AddWithValue("@Date", announcement.Date);
+                command.Parameters.AddWithValue("@FlatId", announcement.AssignedFlat.FlatId);
+                command.ExecuteNonQuery();
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error adding announcement: {ex.Message}");
+            }
+            return result;
+        }
+        public bool UpdateAnnouncement(Announcement announcement)
+        {
+            bool result = false;
+            try
+            {
+                using SqlConnection connection = new(CONNECTION_STRING);
+                connection.Open();
+                string query = "UPDATE Announcement SET Title = @Title, Content = @Content, Date = @Date, AssignedFlatId = @FlatId WHERE AnnouncementId = @AnnouncementId";
+                SqlCommand command = new(query, connection);
+                command.Parameters.AddWithValue("@Title", announcement.Title);
+                command.Parameters.AddWithValue("@Content", announcement.Content);
+                command.Parameters.AddWithValue("@Date", announcement.Date);
+                command.Parameters.AddWithValue("@FlatId", announcement.AssignedFlat.FlatId);
+                command.Parameters.AddWithValue("@AnnouncementId", announcement.AnnouncementId);
+                command.ExecuteNonQuery();
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error updating announcement: {ex.Message}");
+            }
+            return result;
+        }
+        public bool DeleteAnnouncement(int announcementId)
+        {
+            bool result = false;
+            try
+            {
+                using SqlConnection connection = new(CONNECTION_STRING);
+                connection.Open();
+                string query = "DELETE FROM Announcement WHERE AnnouncementId = @AnnouncementId";
+                SqlCommand command = new(query, connection);
+                command.Parameters.AddWithValue("@AnnouncementId", announcementId);
+                command.ExecuteNonQuery();
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error deleting announcement: {ex.Message}");
+            }
+            return result;
+        }
+        public Announcement? GetAnnouncement(int announcementId)
+        {
+            Announcement? announcement = null;
+            try
+            {
+                using SqlConnection connection = new(CONNECTION_STRING);
+                connection.Open();
+                string query = "SELECT * FROM Announcement WHERE AnnouncementId = @AnnouncementId";
+                SqlCommand command = new(query, connection);
+                command.Parameters.AddWithValue("@AnnouncementId", announcementId);
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    announcement = new(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetDateTime(3), GetFlat(reader.GetInt32(4)));
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error getting announcement: {ex.Message}");
+            }
+            return announcement;
+        }
+
+        // CRUD for Rule
+        public bool AddRule(Rule rule)
+        {
+            bool result = false;
+            try
+            {
+                using SqlConnection connection = new(CONNECTION_STRING);
+                connection.Open();
+                string query = "INSERT INTO Rule (Description, AssignedFlatId, AssignedBuildingId) VALUES (@Description, @FlatId, @BuildingId)";
+                SqlCommand command = new(query, connection);
+                command.Parameters.AddWithValue("@Description", rule.Description);
+                command.Parameters.AddWithValue("@FlatId", rule.AssignedFlat.FlatId);
+                command.Parameters.AddWithValue("@BuildingId", rule.AssignedFlat.AssignedBuilding.BuildingId);
+                command.ExecuteNonQuery();
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error adding rule: {ex.Message}");
+            }
+            return result;
+        }
+        public bool UpdateRule(Rule rule)
+        {
+            bool result = false;
+            try
+            {
+                using SqlConnection connection = new(CONNECTION_STRING);
+                connection.Open();
+                string query = "UPDATE Rule SET Description = @Description, AssignedFlatId = @FlatId, AssignedBuildingId = @BuildingId WHERE RuleId = @RuleId";
+                SqlCommand command = new(query, connection);
+                command.Parameters.AddWithValue("@Description", rule.Description);
+                command.Parameters.AddWithValue("@FlatId", rule.AssignedFlat.FlatId);
+                command.Parameters.AddWithValue("@BuildingId", rule.AssignedFlat.AssignedBuilding.BuildingId);
+                command.Parameters.AddWithValue("@RuleId", rule.RuleId);
+                command.ExecuteNonQuery();
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error updating rule: {ex.Message}");
+            }
+            return result;
+        }
+        public bool DeleteRule(int ruleId)
+        {
+            bool result = false;
+            try
+            {
+                using SqlConnection connection = new(CONNECTION_STRING);
+                connection.Open();
+                string query = "DELETE FROM Rule WHERE RuleId = @RuleId";
+                SqlCommand command = new(query, connection);
+                command.Parameters.AddWithValue("@RuleId", ruleId);
+                command.ExecuteNonQuery();
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error deleting rule: {ex.Message}");
+            }
+            return result;
+        }
+        public Rule? GetRule(int ruleId)
+        {
+            Rule? rule = null;
+            try
+            {
+                using SqlConnection connection = new(CONNECTION_STRING);
+                connection.Open();
+                string query = "SELECT * FROM Rule WHERE RuleId = @RuleId";
+                SqlCommand command = new(query, connection);
+                command.Parameters.AddWithValue("@RuleId", ruleId);
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    rule = new(reader.GetInt32(0), reader.GetString(1), GetFlat(reader.GetInt32(2)));
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error getting rule: {ex.Message}");
+            }
+            return rule;
+        }
+
+        // CRUD for Complaint
+        public bool AddComplaint(Complaint complaint)
+        {
+            bool result = false;
+            try
+            {
+                using SqlConnection connection = new(CONNECTION_STRING);
+                connection.Open();
+                string query = "INSERT INTO Complaint (Issue, AssignedFlatId) VALUES (@Issue, @FlatId)";
+                SqlCommand command = new(query, connection);
+                command.Parameters.AddWithValue("@Issue", complaint.Issue);
+                command.Parameters.AddWithValue("@FlatId", complaint.AssignedFlat.FlatId);
+                command.ExecuteNonQuery();
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error adding complaint: {ex.Message}");
+            }
+            return result;
+        }
+        public bool UpdateComplaint(Complaint complaint)
+        {
+            bool result = false;
+            try
+            {
+                using SqlConnection connection = new(CONNECTION_STRING);
+                connection.Open();
+                string query = "UPDATE Complaint SET Issue = @Issue, AssignedFlatId = @FlatId WHERE ComplaintId = @ComplaintId";
+                SqlCommand command = new(query, connection);
+                command.Parameters.AddWithValue("@Issue", complaint.Issue);
+                command.Parameters.AddWithValue("@FlatId", complaint.AssignedFlat.FlatId);
+                command.Parameters.AddWithValue("@ComplaintId", complaint.ComplaintId);
+                command.ExecuteNonQuery();
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error updating complaint: {ex.Message}");
+            }
+            return result;
+        }
+        public bool DeleteComplaint(int complaintId)
+        {
+            bool result = false;
+            try
+            {
+                using SqlConnection connection = new(CONNECTION_STRING);
+                connection.Open();
+                string query = "DELETE FROM Complaint WHERE ComplaintId = @ComplaintId";
+                SqlCommand command = new(query, connection);
+                command.Parameters.AddWithValue("@ComplaintId", complaintId);
+                command.ExecuteNonQuery();
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error deleting complaint: {ex.Message}");
+            }
+            return result;
+        }
+        public Complaint? GetComplaint(int complaintId)
+        {
+            Complaint? complaint = null;
+            try
+            {
+                using SqlConnection connection = new(CONNECTION_STRING);
+                connection.Open();
+                string query = "SELECT * FROM Complaint WHERE ComplaintId = @ComplaintId";
+                SqlCommand command = new(query, connection);
+                command.Parameters.AddWithValue("@ComplaintId", complaintId);
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    complaint = new(reader.GetInt32(0), reader.GetString(1), GetFlat(reader.GetInt32(2)));
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error getting complaint: {ex.Message}");
+            }
+            return complaint;
         }
         #endregion
 

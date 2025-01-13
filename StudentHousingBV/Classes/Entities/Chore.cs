@@ -43,6 +43,17 @@ namespace StudentHousingBV.Classes.Entities
             Deadline = choreDeadline;
             AssignedFlat = assignedFlat;
         }
+
+        public Chore(int id, string choreTitle, string choreDescription, bool isFinished, DateTime choreDeadline, Flat assignedFlat, Student choreAssignee)
+        {
+            ChoreId = id;
+            Title = choreTitle;
+            Description = choreDescription;
+            IsFinished = isFinished;
+            Assignee = choreAssignee;
+            Deadline = choreDeadline;
+            AssignedFlat = assignedFlat;
+        }
         #endregion
     }
 }
