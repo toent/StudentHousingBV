@@ -581,7 +581,8 @@ namespace StudentHousingBV.Classes.Managers
                     result.Add(new(reader.GetString(0), reader.GetString(1), GetFlat(reader.GetInt32(2))));
                 }
 
-            }catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show($"Error getting agreeing students: {ex.Message}");
             }
@@ -669,7 +670,7 @@ namespace StudentHousingBV.Classes.Managers
                 SqlDataReader reader = command.ExecuteReader();
                 if (reader.Read())
                 {
-                    grocery = new(reader.GetInt32(0), reader.GetDateTime(1), GetStudent(reader.GetString(2)), reader.GetString(3), reader.GetString(4), reader.GetString(5), GetFlat(reader.GetInt32(6)));
+                    grocery = new(reader.GetInt32(0), reader.GetDateTime(1), GetStudent(reader.GetString(2)), reader.GetString(3), reader.GetString(4), GetFlat(reader.GetInt32(6)), reader.GetString(5));
                 }
             }
             catch (Exception ex)
@@ -687,10 +688,10 @@ namespace StudentHousingBV.Classes.Managers
             {
                 using SqlConnection connection = new(CONNECTION_STRING);
                 connection.Open();
-                string query = "INSERT INTO Announcement (Title, Content, Date, AssignedFlatId) VALUES (@Title, @Content, @Date, @FlatId)";
+                string query = "INSERT INTO Announcement (Title, Message, Date, AssignedFlatId) VALUES (@Title, @Message, @Date, @FlatId)";
                 SqlCommand command = new(query, connection);
                 command.Parameters.AddWithValue("@Title", announcement.Title);
-                command.Parameters.AddWithValue("@Content", announcement.Content);
+                command.Parameters.AddWithValue("@Message", announcement.Message);
                 command.Parameters.AddWithValue("@Date", announcement.Date);
                 command.Parameters.AddWithValue("@FlatId", announcement.AssignedFlat.FlatId);
                 command.ExecuteNonQuery();
@@ -709,10 +710,10 @@ namespace StudentHousingBV.Classes.Managers
             {
                 using SqlConnection connection = new(CONNECTION_STRING);
                 connection.Open();
-                string query = "UPDATE Announcement SET Title = @Title, Content = @Content, Date = @Date, AssignedFlatId = @FlatId WHERE AnnouncementId = @AnnouncementId";
+                string query = "UPDATE Announcement SET Title = @Title, Message = @Message, Date = @Date, AssignedFlatId = @FlatId WHERE AnnouncementId = @AnnouncementId";
                 SqlCommand command = new(query, connection);
                 command.Parameters.AddWithValue("@Title", announcement.Title);
-                command.Parameters.AddWithValue("@Content", announcement.Content);
+                command.Parameters.AddWithValue("@Message", announcement.Message);
                 command.Parameters.AddWithValue("@Date", announcement.Date);
                 command.Parameters.AddWithValue("@FlatId", announcement.AssignedFlat.FlatId);
                 command.Parameters.AddWithValue("@AnnouncementId", announcement.AnnouncementId);
@@ -843,7 +844,7 @@ namespace StudentHousingBV.Classes.Managers
                 SqlDataReader reader = command.ExecuteReader();
                 if (reader.Read())
                 {
-                    rule = new(reader.GetInt32(0), reader.GetString(1), GetFlat(reader.GetInt32(2)), GetBuilding(reader.GetInt32(3)));
+                    //rule = new(reader.GetInt32(0), reader.GetString(1), GetFlat(reader.GetInt32(2)), GetBuilding(reader.GetInt32(3)));
                 }
             }
             catch (Exception ex)
@@ -927,7 +928,7 @@ namespace StudentHousingBV.Classes.Managers
                 SqlDataReader reader = command.ExecuteReader();
                 if (reader.Read())
                 {
-                    complaint = new(reader.GetInt32(0), reader.GetString(1), GetFlat(reader.GetInt32(2)));
+                    complaint = new(reader.GetInt32(0), GetFlat(reader.GetInt32(2)), reader.GetString(1));
                 }
             }
             catch (Exception ex)

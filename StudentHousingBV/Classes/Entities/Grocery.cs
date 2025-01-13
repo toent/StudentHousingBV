@@ -19,9 +19,10 @@ namespace StudentHousingBV.Classes.Entities
 
         }
 
-        public Grocery(int id, Student creator, string imagePath, string paymentUrl, Flat assignedFlat, string groceryItems)
+        public Grocery(int id, DateTime date, Student creator, string imagePath, string paymentUrl, Flat assignedFlat, string groceryItems)
         {
             GroceryId = id;
+            Date = date;
             Creator = creator;
             ImagePath = imagePath;
             PaymentUrl = paymentUrl;

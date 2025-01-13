@@ -15,11 +15,12 @@ namespace StudentHousingBV.Classes.Entities
         #endregion
 
         #region Constructors
-        public Announcement(int announcementId, string title, string message, Flat? assignedFlat)
+        public Announcement(int announcementId, string title, string message, DateTime date, Flat? assignedFlat)
         {
             AnnouncementId = announcementId;
             Title = title;
             Message = message;
+            Date = date;
             AssignedFlat = assignedFlat;
         }
         #endregion
