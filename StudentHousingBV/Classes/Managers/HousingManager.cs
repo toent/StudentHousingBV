@@ -58,7 +58,7 @@ namespace StudentHousingBV.Classes.Managers
             return buildings.Where(building => building.Address.Contains(filter, StringComparison.CurrentCultureIgnoreCase)).ToList();
         }
 
-        public Building? GetBuilding(int buildingId) =>  buildings.FirstOrDefault(building => building.BuildingId == buildingId);
+        public Building? GetBuilding(int buildingId) => buildings.FirstOrDefault(building => building.BuildingId == buildingId);
 
         public bool AddBuilding(Building building)
         {
@@ -101,7 +101,8 @@ namespace StudentHousingBV.Classes.Managers
             return result;
         }
 
-        public bool UpdateBuilding(Building building) {
+        public bool UpdateBuilding(Building building)
+        {
             bool result;
             if (!buildings.Contains(building))
             {
@@ -141,7 +142,8 @@ namespace StudentHousingBV.Classes.Managers
             return building.Flats.Where(flat => flat.FlatNumber.ToString().Contains(filter, StringComparison.CurrentCultureIgnoreCase)).ToList();
         }
 
-        public bool AddFlat(Flat flat) {
+        public bool AddFlat(Flat flat)
+        {
             bool result;
             if (GetFlats().Contains(flat))
             {
@@ -331,18 +333,6 @@ namespace StudentHousingBV.Classes.Managers
         }
 
         /// <summary>
-        /// Get all global announcements
-        /// </summary>
-        /// <returns> A list of all global announcements if they exist, otherwise null </returns>
-        public ICollection<Announcement> GetGlobalAnnouncements()
-        {
-            return buildings.SelectMany(building => building.Flats)
-                            .SelectMany(flat => flat.Announcements)
-                            .Where(announcement => announcement.IsGlobal)
-                            .ToList();
-        }
-
-        /// <summary>
         /// Get all announcements
         /// </summary>
         /// <returns> A list of all announcements if they exist, otherwise null </returns>
@@ -371,18 +361,6 @@ namespace StudentHousingBV.Classes.Managers
             if (GetAllAnnouncements().FirstOrDefault(a => a.AnnouncementId == announcement.AnnouncementId) is null)
             {
                 announcement.AssignedFlat.Announcements.Add(announcement);
-                result = true;
-                dataManager.SaveAllData(buildings);
-            }
-            return result;
-        }
-
-        public bool AddGlobalAnnouncement(Announcement announcement)
-        {
-            bool result = false;
-            if (GetGlobalAnnouncements().FirstOrDefault(a => a.AnnouncementId == announcement.AnnouncementId) is null)
-            {
-                buildings.SelectMany(building => building.Flats).ToList().ForEach(flat => flat.Announcements.Add(announcement));
                 result = true;
                 dataManager.SaveAllData(buildings);
             }

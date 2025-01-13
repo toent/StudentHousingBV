@@ -9,19 +9,17 @@ namespace StudentHousingBV.Classes.Entities
         public string Title { get; set; }
         public string Message { get; set; }
         public DateTime Date { get; set; }
-        public bool IsGlobal { get; set; }
         [JsonIgnore]
         public Flat? AssignedFlat { get; set; }
 
         #endregion
 
         #region Constructors
-        public Announcement(int announcementId, string title, string message, bool isGlobal, Flat? assignedFlat) 
-        { 
-            AnnouncementId = announcementId; 
-            Title = title; 
-            Message = message; 
-            IsGlobal = isGlobal;
+        public Announcement(int announcementId, string title, string message, Flat? assignedFlat)
+        {
+            AnnouncementId = announcementId;
+            Title = title;
+            Message = message;
             AssignedFlat = assignedFlat;
         }
         #endregion

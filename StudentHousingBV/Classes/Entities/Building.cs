@@ -9,6 +9,7 @@ namespace StudentHousingBV.Classes.Entities
         public string Address { get; set; }
         public List<Rule> Rules { get; set; }
         public List<Flat> Flats { get; set; }
+        //public List<Announcement> Announcements { get; set; }
         #endregion
 
         #region Constructors

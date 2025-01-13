@@ -22,18 +22,23 @@ namespace StudentHousingBV.Company_App
 
         private void LoadAnnouncements()
         {
-            if (cbFlat.SelectedItem is Flat flat)
+            // Get global announcements (they are stored in the building)
+            if (cbBuilding.SelectedItem is Building building)
             {
-                pAnnouncements.Controls.Clear();
-                announcements = [.. flat.Announcements];
-
-                foreach (Announcement announcement in announcements)
+                // Get flat announcements
+                if (cbFlat.SelectedItem is Flat flat)
                 {
-                    CompanyAnnouncementControl announcementControl = new(announcement);
-                    announcementControl.DataChanged += CompanyAnnouncementControl_DataChanged!;
-                    announcementControl.Deleted += CompanyAnnouncementsControl_Deleted!;
-                    announcementControl.Margin = new Padding(0, 10, 0, 10);
-                    pAnnouncements.Controls.Add(announcementControl);
+                    pAnnouncements.Controls.Clear();
+                    announcements = [.. flat.Announcements];
+
+                    foreach (Announcement announcement in announcements)
+                    {
+                        CompanyAnnouncementControl announcementControl = new(announcement);
+                        announcementControl.DataChanged += CompanyAnnouncementControl_DataChanged!;
+                        announcementControl.Deleted += CompanyAnnouncementsControl_Deleted!;
+                        announcementControl.Margin = new Padding(0, 10, 0, 10);
+                        pAnnouncements.Controls.Add(announcementControl);
+                    }
                 }
             }
         }
