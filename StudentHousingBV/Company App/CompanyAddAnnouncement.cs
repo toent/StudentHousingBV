@@ -45,14 +45,11 @@ namespace StudentHousingBV.Company_App
 
         private void cbGlobal_CheckedChanged(object sender, EventArgs e)
         {
-            if (cbGlobal.Checked)
-            {
                 cbBuilding.Enabled = false;
                 cbFlat.Enabled = false;
 
                 cbBuilding.SelectedItem = null;
                 cbFlat.SelectedItem = null;
-            }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
