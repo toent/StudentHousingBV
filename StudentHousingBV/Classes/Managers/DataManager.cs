@@ -951,6 +951,8 @@ namespace StudentHousingBV.Classes.Managers
                 command.Parameters.AddWithValue("@PaymentUrl", grocery.PaymentUrl);
                 command.Parameters.AddWithValue("@GroceryItems", grocery.GroceryItems);
                 command.Parameters.AddWithValue("@FlatId", grocery.AssignedFlat.FlatId);
+                command.ExecuteNonQuery();
+                result = true;
             }
             catch (Exception ex)
             {
