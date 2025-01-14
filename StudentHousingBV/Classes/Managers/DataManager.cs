@@ -1,15 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
 using StudentHousingBV.Classes.Entities;
-using System.Data;
-using System.Net;
-using System.Security.Cryptography.Xml;
-using System.Security.Principal;
-using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
-using System.Windows.Forms;
 
 namespace StudentHousingBV.Classes.Managers
 {
@@ -144,6 +136,24 @@ namespace StudentHousingBV.Classes.Managers
                 SqlCommand command = new(query, connection);
                 command.Parameters.AddWithValue("@Address", building.Address);
                 command.ExecuteNonQuery();
+                foreach (Flat flat in building.Flats)
+                {
+                    if (GetFlat(flat.FlatId) == null)
+                    {
+                        AddFlat(flat);
+                    }
+                    else
+                    {
+                        UpdateFlat(flat);
+                    }
+                }
+                foreach (Flat flat in building.Flats)
+                {
+                    if (flat.AssignedBuilding.BuildingId == building.BuildingId && !building.Flats.Contains(flat))
+                    {
+                        DeleteFlat(flat.FlatId);
+                    }
+                }
                 result = true;
             }
             catch (Exception ex)
@@ -164,6 +174,24 @@ namespace StudentHousingBV.Classes.Managers
                 command.Parameters.AddWithValue("@Address", building.Address);
                 command.Parameters.AddWithValue("@BuildingId", building.BuildingId);
                 command.ExecuteNonQuery();
+                foreach (Flat flat in building.Flats)
+                {
+                    if (GetFlat(flat.FlatId) == null)
+                    {
+                        AddFlat(flat);
+                    }
+                    else
+                    {
+                        UpdateFlat(flat);
+                    }
+                }
+                foreach (Flat flat in GetFlatByBuilding(building.BuildingId))
+                {
+                    if (flat.AssignedBuilding.BuildingId == building.BuildingId && !building.Flats.Contains(flat))
+                    {
+                        DeleteFlat(flat.FlatId);
+                    }
+                }
                 result = true;
             }
             catch (Exception ex)
@@ -183,6 +211,14 @@ namespace StudentHousingBV.Classes.Managers
                 SqlCommand command = new(query, connection);
                 command.Parameters.AddWithValue("@BuildingId", buildingId);
                 command.ExecuteNonQuery();
+
+                foreach (Flat flat in GetAllFlats())
+                {
+                    if (flat.AssignedBuilding.BuildingId == buildingId)
+                    {
+                        DeleteFlat(flat.FlatId);
+                    }
+                }
                 result = true;
             }
             catch (Exception ex)
@@ -205,6 +241,7 @@ namespace StudentHousingBV.Classes.Managers
                 if (reader.Read())
                 {
                     result = new Building(reader.GetInt32(0), reader.GetString(1));
+                    result.Flats = GetFlatByBuilding(result.BuildingId);
                 }
             }
             catch (Exception ex)
@@ -225,7 +262,9 @@ namespace StudentHousingBV.Classes.Managers
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    buildings.Add(new Building(reader.GetInt32(0), reader.GetString(1)));
+                    Building building = new(reader.GetInt32(0), reader.GetString(1));
+                    building.Flats = GetFlatByBuilding(building.BuildingId);
+                    buildings.Add(building);
                 }
             }
             catch (Exception ex)
@@ -248,6 +287,83 @@ namespace StudentHousingBV.Classes.Managers
                 command.Parameters.AddWithValue("@FlatNumber", flat.FlatNumber);
                 command.Parameters.AddWithValue("@BuildingId", flat.AssignedBuilding.BuildingId);
                 command.ExecuteNonQuery();
+                foreach (Student student in flat.Students)
+                {
+                    if (GetStudent(student.StudentId) == null)
+                    {
+                        AddStudent(student);
+                    }
+                    else
+                    {
+                        UpdateStudent(student);
+                    }
+                }
+                foreach (Complaint complaint in flat.Complaints)
+                {
+                    if (GetComplaint(complaint.ComplaintId) == null)
+                    {
+                        AddComplaint(complaint);
+                    }
+                    else
+                    {
+                        UpdateComplaint(complaint);
+                    }
+                }
+                foreach (Agreement agreement in flat.Agreements)
+                {
+                    if (GetAgreement(agreement.AgreementId) == null)
+                    {
+                        AddAgreement(agreement);
+                    }
+                    else
+                    {
+                        UpdateAgreement(agreement);
+                    }
+                }
+                foreach (Announcement announcement in flat.Announcements)
+                {
+                    if (GetAnnouncement(announcement.AnnouncementId) == null)
+                    {
+                        AddAnnouncement(announcement);
+                    }
+                    else
+                    {
+                        UpdateAnnouncement(announcement);
+                    }
+                }
+                foreach (Chore chore in flat.Chores)
+                {
+                    if (GetChore(chore.ChoreId) == null)
+                    {
+                        AddChore(chore);
+                    }
+                    else
+                    {
+                        UpdateChore(chore);
+                    }
+                }
+                foreach (Grocery grocery in flat.Groceries)
+                {
+                    if (GetGrocery(grocery.GroceryId) == null)
+                    {
+                        AddGrocery(grocery);
+                    }
+                    else
+                    {
+                        UpdateGrocery(grocery);
+                    }
+                }
+                foreach (Rule rule in flat.Rules)
+                {
+                    if (GetRule(rule.RuleId) == null)
+                    {
+                        AddRule(rule);
+                    }
+                    else
+                    {
+                        UpdateRule(rule);
+                    }
+                }
                 result = true;
             }
             catch (Exception ex)
@@ -269,7 +385,85 @@ namespace StudentHousingBV.Classes.Managers
                 command.Parameters.AddWithValue("@BuildingId", flat.AssignedBuilding.BuildingId);
                 command.Parameters.AddWithValue("@FlatId", flat.FlatId);
                 command.ExecuteNonQuery();
+                foreach (Student student in flat.Students)
+                {
+                    if (GetStudent(student.StudentId) == null)
+                    {
+                        AddStudent(student);
+                    }
+                    else
+                    {
+                        UpdateStudent(student);
+                    }
+                }
+                foreach (Complaint complaint in flat.Complaints)
+                {
+                    if (GetComplaint(complaint.ComplaintId) == null)
+                    {
+                        AddComplaint(complaint);
+                    }
+                    else
+                    {
+                        UpdateComplaint(complaint);
+                    }
+                }
+                foreach (Agreement agreement in flat.Agreements)
+                {
+                    if (GetAgreement(agreement.AgreementId) == null)
+                    {
+                        AddAgreement(agreement);
+                    }
+                    else
+                    {
+                        UpdateAgreement(agreement);
+                    }
+                }
+                foreach (Announcement announcement in flat.Announcements)
+                {
+                    if (GetAnnouncement(announcement.AnnouncementId) == null)
+                    {
+                        AddAnnouncement(announcement);
+                    }
+                    else
+                    {
+                        UpdateAnnouncement(announcement);
+                    }
+                }
+                foreach (Chore chore in flat.Chores)
+                {
+                    if (GetChore(chore.ChoreId) == null)
+                    {
+                        AddChore(chore);
+                    }
+                    else
+                    {
+                        UpdateChore(chore);
+                    }
+                }
+                foreach (Grocery grocery in flat.Groceries)
+                {
+                    if (GetGrocery(grocery.GroceryId) == null)
+                    {
+                        AddGrocery(grocery);
+                    }
+                    else
+                    {
+                        UpdateGrocery(grocery);
+                    }
+                }
+                foreach (Rule rule in flat.Rules)
+                {
+                    if (GetRule(rule.RuleId) == null)
+                    {
+                        AddRule(rule);
+                    }
+                    else
+                    {
+                        UpdateRule(rule);
+                    }
+                }
                 result = true;
+
             }
             catch (Exception ex)
             {
@@ -288,6 +482,30 @@ namespace StudentHousingBV.Classes.Managers
                 SqlCommand command = new(query, connection);
                 command.Parameters.AddWithValue("@FlatId", flatId);
                 command.ExecuteNonQuery();
+                foreach (Complaint complaint in GetComplaintByFlat(flatId))
+                {
+                    DeleteComplaint(complaint.ComplaintId);
+                }
+                foreach (Agreement agreement in GetAgreementByFlat(flatId))
+                {
+                    DeleteAgreement(agreement.AgreementId);
+                }
+                foreach (Announcement announcement in GetAnnouncementByFlat(flatId))
+                {
+                    DeleteAnnouncement(announcement.AnnouncementId);
+                }
+                foreach (Chore chore in GetChoreByFlat(flatId))
+                {
+                    DeleteChore(chore.ChoreId);
+                }
+                foreach (Grocery grocery in GetGroceryByFlat(flatId))
+                {
+                    DeleteGrocery(grocery.GroceryId);
+                }
+                foreach (Rule rule in GetRuleByFlat(flatId))
+                {
+                    DeleteRule(rule.RuleId);
+                }
                 result = true;
             }
             catch (Exception ex)
@@ -317,6 +535,49 @@ namespace StudentHousingBV.Classes.Managers
                 MessageBox.Show($"Error getting flat: {ex.Message}");
             }
             return result;
+        }
+        public List<Flat> GetAllFlats()
+        {
+            List<Flat> flats = [];
+            try
+            {
+                using SqlConnection connection = new(CONNECTION_STRING);
+                connection.Open();
+                string query = "SELECT * FROM Flat";
+                SqlCommand command = new(query, connection);
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    flats.Add(new Flat(reader.GetInt32(0), reader.GetInt32(1), GetBuilding(reader.GetInt32(2))));
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error getting flats: {ex.Message}");
+            }
+            return flats;
+        }
+        public List<Flat> GetFlatByBuilding(int buildingId)
+        {
+            List<Flat> flats = [];
+            try
+            {
+                using SqlConnection connection = new(CONNECTION_STRING);
+                connection.Open();
+                string query = "SELECT * FROM Flat WHERE AssignedBuildingId = @BuildingId";
+                SqlCommand command = new(query, connection);
+                command.Parameters.AddWithValue("@BuildingId", buildingId);
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    flats.Add(new Flat(reader.GetInt32(0), reader.GetInt32(1), GetBuilding(reader.GetInt32(2))));
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error getting flats by building: {ex.Message}");
+            }
+            return flats;
         }
 
         // CRUD for Chore
@@ -409,6 +670,28 @@ namespace StudentHousingBV.Classes.Managers
                 MessageBox.Show($"Error getting chore: {ex.Message}");
             }
             return chore;
+        }
+        public List<Chore> GetChoreByFlat(int flatId)
+        {
+            List<Chore> chores = [];
+            try
+            {
+                using SqlConnection connection = new(CONNECTION_STRING);
+                connection.Open();
+                string query = "SELECT * FROM Chore WHERE AssignedFlatId = @FlatId";
+                SqlCommand command = new(query, connection);
+                command.Parameters.AddWithValue("@FlatId", flatId);
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    chores.Add(new(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetBoolean(3), reader.GetDateTime(5), GetFlat(reader.GetInt32(6)), GetStudent(reader.GetString(4))));
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error getting chores by flat: {ex.Message}");
+            }
+            return chores;
         }
 
         // CRUD for Student
@@ -584,10 +867,9 @@ namespace StudentHousingBV.Classes.Managers
             }
             return agreement;
         }
-
         private List<Student> GetAgreeingStudents(int agreementId)
         {
-            List<Student> result = new List<Student>();
+            List<Student> result = [];
             try
             {
                 using SqlConnection connection = new(CONNECTION_STRING);
@@ -608,6 +890,28 @@ namespace StudentHousingBV.Classes.Managers
                 MessageBox.Show($"Error getting agreeing students: {ex.Message}");
             }
 
+            return result;
+        }
+        private List<Agreement> GetAgreementByFlat(int flatId)
+        {
+            List<Agreement> result = [];
+            try
+            {
+                using SqlConnection connection = new(CONNECTION_STRING);
+                connection.Open();
+                string query = "SELECT * FROM Agreement WHERE AssignedFlatId = @FlatId";
+                SqlCommand command = new(query, connection);
+                command.Parameters.AddWithValue("@FlatId", flatId);
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    result.Add(new(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), GetAgreeingStudents(reader.GetInt32(0)), GetStudent(reader.GetString(3)), reader.GetDateTime(4), GetFlat(reader.GetInt32(5))));
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error getting agreements by flat: {ex.Message}");
+            }
             return result;
         }
 
@@ -700,6 +1004,28 @@ namespace StudentHousingBV.Classes.Managers
             }
             return grocery;
         }
+        public List<Grocery> GetGroceryByFlat(int flatId)
+        {
+            List<Grocery> groceries = [];
+            try
+            {
+                using SqlConnection connection = new(CONNECTION_STRING);
+                connection.Open();
+                string query = "SELECT * FROM Grocery WHERE AssignedFlatId = @FlatId";
+                SqlCommand command = new(query, connection);
+                command.Parameters.AddWithValue("@FlatId", flatId);
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    groceries.Add(new(reader.GetInt32(0), reader.GetDateTime(1), GetStudent(reader.GetString(2)), reader.GetString(3), reader.GetString(4), GetFlat(reader.GetInt32(6)), reader.GetString(5)));
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error getting groceries by flat: {ex.Message}");
+            }
+            return groceries;
+        }
 
         // CRUD for Announcement
         public bool AddAnnouncement(Announcement announcement)
@@ -788,9 +1114,31 @@ namespace StudentHousingBV.Classes.Managers
             }
             return announcement;
         }
+        public List<Announcement> GetAnnouncementByFlat(int flatId)
+        {
+            List<Announcement> announcements = [];
+            try
+            {
+                using SqlConnection connection = new(CONNECTION_STRING);
+                connection.Open();
+                string query = "SELECT * FROM Announcement WHERE AssignedFlatId = @FlatId";
+                SqlCommand command = new(query, connection);
+                command.Parameters.AddWithValue("@FlatId", flatId);
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    announcements.Add(new(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetDateTime(3), GetFlat(reader.GetInt32(4))));
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error getting announcements by flat: {ex.Message}");
+            }
+            return announcements;
+        }
 
         // CRUD for Rule
-        public bool AddRule(Classes.Entities.Rule rule)
+        public bool AddRule(Rule rule)
         {
             bool result = false;
             try
@@ -811,7 +1159,7 @@ namespace StudentHousingBV.Classes.Managers
             }
             return result;
         }
-        public bool UpdateRule(Classes.Entities.Rule rule)
+        public bool UpdateRule(Rule rule)
         {
             bool result = false;
             try
@@ -852,7 +1200,7 @@ namespace StudentHousingBV.Classes.Managers
             }
             return result;
         }
-        public Classes.Entities.Rule? GetRule(int ruleId)
+        public Rule? GetRule(int ruleId)
         {
             Classes.Entities.Rule? rule = null;
             try
@@ -873,6 +1221,28 @@ namespace StudentHousingBV.Classes.Managers
                 MessageBox.Show($"Error getting rule: {ex.Message}");
             }
             return rule;
+        }
+        public List<Rule> GetRuleByFlat(int flatId)
+        {
+            List<Rule> rules = [];
+            try
+            {
+                using SqlConnection connection = new(CONNECTION_STRING);
+                connection.Open();
+                string query = "SELECT * FROM Rule WHERE AssignedFlatId = @FlatId";
+                SqlCommand command = new(query, connection);
+                command.Parameters.AddWithValue("@FlatId", flatId);
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    //rules.Add(new(reader.GetInt32(0), reader.GetString(1), GetFlat(reader.GetInt32(2)), GetBuilding(reader.GetInt32(3)));
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error getting rules by flat: {ex.Message}");
+            }
+            return rules;
         }
 
         // CRUD for Complaint
@@ -957,6 +1327,28 @@ namespace StudentHousingBV.Classes.Managers
                 MessageBox.Show($"Error getting complaint: {ex.Message}");
             }
             return complaint;
+        }
+        public List<Complaint> GetComplaintByFlat(int flatId)
+        {
+            List<Complaint> complaints = [];
+            try
+            {
+                using SqlConnection connection = new(CONNECTION_STRING);
+                connection.Open();
+                string query = "SELECT * FROM Complaint WHERE AssignedFlatId = @FlatId";
+                SqlCommand command = new(query, connection);
+                command.Parameters.AddWithValue("@FlatId", flatId);
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    complaints.Add(new Complaint(reader.GetInt32(0), GetFlat(reader.GetInt32(2)), reader.GetString(1)));
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error getting complaints by flat: {ex.Message}");
+            }
+            return complaints;
         }
         #endregion
 
