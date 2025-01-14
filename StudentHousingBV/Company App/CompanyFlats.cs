@@ -1,14 +1,6 @@
 ﻿using StudentHousingBV.Classes.Entities;
 using StudentHousingBV.Classes.Managers;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace StudentHousingBV.Company_App
 {
@@ -69,19 +61,6 @@ namespace StudentHousingBV.Company_App
             }
         }
 
-        private void ClearFields()
-        {
-            tbFlatId.Text = string.Empty;
-            nudFlatNumber.Value = 0;
-            lbStudentOverview.Items.Clear();
-        }
-
-        private void LoadBuildingFilter()
-        {
-            lbBuildingFilter.Items.Clear();
-            lbBuildingFilter.Items.AddRange([.. housingManager.Buildings]);
-        }
-
         private void lbBuildingFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (lbBuildingFilter.SelectedItem is Building building)
@@ -112,6 +91,10 @@ namespace StudentHousingBV.Company_App
                         LoadFlats(lbBuildingFilter.SelectedItem as Building);
                         MessageBox.Show("Flat deleted successfully.");
                     }
+                    else
+                    {
+                        MessageBox.Show("There was an error deleting the flat.", Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 else
                 {
@@ -132,16 +115,27 @@ namespace StudentHousingBV.Company_App
 
         private void btnModifyFlat_Click(object sender, EventArgs e)
         {
-            if (lbFlats.SelectedItem is Flat flat && ValidateFlat())
+            try
             {
-
-                flat.FlatNumber = (int)nudFlatNumber.Value;
-
-                if (housingManager.UpdateFlat(flat))
+                if (lbFlats.SelectedItem is Flat flat && ValidateFlat())
                 {
-                    MessageBox.Show("Flat updated successfully.");
-                    LoadFlats(lbBuildingFilter.SelectedItem as Building);
+
+                    flat.FlatNumber = (int)nudFlatNumber.Value;
+
+                    if (housingManager.UpdateFlat(flat))
+                    {
+                        MessageBox.Show("Flat updated successfully.");
+                        LoadFlats(lbBuildingFilter.SelectedItem as Building);
+                    }
+                    else
+                    {
+                        MessageBox.Show("There was an error updating the flat.", Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -154,6 +148,19 @@ namespace StudentHousingBV.Company_App
             }
 
             return true;
+        }
+
+        private void ClearFields()
+        {
+            tbFlatId.Text = string.Empty;
+            nudFlatNumber.Value = 0;
+            lbStudentOverview.Items.Clear();
+        }
+
+        private void LoadBuildingFilter()
+        {
+            lbBuildingFilter.Items.Clear();
+            lbBuildingFilter.Items.AddRange([.. housingManager.Buildings]);
         }
     }
 }

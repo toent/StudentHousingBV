@@ -37,14 +37,14 @@ namespace StudentHousingBV
             }
         }
 
-        private void loadRules(Flat flat)
+        private void LoadRules(Flat flat)
         {
-            if(flat != null)
+            if (flat != null)
             {
                 flpRules.Controls.Clear();
                 foreach (Rule rule in flat.Rules)
                 {
-                    HouserulesControl ruleControl = new HouserulesControl(rule, false);
+                    HouserulesControl ruleControl = new(rule, false);
                     ruleControl.modifyRule += HouserulesControl_btnModify!;
                     ruleControl.deleteRule += HouserulesControl_btnDelete!;
                     flpRules.Controls.Add(ruleControl);
@@ -59,40 +59,40 @@ namespace StudentHousingBV
 
         private void btnCreate_Click(object sender, EventArgs e)
         {
-            CompanyAddHouseRule housingRuleWindow = new CompanyAddHouseRule(housingManager, cbxFlat.SelectedItem as Flat);
+            CompanyAddHouseRule housingRuleWindow = new(housingManager, cbxFlat.SelectedItem as Flat);
             housingRuleWindow.ShowDialog();
-            if(housingRuleWindow.DialogResult == DialogResult.OK)
+            if (housingRuleWindow.DialogResult == DialogResult.OK)
             {
-                loadRules(cbxFlat.SelectedItem as Flat);
+                LoadRules(cbxFlat.SelectedItem as Flat);
             }
 
         }
 
         private void HouserulesControl_btnModify(object sender, EventArgs e)
         {
-            if(sender.GetType() == typeof(HouserulesControl))
+            if (sender.GetType() == typeof(HouserulesControl))
             {
                 HouserulesControl ruleControl = sender as HouserulesControl;
-                CompanyAddHouseRule housingRuleWindow = new CompanyAddHouseRule(housingManager, cbxFlat.SelectedItem as Flat, ruleControl.rule);
+                CompanyAddHouseRule housingRuleWindow = new(housingManager, cbxFlat.SelectedItem as Flat, ruleControl.rule);
 
                 housingRuleWindow.ShowDialog();
 
                 if (housingRuleWindow.DialogResult == DialogResult.OK)
                 {
-                    loadRules(cbxFlat.SelectedItem as Flat);
+                    LoadRules(cbxFlat.SelectedItem as Flat);
                 }
             }
         }
 
         private void HouserulesControl_btnDelete(object sender, EventArgs e)
         {
-            if (sender.GetType() == typeof(HouserulesControl))
+            if (sender is HouserulesControl ruleControl && cbxFlat.SelectedItem is Flat flat)
             {
-                HouserulesControl ruleControl = sender as HouserulesControl;
-                Flat flat = cbxFlat.SelectedItem as Flat;
-                flat.Rules.Remove(ruleControl.rule);
-                housingManager.SaveAllData();
-                loadRules(flat);
+                if (housingManager.RemoveRule(ruleControl.rule))
+                {
+                    LoadRules(flat);
+                    MessageBox.Show("Rule deleted", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
         }
 
@@ -103,7 +103,7 @@ namespace StudentHousingBV
 
         private void cbxFlat_SelectedIndexChanged(object sender, EventArgs e)
         {
-            loadRules(cbxFlat.SelectedItem as Flat);
+            LoadRules(cbxFlat.SelectedItem as Flat);
         }
     }
 }

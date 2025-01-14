@@ -28,8 +28,8 @@ namespace StudentHousingBV.Company_App
 
             if (addBuilding.DialogResult == DialogResult.OK && addBuilding.Building is not null && housingManager.AddBuilding(addBuilding.Building))
             {
-                LoadBuildings();
                 MessageBox.Show("Building added successfully.");
+                LoadBuildings();
             }
             else
             {

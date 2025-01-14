@@ -45,10 +45,18 @@ namespace StudentHousingBV.Company_App
 
         private void CompanyAnnouncementControl_DataChanged(object sender, EventArgs e)
         {
-            housingManager.SaveAllData();
-            LoadAnnouncements();
-            MessageBox.Show("Changes applied", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+            if (sender is CompanyAnnouncementControl announcementControl)
+            {
+                if(housingManager.UpdateAnnouncement(announcementControl.announcement))
+                {
+                    LoadAnnouncements();
+                    MessageBox.Show("Changes applied", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Failed to apply changes", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
 
         private void CompanyAnnouncementsControl_Deleted(object sender, EventArgs e)
@@ -88,7 +96,6 @@ namespace StudentHousingBV.Company_App
         private void AddAnnouncement(object sender, Announcement announcement)
         {
             housingManager.AddAnnouncement(announcement);
-            housingManager.SaveAllData();
             LoadAnnouncements();
         }
     }

@@ -1,15 +1,7 @@
 ﻿using StudentHousingBV.Classes.Entities;
 using StudentHousingBV.Classes.Managers;
 using StudentHousingBV.Custom_Controls;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace StudentHousingBV.Student_App
 {
@@ -25,7 +17,7 @@ namespace StudentHousingBV.Student_App
             InitializeComponent();
             this.loggedStudent = LoggedStudent;
             this.housingManager = HousingManager;
-            this.agreements = new List<Agreement>();
+            this.agreements = [];
             GetAgreements();
             SetUI_Elements();
         }
@@ -50,10 +42,10 @@ namespace StudentHousingBV.Student_App
         private void UpdateAgreementVisual()
         {
             pAgreements.Controls.Clear();
-            this.controls = new List<AgreementControl>();
+            this.controls = [];
             foreach (Agreement agreement in agreements)
             {
-                AgreementControl newControl = new AgreementControl(agreement, loggedStudent);
+                AgreementControl newControl = new(agreement, loggedStudent);
                 controls.Add(newControl);
                 newControl.deleteAgreement += AgreementControl_deleteAgreement!;
                 newControl.agreeToAgreement += AgreementControl_agreeToAgreement!;
@@ -64,11 +56,11 @@ namespace StudentHousingBV.Student_App
         private void GetAllAgreementCreators()
         {
             List<Agreement> allAgreements = housingManager.GetAllAgreements().Where(agreement => agreement.AssignedFlat == loggedStudent.AssignedFlat).ToList();
-            List<Student> creators = new List<Student>();
+            List<Student> creators = [];
             creators = allAgreements.Select(agreement => agreement.Student).Distinct().ToList();
             creators.Insert(0, new Student("-1", "All"));
 
-            if(!creators.Any(student => student.StudentId == loggedStudent.StudentId))
+            if (!creators.Any(student => student.StudentId == loggedStudent.StudentId))
             {
                 btnShowMine.Enabled = false;
             }
@@ -87,10 +79,10 @@ namespace StudentHousingBV.Student_App
             if (sender is AgreementControl selectedControl)
             {
                 Agreement selectedAgreement = selectedControl.agreementToControl;
-                if (selectedAgreement.AgreedBy.Count() <= 0)
+                if (selectedAgreement.AgreedBy.Count <= 0)
                 {
                     housingManager.DeleteAgreement(selectedAgreement);
-                    this.agreements.Remove(selectedAgreement);
+                    agreements.Remove(selectedAgreement);
                     GetAgreements();
                 }
                 else
@@ -100,23 +92,29 @@ namespace StudentHousingBV.Student_App
 
         private void AgreementControl_agreeToAgreement(object sender, EventArgs e)
         {
-            if(sender is AgreementControl)
+            if (sender is AgreementControl agreementControl)
             {
-                housingManager.SaveAllData();
+                if (housingManager.UpdateAgreement(agreementControl.agreementToControl))
+                {
+                    MessageBox.Show("Agreement accepted", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
         }
 
         private void btnAddAgreement_Click(object sender, EventArgs e)
         {
-            StudentAddAgreement creationPage = new StudentAddAgreement(housingManager, loggedStudent);
+            StudentAddAgreement creationPage = new(housingManager, loggedStudent);
             creationPage.ShowDialog();
+
             if (creationPage.DialogResult == DialogResult.OK && creationPage.agreement is Agreement fetchedAgreement)
             {
-                this.loggedStudent.AssignedFlat.Agreements.Add(fetchedAgreement);
-                this.housingManager.SaveAllData();
-                this.agreements.Add(fetchedAgreement);
-                GetAgreements();
-                GetAllAgreementCreators();
+                if (housingManager.AddAgreement(fetchedAgreement))
+                {
+                    MessageBox.Show("Agreement added", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    agreements.Add(fetchedAgreement);
+                    GetAgreements();
+                    GetAllAgreementCreators();
+                }
             }
         }
 
@@ -133,7 +131,7 @@ namespace StudentHousingBV.Student_App
         private void dtpStartDate_ValueChanged(object sender, EventArgs e)
         {
             GetAgreements();
-            if(dtpStartDate.Value >= dtpEndDate.Value)
+            if (dtpStartDate.Value >= dtpEndDate.Value)
             {
                 dtpStartDate.Value = dtpEndDate.Value.AddDays(-1);
             }

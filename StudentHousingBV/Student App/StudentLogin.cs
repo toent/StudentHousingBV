@@ -11,7 +11,6 @@ namespace StudentHousingBV.Student_App
         {
             InitializeComponent();
             housingManager = new HousingManager();
-            InitializeTestingDataset();
             StartPosition = FormStartPosition.CenterScreen;
         }
 
@@ -83,7 +82,6 @@ namespace StudentHousingBV.Student_App
                 housingManager.Buildings[0].Flats[0].Agreements.Add(new Agreement(housingManager.GetNextAgreementId(), "Chores", "I agree to do the chores.", [housingManager.GetStudent("F12345")], housingManager.GetStudent("F12345"), housingManager.Buildings[0].Flats[0]));
                 housingManager.Buildings[0].Flats[0].Agreements.Add(new Agreement(housingManager.GetNextAgreementId(), "Garbage collection", "I agree to throw the garbage away correctly.", [housingManager.GetStudent("F12345")], housingManager.GetStudent("F12345"), housingManager.Buildings[0].Flats[0]));
                 housingManager.Buildings[0].Flats[0].Agreements.Add(new Agreement(housingManager.GetNextAgreementId(), "Quiet hours", "I agree to be quiet during quiet hours.", [housingManager.GetStudent("F12345")], housingManager.GetStudent("F12345"), housingManager.Buildings[0].Flats[0]));
-                housingManager.SaveAllData();
             }
         }
     }

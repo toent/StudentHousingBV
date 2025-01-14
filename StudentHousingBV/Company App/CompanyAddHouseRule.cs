@@ -1,14 +1,5 @@
 ﻿using StudentHousingBV.Classes.Entities;
 using StudentHousingBV.Classes.Managers;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace StudentHousingBV.Company_App
 {
@@ -16,7 +7,7 @@ namespace StudentHousingBV.Company_App
     {
         private readonly HousingManager housingManager;
         private readonly Flat flat;
-        private readonly Classes.Entities.Rule rule;
+        private readonly Rule rule;
         private bool isUpdate;
 
         public CompanyAddHouseRule(HousingManager housingManager, Flat flat)
@@ -29,7 +20,7 @@ namespace StudentHousingBV.Company_App
             SetupVisuals(null);
         }
 
-        public CompanyAddHouseRule(HousingManager housingManager, Flat flat, Classes.Entities.Rule rule)
+        public CompanyAddHouseRule(HousingManager housingManager, Flat flat, Rule rule)
         {
             InitializeComponent();
 
@@ -37,7 +28,7 @@ namespace StudentHousingBV.Company_App
             this.housingManager = housingManager;
             this.flat = flat;
             this.rule = rule;
-          
+
             SetupVisuals(rule.Description);
         }
 
@@ -60,18 +51,23 @@ namespace StudentHousingBV.Company_App
 
         private void btnAddUpdate_Click(object sender, EventArgs e)
         {
-            if (tbxDescription.Text != String.Empty)
+            if (!string.IsNullOrEmpty(tbxDescription.Text))
             {
                 if (isUpdate)
                 {
                     rule.Description = tbxDescription.Text;
+                    if (housingManager.UpdateRule(rule))
+                    {
+                        MessageBox.Show("Rule updated successfully.");
+                    }
                 }
                 else
                 {
-                    Classes.Entities.Rule newRule = new Classes.Entities.Rule(housingManager.GetNextRuleId(), flat, tbxDescription.Text);
-                    flat.Rules.Add(newRule);
+                    if (housingManager.AddRule(new(housingManager.GetNextRuleId(), flat, tbxDescription.Text)))
+                    {
+                        MessageBox.Show("Rule added successfully.");
+                    }
                 }
-                housingManager.SaveAllData();
                 DialogResult = DialogResult.OK;
                 Close();
             }

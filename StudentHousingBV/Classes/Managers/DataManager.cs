@@ -136,24 +136,6 @@ namespace StudentHousingBV.Classes.Managers
                 SqlCommand command = new(query, connection);
                 command.Parameters.AddWithValue("@Address", building.Address);
                 command.ExecuteNonQuery();
-                foreach (Flat flat in building.Flats)
-                {
-                    if (GetFlat(flat.FlatId) == null)
-                    {
-                        AddFlat(flat);
-                    }
-                    else
-                    {
-                        UpdateFlat(flat);
-                    }
-                }
-                foreach (Flat flat in building.Flats)
-                {
-                    if (flat.AssignedBuilding.BuildingId == building.BuildingId && !building.Flats.Contains(flat))
-                    {
-                        DeleteFlat(flat.FlatId);
-                    }
-                }
                 result = true;
             }
             catch (Exception ex)
@@ -174,24 +156,6 @@ namespace StudentHousingBV.Classes.Managers
                 command.Parameters.AddWithValue("@Address", building.Address);
                 command.Parameters.AddWithValue("@BuildingId", building.BuildingId);
                 command.ExecuteNonQuery();
-                foreach (Flat flat in building.Flats)
-                {
-                    if (GetFlat(flat.FlatId) == null)
-                    {
-                        AddFlat(flat);
-                    }
-                    else
-                    {
-                        UpdateFlat(flat);
-                    }
-                }
-                foreach (Flat flat in GetFlatByBuilding(building.BuildingId))
-                {
-                    if (flat.AssignedBuilding.BuildingId == building.BuildingId && !building.Flats.Contains(flat))
-                    {
-                        DeleteFlat(flat.FlatId);
-                    }
-                }
                 result = true;
             }
             catch (Exception ex)

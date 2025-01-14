@@ -25,8 +25,18 @@ namespace StudentHousingBV.Student_App
 
         private void ChoreControl_StatusChanged(object sender, EventArgs e)
         {
-            housingManager.SaveAllData();
-            LoadChores();
+            if (sender is ChoreControl choreControl)
+            {
+                if (housingManager.UpdateChore(choreControl.Chore))
+                {
+                    MessageBox.Show("Chore status updated", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadChores();
+                }
+                else
+                {
+                    MessageBox.Show("Failed to update chore status", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
 
         private void btnFilter_Click(object sender, EventArgs e)
@@ -87,11 +97,12 @@ namespace StudentHousingBV.Student_App
 
             if (studentAddChore.DialogResult == DialogResult.OK && studentAddChore.chore is Chore chore)
             {
-                flat.Chores.Add(chore);
-                housingManager.SaveAllData();
-                LoadChores();
+                if (housingManager.AddChore(chore))
+                {
+                    MessageBox.Show("Chore added", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadChores();
+                }
             }
-
         }
     }
 }

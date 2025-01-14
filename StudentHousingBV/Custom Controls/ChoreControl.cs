@@ -4,25 +4,25 @@ namespace StudentHousingBV.Custom_Controls
 {
     public partial class ChoreControl : UserControl
     {
-        private readonly Chore chore;
+        public readonly Chore Chore;
         public event EventHandler? StatusChanged;
 
         public ChoreControl(Chore chore)
         {
             InitializeComponent();
-            this.chore = chore;
+            this.Chore = chore;
             LoadChoreControl();
         }
 
         private void btnStatusChange_Click(object sender, EventArgs e)
         {
-            if (chore.IsFinished)
+            if (Chore.IsFinished)
             {
-                chore.AssignedFlat.Chores.Remove(chore);
+                Chore.AssignedFlat.Chores.Remove(Chore);
             }
             else
             {
-                chore.IsFinished = true;
+                Chore.IsFinished = true;
                 btnStatusChange.Text = "Delete";
             }
 
@@ -31,11 +31,11 @@ namespace StudentHousingBV.Custom_Controls
 
         private void LoadChoreControl()
         {
-            lblChoreName.Text = chore.Title;
-            lblDescription.Text = chore.Description;
-            lblDueDate.Text = chore.Deadline.ToString("dd/MM/yyyy");
-            lblAssignee.Text = chore.Assignee?.Name;
-            btnStatusChange.Text = chore.IsFinished ? "Delete" : "Mark as finished";
+            lblChoreName.Text = Chore.Title;
+            lblDescription.Text = Chore.Description;
+            lblDueDate.Text = Chore.Deadline.ToString("dd/MM/yyyy");
+            lblAssignee.Text = Chore.Assignee?.Name;
+            btnStatusChange.Text = Chore.IsFinished ? "Delete" : "Mark as finished";
         }
     }
 }

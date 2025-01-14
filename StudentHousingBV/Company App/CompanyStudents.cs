@@ -15,23 +15,6 @@ namespace StudentHousingBV.Company_App
             LoadBuildings();
         }
 
-        private void LoadStudents()
-        {
-            lbStudents.Items.Clear();
-            lbStudents.Items.AddRange([.. housingManager.GetAllStudents()]);
-        }
-
-        private void LoadBuildings()
-        {
-            lbStudentBuilding.Items.AddRange([.. housingManager.GetBuildings()]);
-        }
-
-        private void LoadFlats(Building building)
-        {
-            lbStudentFlat.Items.Clear();
-            lbStudentFlat.Items.AddRange([.. building.Flats]);
-        }
-
         private void tbFilterStudent_TextChanged(object sender, EventArgs e)
         {
             lbStudents.Items.Clear();
@@ -85,6 +68,10 @@ namespace StudentHousingBV.Company_App
                     MessageBox.Show("Student added successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     LoadStudents();
                 }
+                else
+                {
+                    MessageBox.Show("Student could not be added", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -100,7 +87,43 @@ namespace StudentHousingBV.Company_App
                     LoadStudents();
                     MessageBox.Show("Student updated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+                else
+                {
+                    MessageBox.Show("Student could not be updated", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
+        }
+
+        private void btnRemoveStudent_Click(object sender, EventArgs e)
+        {
+            if (lbStudents.SelectedItem is Student student)
+            {
+                if (MessageBox.Show("Are you sure you want to remove this student?\nAll data related to the student is also going to be deleted.", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    if (housingManager.DeleteStudent(student))
+                    {
+                        LoadStudents();
+                        MessageBox.Show("Student removed successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }
+        }
+
+        private void LoadStudents()
+        {
+            lbStudents.Items.Clear();
+            lbStudents.Items.AddRange([.. housingManager.GetAllStudents()]);
+        }
+
+        private void LoadBuildings()
+        {
+            lbStudentBuilding.Items.AddRange([.. housingManager.GetBuildings()]);
+        }
+
+        private void LoadFlats(Building building)
+        {
+            lbStudentFlat.Items.Clear();
+            lbStudentFlat.Items.AddRange([.. building.Flats]);
         }
 
         private bool ValidateStudent()
@@ -123,21 +146,6 @@ namespace StudentHousingBV.Company_App
             }
 
             return result;
-        }
-
-        private void btnRemoveStudent_Click(object sender, EventArgs e)
-        {
-            if (lbStudents.SelectedItem is Student student)
-            {
-                if (MessageBox.Show("Are you sure you want to remove this student?\nAll data related to the student is also going to be deleted.", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    if (housingManager.DeleteStudent(student))
-                    {
-                        LoadStudents();
-                        MessageBox.Show("Student removed successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                }
-            }
         }
     }
 }

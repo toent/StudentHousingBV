@@ -5,7 +5,7 @@ namespace StudentHousingBV.Classes.Managers
     public class HousingManager
     {
         #region Fields
-        private List<Building> buildings;
+        private readonly List<Building> buildings;
         private readonly DataManager dataManager;
         #endregion
 
@@ -17,23 +17,11 @@ namespace StudentHousingBV.Classes.Managers
         public HousingManager()
         {
             dataManager = new();
-            buildings = dataManager.GetAllData() ?? []; //Flagged as modify
+            buildings = dataManager.GetAllBuildings();
         }
         #endregion
 
         #region Methods
-        #region Serialization
-        public void SaveAllData()
-        {
-            dataManager.SaveAllData(buildings);
-        }
-
-        public void LoadAllData()
-        {
-            buildings = dataManager.GetAllData() ?? [];
-        }
-        #endregion
-
         #region Building
         /// <summary>
         /// Get the next available ID for a building
@@ -63,18 +51,11 @@ namespace StudentHousingBV.Classes.Managers
         public bool AddBuilding(Building building)
         {
             bool result = false;
-            try
+
+            if (dataManager.AddBuilding(building))
             {
-                if (GetBuilding(building.BuildingId) is null)
-                {
-                    buildings.Add(building);
-                    dataManager.SaveAllData(buildings);
-                    result = true;
-                }
-            }
-            catch
-            {
-                MessageBox.Show("There was an error adding the building.");
+                buildings.Add(building);
+                result = true;
             }
 
             return result;
@@ -82,7 +63,7 @@ namespace StudentHousingBV.Classes.Managers
 
         public bool DeleteBuilding(Building building)
         {
-            bool result;
+            bool result = false;
             if (!buildings.Contains(building))
             {
                 throw new Exception("Building does not exist.");
@@ -91,10 +72,10 @@ namespace StudentHousingBV.Classes.Managers
             {
                 throw new Exception("Building has flats assigned to it. Cannot remove.");
             }
-            else
+
+            if (dataManager.DeleteBuilding(building.BuildingId))
             {
                 buildings.Remove(building);
-                dataManager.SaveAllData(buildings);
                 result = true;
             }
 
@@ -103,16 +84,17 @@ namespace StudentHousingBV.Classes.Managers
 
         public bool UpdateBuilding(Building building)
         {
-            bool result;
+            bool result = false;
             if (!buildings.Contains(building))
             {
                 throw new Exception("Building does not exist.");
             }
-            else
+
+            if (dataManager.UpdateBuilding(building))
             {
-                dataManager.SaveAllData(buildings);
                 result = true;
             }
+
             return result;
         }
 
@@ -144,48 +126,45 @@ namespace StudentHousingBV.Classes.Managers
 
         public bool AddFlat(Flat flat)
         {
-            bool result;
+            bool result = false;
             if (GetFlats().Contains(flat))
             {
                 throw new Exception("Flat already exists.");
             }
-            else
+
+            if (dataManager.AddFlat(flat))
             {
                 flat.AssignedBuilding.Flats.Add(flat);
-                dataManager.SaveAllData(buildings);
                 result = true;
             }
+
             return result;
         }
 
         public bool UpdateFlat(Flat flat)
         {
-            bool result;
             if (!GetFlats().Contains(flat))
             {
                 throw new Exception("Flat does not exist.");
             }
-            else
-            {
-                dataManager.SaveAllData(buildings);
-                result = true;
-            }
-            return result;
+
+            return dataManager.UpdateFlat(flat);
         }
 
         public bool DeleteFlat(Flat flat)
         {
-            bool result;
+            bool result = false;
             if (flat.Students.Count > 0)
             {
                 throw new Exception("Flat has students assigned to it. Cannot remove.");
             }
-            else
+
+            if (dataManager.DeleteFlat(flat.FlatId))
             {
                 flat.AssignedBuilding.Flats.Remove(flat);
-                dataManager.SaveAllData(buildings);
                 result = true;
             }
+
             return result;
         }
         #endregion
@@ -221,10 +200,9 @@ namespace StudentHousingBV.Classes.Managers
         public bool AddStudent(Student student)
         {
             bool result = false;
-            if (GetStudent(student.StudentId) is null)
+            if (dataManager.AddStudent(student))
             {
                 student.AssignedFlat.Students.Add(student);
-                dataManager.SaveAllData(buildings);
                 result = true;
             }
             return result;
@@ -232,13 +210,7 @@ namespace StudentHousingBV.Classes.Managers
 
         public bool UpdateStudent(Student student)
         {
-            bool result = false;
-            if (GetStudent(student.StudentId) is not null)
-            {
-                dataManager.SaveAllData(buildings);
-                result = true;
-            }
-            return result;
+            return dataManager.UpdateStudent(student);
         }
 
         // Remove student from flat and all related data
@@ -246,26 +218,31 @@ namespace StudentHousingBV.Classes.Managers
         {
             bool result = false;
 
-            try
+            if (dataManager.DeleteStudent(student))
             {
-                if (GetStudent(student.StudentId) is not null)
+                foreach (Chore chore in student.AssignedFlat.Chores.FindAll(chore => chore.Assignee == student))
                 {
-                    // Remove all related data from agreements, chores and groceries.
-                    student.AssignedFlat.Agreements.RemoveAll(agreement => agreement.Student == student);
-                    student.AssignedFlat.Chores.RemoveAll(chore => chore.Assignee == student);
-                    student.AssignedFlat.Groceries.RemoveAll(grocery => grocery.Creator == student);
-
-                    // Remove student from flat
-                    student.AssignedFlat.Students.Remove(student);
-
-                    // Save data
-                    dataManager.SaveAllData(buildings);
-                    result = true;
+                    if (dataManager.DeleteChore(chore.ChoreId))
+                    {
+                        student.AssignedFlat.Chores.Remove(chore);
+                    }
                 }
-            }
-            catch
-            {
-                MessageBox.Show("There was an error deleting the student.");
+                foreach (Agreement agreement in student.AssignedFlat.Agreements.FindAll(agreement => agreement.Student == student))
+                {
+                    if (dataManager.DeleteAgreement(agreement.AgreementId))
+                    {
+                        student.AssignedFlat.Agreements.Remove(agreement);
+                    }
+                }
+                foreach (Grocery grocery in student.AssignedFlat.Groceries.FindAll(grocery => grocery.Creator == student))
+                {
+                    if (dataManager.DeleteGrocery(grocery.GroceryId))
+                    {
+                        student.AssignedFlat.Groceries.Remove(grocery);
+                    }
+                }
+                student.AssignedFlat.Students.Remove(student);
+                result = true;
             }
 
             return result;
@@ -327,6 +304,23 @@ namespace StudentHousingBV.Classes.Managers
                             .Concat(buildings.SelectMany(building => building.Rules))
                             .ToList();
         }
+
+        public bool UpdateRule(Rule rule)
+        {
+            return dataManager.UpdateRule(rule);
+        }
+
+        public bool AddRule(Rule rule)
+        {
+            rule.AssignedFlat?.Rules.Add(rule);
+            return dataManager.AddRule(rule);
+        }
+
+        public bool RemoveRule(Rule rule)
+        {
+            rule.AssignedFlat?.Rules.Remove(rule);
+            return dataManager.DeleteRule(rule.RuleId);
+        }
         #endregion
 
         #region Announcement
@@ -356,7 +350,7 @@ namespace StudentHousingBV.Classes.Managers
             if (announcement.AssignedFlat is not null)
             {
                 announcement.AssignedFlat.Announcements.Remove(announcement);
-                SaveAllData();
+                dataManager.DeleteAnnouncement(announcement.AnnouncementId);
                 result = true;
             }
             return result;
@@ -364,18 +358,13 @@ namespace StudentHousingBV.Classes.Managers
 
         public bool AddAnnouncement(Announcement announcement)
         {
-            bool result = false;
-            if (GetAllAnnouncements().FirstOrDefault(a => a.AnnouncementId == announcement.AnnouncementId) is null)
-            {
-                announcement.AssignedFlat.Announcements.Add(announcement);
+            announcement.AssignedFlat?.Announcements.Add(announcement);
+            return dataManager.AddAnnouncement(announcement);
+        }
 
-                if (dataManager.AddAnnouncement(announcement))
-                {
-                    result = true;
-                    MessageBox.Show("Saved");
-                }
-            }
-            return result;
+        public bool UpdateAnnouncement(Announcement announcement)
+        {
+            return dataManager.UpdateAnnouncement(announcement);
         }
         #endregion
 
@@ -406,10 +395,21 @@ namespace StudentHousingBV.Classes.Managers
             if (agreement.AssignedFlat is not null)
             {
                 agreement.AssignedFlat.Agreements.Remove(agreement);
-                SaveAllData();
+                dataManager.DeleteAgreement(agreement.AgreementId);
                 result = true;
             }
             return result;
+        }
+
+        public bool UpdateAgreement(Agreement agreement)
+        {
+            return dataManager.UpdateAgreement(agreement);
+        }
+
+        public bool AddAgreement(Agreement agreement)
+        {
+            agreement.AssignedFlat?.Agreements.Add(agreement);
+            return dataManager.AddAgreement(agreement);
         }
         #endregion
 
@@ -432,6 +432,17 @@ namespace StudentHousingBV.Classes.Managers
             return buildings.SelectMany(building => building.Flats)
                             .SelectMany(flat => flat.Chores)
                             .ToList();
+        }
+
+        public bool UpdateChore(Chore chore)
+        {
+            return dataManager.UpdateChore(chore);
+        }
+
+        public bool AddChore(Chore chore)
+        {
+            chore.AssignedFlat?.Chores.Add(chore);
+            return dataManager.AddChore(chore);
         }
         #endregion
 
