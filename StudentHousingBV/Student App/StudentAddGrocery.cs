@@ -35,7 +35,7 @@ namespace StudentHousingBV.Student_App
 
             if (paymentURL != string.Empty && imgPath != string.Empty)
             {
-                Grocery grocery = new(housingManager.GetNextGroceryId(), student, imgPath, paymentURL, student.AssignedFlat!, groceryItems);
+                Grocery grocery = new(housingManager.GetNextGroceryId(), DateTime.Today , student, imgPath, paymentURL, student.AssignedFlat!, groceryItems);
                 DialogResult = DialogResult.OK;
 
                 NewGrocery?.Invoke(this, grocery);

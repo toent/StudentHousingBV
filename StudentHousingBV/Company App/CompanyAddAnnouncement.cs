@@ -55,8 +55,9 @@ namespace StudentHousingBV.Company_App
         private void btnAdd_Click(object sender, EventArgs e)
         {
             Announcement announcement;
-            announcement = new Announcement(housingManager.GetNextAnnouncementId(), tbTitle.Text, rtbMessage.Text, (Flat)cbFlat.SelectedItem);
+            announcement = new Announcement(housingManager.GetNextAnnouncementId(), tbTitle.Text, rtbMessage.Text, DateTime.Today, (Flat)cbFlat.SelectedItem);
             housingManager.AddAnnouncement(announcement);
+            
 
             NewAnnouncement?.Invoke(this, announcement);
         }

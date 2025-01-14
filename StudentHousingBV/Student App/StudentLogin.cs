@@ -50,13 +50,13 @@ namespace StudentHousingBV.Student_App
 
         private void InitializeTestingDataset()
         {
-            if(!DataManager.CheckIfDataExists())
-            {       
+            if (!DataManager.CheckIfDataExists())
+            {
                 housingManager.Buildings.Add(new Building(housingManager.GetNextBuildingId(), "123 Main St"));
                 housingManager.Buildings[0].Flats.Add(new Flat(housingManager.GetNextFlatId(), 101, housingManager.Buildings[0]));
                 housingManager.AddStudent(new Student("F12345", "John Doe", housingManager.Buildings[0].Flats[0]));
                 housingManager.AddStudent(new Student("F54321", "Doe Doe", housingManager.Buildings[0].Flats[0]));
-                    
+
                 housingManager.Buildings[0].Flats[0].Chores.Add(new Chore(housingManager.GetNextChoreId(), "Clean the bathroom", "Clean the bathroom with the broom.", DateTime.Now.AddDays(1), housingManager.Buildings[0].Flats[0], housingManager.GetStudent("F12345")));
                 housingManager.Buildings[0].Flats[0].Chores.Add(new Chore(housingManager.GetNextChoreId(), "Clean the kitchen", "Clean the kitchen with the mop.", DateTime.Now.AddDays(2), housingManager.Buildings[0].Flats[0], housingManager.GetStudent("F12345")));
                 housingManager.Buildings[0].Flats[0].Chores.Add(new Chore(housingManager.GetNextChoreId(), "Clean the living room", "Clean the living room with the vacuum cleaner.", DateTime.Now.AddDays(3), housingManager.Buildings[0].Flats[0], housingManager.GetStudent("F12345")));
@@ -66,10 +66,10 @@ namespace StudentHousingBV.Student_App
                 housingManager.Buildings[0].Flats[0].Chores.Add(new Chore(housingManager.GetNextChoreId(), "Clean the garden", "Clean the garden with the vacuum cleaner.", DateTime.Now.AddDays(7), housingManager.Buildings[0].Flats[0]));
                 housingManager.Buildings[0].Flats[0].Chores.Add(new Chore(housingManager.GetNextChoreId(), "Clean the garage", "Clean the garage with the duster.", DateTime.Now.AddDays(8), housingManager.Buildings[0].Flats[0]));
                 housingManager.Buildings[0].Flats[0].Chores.Add(new Chore(housingManager.GetNextChoreId(), "Clean the attic", "Clean the attic with the broom.", DateTime.Now.AddDays(9), housingManager.Buildings[0].Flats[0]));
-                housingManager.Buildings[0].Flats[0].Announcements.Add(new Announcement(housingManager.GetNextAnnouncementId(), "Important Announcement", "Please do not leave the garbage outside as it may attract insects and rats. We will be monitoring garbage collection from now on. You could have to pay more if you don't throw the garbage away correctly.", housingManager.Buildings[0].Flats[0]));
-                housingManager.Buildings[0].Flats[0].Announcements.Add(new Announcement(housingManager.GetNextAnnouncementId(), "Garbage collection", "Please do not leave the garbage outside as it may attract insects and rats. We will be monitoring garbage collection from now on. You could have to pay more if you don't throw the garbage away correctly.", housingManager.Buildings[0].Flats[0]));
-                housingManager.Buildings[0].Flats[0].Announcements.Add(new Announcement(housingManager.GetNextAnnouncementId(), "New bike parrking rule", "Please do not leave the garbage outside as it may attract insects and rats. We will be monitoring garbage collection from now on. You could have to pay more if you don't throw the garbage away correctly.", housingManager.Buildings[0].Flats[0]));
-                housingManager.Buildings[0].Flats[0].Announcements.Add(new Announcement(housingManager.GetNextAnnouncementId(), "Updated parking notice", "Please do not leave the garbage outside as it may attract insects and rats. We will be monitoring garbage collection from now on. You could have to pay more if you don't throw the garbage away correctly.", housingManager.Buildings[0].Flats[0]));
+                housingManager.Buildings[0].Flats[0].Announcements.Add(new Announcement(housingManager.GetNextAnnouncementId(), "Important Announcement", "Please do not leave the garbage outside as it may attract insects and rats. We will be monitoring garbage collection from now on. You could have to pay more if you don't throw the garbage away correctly.", DateTime.Today, housingManager.Buildings[0].Flats[0]));
+                housingManager.Buildings[0].Flats[0].Announcements.Add(new Announcement(housingManager.GetNextAnnouncementId(), "Garbage collection", "Please do not leave the garbage outside as it may attract insects and rats. We will be monitoring garbage collection from now on. You could have to pay more if you don't throw the garbage away correctly.", DateTime.Today, housingManager.Buildings[0].Flats[0]));
+                housingManager.Buildings[0].Flats[0].Announcements.Add(new Announcement(housingManager.GetNextAnnouncementId(), "New bike parrking rule", "Please do not leave the garbage outside as it may attract insects and rats. We will be monitoring garbage collection from now on. You could have to pay more if you don't throw the garbage away correctly.", DateTime.Today, housingManager.Buildings[0].Flats[0]));
+                housingManager.Buildings[0].Flats[0].Announcements.Add(new Announcement(housingManager.GetNextAnnouncementId(), "Updated parking notice", "Please do not leave the garbage outside as it may attract insects and rats. We will be monitoring garbage collection from now on. You could have to pay more if you don't throw the garbage away correctly.", DateTime.Today, housingManager.Buildings[0].Flats[0]));
                 housingManager.Buildings[0].Flats[0].Rules.Add(new Rule(housingManager.GetNextRuleId(), housingManager.Buildings[0].Flats[0], "Smoking is not allowed in the building."));
                 housingManager.Buildings[0].Flats[0].Rules.Add(new Rule(housingManager.GetNextRuleId(), housingManager.Buildings[0].Flats[0], "Pets are not allowed in the building."));
                 housingManager.Buildings[0].Flats[0].Rules.Add(new Rule(housingManager.GetNextRuleId(), housingManager.Buildings[0].Flats[0], "Parties are not allowed in the building."));
@@ -79,7 +79,7 @@ namespace StudentHousingBV.Student_App
                 housingManager.Buildings[0].Flats[0].Rules.Add(new Rule(housingManager.GetNextRuleId(), housingManager.Buildings[0].Flats[0], "Bikes must be parked in the designated area."));
                 housingManager.Buildings[0].Flats[0].Rules.Add(new Rule(housingManager.GetNextRuleId(), housingManager.Buildings[0].Flats[0], "Cars must be parked in the designated area."));
                 // Add agreements
-                housingManager.Buildings[0].Flats[0].Agreements.Add(new Agreement(housingManager.GetNextAgreementId(), "House rules", "I agree to follow the house rules.", [housingManager.GetStudent("F12345"), housingManager.GetStudent("F54321")], housingManager.GetStudent("F12345"),  housingManager.Buildings[0].Flats[0]));
+                housingManager.Buildings[0].Flats[0].Agreements.Add(new Agreement(housingManager.GetNextAgreementId(), "House rules", "I agree to follow the house rules.", [housingManager.GetStudent("F12345"), housingManager.GetStudent("F54321")], housingManager.GetStudent("F12345"), housingManager.Buildings[0].Flats[0]));
                 housingManager.Buildings[0].Flats[0].Agreements.Add(new Agreement(housingManager.GetNextAgreementId(), "Chores", "I agree to do the chores.", [housingManager.GetStudent("F12345")], housingManager.GetStudent("F12345"), housingManager.Buildings[0].Flats[0]));
                 housingManager.Buildings[0].Flats[0].Agreements.Add(new Agreement(housingManager.GetNextAgreementId(), "Garbage collection", "I agree to throw the garbage away correctly.", [housingManager.GetStudent("F12345")], housingManager.GetStudent("F12345"), housingManager.Buildings[0].Flats[0]));
                 housingManager.Buildings[0].Flats[0].Agreements.Add(new Agreement(housingManager.GetNextAgreementId(), "Quiet hours", "I agree to be quiet during quiet hours.", [housingManager.GetStudent("F12345")], housingManager.GetStudent("F12345"), housingManager.Buildings[0].Flats[0]));
