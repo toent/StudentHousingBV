@@ -205,7 +205,7 @@ namespace StudentHousingBV.Classes.Managers
                 if (reader.Read())
                 {
                     result = new Building(reader.GetInt32(0), reader.GetString(1));
-                    result.Flats = GetFlatByBuilding(result.BuildingId);
+                    result.Flats = GetFlatByBuilding(result);
                 }
             }
             catch (Exception ex)
@@ -227,7 +227,7 @@ namespace StudentHousingBV.Classes.Managers
                 while (reader.Read())
                 {
                     Building building = new(reader.GetInt32(0), reader.GetString(1));
-                    building.Flats = GetFlatByBuilding(building.BuildingId);
+                    building.Flats = GetFlatByBuilding(building);
                     buildings.Add(building);
                 }
             }
@@ -521,7 +521,7 @@ namespace StudentHousingBV.Classes.Managers
             }
             return flats;
         }
-        public List<Flat> GetFlatByBuilding(int buildingId)
+        public List<Flat> GetFlatByBuilding(Building building)
         {
             List<Flat> flats = [];
             try
@@ -530,11 +530,11 @@ namespace StudentHousingBV.Classes.Managers
                 connection.Open();
                 string query = "SELECT * FROM Flat WHERE AssignedBuildingId = @BuildingId";
                 SqlCommand command = new(query, connection);
-                command.Parameters.AddWithValue("@BuildingId", buildingId);
+                command.Parameters.AddWithValue("@BuildingId", building.BuildingId);
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    flats.Add(new Flat(reader.GetInt32(0), reader.GetInt32(1), GetBuilding(reader.GetInt32(2))));
+                    flats.Add(new Flat(reader.GetInt32(0), reader.GetInt32(1), building));
                 }
             }
             catch (Exception ex)
