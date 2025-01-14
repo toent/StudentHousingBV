@@ -450,7 +450,7 @@ namespace StudentHousingBV.Classes.Managers
                 {
                     DeleteComplaint(complaint.ComplaintId);
                 }
-                foreach (Agreement agreement in GetAgreementByFlat(flatId))
+                foreach (Agreement agreement in GetAgreementsByFlat(GetFlat(flatId)))
                 {
                     DeleteAgreement(agreement.AgreementId);
                 }
@@ -466,7 +466,7 @@ namespace StudentHousingBV.Classes.Managers
                 {
                     DeleteGrocery(grocery.GroceryId);
                 }
-                foreach (Rule rule in GetRuleByFlat(flatId))
+                foreach (Rule rule in GetRuleByFlat(GetFlat(flatId)))
                 {
                     DeleteRule(rule.RuleId);
                 }
@@ -534,7 +534,11 @@ namespace StudentHousingBV.Classes.Managers
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    flats.Add(new Flat(reader.GetInt32(0), reader.GetInt32(1), building));
+                    Flat flat = new(reader.GetInt32(0), reader.GetInt32(1), building);
+                    flats.Add(flat);
+                    flat.Students = GetStudentsByFlat(flat);
+                    //flat.Agreements = GetAgreementsByFlat(flat);
+                    flat.Rules = GetRuleByFlat(flat);
                 }
             }
             catch (Exception ex)
@@ -752,7 +756,8 @@ namespace StudentHousingBV.Classes.Managers
                 SqlDataReader reader = command.ExecuteReader();
                 if (reader.Read())
                 {
-                    student = new Student(reader.GetString(0), reader.GetString(1), GetFlat(reader.GetInt32(2)));
+                    Flat flat = GetFlat(reader.GetInt32(2));
+                    student = new Student(reader.GetString(0), reader.GetString(1), flat);
                 }
             }
             catch (Exception ex)
@@ -760,6 +765,56 @@ namespace StudentHousingBV.Classes.Managers
                 MessageBox.Show($"Error getting student: {ex.Message}");
             }
             return student;
+        }
+        public List<Student> GetStudentsByFlat(Flat flat)
+        {
+            List<Student> students = [];
+            try
+            {
+                using SqlConnection connection = new(CONNECTION_STRING);
+                connection.Open();
+                string query = "SELECT * FROM Student WHERE AssignedFlatId = @FlatId";
+                SqlCommand command = new(query, connection);
+                command.Parameters.AddWithValue("@FlatId", flat.FlatId);
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    Student student = new(reader.GetString(0), reader.GetString(1), flat);
+                    students.Add(student);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error getting students by flat: {ex.Message}");
+            }
+            return students;
+        }
+        public List<Student> GetAllStudents()
+        {
+            List<Student> students = [];
+            try
+            {
+                using SqlConnection connection = new(CONNECTION_STRING);
+                connection.Open();
+                string query = "SELECT * FROM Student";
+                SqlCommand command = new(query, connection);
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    Flat flat = GetFlat(reader.GetInt32(2));
+                    Student student = new(reader.GetString(0), reader.GetString(1), flat);
+                    if(!flat.Students.Contains(student))
+                    {
+                        flat.Students.Add(student);
+                    }
+                    students.Add(student);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error getting students: {ex.Message}");
+            }
+            return students;
         }
 
         // CRUD for Agreement
@@ -842,7 +897,8 @@ namespace StudentHousingBV.Classes.Managers
                 SqlDataReader reader = command.ExecuteReader();
                 if (reader.Read())
                 {
-                    agreement = new(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), GetAgreeingStudents(reader.GetInt32(0)), GetStudent(reader.GetString(3)), reader.GetDateTime(4), GetFlat(reader.GetInt32(5)));
+                    Flat flat = GetFlat(reader.GetInt32(5));
+                    agreement = new(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), GetAgreeingStudents(reader.GetInt32(0), flat), GetStudent(reader.GetString(3)), reader.GetDateTime(4), flat);
                 }
             }
             catch (Exception ex)
@@ -851,21 +907,21 @@ namespace StudentHousingBV.Classes.Managers
             }
             return agreement;
         }
-        private List<Student> GetAgreeingStudents(int agreementId)
+        private List<Student?> GetAgreeingStudents(int agreementId, Flat flat)
         {
-            List<Student> result = [];
+            List<Student?> result = [];
             try
             {
                 using SqlConnection connection = new(CONNECTION_STRING);
                 connection.Open();
-                string query = "SELECT Student.StudentId, Student.Name, Student.AssignedFlatId FROM Agreement_Student " +
+                string query = "SELECT Student.StudentId FROM Agreement_Student " +
                                 "INNER JOIN Student ON Student.StudentId = Agreement_Student.StudentId WHERE AgreementId = @AgreementId";
                 SqlCommand command = new(query, connection);
                 command.Parameters.AddWithValue("@AgreementId", agreementId);
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    result.Add(new(reader.GetString(0), reader.GetString(1), GetFlat(reader.GetInt32(2))));
+                    result.Add(GetStudent(reader.GetString(0)));
                 }
 
             }
@@ -876,7 +932,7 @@ namespace StudentHousingBV.Classes.Managers
 
             return result;
         }
-        private List<Agreement> GetAgreementByFlat(int flatId)
+        private List<Agreement> GetAgreementsByFlat(Flat flat)
         {
             List<Agreement> result = [];
             try
@@ -885,11 +941,11 @@ namespace StudentHousingBV.Classes.Managers
                 connection.Open();
                 string query = "SELECT * FROM Agreement WHERE AssignedFlatId = @FlatId";
                 SqlCommand command = new(query, connection);
-                command.Parameters.AddWithValue("@FlatId", flatId);
+                command.Parameters.AddWithValue("@FlatId", flat.FlatId);
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    result.Add(new(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), GetAgreeingStudents(reader.GetInt32(0)), GetStudent(reader.GetString(3)), reader.GetDateTime(4), GetFlat(reader.GetInt32(5))));
+                    result.Add(new(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), GetAgreeingStudents(reader.GetInt32(0), flat), GetStudent(reader.GetString(3)), reader.GetDateTime(4), flat));
                 }
             }
             catch (Exception ex)
@@ -1131,7 +1187,7 @@ namespace StudentHousingBV.Classes.Managers
             {
                 using SqlConnection connection = new(CONNECTION_STRING);
                 connection.Open();
-                string query = "INSERT INTO Rule (Description, AssignedFlatId, AssignedBuildingId) VALUES (@Description, @FlatId, @BuildingId)";
+                string query = "INSERT INTO [Rule] (Description, AssignedFlatId, AssignedBuildingId) VALUES (@Description, @FlatId, @BuildingId)";
                 SqlCommand command = new(query, connection);
                 command.Parameters.AddWithValue("@Description", rule.Description);
                 command.Parameters.AddWithValue("@FlatId", rule.AssignedFlat.FlatId);
@@ -1152,7 +1208,7 @@ namespace StudentHousingBV.Classes.Managers
             {
                 using SqlConnection connection = new(CONNECTION_STRING);
                 connection.Open();
-                string query = "UPDATE Rule SET Description = @Description, AssignedFlatId = @FlatId, AssignedBuildingId = @BuildingId WHERE RuleId = @RuleId";
+                string query = "UPDATE [Rule] SET Description = @Description, AssignedFlatId = @FlatId, AssignedBuildingId = @BuildingId WHERE RuleId = @RuleId";
                 SqlCommand command = new(query, connection);
                 command.Parameters.AddWithValue("@Description", rule.Description);
                 command.Parameters.AddWithValue("@FlatId", rule.AssignedFlat.FlatId);
@@ -1174,7 +1230,7 @@ namespace StudentHousingBV.Classes.Managers
             {
                 using SqlConnection connection = new(CONNECTION_STRING);
                 connection.Open();
-                string query = "DELETE FROM Rule WHERE RuleId = @RuleId";
+                string query = "DELETE FROM [Rule] WHERE RuleId = @RuleId";
                 SqlCommand command = new(query, connection);
                 command.Parameters.AddWithValue("@RuleId", ruleId);
                 command.ExecuteNonQuery();
@@ -1193,7 +1249,7 @@ namespace StudentHousingBV.Classes.Managers
             {
                 using SqlConnection connection = new(CONNECTION_STRING);
                 connection.Open();
-                string query = "SELECT * FROM Rule WHERE RuleId = @RuleId";
+                string query = "SELECT * FROM [Rule] WHERE RuleId = @RuleId";
                 SqlCommand command = new(query, connection);
                 command.Parameters.AddWithValue("@RuleId", ruleId);
                 SqlDataReader reader = command.ExecuteReader();
@@ -1208,20 +1264,20 @@ namespace StudentHousingBV.Classes.Managers
             }
             return rule;
         }
-        public List<Rule> GetRuleByFlat(int flatId)
+        public List<Rule> GetRuleByFlat(Flat flat)
         {
             List<Rule> rules = [];
             try
             {
                 using SqlConnection connection = new(CONNECTION_STRING);
                 connection.Open();
-                string query = "SELECT * FROM Rule WHERE AssignedFlatId = @FlatId";
+                string query = "SELECT * FROM [Rule] WHERE AssignedFlatId = @FlatId";
                 SqlCommand command = new(query, connection);
-                command.Parameters.AddWithValue("@FlatId", flatId);
+                command.Parameters.AddWithValue("@FlatId", flat.FlatId);
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    //rules.Add(new(reader.GetInt32(0), reader.GetString(1), GetFlat(reader.GetInt32(2)), GetBuilding(reader.GetInt32(3)));
+                    rules.Add(new(reader.GetInt32(0), flat, reader.GetString(1)));
                 }
             }
             catch (Exception ex)
