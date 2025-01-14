@@ -282,9 +282,16 @@ namespace StudentHousingBV.Classes.Managers
             return GetAllComplaints().Count > 0 ? GetAllComplaints().Max(complaint => complaint.ComplaintId) + 1 : 1;
         }
 
-        public void SubmitComplaint(Complaint complaint)
+        public bool SubmitComplaint(Complaint complaint)
         {
+            bool result = false;
             complaint.AssignedFlat.Complaints.Add(complaint);
+            if (dataManager.AddComplaint(complaint))
+            {
+                result = true;
+                MessageBox.Show("Saved");
+            }
+            return result;
         }
 
         /// <summary>
@@ -361,9 +368,10 @@ namespace StudentHousingBV.Classes.Managers
             if (GetAllAnnouncements().FirstOrDefault(a => a.AnnouncementId == announcement.AnnouncementId) is null)
             {
                 announcement.AssignedFlat.Announcements.Add(announcement);
-                result = true;
+
                 if (dataManager.AddAnnouncement(announcement))
                 {
+                    result = true;
                     MessageBox.Show("Saved");
                 }
             }
@@ -448,8 +456,11 @@ namespace StudentHousingBV.Classes.Managers
             if (GetAllGroceries().FirstOrDefault(g => g.GroceryId == grocery.GroceryId) is null)
             {
                 grocery.AssignedFlat.Groceries.Add(grocery);
-                result = true;
-                dataManager.SaveAllData(buildings);
+                if (dataManager.AddGrocery(grocery))
+                {
+                    result = true;
+                    MessageBox.Show("Saved");
+                }
             }
             return result;
         }
