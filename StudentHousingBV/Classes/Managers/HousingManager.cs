@@ -358,7 +358,7 @@ namespace StudentHousingBV.Classes.Managers
 
         public bool AddAnnouncement(Announcement announcement)
         {
-            announcement.AssignedFlat?.Announcements.Add(announcement);
+            //announcement.AssignedFlat?.Announcements.Add(announcement);
             return dataManager.AddAnnouncement(announcement);
         }
 

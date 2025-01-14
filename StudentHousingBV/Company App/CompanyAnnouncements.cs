@@ -14,31 +14,30 @@ namespace StudentHousingBV.Company_App
         public CompanyAnnouncements(HousingManager housingManager)
         {
             InitializeComponent();
+            LoadAnnouncements();
             this.housingManager = housingManager;
             announcements = [];
             cbBuilding.DataSource = housingManager.GetBuildings();
+            cbFlat.DataSource = selectedBuilding.Flats;
+            cbFlat.SelectedIndex = 0;
             cbBuilding.DisplayMember = "Address";
         }
 
         private void LoadAnnouncements()
         {
-            // Get global announcements (they are stored in the building)
-            if (cbBuilding.SelectedItem is Building building)
+            if (cbBuilding.SelectedItem is Building && cbFlat.SelectedItem is Flat flat)
             {
-                // Get flat announcements
-                if (cbFlat.SelectedItem is Flat flat)
-                {
-                    pAnnouncements.Controls.Clear();
-                    announcements = [.. flat.Announcements];
+                MessageBox.Show("im here");
+                pAnnouncements.Controls.Clear();
+                announcements = [.. flat.Announcements];
 
-                    foreach (Announcement announcement in announcements)
-                    {
-                        CompanyAnnouncementControl announcementControl = new(announcement);
-                        announcementControl.DataChanged += CompanyAnnouncementControl_DataChanged!;
-                        announcementControl.Deleted += CompanyAnnouncementsControl_Deleted!;
-                        announcementControl.Margin = new Padding(0, 10, 0, 10);
-                        pAnnouncements.Controls.Add(announcementControl);
-                    }
+                foreach (Announcement announcement in announcements)
+                {
+                    CompanyAnnouncementControl announcementControl = new(announcement);
+                    announcementControl.DataChanged += CompanyAnnouncementControl_DataChanged!;
+                    announcementControl.Deleted += CompanyAnnouncementsControl_Deleted!;
+                    announcementControl.Margin = new Padding(0, 10, 0, 10);
+                    pAnnouncements.Controls.Add(announcementControl);
                 }
             }
         }
@@ -47,7 +46,7 @@ namespace StudentHousingBV.Company_App
         {
             if (sender is CompanyAnnouncementControl announcementControl)
             {
-                if(housingManager.UpdateAnnouncement(announcementControl.announcement))
+                if (housingManager.UpdateAnnouncement(announcementControl.announcement))
                 {
                     LoadAnnouncements();
                     MessageBox.Show("Changes applied", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -67,25 +66,6 @@ namespace StudentHousingBV.Company_App
             MessageBox.Show("Announcement deleted", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void cbBuilding_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cbBuilding.SelectedItem is Building building)
-            {
-                selectedBuilding = building;
-                cbFlat.DataSource = building.Flats;
-                cbFlat.DisplayMember = "FlatNumber";
-            }
-            LoadAnnouncements();
-        }
-
-        private void cbFlat_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cbFlat.SelectedItem is Flat flat)
-            {
-                LoadAnnouncements();
-            }
-        }
-
         private void btnAddAnnouncement_Click(object sender, EventArgs e)
         {
             CompanyAddAnnouncement companyAddAnnouncement = new(housingManager);
@@ -97,6 +77,26 @@ namespace StudentHousingBV.Company_App
         {
             housingManager.AddAnnouncement(announcement);
             LoadAnnouncements();
+        }
+
+        private void cbBuilding_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbBuilding.SelectedItem is Building building)
+            {
+                selectedBuilding = building;
+                cbFlat.DataSource = building.Flats;
+                cbFlat.DisplayMember = "FlatNumber";
+                cbFlat.SelectedIndex = 0;
+            }
+            LoadAnnouncements();
+        }
+
+        private void cbFlat_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbFlat.SelectedItem is Flat flat)
+            {
+                LoadAnnouncements();
+            }
         }
     }
 }
