@@ -362,7 +362,10 @@ namespace StudentHousingBV.Classes.Managers
             {
                 announcement.AssignedFlat.Announcements.Add(announcement);
                 result = true;
-                dataManager.SaveAllData(buildings);
+                if (dataManager.AddAnnouncement(announcement))
+                {
+                    MessageBox.Show("Saved");
+                }
             }
             return result;
         }

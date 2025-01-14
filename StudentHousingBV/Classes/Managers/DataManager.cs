@@ -213,6 +213,27 @@ namespace StudentHousingBV.Classes.Managers
             }
             return result;
         }
+        public List<Building> GetAllBuildings()
+        {
+            List<Building> buildings = [];
+            try
+            {
+                using SqlConnection connection = new(CONNECTION_STRING);
+                connection.Open();
+                string query = "SELECT * FROM Building";
+                SqlCommand command = new(query, connection);
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    buildings.Add(new Building(reader.GetInt32(0), reader.GetString(1)));
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error getting buildings: {ex.Message}");
+            }
+            return buildings;
+        }
 
         // CRUD for Flat
         public bool AddFlat(Flat flat)
