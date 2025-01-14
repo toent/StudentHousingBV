@@ -1,7 +1,4 @@
-﻿using StudentHousingBV.Classes.Managers;
-using System.Text.Json.Serialization;
-
-namespace StudentHousingBV.Classes.Entities
+﻿namespace StudentHousingBV.Classes.Entities
 {
     public class Grocery
     {
@@ -11,7 +8,6 @@ namespace StudentHousingBV.Classes.Entities
         public string ImagePath { get; set; }
         public string PaymentUrl { get; set; }
         public string GroceryItems { get; set; }
-        [JsonIgnore]
         public Flat AssignedFlat { get; set; } // Cross-Reference
 
         public Grocery()

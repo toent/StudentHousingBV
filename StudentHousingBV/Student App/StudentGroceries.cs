@@ -49,6 +49,7 @@ namespace StudentHousingBV.Student_App
             studentAddGrocery.NewGrocery += (sender, grocery) =>
             {
                 housingManager.AddGrocery(grocery);
+                housingManager.AddGrocery(grocery);
                 housingManager.GetAllGroceries();
             };
 

@@ -55,7 +55,6 @@ namespace StudentHousingBV.Company_App
         {
             CompanyAnnouncementControl announcementControl = (CompanyAnnouncementControl)sender;
             housingManager.DeleteAnnouncement(announcementControl.announcement);
-            housingManager.SaveAllData();
             LoadAnnouncements();
             MessageBox.Show("Announcement deleted", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
