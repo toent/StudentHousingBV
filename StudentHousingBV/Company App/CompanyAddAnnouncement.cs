@@ -36,7 +36,6 @@ namespace StudentHousingBV.Company_App
             }
         }
 
-
         private void cbBuilding_SelectedIndexChanged(object sender, EventArgs e)
         {
                 selectedBuilding = (Building)cbBuilding.SelectedItem;
@@ -56,10 +55,8 @@ namespace StudentHousingBV.Company_App
         {
             Announcement announcement;
             announcement = new Announcement(housingManager.GetNextAnnouncementId(), tbTitle.Text, rtbMessage.Text, DateTime.Today, (Flat)cbFlat.SelectedItem);
-            housingManager.AddAnnouncement(announcement);
-            
-
             NewAnnouncement?.Invoke(this, announcement);
+            this.Close();
         }
     }
 }
