@@ -398,8 +398,9 @@ namespace StudentHousingBV.Classes.Managers
             {
                 using SqlConnection connection = new(CONNECTION_STRING);
                 connection.Open();
-                string query = "INSERT INTO Student (Name, AssignedFlatId) VALUES (@Name, @FlatId)";
+                string query = "INSERT INTO Student (StudentId, Name, AssignedFlatId) VALUES (@StudentId, @Name, @FlatId)";
                 SqlCommand command = new(query, connection);
+                command.Parameters.AddWithValue("@StudentId", student.StudentId);
                 command.Parameters.AddWithValue("@Name", student.Name);
                 command.Parameters.AddWithValue("@FlatId", student.AssignedFlat.FlatId);
                 command.ExecuteNonQuery();
@@ -429,6 +430,25 @@ namespace StudentHousingBV.Classes.Managers
             catch (Exception ex)
             {
                 MessageBox.Show($"Error updating student: {ex.Message}");
+            }
+            return result;
+        }
+        public bool DeleteStudent(Student student)
+        {
+            bool result = false;
+            try
+            {
+                using SqlConnection connection = new(CONNECTION_STRING);
+                connection.Open();
+                string query = "DELETE FROM Student WHERE StudentId = @StudentId";
+                SqlCommand command = new(query, connection);
+                command.Parameters.AddWithValue("@StudentId", student.StudentId);
+                command.ExecuteNonQuery();
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error deleting student: {ex.Message}");
             }
             return result;
         }
@@ -844,7 +864,7 @@ namespace StudentHousingBV.Classes.Managers
                 SqlDataReader reader = command.ExecuteReader();
                 if (reader.Read())
                 {
-                    //rule = new(reader.GetInt32(0), reader.GetString(1), GetFlat(reader.GetInt32(2)), GetBuilding(reader.GetInt32(3)));
+                    rule = new(reader.GetInt32(0), GetFlat(reader.GetInt32(2)), reader.GetString(1));
                 }
             }
             catch (Exception ex)
