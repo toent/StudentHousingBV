@@ -16,7 +16,7 @@ namespace StudentHousingBV.Classes.Managers
             ReferenceHandler = ReferenceHandler.Preserve,
             WriteIndented = true
         };
-        private readonly string CONNECTION_STRING = "Server=tcp:s1aurbano.database.windows.net,1433;Initial Catalog=StudentHousing;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;Authentication=\"Active Directory Default\";";
+        private readonly string CONNECTION_STRING = "Server=tcp:s1aurbano.database.windows.net,1433;Initial Catalog=StudentHousing;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;Authentication=Active Directory Interactive;";
         #endregion
 
         #region Constructors
