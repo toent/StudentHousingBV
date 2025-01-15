@@ -476,6 +476,11 @@ namespace StudentHousingBV.Classes.Managers
             return result;
         }
 
+        public List<Grocery> GetGroceryByFlat(int flatId)
+        {
+            return dataManager.GetGroceryByFlat(flatId);
+        }
+
         /// <summary>
         /// Get all groceries
         /// </summary>
