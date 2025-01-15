@@ -28,31 +28,61 @@
         /// </summary>
         private void InitializeComponent()
         {
-            lblDescription = new Label();
+            lblIssue = new Label();
+            panel1 = new Panel();
+            lblId = new Label();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
-            // lblDescription
+            // lblIssue
             // 
-            lblDescription.Location = new Point(10, 10);
-            lblDescription.Margin = new Padding(10);
-            lblDescription.Name = "lblDescription";
-            lblDescription.Size = new Size(1479, 207);
-            lblDescription.TabIndex = 4;
-            lblDescription.Text = "[Description]";
+            lblIssue.Location = new Point(15, 64);
+            lblIssue.Margin = new Padding(2, 0, 2, 0);
+            lblIssue.Name = "lblIssue";
+            lblIssue.Size = new Size(1019, 104);
+            lblIssue.TabIndex = 5;
+            lblIssue.Text = "[Issue]";
+            // 
+            // panel1
+            // 
+            panel1.BackColor = Color.WhiteSmoke;
+            panel1.Controls.Add(lblId);
+            panel1.Location = new Point(0, 0);
+            panel1.Margin = new Padding(0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(1049, 52);
+            panel1.TabIndex = 4;
+            // 
+            // lblId
+            // 
+            lblId.AutoSize = true;
+            lblId.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblId.Location = new Point(15, 10);
+            lblId.Margin = new Padding(2, 0, 2, 0);
+            lblId.Name = "lblId";
+            lblId.Size = new Size(51, 32);
+            lblId.TabIndex = 1;
+            lblId.Text = "[Id]";
             // 
             // ComplaintControl
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.WhiteSmoke;
-            Controls.Add(lblDescription);
+            BackColor = Color.White;
+            Controls.Add(lblIssue);
+            Controls.Add(panel1);
+            Margin = new Padding(2);
             Name = "ComplaintControl";
-            Size = new Size(1499, 227);
+            Size = new Size(1049, 181);
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private Label lblDescription;
+        private Label lblIssue;
+        private Panel panel1;
+        private Label lblId;
     }
 }

@@ -7,7 +7,8 @@ namespace StudentHousingBV.Custom_Controls
         public ComplaintControl(Complaint complaint)
         {
             InitializeComponent();
-            lblDescription.Text = complaint.Issue;
+            lblIssue.Text = complaint.Issue;
+            lblId.Text = complaint.ComplaintId.ToString();
         }
     }
 }
