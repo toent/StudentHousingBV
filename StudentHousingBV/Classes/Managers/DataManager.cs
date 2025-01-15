@@ -11,6 +11,7 @@ namespace StudentHousingBV.Classes.Managers
         private readonly string storagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Storage");
         private readonly bool directoryExists = false;
         private const string JSON_NAME = "Data";
+        private List<Building> buildings = new List<Building>();
         private readonly JsonSerializerOptions jsonOptions = new()
         {
             ReferenceHandler = ReferenceHandler.Preserve,
@@ -24,6 +25,7 @@ namespace StudentHousingBV.Classes.Managers
         {
             Directory.CreateDirectory(storagePath);
             directoryExists = Directory.Exists(storagePath);
+            GetAllBuildings();
         }
         #endregion
 
@@ -208,6 +210,10 @@ namespace StudentHousingBV.Classes.Managers
                     result = new Building(reader.GetInt32(0), reader.GetString(1));
                     result.Flats = GetFlatByBuilding(result);
                 }
+                if(!buildings.Contains(result))
+                {
+                    buildings.Add(result);
+                }
             }
             catch (Exception ex)
             {
@@ -231,6 +237,7 @@ namespace StudentHousingBV.Classes.Managers
                     building.Flats = GetFlatByBuilding(building);
                     buildings.Add(building);
                 }
+                this.buildings = buildings;
             }
             catch (Exception ex)
             {
@@ -341,7 +348,6 @@ namespace StudentHousingBV.Classes.Managers
             }
             return result;
         }
-
         public bool UpdateFlat(Flat flat)
         {
             bool result = false;
@@ -938,7 +944,7 @@ namespace StudentHousingBV.Classes.Managers
 
             return result;
         }
-        private List<Agreement> GetAgreementsByFlat(Flat flat)
+        public List<Agreement> GetAgreementsByFlat(Flat flat)
         {
             List<Agreement> result = [];
             try
@@ -957,6 +963,45 @@ namespace StudentHousingBV.Classes.Managers
             catch (Exception ex)
             {
                 MessageBox.Show($"Error getting agreements by flat: {ex.Message}");
+            }
+            return result;
+        }
+        public List<Agreement> GetAllAgreements()
+        {
+            List<Agreement> result = [];
+            try
+            {
+                using SqlConnection connection = new(CONNECTION_STRING);
+                connection.Open();
+                string query = "SELECT Agreement.AgreementId, Agreement.Title, Agreement.Details, Agreement.StudentId, Agreement.DateCreated,  Flat.FlatId, Flat.FlatNumber, Flat.AssignedBuildingId " +
+                                "FROM Agreement INNER JOIN Flat ON Flat.FlatId = Agreement.AssignedFlatId;";
+                SqlCommand command = new(query, connection);
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    if(buildings.Count != 0)
+                    {
+                        if (buildings.Any(building => building.BuildingId == reader.GetInt32(7)))
+                        {
+                            Flat flat = new(reader.GetInt32(5), reader.GetInt32(6), buildings.First(building => building.BuildingId == reader.GetInt32(7)));
+                            result.Add(new(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), GetAgreeingStudents(reader.GetInt32(0), flat), GetStudent(reader.GetString(3)), reader.GetDateTime(4), flat));
+                        }
+                    }
+                    else
+                    {
+                        buildings = GetAllBuildings();
+                        if (buildings.Any(building => building.BuildingId == reader.GetInt32(8)))
+                        {
+                            Flat flat = new(reader.GetInt32(5), reader.GetInt32(6), buildings.First(building => building.BuildingId == reader.GetInt32(8)));
+                            result.Add(new(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), GetAgreeingStudents(reader.GetInt32(0), flat), GetStudent(reader.GetString(3)), reader.GetDateTime(4), flat));
+                        }
+                    }
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error getting all agreements: {ex.Message}");
             }
             return result;
         }
@@ -1424,7 +1469,7 @@ namespace StudentHousingBV.Classes.Managers
         }
         #endregion
 
-            #region Methods
+        #region Methods
 
         public static bool CheckIfDataExists()
         {

@@ -21,7 +21,10 @@ namespace StudentHousingBV.Custom_Controls
             agreementToControl = agreement;
             Creator = agreement.Student ?? new();
             Students = agreement.AgreedBy;
-            isOwner = (Creator == StudentLookingAt);
+            if(StudentLookingAt != null)
+            { isOwner = (Creator.StudentId == StudentLookingAt.StudentId); }
+            else
+            { isOwner = false; }
             SetupVisuals();
         }
 
@@ -52,7 +55,7 @@ namespace StudentHousingBV.Custom_Controls
             agreedByString = string.Join(", ", Students.Select(student => student.Name));
             lblAgreedBy.Text = $"Agreed By: {agreedByString}";
 
-            if (agreementToControl.AgreedBy.Contains(StudentLookingAt))
+            if (agreementToControl.AgreedBy.Any(student => student.StudentId == StudentLookingAt.StudentId))
             {
                 btnAgreeTo.Text = "Unagree";
             }
@@ -68,7 +71,7 @@ namespace StudentHousingBV.Custom_Controls
         {
             if (!isOwner)
             {
-                if (!agreementToControl.AgreedBy.Contains(StudentLookingAt))
+                if (!agreementToControl.AgreedBy.Any(student => student.StudentId == StudentLookingAt.StudentId))
                 {
                     agreementToControl.AddStudentAgreed(StudentLookingAt);
                 }

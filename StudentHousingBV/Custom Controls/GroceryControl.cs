@@ -17,7 +17,15 @@ namespace StudentHousingBV.Custom_Controls
             this.grocery = grocery;
 
             lblDate.Text = grocery.Date.ToShortDateString();
-            pictureBoxGrocery.Image = Image.FromFile(grocery.ImagePath);
+            try
+            {
+                pictureBoxGrocery.Image = Image.FromFile(grocery.ImagePath);
+            }
+            catch
+            {
+
+            }
+
         }
 
         private void btnDetails_Click(object sender, EventArgs e)

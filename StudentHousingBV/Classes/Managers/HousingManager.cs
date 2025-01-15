@@ -401,9 +401,7 @@ namespace StudentHousingBV.Classes.Managers
         /// <returns> A list of all agreements </returns>
         public ICollection<Agreement> GetAllAgreements()
         {
-            return buildings.SelectMany(building => building.Flats)
-                            .SelectMany(flat => flat.Agreements)
-                            .ToList();
+            return dataManager.GetAllAgreements();
         }
 
         public bool DeleteAgreement(Agreement agreement)
