@@ -418,6 +418,13 @@ namespace StudentHousingBV.Classes.Managers
         /// Get the next available ID for a chore
         /// </summary>
         /// <returns> The next available ID for a chore </returns>
+        /// 
+
+        public List<Chore> GetChoresByFlatId(int flatId)
+        {
+            return dataManager.GetChoreByFlat(flatId);
+        }
+
         public int GetNextChoreId()
         {
             return GetAllChores().Count > 0 ? GetAllChores().Max(chore => chore.ChoreId) + 1 : 1;

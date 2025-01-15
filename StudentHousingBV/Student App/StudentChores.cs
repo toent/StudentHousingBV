@@ -9,6 +9,7 @@ namespace StudentHousingBV.Student_App
         private readonly HousingManager housingManager;
         private readonly Student student;
         private readonly Flat flat;
+        private Student selectedStudent => (Student)cbAssignee.SelectedItem!;
 
         private bool isFiltered;
 
@@ -20,6 +21,7 @@ namespace StudentHousingBV.Student_App
             isFiltered = false;
             flat = student.AssignedFlat;
             cbAssignee.DataSource = flat.Students;
+            dtpEndDate.Value = DateTime.Now.AddDays(14);
             LoadChores();
         }
 
@@ -49,7 +51,7 @@ namespace StudentHousingBV.Student_App
         {
             cbAssignee.SelectedItem = null;
             dtpStartDate.Value = DateTime.Now;
-            dtpEndDate.Value = DateTime.Now;
+            dtpEndDate.Value = DateTime.Now.AddDays(14);
             isFiltered = false;
             LoadChores();
         }
@@ -72,10 +74,14 @@ namespace StudentHousingBV.Student_App
 
         private void LoadChores()
         {
-            List<Chore> chores = isFiltered && ValidateInput() ?
-                                 student.AssignedFlat!.Chores.Where(c => c.Deadline >= dtpStartDate.Value &&
-                                                                    c.Deadline <= dtpEndDate.Value &&
-                                                                    c.Assignee == (Student)cbAssignee.SelectedItem!).ToList() :
+            //List<Chore> chores = isFiltered && ValidateInput() ?
+            //                     housingManager.GetChoresByFlatId(student.AssignedFlat.FlatId).Where(c => c.Deadline >= dtpStartDate.Value &&
+            //                                                        c.Deadline <= dtpEndDate.Value &&
+            //                                                        c.Assignee.StudentId == selectedStudent.StudentId).ToList() :
+            //                                                        [.. flat.Chores];
+
+            List<Chore> chores = ValidateInput() ? housingManager.GetChoresByFlatId(student.AssignedFlat.FlatId).Where(c => c.Deadline >= dtpStartDate.Value &&
+                                                                    c.Deadline <= dtpEndDate.Value && c.Assignee.StudentId == selectedStudent.StudentId).ToList() :
                                                                     [.. flat.Chores];
 
             pChores.Controls.Clear();
