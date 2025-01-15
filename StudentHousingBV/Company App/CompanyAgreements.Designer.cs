@@ -46,9 +46,9 @@
             lblCreatorFilter.Font = new Font("Segoe UI", 10F);
             lblCreatorFilter.Location = new Point(697, 17);
             lblCreatorFilter.Name = "lblCreatorFilter";
-            lblCreatorFilter.Size = new Size(81, 28);
+            lblCreatorFilter.Size = new Size(77, 28);
             lblCreatorFilter.TabIndex = 17;
-            lblCreatorFilter.Text = "Creator:";
+            lblCreatorFilter.Text = "Creator";
             // 
             // dtpEndDate
             // 
@@ -108,9 +108,9 @@
             label1.Font = new Font("Segoe UI", 10F);
             label1.Location = new Point(374, 17);
             label1.Name = "label1";
-            label1.Size = new Size(48, 28);
+            label1.Size = new Size(44, 28);
             label1.TabIndex = 20;
-            label1.Text = "Flat:";
+            label1.Text = "Flat";
             // 
             // cbxSelectedFlat
             // 
@@ -128,9 +128,9 @@
             label3.Font = new Font("Segoe UI", 10F);
             label3.Location = new Point(11, 18);
             label3.Name = "label3";
-            label3.Size = new Size(88, 28);
+            label3.Size = new Size(84, 28);
             label3.TabIndex = 22;
-            label3.Text = "Building:";
+            label3.Text = "Building";
             // 
             // cbxSelectedBuilding
             // 

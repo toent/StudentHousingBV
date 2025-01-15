@@ -36,9 +36,10 @@
             // 
             // btnSubmitComplaint
             // 
+            btnSubmitComplaint.BackColor = Color.FromArgb(240, 243, 255);
             resources.ApplyResources(btnSubmitComplaint, "btnSubmitComplaint");
             btnSubmitComplaint.Name = "btnSubmitComplaint";
-            btnSubmitComplaint.UseVisualStyleBackColor = true;
+            btnSubmitComplaint.UseVisualStyleBackColor = false;
             btnSubmitComplaint.Click += btnSubmitComplaint_Click;
             // 
             // rtbComplaint
@@ -51,7 +52,6 @@
             // 
             resources.ApplyResources(label1, "label1");
             label1.Name = "label1";
-            label1.UseWaitCursor = true;
             // 
             // StudentComplaint
             // 

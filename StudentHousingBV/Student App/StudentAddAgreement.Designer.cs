@@ -37,58 +37,60 @@
             // 
             // btnCreateAgreement
             // 
+            btnCreateAgreement.BackColor = Color.FromArgb(240, 243, 255);
             btnCreateAgreement.Font = new Font("Segoe UI", 12F);
-            btnCreateAgreement.Location = new Point(252, 537);
+            btnCreateAgreement.Location = new Point(30, 553);
             btnCreateAgreement.Name = "btnCreateAgreement";
-            btnCreateAgreement.Size = new Size(669, 92);
+            btnCreateAgreement.Size = new Size(792, 44);
             btnCreateAgreement.TabIndex = 1;
             btnCreateAgreement.Text = "Create Agreement";
-            btnCreateAgreement.UseVisualStyleBackColor = true;
+            btnCreateAgreement.UseVisualStyleBackColor = false;
             btnCreateAgreement.Click += btnCreateAgreement_Click;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 17F, FontStyle.Bold);
-            label1.Location = new Point(52, 103);
+            label1.Font = new Font("Segoe UI", 9F);
+            label1.Location = new Point(30, 124);
             label1.Name = "label1";
-            label1.Size = new Size(344, 46);
+            label1.Size = new Size(172, 25);
             label1.TabIndex = 2;
             label1.Text = "Agreement Content:";
             label1.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // tbxAgreementContent
             // 
-            tbxAgreementContent.Location = new Point(52, 152);
+            tbxAgreementContent.Location = new Point(30, 152);
             tbxAgreementContent.Multiline = true;
             tbxAgreementContent.Name = "tbxAgreementContent";
             tbxAgreementContent.ScrollBars = ScrollBars.Vertical;
-            tbxAgreementContent.Size = new Size(1067, 356);
+            tbxAgreementContent.Size = new Size(792, 356);
             tbxAgreementContent.TabIndex = 0;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 17F, FontStyle.Bold);
-            label2.Location = new Point(52, 9);
+            label2.Font = new Font("Segoe UI", 9F);
+            label2.Location = new Point(30, 30);
             label2.Name = "label2";
-            label2.Size = new Size(287, 46);
+            label2.Size = new Size(141, 25);
             label2.TabIndex = 4;
             label2.Text = "Agreement Title:";
             label2.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // tbxAgreementTitle
             // 
-            tbxAgreementTitle.Location = new Point(52, 58);
+            tbxAgreementTitle.Location = new Point(30, 58);
             tbxAgreementTitle.Name = "tbxAgreementTitle";
-            tbxAgreementTitle.Size = new Size(1067, 31);
+            tbxAgreementTitle.Size = new Size(792, 31);
             tbxAgreementTitle.TabIndex = 3;
             // 
             // StudentAddAgreement
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1173, 664);
+            BackColor = Color.White;
+            ClientSize = new Size(856, 621);
             Controls.Add(label2);
             Controls.Add(tbxAgreementTitle);
             Controls.Add(label1);

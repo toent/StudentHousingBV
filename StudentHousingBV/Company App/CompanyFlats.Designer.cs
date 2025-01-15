@@ -116,35 +116,38 @@
             // 
             // btnDeleteFlat
             // 
+            btnDeleteFlat.BackColor = Color.FromArgb(240, 243, 255);
             btnDeleteFlat.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnDeleteFlat.Location = new Point(766, 105);
             btnDeleteFlat.Name = "btnDeleteFlat";
             btnDeleteFlat.Size = new Size(228, 43);
             btnDeleteFlat.TabIndex = 10;
             btnDeleteFlat.Text = "Delete flat";
-            btnDeleteFlat.UseVisualStyleBackColor = true;
+            btnDeleteFlat.UseVisualStyleBackColor = false;
             btnDeleteFlat.Click += btnDeleteFlat_Click;
             // 
             // btnModifyFlat
             // 
+            btnModifyFlat.BackColor = Color.FromArgb(240, 243, 255);
             btnModifyFlat.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnModifyFlat.Location = new Point(1096, 757);
             btnModifyFlat.Name = "btnModifyFlat";
             btnModifyFlat.Size = new Size(468, 43);
             btnModifyFlat.TabIndex = 9;
             btnModifyFlat.Text = "Modify flat";
-            btnModifyFlat.UseVisualStyleBackColor = true;
+            btnModifyFlat.UseVisualStyleBackColor = false;
             btnModifyFlat.Click += btnModifyFlat_Click;
             // 
             // btnAddFlat
             // 
+            btnAddFlat.BackColor = Color.FromArgb(240, 243, 255);
             btnAddFlat.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnAddFlat.Location = new Point(766, 56);
             btnAddFlat.Name = "btnAddFlat";
             btnAddFlat.Size = new Size(228, 43);
             btnAddFlat.TabIndex = 8;
             btnAddFlat.Text = "Add flat";
-            btnAddFlat.UseVisualStyleBackColor = true;
+            btnAddFlat.UseVisualStyleBackColor = false;
             btnAddFlat.Click += btnAddFlat_Click;
             // 
             // label1

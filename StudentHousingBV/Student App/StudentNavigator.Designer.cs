@@ -48,6 +48,7 @@
             // 
             // pSideMenu
             // 
+            pSideMenu.BackColor = Color.WhiteSmoke;
             pSideMenu.Controls.Add(btnFileComplaint);
             pSideMenu.Controls.Add(btnGroceries);
             pSideMenu.Controls.Add(btnChores);
@@ -62,10 +63,10 @@
             // 
             // btnFileComplaint
             // 
-            btnFileComplaint.BackColor = Color.FromArgb(214, 223, 255);
+            btnFileComplaint.BackColor = Color.White;
             btnFileComplaint.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnFileComplaint.ForeColor = Color.FromArgb(26, 37, 47);
-            btnFileComplaint.Location = new Point(3, 818);
+            btnFileComplaint.Location = new Point(3, 713);
             btnFileComplaint.Margin = new Padding(3, 20, 3, 20);
             btnFileComplaint.Name = "btnFileComplaint";
             btnFileComplaint.Size = new Size(294, 69);
@@ -76,10 +77,10 @@
             // 
             // btnGroceries
             // 
-            btnGroceries.BackColor = Color.FromArgb(214, 223, 255);
+            btnGroceries.BackColor = Color.White;
             btnGroceries.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnGroceries.ForeColor = Color.FromArgb(26, 37, 47);
-            btnGroceries.Location = new Point(3, 709);
+            btnGroceries.Location = new Point(3, 604);
             btnGroceries.Margin = new Padding(3, 20, 3, 20);
             btnGroceries.Name = "btnGroceries";
             btnGroceries.Size = new Size(294, 69);
@@ -90,10 +91,10 @@
             // 
             // btnChores
             // 
-            btnChores.BackColor = Color.FromArgb(214, 223, 255);
+            btnChores.BackColor = Color.White;
             btnChores.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnChores.ForeColor = Color.FromArgb(26, 37, 47);
-            btnChores.Location = new Point(3, 600);
+            btnChores.Location = new Point(3, 495);
             btnChores.Margin = new Padding(3, 20, 3, 20);
             btnChores.Name = "btnChores";
             btnChores.Size = new Size(294, 69);
@@ -104,10 +105,10 @@
             // 
             // btnAgreements
             // 
-            btnAgreements.BackColor = Color.FromArgb(214, 223, 255);
+            btnAgreements.BackColor = Color.White;
             btnAgreements.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnAgreements.ForeColor = Color.FromArgb(26, 37, 47);
-            btnAgreements.Location = new Point(3, 491);
+            btnAgreements.Location = new Point(3, 386);
             btnAgreements.Margin = new Padding(3, 20, 3, 20);
             btnAgreements.Name = "btnAgreements";
             btnAgreements.Size = new Size(294, 69);
@@ -118,10 +119,10 @@
             // 
             // btnHouseRules
             // 
-            btnHouseRules.BackColor = Color.FromArgb(214, 223, 255);
+            btnHouseRules.BackColor = Color.White;
             btnHouseRules.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnHouseRules.ForeColor = Color.FromArgb(26, 37, 47);
-            btnHouseRules.Location = new Point(3, 382);
+            btnHouseRules.Location = new Point(3, 277);
             btnHouseRules.Margin = new Padding(3, 20, 3, 20);
             btnHouseRules.Name = "btnHouseRules";
             btnHouseRules.Size = new Size(294, 69);
@@ -132,10 +133,10 @@
             // 
             // btnAnnouncements
             // 
-            btnAnnouncements.BackColor = Color.FromArgb(214, 223, 255);
+            btnAnnouncements.BackColor = Color.White;
             btnAnnouncements.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnAnnouncements.ForeColor = Color.FromArgb(26, 37, 47);
-            btnAnnouncements.Location = new Point(3, 273);
+            btnAnnouncements.Location = new Point(3, 168);
             btnAnnouncements.Margin = new Padding(3, 20, 3, 20);
             btnAnnouncements.Name = "btnAnnouncements";
             btnAnnouncements.Size = new Size(294, 69);
@@ -196,13 +197,14 @@
             // 
             // btnLogout
             // 
+            btnLogout.BackColor = Color.White;
             btnLogout.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
             btnLogout.Location = new Point(1418, 12);
             btnLogout.Name = "btnLogout";
             btnLogout.Size = new Size(168, 43);
             btnLogout.TabIndex = 0;
             btnLogout.Text = "Logout";
-            btnLogout.UseVisualStyleBackColor = true;
+            btnLogout.UseVisualStyleBackColor = false;
             btnLogout.Click += btnLogout_Click;
             // 
             // pShowForm

@@ -83,9 +83,10 @@
             // rtbContent
             // 
             rtbContent.BorderStyle = BorderStyle.None;
+            rtbContent.Font = new Font("Segoe UI", 10F);
             rtbContent.Location = new Point(20, 100);
             rtbContent.Name = "rtbContent";
-            rtbContent.Size = new Size(1216, 182);
+            rtbContent.Size = new Size(1216, 127);
             rtbContent.TabIndex = 3;
             rtbContent.Text = "[Content]";
             rtbContent.TextChanged += rtbContent_TextChanged;
@@ -93,10 +94,10 @@
             // btnApplyChanges
             // 
             btnApplyChanges.Enabled = false;
-            btnApplyChanges.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnApplyChanges.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
             btnApplyChanges.Location = new Point(1242, 100);
             btnApplyChanges.Name = "btnApplyChanges";
-            btnApplyChanges.Size = new Size(254, 34);
+            btnApplyChanges.Size = new Size(254, 44);
             btnApplyChanges.TabIndex = 4;
             btnApplyChanges.Text = "Apply Changes";
             btnApplyChanges.UseVisualStyleBackColor = true;
@@ -104,10 +105,10 @@
             // 
             // btnDelete
             // 
-            btnDelete.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnDelete.Location = new Point(1242, 140);
+            btnDelete.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
+            btnDelete.Location = new Point(1242, 150);
             btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(254, 34);
+            btnDelete.Size = new Size(254, 44);
             btnDelete.TabIndex = 5;
             btnDelete.Text = "Delete";
             btnDelete.UseVisualStyleBackColor = true;
@@ -123,7 +124,7 @@
             Controls.Add(rtbContent);
             Controls.Add(panel1);
             Name = "CompanyAnnouncementControl";
-            Size = new Size(1499, 300);
+            Size = new Size(1499, 247);
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ResumeLayout(false);

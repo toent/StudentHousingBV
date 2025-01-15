@@ -101,9 +101,10 @@
             // lblDescription
             // 
             lblDescription.AutoSize = true;
+            lblDescription.Font = new Font("Segoe UI", 10F);
             lblDescription.Location = new Point(284, 88);
             lblDescription.Name = "lblDescription";
-            lblDescription.Size = new Size(162, 25);
+            lblDescription.Size = new Size(179, 28);
             lblDescription.TabIndex = 2;
             lblDescription.Text = "[Chore description]";
             // 

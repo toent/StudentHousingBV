@@ -11,6 +11,7 @@ namespace StudentHousingBV.Company_App
             InitializeComponent();
             StartPosition = FormStartPosition.CenterScreen;
             housingManager = new HousingManager();
+            btnBuildings.BackColor = Color.FromArgb(240, 243, 255);
             LoadFormIntoPanel(new CompanyBuildings(housingManager));
         }
 
@@ -18,6 +19,17 @@ namespace StudentHousingBV.Company_App
         {
             if (sender is Button button)
             {
+
+                btnBuildings.BackColor = Color.FromArgb(255, 255, 255);
+                btnFlats.BackColor = Color.FromArgb(255,255,255);
+                btnAnnouncements.BackColor = Color.FromArgb(255,255,255);
+                btnHouseRules.BackColor = Color.FromArgb(255,255,255);
+                btnAgreements.BackColor = Color.FromArgb(255,255,255);
+                btnFiledComplaint.BackColor = Color.FromArgb(255,255,255);
+                btnStudents.BackColor = Color.FromArgb(255,255,255);
+
+                button.BackColor = Color.FromArgb(240, 243, 255);
+
                 switch (button.Name)
                 {
                     case "btnBuildings":

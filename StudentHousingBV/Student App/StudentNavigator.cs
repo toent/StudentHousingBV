@@ -15,6 +15,7 @@ namespace StudentHousingBV
             StartPosition = FormStartPosition.CenterScreen;
             this.housingManager = housingManager;
             this.student = student;
+            btnAnnouncements.BackColor = Color.FromArgb(240, 243, 255);
             LoadStudentNavigator();
         }
 
@@ -39,6 +40,15 @@ namespace StudentHousingBV
         {
             if (sender is Button button)
             {
+                btnAgreements.BackColor = Color.FromArgb(255,255,255);
+                btnAnnouncements.BackColor = Color.FromArgb(255,255,255);
+                btnChores.BackColor = Color.FromArgb(255,255,255);
+                btnFileComplaint.BackColor = Color.FromArgb(255,255,255);
+                btnGroceries.BackColor = Color.FromArgb(255,255,255);
+                btnHouseRules.BackColor = Color.FromArgb(255,255,255);
+
+                button.BackColor = Color.FromArgb(240, 243, 255);
+
                 switch (button.Name)
                 {
                     case "btnAnnouncements":

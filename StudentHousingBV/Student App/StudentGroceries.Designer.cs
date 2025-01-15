@@ -35,32 +35,35 @@
             // flowLayoutPanelGrocery
             // 
             flowLayoutPanelGrocery.AutoScroll = true;
-            flowLayoutPanelGrocery.Location = new Point(12, 51);
+            flowLayoutPanelGrocery.Location = new Point(15, 64);
+            flowLayoutPanelGrocery.Margin = new Padding(4, 4, 4, 4);
             flowLayoutPanelGrocery.Name = "flowLayoutPanelGrocery";
-            flowLayoutPanelGrocery.Size = new Size(1238, 591);
+            flowLayoutPanelGrocery.Size = new Size(1548, 739);
             flowLayoutPanelGrocery.TabIndex = 0;
             // 
             // btnAddChore
             // 
+            btnAddChore.BackColor = Color.FromArgb(240, 243, 255);
             btnAddChore.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnAddChore.Location = new Point(1112, 11);
+            btnAddChore.Location = new Point(1390, 14);
             btnAddChore.Margin = new Padding(2);
             btnAddChore.Name = "btnAddChore";
-            btnAddChore.Size = new Size(138, 34);
+            btnAddChore.Size = new Size(172, 42);
             btnAddChore.TabIndex = 1;
             btnAddChore.Text = "Add Grocery";
-            btnAddChore.UseVisualStyleBackColor = true;
+            btnAddChore.UseVisualStyleBackColor = false;
             btnAddChore.Click += btnAddGrocery_Click;
             // 
             // StudentGroceries
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(1261, 654);
+            ClientSize = new Size(1576, 818);
             Controls.Add(btnAddChore);
             Controls.Add(flowLayoutPanelGrocery);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Margin = new Padding(4, 4, 4, 4);
             Name = "StudentGroceries";
             Text = "StudentGroceries";
             ResumeLayout(false);

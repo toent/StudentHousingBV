@@ -33,7 +33,6 @@ namespace StudentHousingBV.Student_App
                     GroceryControl groceryControl = new();
                     groceryControl.SetGrocery(grocery); 
                     groceryControl.Margin = new Padding(5);
-                    MessageBox.Show(groceries.Count().ToString());
 
                     // Add the control to the FlowLayoutPanel
                     flowLayoutPanelGrocery.Controls.Add(groceryControl);

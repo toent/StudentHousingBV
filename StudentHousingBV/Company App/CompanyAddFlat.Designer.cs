@@ -37,10 +37,10 @@
             // 
             // btnCancel
             // 
-            btnCancel.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnCancel.Location = new Point(22, 141);
+            btnCancel.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
+            btnCancel.Location = new Point(12, 131);
             btnCancel.Name = "btnCancel";
-            btnCancel.Size = new Size(136, 34);
+            btnCancel.Size = new Size(146, 44);
             btnCancel.TabIndex = 13;
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = true;
@@ -48,13 +48,14 @@
             // 
             // btnAdd
             // 
-            btnAdd.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnAdd.Location = new Point(164, 141);
+            btnAdd.BackColor = Color.FromArgb(240, 243, 255);
+            btnAdd.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
+            btnAdd.Location = new Point(164, 131);
             btnAdd.Name = "btnAdd";
-            btnAdd.Size = new Size(221, 34);
+            btnAdd.Size = new Size(227, 44);
             btnAdd.TabIndex = 12;
             btnAdd.Text = "Add";
-            btnAdd.UseVisualStyleBackColor = true;
+            btnAdd.UseVisualStyleBackColor = false;
             btnAdd.Click += btnAdd_Click;
             // 
             // label3
