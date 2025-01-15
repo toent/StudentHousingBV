@@ -47,10 +47,18 @@ namespace StudentHousingBV.Company_App
         private void btnAdd_Click(object sender, EventArgs e)
         {
             Announcement announcement;
-            announcement = new Announcement(housingManager.GetNextAnnouncementId(), tbTitle.Text, rtbMessage.Text, (Flat)cbFlat.SelectedItem);
-            housingManager.AddAnnouncement(announcement);
+            if (tbTitle.Text != string.Empty && rtbMessage.Text != string.Empty && cbBuilding.SelectedIndex > -1 && cbFlat.SelectedIndex > -1)
+            {
+                announcement = new Announcement(housingManager.GetNextAnnouncementId(), tbTitle.Text, rtbMessage.Text, (Flat)cbFlat.SelectedItem);
+                housingManager.AddAnnouncement(announcement);
 
-            NewAnnouncement?.Invoke(this, announcement);
+                NewAnnouncement?.Invoke(this, announcement);
+                Close();
+            }
+            else
+            {
+                MessageBox.Show("Please fill in all fields", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
