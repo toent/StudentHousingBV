@@ -23,7 +23,7 @@ namespace StudentHousingBV
             lblContractId.Text = student.StudentId;
             lblUserName.Text = student.Name;
             lblLocation.Text = $"{student.AssignedFlat?.AssignedBuilding.Address} - Flat {student.AssignedFlat?.FlatNumber}";
-            LoadFormIntoPanel(new StudentAnnouncements([.. student.AssignedFlat.Announcements]));
+            LoadFormIntoPanel(new StudentAnnouncements(housingManager, student));
             lblTitle.Text = "Announcements";
         }
 
@@ -42,7 +42,7 @@ namespace StudentHousingBV
                 switch (button.Name)
                 {
                     case "btnAnnouncements":
-                        LoadFormIntoPanel(new StudentAnnouncements([.. student.AssignedFlat.Announcements]));
+                        LoadFormIntoPanel(new StudentAnnouncements(housingManager, student));
                         lblTitle.Text = "Announcements";
                         break;
                     case "btnHouseRules":

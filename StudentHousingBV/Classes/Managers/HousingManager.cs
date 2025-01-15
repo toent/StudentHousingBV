@@ -281,6 +281,17 @@ namespace StudentHousingBV.Classes.Managers
                             .SelectMany(flat => flat.Complaints)
                             .ToList();
         }
+
+        public List<Complaint> GetAllComplaintsDB()
+        {
+            return dataManager.GetAllComplaints();
+        }
+
+        public List<Complaint> GetComplaintsByFlatDB(int flatId)
+        {
+            return dataManager.GetComplaintByFlat(flatId);
+        }
+
         #endregion
 
         #region Rule

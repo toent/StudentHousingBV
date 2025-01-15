@@ -1301,7 +1301,7 @@ namespace StudentHousingBV.Classes.Managers
             {
                 using SqlConnection connection = new(CONNECTION_STRING);
                 connection.Open();
-                string query = "INSERT INTO Complaint (Issue, AssignedFlatId) VALUES (@Issue, @FlatId)";
+                string query = "INSERT INTO Complaint (Issue, AssignedFlatId) VALUES (@Issue, @FlatId, )";
                 SqlCommand command = new(query, connection);
                 command.Parameters.AddWithValue("@Issue", complaint.Issue);
                 command.Parameters.AddWithValue("@FlatId", complaint.AssignedFlat.FlatId);
@@ -1398,9 +1398,33 @@ namespace StudentHousingBV.Classes.Managers
             }
             return complaints;
         }
+
+        public List<Complaint> GetAllComplaints()
+        {
+            List<Complaint> complaints = [];
+
+            try
+            {
+                using SqlConnection connection = new(CONNECTION_STRING);
+                connection.Open();
+                string query = "SELECT * FROM Complaint";
+                SqlCommand command = new(query, connection);
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    complaints.Add(new Complaint(reader.GetInt32(0), GetFlat(reader.GetInt32(2)), reader.GetString(1)));
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error getting complaints: {ex.Message}");
+            }
+
+            return complaints;
+        }
         #endregion
 
-        #region Methods
+            #region Methods
 
         public static bool CheckIfDataExists()
         {

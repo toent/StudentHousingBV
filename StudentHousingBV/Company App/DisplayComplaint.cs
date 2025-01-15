@@ -1,34 +1,108 @@
-﻿using StudentHousingBV.Classes.Entities;
+﻿using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
+using StudentHousingBV.Classes.Entities;
 using StudentHousingBV.Classes.Managers;
+using StudentHousingBV.Custom_Controls;
 
 namespace StudentHousingBV.Company_App
 {
     public partial class DisplayComplaint : Form
     {
         private readonly HousingManager housingManager;
+        private List<Complaint> complaints;
+
         public DisplayComplaint(HousingManager housingManager)
         {
             InitializeComponent();
             this.housingManager = housingManager;
-            CreateDummyComplaints();
-            UpdateListBoxComplaint();
-            
+            InitializeForm();
         }
 
-        private void CreateDummyComplaints()
+        private void InitializeForm()
         {
-            //string description, int buildingId, int flatId, DataManager dataManager
-            /*            Complaint complaint1 = new Complaint(1, "Mats annoyed me! he did this and that and bla bla bla.", 1, 1, dataManager);
-                        Complaint complaint2 = new Complaint(2, "Aleix annoyed me! he did this and that and bla bla bla.", 1, 1, dataManager);
-                        Complaint complaint3 = new Complaint(3, "Realgi annoyed me! he did this and that and bla bla bla.", 1, 2, dataManager);*/
+            checkBoxViewAll.Checked = true;
+            LoadComplaints();
+            PopulateComboBoxes();
+            SetupEventHandlers();
+            UpdateFilterVisibility();
         }
 
-        private void UpdateListBoxComplaint()
+        private void SetupEventHandlers()
         {
-            List<Complaint> complaints = housingManager.GetAllComplaints();
-            if (complaints.Count > 0) {
-                lBoxComplaint.DataSource = null;
-                lBoxComplaint.DataSource = complaints;
+            checkBoxViewAll.CheckedChanged += checkBoxViewAll_CheckedChanged;
+            cbBuilding.SelectedIndexChanged += cbBuilding_SelectedIndexChanged;
+            cbFlat.SelectedIndexChanged += cbFlat_SelectedIndexChanged;
+        }
+
+        private void LoadComplaints()
+        {
+            complaints = housingManager.GetAllComplaintsDB();
+            DisplayComplaintControls();
+        }
+
+        private void DisplayComplaintControls()
+        {
+            pComplaints.Controls.Clear(); // Clear existing controls
+            foreach (Complaint complaint in complaints)
+            {
+                ComplaintControl complaintControl = new ComplaintControl(complaint); // Assuming ComplaintControl constructor takes Complaint object
+                pComplaints.Controls.Add(complaintControl);
+            }
+        }
+
+        private void PopulateComboBoxes()
+        {
+            cbBuilding.DataSource = housingManager.GetBuildings();
+            UpdateFlatComboBox();
+        }
+
+        private void UpdateFlatComboBox()
+        {
+            if (cbBuilding.SelectedItem is Building building)
+            {
+                cbFlat.DataSource = building.Flats;
+            }
+        }
+
+        private void UpdateFilterVisibility()
+        {
+            cbBuilding.Enabled = !checkBoxViewAll.Checked;
+            cbFlat.Enabled = !checkBoxViewAll.Checked && cbBuilding.SelectedItem is Building;
+        }
+
+        private void checkBoxViewAll_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateFilterVisibility();
+
+            if (checkBoxViewAll.Checked)
+            {
+                LoadComplaints();
+            }
+            else
+            {
+                LoadComplaintsByFlat();
+            }
+        }
+
+
+        private void cbBuilding_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateFlatComboBox();
+            LoadComplaintsByFlat();
+        }
+
+        private void cbFlat_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadComplaintsByFlat();
+        }
+
+        private void LoadComplaintsByFlat()
+        {
+            if (!checkBoxViewAll.Checked && cbFlat.SelectedItem is Flat flat)
+            {
+                complaints = housingManager.GetComplaintsByFlatDB(flat.FlatId);
+                DisplayComplaintControls();
             }
         }
     }

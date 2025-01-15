@@ -28,95 +28,85 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new Label();
-            cBoxFlat = new ComboBox();
+            pComplaints = new FlowLayoutPanel();
+            cbFlat = new ComboBox();
+            cbBuilding = new ComboBox();
             label2 = new Label();
-            tBoxDate = new TextBox();
-            tBoxTime = new TextBox();
-            label3 = new Label();
-            lBoxComplaint = new ListBox();
-            richTextBoxComplaint = new RichTextBox();
+            label1 = new Label();
+            checkBoxViewAll = new CheckBox();
             SuspendLayout();
             // 
-            // label1
+            // pComplaints
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(12, 25);
-            label1.Name = "label1";
-            label1.Size = new Size(36, 20);
-            label1.TabIndex = 3;
-            label1.Text = "Flat:";
+            pComplaints.AutoScroll = true;
+            pComplaints.Location = new Point(8, 40);
+            pComplaints.Margin = new Padding(2);
+            pComplaints.Name = "pComplaints";
+            pComplaints.Size = new Size(1086, 443);
+            pComplaints.TabIndex = 13;
             // 
-            // cBoxFlat
+            // cbFlat
             // 
-            cBoxFlat.FormattingEnabled = true;
-            cBoxFlat.Location = new Point(72, 22);
-            cBoxFlat.Name = "cBoxFlat";
-            cBoxFlat.Size = new Size(160, 28);
-            cBoxFlat.TabIndex = 2;
+            cbFlat.FormattingEnabled = true;
+            cbFlat.Location = new Point(307, 11);
+            cbFlat.Margin = new Padding(2);
+            cbFlat.Name = "cbFlat";
+            cbFlat.Size = new Size(189, 23);
+            cbFlat.TabIndex = 12;
+            cbFlat.SelectedIndexChanged += cbFlat_SelectedIndexChanged;
+            // 
+            // cbBuilding
+            // 
+            cbBuilding.FormattingEnabled = true;
+            cbBuilding.Location = new Point(66, 11);
+            cbBuilding.Margin = new Padding(2);
+            cbBuilding.Name = "cbBuilding";
+            cbBuilding.Size = new Size(189, 23);
+            cbBuilding.TabIndex = 11;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(12, 87);
+            label2.Location = new Point(274, 13);
+            label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
-            label2.Size = new Size(44, 20);
-            label2.TabIndex = 4;
-            label2.Text = "Date:";
+            label2.Size = new Size(26, 15);
+            label2.TabIndex = 10;
+            label2.Text = "Flat";
             // 
-            // tBoxDate
+            // label1
             // 
-            tBoxDate.Location = new Point(72, 87);
-            tBoxDate.Name = "tBoxDate";
-            tBoxDate.Size = new Size(160, 27);
-            tBoxDate.TabIndex = 5;
+            label1.AutoSize = true;
+            label1.Location = new Point(8, 13);
+            label1.Margin = new Padding(2, 0, 2, 0);
+            label1.Name = "label1";
+            label1.Size = new Size(51, 15);
+            label1.TabIndex = 9;
+            label1.Text = "Building";
             // 
-            // tBoxTime
+            // checkBoxViewAll
             // 
-            tBoxTime.Location = new Point(72, 153);
-            tBoxTime.Name = "tBoxTime";
-            tBoxTime.Size = new Size(160, 27);
-            tBoxTime.TabIndex = 6;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(12, 156);
-            label3.Name = "label3";
-            label3.Size = new Size(45, 20);
-            label3.TabIndex = 7;
-            label3.Text = "Time:";
-            // 
-            // lBoxComplaint
-            // 
-            lBoxComplaint.FormattingEnabled = true;
-            lBoxComplaint.Location = new Point(314, 22);
-            lBoxComplaint.Name = "lBoxComplaint";
-            lBoxComplaint.Size = new Size(538, 164);
-            lBoxComplaint.TabIndex = 8;
-            // 
-            // richTextBoxComplaint
-            // 
-            richTextBoxComplaint.Location = new Point(314, 221);
-            richTextBoxComplaint.Name = "richTextBoxComplaint";
-            richTextBoxComplaint.ReadOnly = true;
-            richTextBoxComplaint.Size = new Size(538, 289);
-            richTextBoxComplaint.TabIndex = 9;
-            richTextBoxComplaint.Text = "";
+            checkBoxViewAll.AutoSize = true;
+            checkBoxViewAll.Location = new Point(540, 12);
+            checkBoxViewAll.Name = "checkBoxViewAll";
+            checkBoxViewAll.Size = new Size(128, 19);
+            checkBoxViewAll.TabIndex = 14;
+            checkBoxViewAll.Text = "View all complaints";
+            checkBoxViewAll.UseVisualStyleBackColor = true;
+            checkBoxViewAll.CheckedChanged += checkBoxViewAll_CheckedChanged;
             // 
             // DisplayComplaint
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(874, 522);
-            Controls.Add(richTextBoxComplaint);
-            Controls.Add(lBoxComplaint);
-            Controls.Add(label3);
-            Controls.Add(tBoxTime);
-            Controls.Add(tBoxDate);
+            ClientSize = new Size(1338, 593);
+            Controls.Add(checkBoxViewAll);
+            Controls.Add(pComplaints);
+            Controls.Add(cbFlat);
+            Controls.Add(cbBuilding);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(cBoxFlat);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "DisplayComplaint";
             Text = "DisplayComplaint";
             ResumeLayout(false);
@@ -125,13 +115,11 @@
 
         #endregion
 
-        private Label label1;
-        private ComboBox cBoxFlat;
+        private FlowLayoutPanel pComplaints;
+        private ComboBox cbFlat;
+        private ComboBox cbBuilding;
         private Label label2;
-        private TextBox tBoxDate;
-        private TextBox tBoxTime;
-        private Label label3;
-        private ListBox lBoxComplaint;
-        private RichTextBox richTextBoxComplaint;
+        private Label label1;
+        private CheckBox checkBoxViewAll;
     }
 }
