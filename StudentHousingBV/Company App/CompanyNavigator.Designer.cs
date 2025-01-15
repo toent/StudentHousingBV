@@ -53,6 +53,7 @@
             // 
             // pFormTitle
             // 
+            pFormTitle.BackColor = Color.White;
             pFormTitle.Controls.Add(lblTitle);
             pFormTitle.Dock = DockStyle.Top;
             pFormTitle.Location = new Point(300, 0);
@@ -72,6 +73,7 @@
             // 
             // pSideMenu
             // 
+            pSideMenu.BackColor = Color.WhiteSmoke;
             pSideMenu.Controls.Add(btnFlats);
             pSideMenu.Controls.Add(btnBuildings);
             pSideMenu.Controls.Add(btnFiledComplaint);
@@ -87,7 +89,7 @@
             // 
             // btnFlats
             // 
-            btnFlats.BackColor = Color.FromArgb(214, 223, 255);
+            btnFlats.BackColor = Color.White;
             btnFlats.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnFlats.ForeColor = Color.FromArgb(26, 37, 47);
             btnFlats.Location = new Point(3, 279);
@@ -101,7 +103,7 @@
             // 
             // btnBuildings
             // 
-            btnBuildings.BackColor = Color.FromArgb(214, 223, 255);
+            btnBuildings.BackColor = Color.White;
             btnBuildings.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnBuildings.ForeColor = Color.FromArgb(26, 37, 47);
             btnBuildings.Location = new Point(3, 170);
@@ -115,7 +117,7 @@
             // 
             // btnFiledComplaint
             // 
-            btnFiledComplaint.BackColor = Color.FromArgb(214, 223, 255);
+            btnFiledComplaint.BackColor = Color.White;
             btnFiledComplaint.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnFiledComplaint.ForeColor = Color.FromArgb(26, 37, 47);
             btnFiledComplaint.Location = new Point(3, 824);
@@ -129,7 +131,7 @@
             // 
             // btnStudents
             // 
-            btnStudents.BackColor = Color.FromArgb(214, 223, 255);
+            btnStudents.BackColor = Color.White;
             btnStudents.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnStudents.ForeColor = Color.FromArgb(26, 37, 47);
             btnStudents.Location = new Point(3, 388);
@@ -143,7 +145,7 @@
             // 
             // btnAgreements
             // 
-            btnAgreements.BackColor = Color.FromArgb(214, 223, 255);
+            btnAgreements.BackColor = Color.White;
             btnAgreements.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnAgreements.ForeColor = Color.FromArgb(26, 37, 47);
             btnAgreements.Location = new Point(3, 715);
@@ -157,7 +159,7 @@
             // 
             // btnHouseRules
             // 
-            btnHouseRules.BackColor = Color.FromArgb(214, 223, 255);
+            btnHouseRules.BackColor = Color.White;
             btnHouseRules.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnHouseRules.ForeColor = Color.FromArgb(26, 37, 47);
             btnHouseRules.Location = new Point(3, 606);
@@ -171,7 +173,7 @@
             // 
             // btnAnnouncements
             // 
-            btnAnnouncements.BackColor = Color.FromArgb(214, 223, 255);
+            btnAnnouncements.BackColor = Color.White;
             btnAnnouncements.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnAnnouncements.ForeColor = Color.FromArgb(26, 37, 47);
             btnAnnouncements.Location = new Point(3, 497);
