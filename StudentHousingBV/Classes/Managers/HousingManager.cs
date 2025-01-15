@@ -324,6 +324,12 @@ namespace StudentHousingBV.Classes.Managers
         #endregion
 
         #region Announcement
+
+        public List<Announcement> GetAnnouncementsByFlat(int flatId)
+        {
+            return dataManager.GetAnnouncementByFlat(flatId);
+        }
+
         /// <summary>
         ///  Get the next available ID for an announcement
         /// </summary>

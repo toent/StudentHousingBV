@@ -27,9 +27,8 @@ namespace StudentHousingBV.Company_App
         {
             if (cbBuilding.SelectedItem is Building && cbFlat.SelectedItem is Flat flat)
             {
-                MessageBox.Show("im here");
                 pAnnouncements.Controls.Clear();
-                announcements = [.. flat.Announcements];
+                announcements = housingManager.GetAnnouncementsByFlat(flat.FlatId);
 
                 foreach (Announcement announcement in announcements)
                 {
@@ -60,10 +59,15 @@ namespace StudentHousingBV.Company_App
 
         private void CompanyAnnouncementsControl_Deleted(object sender, EventArgs e)
         {
-            CompanyAnnouncementControl announcementControl = (CompanyAnnouncementControl)sender;
-            housingManager.DeleteAnnouncement(announcementControl.announcement);
-            LoadAnnouncements();
-            MessageBox.Show("Announcement deleted", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            // Show confirmation modal before deleting
+            DialogResult result = MessageBox.Show("Are you sure you want to delete this announcement?", "Confirm Deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                CompanyAnnouncementControl announcementControl = (CompanyAnnouncementControl)sender;
+                housingManager.DeleteAnnouncement(announcementControl.announcement);
+                LoadAnnouncements();
+            }
         }
 
         private void btnAddAnnouncement_Click(object sender, EventArgs e)
@@ -75,8 +79,15 @@ namespace StudentHousingBV.Company_App
 
         private void AddAnnouncement(object sender, Announcement announcement)
         {
-            housingManager.AddAnnouncement(announcement);
-            LoadAnnouncements();
+            if (announcement.Title != string.Empty && announcement.Message != string.Empty && announcement.AssignedFlat != null)
+            {
+                housingManager.AddAnnouncement(announcement);
+                LoadAnnouncements();
+            }
+            else
+            {
+                MessageBox.Show("Please fill in all fields", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void cbBuilding_SelectedIndexChanged(object sender, EventArgs e)
