@@ -20,8 +20,8 @@ namespace StudentHousingBV.Student_App
 
         private void LoadGroceries()
         {
-            groceries = housingManager.GetAllGroceries().ToList();
-            //groceries = housingManager.GetAllGroceries().Where(g => g.AssignedFlat == student.AssignedFlat).ToList();
+            //groceries = housingManager.GetAllGroceries().ToList();
+            groceries = housingManager.GetAllGroceries().Where(g => g.AssignedFlat == student.AssignedFlat).ToList();
 
             if (flowLayoutPanelGrocery != null && groceries != null)
             {
