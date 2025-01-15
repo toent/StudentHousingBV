@@ -29,71 +29,92 @@
         private void InitializeComponent()
         {
             label3 = new Label();
-            cbSelectedBuilding = new ComboBox();
+            cbBuilding = new ComboBox();
             label1 = new Label();
-            cbSelectedFlat = new ComboBox();
+            cbFlat = new ComboBox();
             pComplaints = new FlowLayoutPanel();
+            checkBoxViewAll = new CheckBox();
             SuspendLayout();
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 10F);
-            label3.Location = new Point(12, 15);
+            label3.Location = new Point(8, 9);
+            label3.Margin = new Padding(2, 0, 2, 0);
             label3.Name = "label3";
-            label3.Size = new Size(88, 28);
+            label3.Size = new Size(61, 19);
             label3.TabIndex = 38;
             label3.Text = "Building:";
             // 
-            // cbSelectedBuilding
+            // cbBuilding
             // 
-            cbSelectedBuilding.Font = new Font("Segoe UI", 10F);
-            cbSelectedBuilding.FormattingEnabled = true;
-            cbSelectedBuilding.Location = new Point(106, 14);
-            cbSelectedBuilding.Name = "cbSelectedBuilding";
-            cbSelectedBuilding.Size = new Size(255, 36);
-            cbSelectedBuilding.TabIndex = 37;
-            cbSelectedBuilding.SelectedIndexChanged += cbSelectedBuilding_SelectedIndexChanged;
+            cbBuilding.Font = new Font("Segoe UI", 10F);
+            cbBuilding.FormattingEnabled = true;
+            cbBuilding.Location = new Point(74, 8);
+            cbBuilding.Margin = new Padding(2);
+            cbBuilding.Name = "cbBuilding";
+            cbBuilding.Size = new Size(180, 25);
+            cbBuilding.TabIndex = 37;
+            cbBuilding.SelectedIndexChanged += cbBuilding_SelectedIndexChanged;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 10F);
-            label1.Location = new Point(375, 14);
+            label1.Location = new Point(262, 8);
+            label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(48, 28);
+            label1.Size = new Size(34, 19);
             label1.TabIndex = 36;
             label1.Text = "Flat:";
             // 
-            // cbSelectedFlat
+            // cbFlat
             // 
-            cbSelectedFlat.Font = new Font("Segoe UI", 10F);
-            cbSelectedFlat.FormattingEnabled = true;
-            cbSelectedFlat.Location = new Point(429, 14);
-            cbSelectedFlat.Name = "cbSelectedFlat";
-            cbSelectedFlat.Size = new Size(255, 36);
-            cbSelectedFlat.TabIndex = 35;
-            cbSelectedFlat.SelectedIndexChanged += cbSelectedFlat_SelectedIndexChanged;
+            cbFlat.Font = new Font("Segoe UI", 10F);
+            cbFlat.FormattingEnabled = true;
+            cbFlat.Location = new Point(300, 8);
+            cbFlat.Margin = new Padding(2);
+            cbFlat.Name = "cbFlat";
+            cbFlat.Size = new Size(180, 25);
+            cbFlat.TabIndex = 35;
+            cbFlat.SelectedIndexChanged += cbFlat_SelectedIndexChanged;
             // 
             // pComplaints
             // 
             pComplaints.AutoScroll = true;
-            pComplaints.Location = new Point(12, 59);
+            pComplaints.Location = new Point(8, 35);
+            pComplaints.Margin = new Padding(2);
             pComplaints.Name = "pComplaints";
-            pComplaints.Size = new Size(1551, 745);
+            pComplaints.Size = new Size(1086, 447);
             pComplaints.TabIndex = 31;
+            // 
+            // checkBoxViewAll
+            // 
+            checkBoxViewAll.AutoSize = true;
+            checkBoxViewAll.Checked = true;
+            checkBoxViewAll.CheckState = CheckState.Checked;
+            checkBoxViewAll.Location = new Point(509, 10);
+            checkBoxViewAll.Name = "checkBoxViewAll";
+            checkBoxViewAll.Size = new Size(128, 19);
+            checkBoxViewAll.TabIndex = 39;
+            checkBoxViewAll.Text = "View all complaints";
+            checkBoxViewAll.UseVisualStyleBackColor = true;
+            checkBoxViewAll.CheckedChanged += checkBoxViewAll_CheckedChanged;
             // 
             // CompanyComplaints
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(1576, 818);
+            ClientSize = new Size(1103, 491);
+            Controls.Add(checkBoxViewAll);
             Controls.Add(label3);
-            Controls.Add(cbSelectedBuilding);
+            Controls.Add(cbBuilding);
             Controls.Add(label1);
-            Controls.Add(cbSelectedFlat);
+            Controls.Add(cbFlat);
             Controls.Add(pComplaints);
+            Margin = new Padding(2);
             Name = "CompanyComplaints";
             Text = "CompanyComplaints";
             ResumeLayout(false);
@@ -103,9 +124,10 @@
         #endregion
 
         private Label label3;
-        private ComboBox cbSelectedBuilding;
+        private ComboBox cbBuilding;
         private Label label1;
-        private ComboBox cbSelectedFlat;
+        private ComboBox cbFlat;
         private FlowLayoutPanel pComplaints;
+        private CheckBox checkBoxViewAll;
     }
 }
