@@ -79,7 +79,6 @@ namespace StudentHousingBV.Company_App
         {
             if (lbStudents.SelectedItem is Student student && lbStudentFlat.SelectedItem is Flat flat && ValidateStudent())
             {
-                student.StudentId = tbStudentId.Text;
                 student.Name = tbStudentName.Text;
                 student.AssignedFlat = flat;
                 if (housingManager.UpdateStudent(student))
@@ -91,6 +90,10 @@ namespace StudentHousingBV.Company_App
                 {
                     MessageBox.Show("Student could not be updated", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+            }
+            else
+            {
+                MessageBox.Show("Please select a student.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -129,12 +132,7 @@ namespace StudentHousingBV.Company_App
         private bool ValidateStudent()
         {
             bool result = true;
-            if (string.IsNullOrWhiteSpace(tbStudentId.Text))
-            {
-                MessageBox.Show("Contract ID is required", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                result = false;
-            }
-            else if (string.IsNullOrWhiteSpace(tbStudentName.Text))
+            if (string.IsNullOrWhiteSpace(tbStudentName.Text))
             {
                 MessageBox.Show("Student Name is required", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 result = false;

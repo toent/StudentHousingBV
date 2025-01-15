@@ -5,7 +5,7 @@ namespace StudentHousingBV.Classes.Entities
     public class Flat
     {
         #region Properties
-        public int FlatId { get; set; } // Primary Key
+        internal int FlatId { get; set; } // Primary Key
         public int FlatNumber { get; set; }
         public List<Student> Students { get; set; }
         public List<Complaint> Complaints { get; set; }
@@ -14,6 +14,7 @@ namespace StudentHousingBV.Classes.Entities
         public List<Chore> Chores { get; set; }
         public List<Grocery> Groceries { get; set; }
         public List<Rule> Rules { get; set; }
+        public int ExternalId { get => FlatId; }
         [JsonIgnore]
         public Building AssignedBuilding { get; set; } // Cross-Reference
         #endregion

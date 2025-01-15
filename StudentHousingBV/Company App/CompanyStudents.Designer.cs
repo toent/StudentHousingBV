@@ -138,6 +138,7 @@
             // 
             // tbStudentId
             // 
+            tbStudentId.Enabled = false;
             tbStudentId.Location = new Point(19, 65);
             tbStudentId.Name = "tbStudentId";
             tbStudentId.Size = new Size(428, 31);

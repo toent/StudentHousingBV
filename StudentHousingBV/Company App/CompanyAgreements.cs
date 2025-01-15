@@ -43,7 +43,7 @@ namespace StudentHousingBV.Company_App
         {
             cbxSelectedBuilding.DataSource = housingManager.GetBuildings();
             cbxSelectedBuilding.DisplayMember = "Address";
-            cbxSelectedBuilding.ValueMember = "BuildingID";
+            cbxSelectedBuilding.ValueMember = "ExternalId";
         }
 
         private void ResetCbxSelectedFlat()
@@ -53,7 +53,7 @@ namespace StudentHousingBV.Company_App
             {
                 cbxSelectedFlat.DataSource = building.Flats;
                 cbxSelectedFlat.DisplayMember = "FlatNumber";
-                cbxSelectedFlat.ValueMember = "FlatID";
+                cbxSelectedFlat.ValueMember = "ExternalId";
             }
             else
             {

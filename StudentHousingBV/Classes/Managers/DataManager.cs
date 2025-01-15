@@ -132,10 +132,11 @@ namespace StudentHousingBV.Classes.Managers
             {
                 using SqlConnection connection = new(CONNECTION_STRING);
                 connection.Open();
-                string query = "INSERT INTO Building (Address) VALUES (@Address)";
+                string query = "INSERT INTO Building (Address) OUTPUT INSERTED.BuildingId VALUES (@Address)";
                 SqlCommand command = new(query, connection);
                 command.Parameters.AddWithValue("@Address", building.Address);
-                command.ExecuteNonQuery();
+                int newBuildingId = (int)command.ExecuteScalar();
+                building.BuildingId = newBuildingId;
                 result = true;
             }
             catch (Exception ex)
@@ -246,11 +247,15 @@ namespace StudentHousingBV.Classes.Managers
             {
                 using SqlConnection connection = new(CONNECTION_STRING);
                 connection.Open();
-                string query = "INSERT INTO Flat (FlatNumber, AssignedBuildingId) VALUES (@FlatNumber, @BuildingId)";
-                SqlCommand command = new(query, connection);
+                string query = "INSERT INTO Flat (FlatNumber, AssignedBuildingId) OUTPUT INSERTED.FlatId VALUES (@FlatNumber, @BuildingId)";
+                using SqlCommand command = new(query, connection);
                 command.Parameters.AddWithValue("@FlatNumber", flat.FlatNumber);
                 command.Parameters.AddWithValue("@BuildingId", flat.AssignedBuilding.BuildingId);
-                command.ExecuteNonQuery();
+
+                // Execute the query and get the inserted ID
+                int newFlatId = (int)command.ExecuteScalar();
+                flat.FlatId = newFlatId;
+
                 foreach (Student student in flat.Students)
                 {
                     if (GetStudent(student.StudentId) == null)
@@ -336,6 +341,7 @@ namespace StudentHousingBV.Classes.Managers
             }
             return result;
         }
+
         public bool UpdateFlat(Flat flat)
         {
             bool result = false;
@@ -440,12 +446,6 @@ namespace StudentHousingBV.Classes.Managers
             bool result = false;
             try
             {
-                using SqlConnection connection = new(CONNECTION_STRING);
-                connection.Open();
-                string query = "DELETE FROM Flat WHERE FlatId = @FlatId";
-                SqlCommand command = new(query, connection);
-                command.Parameters.AddWithValue("@FlatId", flatId);
-                command.ExecuteNonQuery();
                 foreach (Complaint complaint in GetComplaintByFlat(flatId))
                 {
                     DeleteComplaint(complaint.ComplaintId);
@@ -470,6 +470,12 @@ namespace StudentHousingBV.Classes.Managers
                 {
                     DeleteRule(rule.RuleId);
                 }
+                using SqlConnection connection = new(CONNECTION_STRING);
+                connection.Open();
+                string query = "DELETE FROM Flat WHERE FlatId = @FlatId";
+                SqlCommand command = new(query, connection);
+                command.Parameters.AddWithValue("@FlatId", flatId);
+                command.ExecuteNonQuery();
                 result = true;
             }
             catch (Exception ex)

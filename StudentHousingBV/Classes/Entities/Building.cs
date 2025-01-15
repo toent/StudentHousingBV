@@ -5,11 +5,12 @@ namespace StudentHousingBV.Classes.Entities
     public class Building
     {
         #region Properties
-        public int BuildingId { get; set; } // Primary key
+        internal int BuildingId { get; set; } // Primary key
         public string Address { get; set; }
         public List<Rule> Rules { get; set; }
         public List<Flat> Flats { get; set; }
-        //public List<Announcement> Announcements { get; set; }
+        public int ExternalId { get => BuildingId; }
+
         #endregion
 
         #region Constructors

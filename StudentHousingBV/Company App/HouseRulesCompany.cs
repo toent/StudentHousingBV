@@ -20,7 +20,7 @@ namespace StudentHousingBV
         {
             cbxBuilding.DataSource = housingManager.GetBuildings();
             cbxBuilding.DisplayMember = "Address";
-            cbxBuilding.ValueMember = "BuildingId";
+            cbxBuilding.ValueMember = "ExternalId";
             Building selectedBuilding = cbxBuilding.SelectedItem as Building;
             SetupFlatbox(selectedBuilding);
         }

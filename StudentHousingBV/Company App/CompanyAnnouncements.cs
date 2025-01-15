@@ -86,14 +86,14 @@ namespace StudentHousingBV.Company_App
                 selectedBuilding = building;
                 cbFlat.DataSource = building.Flats;
                 cbFlat.DisplayMember = "FlatNumber";
-                cbFlat.SelectedIndex = 0;
+                cbFlat.SelectedIndex = building.Flats.Count > 0 ? 0 : -1;
             }
             LoadAnnouncements();
         }
 
         private void cbFlat_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cbFlat.SelectedItem is Flat flat)
+            if (cbFlat.SelectedItem is Flat)
             {
                 LoadAnnouncements();
             }
