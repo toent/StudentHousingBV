@@ -41,8 +41,8 @@ namespace StudentHousingBV.Company_App
                         lblTitle.Text = "Agreements";
                         break;
                     case "btnFiledComplaint":
-                        LoadFormIntoPanel(new DisplayComplaint(housingManager));
-                        lblTitle.Text = "Filed Complaints";
+                        LoadFormIntoPanel(new CompanyComplaints(housingManager));
+                        lblTitle.Text = "Complaints";
                         break;
                     case "btnStudents":
                         LoadFormIntoPanel(new CompanyStudents(housingManager));

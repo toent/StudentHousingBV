@@ -1,14 +1,5 @@
 ﻿using StudentHousingBV.Classes.Entities;
 using StudentHousingBV.Classes.Managers;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace StudentHousingBV.Company_App
 {
@@ -25,6 +16,7 @@ namespace StudentHousingBV.Company_App
 
             this.housingManager = housingManager;
             this.flat = flat;
+            StartPosition = FormStartPosition.CenterScreen;
 
             SetupVisuals(null);
         }
@@ -37,7 +29,7 @@ namespace StudentHousingBV.Company_App
             this.housingManager = housingManager;
             this.flat = flat;
             this.rule = rule;
-          
+
             SetupVisuals(rule.Description);
         }
 
@@ -60,7 +52,7 @@ namespace StudentHousingBV.Company_App
 
         private void btnAddUpdate_Click(object sender, EventArgs e)
         {
-            if (tbxDescription.Text != String.Empty)
+            if (tbxDescription.Text != string.Empty)
             {
                 if (isUpdate)
                 {
@@ -68,7 +60,7 @@ namespace StudentHousingBV.Company_App
                 }
                 else
                 {
-                    Classes.Entities.Rule newRule = new Classes.Entities.Rule(housingManager.GetNextRuleId(), flat, tbxDescription.Text);
+                    Classes.Entities.Rule newRule = new(housingManager.GetNextRuleId(), flat, tbxDescription.Text);
                     flat.Rules.Add(newRule);
                 }
                 housingManager.SaveAllData();

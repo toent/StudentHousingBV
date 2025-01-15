@@ -1,14 +1,5 @@
-﻿using StudentHousingBV.Classes.Managers;
-using StudentHousingBV.Classes.Entities;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using StudentHousingBV.Classes.Entities;
+using StudentHousingBV.Classes.Managers;
 
 namespace StudentHousingBV.Company_App
 {
@@ -21,6 +12,7 @@ namespace StudentHousingBV.Company_App
         {
             this.housingManager = housingManager;
             InitializeComponent();
+            StartPosition = FormStartPosition.CenterScreen;
             PopulateComboboxes();
         }
 
@@ -39,17 +31,17 @@ namespace StudentHousingBV.Company_App
 
         private void cbBuilding_SelectedIndexChanged(object sender, EventArgs e)
         {
-                selectedBuilding = (Building)cbBuilding.SelectedItem;
-                cbFlat.DataSource = selectedBuilding.Flats;
+            selectedBuilding = (Building)cbBuilding.SelectedItem;
+            cbFlat.DataSource = selectedBuilding.Flats;
         }
 
         private void cbGlobal_CheckedChanged(object sender, EventArgs e)
         {
-                cbBuilding.Enabled = false;
-                cbFlat.Enabled = false;
+            cbBuilding.Enabled = false;
+            cbFlat.Enabled = false;
 
-                cbBuilding.SelectedItem = null;
-                cbFlat.SelectedItem = null;
+            cbBuilding.SelectedItem = null;
+            cbFlat.SelectedItem = null;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)

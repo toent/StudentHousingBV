@@ -30,24 +30,25 @@ namespace StudentHousingBV.Classes.Managers
         /// <summary>
         /// Load all data from the storage directory
         /// </summary>
-        public List<Building>? GetAllData()
+        public List<Building> GetAllData()
         {
+            List<Building> buildings = [];
             string filePath = Path.Combine(storagePath, "Data.json");
             if (!directoryExists || !File.Exists(filePath))
             {
-                return null;
+                return buildings;
             }
             try
             {
                 string extractedJson = File.ReadAllText(filePath);
-                var buildings = JsonSerializer.Deserialize<List<Building>>(extractedJson, jsonOptions);
+                buildings = JsonSerializer.Deserialize<List<Building>>(extractedJson, jsonOptions) ?? [];
                 ReLinkAllData(buildings);
                 return buildings;
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Error loading buildings: {ex.Message}");
-                return null;
+                return buildings;
             }
         }
 

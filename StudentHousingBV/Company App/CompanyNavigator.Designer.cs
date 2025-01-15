@@ -118,12 +118,12 @@
             btnFiledComplaint.BackColor = Color.FromArgb(214, 223, 255);
             btnFiledComplaint.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnFiledComplaint.ForeColor = Color.FromArgb(26, 37, 47);
-            btnFiledComplaint.Location = new Point(3, 719);
+            btnFiledComplaint.Location = new Point(3, 824);
             btnFiledComplaint.Margin = new Padding(3, 20, 3, 20);
             btnFiledComplaint.Name = "btnFiledComplaint";
             btnFiledComplaint.Size = new Size(294, 69);
             btnFiledComplaint.TabIndex = 5;
-            btnFiledComplaint.Text = "Filed complaint";
+            btnFiledComplaint.Text = "Complaints";
             btnFiledComplaint.UseVisualStyleBackColor = false;
             btnFiledComplaint.Click += Navigation_Click;
             // 
@@ -146,7 +146,7 @@
             btnAgreements.BackColor = Color.FromArgb(214, 223, 255);
             btnAgreements.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnAgreements.ForeColor = Color.FromArgb(26, 37, 47);
-            btnAgreements.Location = new Point(3, 610);
+            btnAgreements.Location = new Point(3, 715);
             btnAgreements.Margin = new Padding(3, 20, 3, 20);
             btnAgreements.Name = "btnAgreements";
             btnAgreements.Size = new Size(294, 69);
@@ -160,7 +160,7 @@
             btnHouseRules.BackColor = Color.FromArgb(214, 223, 255);
             btnHouseRules.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnHouseRules.ForeColor = Color.FromArgb(26, 37, 47);
-            btnHouseRules.Location = new Point(3, 501);
+            btnHouseRules.Location = new Point(3, 606);
             btnHouseRules.Margin = new Padding(3, 20, 3, 20);
             btnHouseRules.Name = "btnHouseRules";
             btnHouseRules.Size = new Size(294, 69);
@@ -174,7 +174,7 @@
             btnAnnouncements.BackColor = Color.FromArgb(214, 223, 255);
             btnAnnouncements.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnAnnouncements.ForeColor = Color.FromArgb(26, 37, 47);
-            btnAnnouncements.Location = new Point(3, 828);
+            btnAnnouncements.Location = new Point(3, 497);
             btnAnnouncements.Margin = new Padding(3, 20, 3, 20);
             btnAnnouncements.Name = "btnAnnouncements";
             btnAnnouncements.Size = new Size(294, 69);

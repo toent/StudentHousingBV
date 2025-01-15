@@ -1,15 +1,7 @@
 ﻿using StudentHousingBV.Classes.Entities;
 using StudentHousingBV.Classes.Managers;
 using StudentHousingBV.Custom_Controls;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace StudentHousingBV.Company_App
 {
@@ -23,7 +15,7 @@ namespace StudentHousingBV.Company_App
         {
             InitializeComponent();
             this.housingManager = HousingManager;
-            this.agreements = new List<Agreement>();
+            this.agreements = [];
             SetUI_Elements();
         }
 
@@ -34,9 +26,12 @@ namespace StudentHousingBV.Company_App
 
             ResetCbxSelectedBuilding();
 
-            cbxSelectedBuilding.SelectedIndex = 0;
-            cbxSelectedFlat.SelectedIndex = 0;
-            cbxSelectedCreator.SelectedIndex = 0;
+            if (cbxSelectedBuilding.SelectedItem is Building building)
+            {
+                cbxSelectedBuilding.SelectedIndex = 0;
+                cbxSelectedFlat.SelectedIndex = building.Flats.Count > 0 ? 0 : -1;
+                cbxSelectedCreator.SelectedIndex = building.Flats.Count > 0 ? 0 : -1;
+            }
         }
 
         private void ResetCbxSelectedBuilding()
@@ -60,11 +55,11 @@ namespace StudentHousingBV.Company_App
                 cbxSelectedFlat.DataSource = null;
             }
         }
-        
+
         private void ResetCbxSelectedCreator()
         {
             Flat flat = cbxSelectedFlat.SelectedItem as Flat;
-            List<Student> creators = new List<Student>();
+            List<Student> creators = [];
             if (flat != null)
             {
                 creators = housingManager.GetAllAgreements().Where(agreement => agreement.AssignedFlat.FlatId == flat.FlatId).Select(agreement => agreement.Student).Distinct().ToList();
@@ -86,13 +81,13 @@ namespace StudentHousingBV.Company_App
         private void LoadAllAgreements()
         {
             Flat flat = cbxSelectedFlat.SelectedItem as Flat;
-            if(flat != null)
+            if (flat != null)
             {
                 this.agreements = housingManager.GetAllAgreements().Where(agreement => agreement.AssignedFlat.FlatId == flat.FlatId).ToList();
             }
             else
             {
-                this.agreements = new List<Agreement>();
+                this.agreements = [];
             }
         }
 
@@ -136,7 +131,7 @@ namespace StudentHousingBV.Company_App
                 dtpStartDate.Value = dtpEndDate.Value.AddDays(-1);
             }
 
-            if(cbxSelectedCreator.SelectedItem != null)
+            if (cbxSelectedCreator.SelectedItem != null)
             {
                 LoadAllAgreements();
                 LiveFilter(cbxSelectedCreator.SelectedItem as Student, dtpStartDate.Value, dtpEndDate.Value);
@@ -160,11 +155,11 @@ namespace StudentHousingBV.Company_App
         private void LoadAgreementControls()
         {
             pAgreements.Controls.Clear();
-            controls = new List<AgreementControl>();
+            controls = [];
 
             foreach (Agreement agreement in agreements)
             {
-                AgreementControl control = new AgreementControl(agreement, null);
+                AgreementControl control = new(agreement, null);
                 controls.Add(control);
                 pAgreements.Controls.Add(control);
             }

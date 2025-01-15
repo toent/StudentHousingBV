@@ -17,7 +17,7 @@ namespace StudentHousingBV.Classes.Managers
         public HousingManager()
         {
             dataManager = new();
-            buildings = dataManager.GetAllData() ?? []; //Flagged as modify
+            buildings = dataManager.GetAllData();
         }
         #endregion
 
@@ -285,6 +285,7 @@ namespace StudentHousingBV.Classes.Managers
         public void SubmitComplaint(Complaint complaint)
         {
             complaint.AssignedFlat.Complaints.Add(complaint);
+            SaveAllData();
         }
 
         /// <summary>
@@ -296,6 +297,11 @@ namespace StudentHousingBV.Classes.Managers
             return buildings.SelectMany(building => building.Flats)
                             .SelectMany(flat => flat.Complaints)
                             .ToList();
+        }
+
+        public List<Complaint> GetComplaints(Flat flat)
+        {
+            return flat.Complaints;
         }
         #endregion
 

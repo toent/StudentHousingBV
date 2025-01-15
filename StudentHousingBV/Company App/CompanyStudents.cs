@@ -101,6 +101,10 @@ namespace StudentHousingBV.Company_App
                     MessageBox.Show("Student updated successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
+            else
+            {
+                MessageBox.Show("Please select a student and a flat", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private bool ValidateStudent()
