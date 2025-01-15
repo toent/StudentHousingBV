@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CompanyNavigator));
             pShowForm = new Panel();
             pFormTitle = new Panel();
             lblTitle = new Label();
@@ -39,8 +40,10 @@
             btnAgreements = new Button();
             btnHouseRules = new Button();
             btnAnnouncements = new Button();
+            pictureBox1 = new PictureBox();
             pFormTitle.SuspendLayout();
             pSideMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // pShowForm
@@ -74,6 +77,7 @@
             // pSideMenu
             // 
             pSideMenu.BackColor = Color.WhiteSmoke;
+            pSideMenu.Controls.Add(pictureBox1);
             pSideMenu.Controls.Add(btnFlats);
             pSideMenu.Controls.Add(btnBuildings);
             pSideMenu.Controls.Add(btnFiledComplaint);
@@ -185,6 +189,17 @@
             btnAnnouncements.UseVisualStyleBackColor = false;
             btnAnnouncements.Click += Navigation_Click;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.BackColor = Color.Transparent;
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(12, 12);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(268, 120);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 8;
+            pictureBox1.TabStop = false;
+            // 
             // CompanyNavigator
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -199,6 +214,7 @@
             pFormTitle.ResumeLayout(false);
             pFormTitle.PerformLayout();
             pSideMenu.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
@@ -215,5 +231,6 @@
         private Button btnAnnouncements;
         private Button btnFlats;
         private Button btnBuildings;
+        private PictureBox pictureBox1;
     }
 }

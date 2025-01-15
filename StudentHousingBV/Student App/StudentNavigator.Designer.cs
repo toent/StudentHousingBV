@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StudentNavigator));
             pSideMenu = new Panel();
+            pictureBox1 = new PictureBox();
             btnFileComplaint = new Button();
             btnGroceries = new Button();
             btnChores = new Button();
@@ -43,12 +45,14 @@
             btnLogout = new Button();
             pShowForm = new Panel();
             pSideMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             pFormTitle.SuspendLayout();
             SuspendLayout();
             // 
             // pSideMenu
             // 
             pSideMenu.BackColor = Color.WhiteSmoke;
+            pSideMenu.Controls.Add(pictureBox1);
             pSideMenu.Controls.Add(btnFileComplaint);
             pSideMenu.Controls.Add(btnGroceries);
             pSideMenu.Controls.Add(btnChores);
@@ -60,6 +64,17 @@
             pSideMenu.Name = "pSideMenu";
             pSideMenu.Size = new Size(300, 1024);
             pSideMenu.TabIndex = 0;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.BackColor = Color.Transparent;
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(14, 16);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(268, 120);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 6;
+            pictureBox1.TabStop = false;
             // 
             // btnFileComplaint
             // 
@@ -227,6 +242,7 @@
             Name = "StudentNavigator";
             Text = "Students - Student Housing B.V.";
             pSideMenu.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             pFormTitle.ResumeLayout(false);
             pFormTitle.PerformLayout();
             ResumeLayout(false);
@@ -248,5 +264,6 @@
         private Button btnLogout;
         private Label lblLocation;
         private Label lblTitle;
+        private PictureBox pictureBox1;
     }
 }
