@@ -42,102 +42,111 @@
             // 
             // btnCancel
             // 
-            btnCancel.Location = new Point(147, 444);
+            btnCancel.BackColor = Color.White;
+            btnCancel.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
+            btnCancel.Location = new Point(11, 546);
             btnCancel.Margin = new Padding(2);
             btnCancel.Name = "btnCancel";
-            btnCancel.Size = new Size(90, 27);
+            btnCancel.Size = new Size(163, 43);
             btnCancel.TabIndex = 15;
             btnCancel.Text = "Cancel";
-            btnCancel.UseVisualStyleBackColor = true;
+            btnCancel.UseVisualStyleBackColor = false;
             // 
             // btnAdd
             // 
-            btnAdd.Location = new Point(241, 444);
+            btnAdd.BackColor = Color.FromArgb(240, 243, 255);
+            btnAdd.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
+            btnAdd.Location = new Point(178, 546);
             btnAdd.Margin = new Padding(2);
             btnAdd.Name = "btnAdd";
-            btnAdd.Size = new Size(161, 27);
+            btnAdd.Size = new Size(324, 43);
             btnAdd.TabIndex = 14;
             btnAdd.Text = "Add";
-            btnAdd.UseVisualStyleBackColor = true;
+            btnAdd.UseVisualStyleBackColor = false;
             btnAdd.Click += btnAdd_Click;
             // 
             // rtbMessage
             // 
-            rtbMessage.Location = new Point(11, 218);
+            rtbMessage.Location = new Point(14, 252);
             rtbMessage.Margin = new Padding(2);
             rtbMessage.Name = "rtbMessage";
-            rtbMessage.Size = new Size(391, 222);
+            rtbMessage.Size = new Size(488, 276);
             rtbMessage.TabIndex = 13;
             rtbMessage.Text = "";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(11, 196);
+            label4.Location = new Point(14, 225);
             label4.Margin = new Padding(2, 0, 2, 0);
             label4.Name = "label4";
-            label4.Size = new Size(67, 20);
+            label4.Size = new Size(82, 25);
             label4.TabIndex = 12;
             label4.Text = "Message";
             // 
             // tbTitle
             // 
-            tbTitle.Location = new Point(10, 33);
+            tbTitle.Location = new Point(12, 41);
             tbTitle.Margin = new Padding(2);
             tbTitle.Name = "tbTitle";
-            tbTitle.Size = new Size(179, 27);
+            tbTitle.Size = new Size(223, 31);
             tbTitle.TabIndex = 11;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(10, 10);
+            label1.Location = new Point(12, 12);
             label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(38, 20);
+            label1.Size = new Size(44, 25);
             label1.TabIndex = 10;
             label1.Text = "Title";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(10, 98);
+            label2.Location = new Point(12, 118);
+            label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new Size(64, 20);
+            label2.Size = new Size(76, 25);
             label2.TabIndex = 17;
             label2.Text = "Building";
             // 
             // cbBuilding
             // 
             cbBuilding.FormattingEnabled = true;
-            cbBuilding.Location = new Point(10, 121);
+            cbBuilding.Location = new Point(12, 147);
+            cbBuilding.Margin = new Padding(4, 4, 4, 4);
             cbBuilding.Name = "cbBuilding";
-            cbBuilding.Size = new Size(179, 28);
+            cbBuilding.Size = new Size(223, 33);
             cbBuilding.TabIndex = 18;
             cbBuilding.SelectedIndexChanged += cbBuilding_SelectedIndexChanged;
             // 
             // cbFlat
             // 
             cbFlat.FormattingEnabled = true;
-            cbFlat.Location = new Point(223, 121);
+            cbFlat.Location = new Point(279, 147);
+            cbFlat.Margin = new Padding(4, 4, 4, 4);
             cbFlat.Name = "cbFlat";
-            cbFlat.Size = new Size(179, 28);
+            cbFlat.Size = new Size(223, 33);
             cbFlat.TabIndex = 19;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(223, 99);
+            label3.Location = new Point(279, 120);
+            label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
-            label3.Size = new Size(33, 20);
+            label3.Size = new Size(40, 25);
             label3.TabIndex = 20;
             label3.Text = "Flat";
             // 
             // CompanyAddAnnouncement
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(415, 480);
+            BackColor = Color.White;
+            ClientSize = new Size(519, 600);
             Controls.Add(label3);
             Controls.Add(cbFlat);
             Controls.Add(cbBuilding);

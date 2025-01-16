@@ -108,19 +108,22 @@
             // 
             // btnAdd
             // 
-            btnAdd.Location = new Point(143, 450);
+            btnAdd.BackColor = Color.FromArgb(240, 243, 255);
+            btnAdd.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
+            btnAdd.Location = new Point(143, 461);
             btnAdd.Name = "btnAdd";
-            btnAdd.Size = new Size(177, 34);
+            btnAdd.Size = new Size(177, 44);
             btnAdd.TabIndex = 8;
             btnAdd.Text = "Add";
-            btnAdd.UseVisualStyleBackColor = true;
+            btnAdd.UseVisualStyleBackColor = false;
             btnAdd.Click += btnAdd_Click;
             // 
             // btnCancel
             // 
-            btnCancel.Location = new Point(25, 450);
+            btnCancel.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
+            btnCancel.Location = new Point(25, 461);
             btnCancel.Name = "btnCancel";
-            btnCancel.Size = new Size(112, 34);
+            btnCancel.Size = new Size(112, 44);
             btnCancel.TabIndex = 9;
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = true;
@@ -131,7 +134,7 @@
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(351, 496);
+            ClientSize = new Size(351, 517);
             Controls.Add(btnCancel);
             Controls.Add(btnAdd);
             Controls.Add(rtbDescription);

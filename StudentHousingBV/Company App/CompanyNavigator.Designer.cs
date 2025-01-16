@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CompanyNavigator));
             pShowForm = new Panel();
             pFormTitle = new Panel();
             lblTitle = new Label();
@@ -39,8 +40,10 @@
             btnAgreements = new Button();
             btnHouseRules = new Button();
             btnAnnouncements = new Button();
+            pictureBox1 = new PictureBox();
             pFormTitle.SuspendLayout();
             pSideMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // pShowForm
@@ -72,6 +75,8 @@
             // 
             // pSideMenu
             // 
+            pSideMenu.BackColor = Color.WhiteSmoke;
+            pSideMenu.Controls.Add(pictureBox1);
             pSideMenu.Controls.Add(btnFlats);
             pSideMenu.Controls.Add(btnBuildings);
             pSideMenu.Controls.Add(btnFiledComplaint);
@@ -87,7 +92,7 @@
             // 
             // btnFlats
             // 
-            btnFlats.BackColor = Color.FromArgb(214, 223, 255);
+            btnFlats.BackColor = Color.White;
             btnFlats.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnFlats.ForeColor = Color.FromArgb(26, 37, 47);
             btnFlats.Location = new Point(3, 279);
@@ -101,7 +106,7 @@
             // 
             // btnBuildings
             // 
-            btnBuildings.BackColor = Color.FromArgb(214, 223, 255);
+            btnBuildings.BackColor = Color.White;
             btnBuildings.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnBuildings.ForeColor = Color.FromArgb(26, 37, 47);
             btnBuildings.Location = new Point(3, 170);
@@ -115,7 +120,7 @@
             // 
             // btnFiledComplaint
             // 
-            btnFiledComplaint.BackColor = Color.FromArgb(214, 223, 255);
+            btnFiledComplaint.BackColor = Color.White;
             btnFiledComplaint.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnFiledComplaint.ForeColor = Color.FromArgb(26, 37, 47);
             btnFiledComplaint.Location = new Point(3, 719);
@@ -129,7 +134,7 @@
             // 
             // btnStudents
             // 
-            btnStudents.BackColor = Color.FromArgb(214, 223, 255);
+            btnStudents.BackColor = Color.White;
             btnStudents.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnStudents.ForeColor = Color.FromArgb(26, 37, 47);
             btnStudents.Location = new Point(3, 388);
@@ -143,7 +148,7 @@
             // 
             // btnAgreements
             // 
-            btnAgreements.BackColor = Color.FromArgb(214, 223, 255);
+            btnAgreements.BackColor = Color.White;
             btnAgreements.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnAgreements.ForeColor = Color.FromArgb(26, 37, 47);
             btnAgreements.Location = new Point(3, 610);
@@ -157,7 +162,7 @@
             // 
             // btnHouseRules
             // 
-            btnHouseRules.BackColor = Color.FromArgb(214, 223, 255);
+            btnHouseRules.BackColor = Color.White;
             btnHouseRules.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnHouseRules.ForeColor = Color.FromArgb(26, 37, 47);
             btnHouseRules.Location = new Point(3, 501);
@@ -171,7 +176,7 @@
             // 
             // btnAnnouncements
             // 
-            btnAnnouncements.BackColor = Color.FromArgb(214, 223, 255);
+            btnAnnouncements.BackColor = Color.White;
             btnAnnouncements.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnAnnouncements.ForeColor = Color.FromArgb(26, 37, 47);
             btnAnnouncements.Location = new Point(3, 828);
@@ -182,6 +187,16 @@
             btnAnnouncements.Text = "Announcements";
             btnAnnouncements.UseVisualStyleBackColor = false;
             btnAnnouncements.Click += Navigation_Click;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(12, 12);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(268, 120);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 8;
+            pictureBox1.TabStop = false;
             // 
             // CompanyNavigator
             // 
@@ -197,6 +212,7 @@
             pFormTitle.ResumeLayout(false);
             pFormTitle.PerformLayout();
             pSideMenu.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
@@ -213,5 +229,6 @@
         private Button btnAnnouncements;
         private Button btnFlats;
         private Button btnBuildings;
+        private PictureBox pictureBox1;
     }
 }

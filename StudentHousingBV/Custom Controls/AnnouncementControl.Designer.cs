@@ -78,6 +78,7 @@
             // 
             // lblDescription
             // 
+            lblDescription.Font = new Font("Segoe UI", 10F);
             lblDescription.Location = new Point(21, 109);
             lblDescription.Name = "lblDescription";
             lblDescription.Size = new Size(1456, 173);

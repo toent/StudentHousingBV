@@ -42,13 +42,14 @@
             // 
             // btnAddChore
             // 
+            btnAddChore.BackColor = Color.FromArgb(240, 243, 255);
             btnAddChore.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnAddChore.Location = new Point(1391, 12);
             btnAddChore.Name = "btnAddChore";
             btnAddChore.Size = new Size(173, 43);
             btnAddChore.TabIndex = 0;
             btnAddChore.Text = "Add Chore";
-            btnAddChore.UseVisualStyleBackColor = true;
+            btnAddChore.UseVisualStyleBackColor = false;
             btnAddChore.Click += btnAddChore_Click;
             // 
             // pChores
@@ -112,24 +113,26 @@
             // 
             // btnFilter
             // 
+            btnFilter.BackColor = Color.FromArgb(240, 243, 255);
             btnFilter.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
             btnFilter.Location = new Point(849, 14);
             btnFilter.Name = "btnFilter";
             btnFilter.Size = new Size(112, 43);
             btnFilter.TabIndex = 7;
             btnFilter.Text = "Filter";
-            btnFilter.UseVisualStyleBackColor = true;
+            btnFilter.UseVisualStyleBackColor = false;
             btnFilter.Click += btnFilter_Click;
             // 
             // btnClearFilter
             // 
+            btnClearFilter.BackColor = Color.FromArgb(240, 243, 255);
             btnClearFilter.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
             btnClearFilter.Location = new Point(967, 14);
             btnClearFilter.Name = "btnClearFilter";
             btnClearFilter.Size = new Size(137, 43);
             btnClearFilter.TabIndex = 8;
             btnClearFilter.Text = "Clear Filter";
-            btnClearFilter.UseVisualStyleBackColor = true;
+            btnClearFilter.UseVisualStyleBackColor = false;
             btnClearFilter.Click += btnClearFilter_Click;
             // 
             // StudentChores

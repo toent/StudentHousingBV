@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StudentNavigator));
             pSideMenu = new Panel();
             btnFileComplaint = new Button();
             btnGroceries = new Button();
@@ -42,12 +43,16 @@
             lblUserName = new Label();
             btnLogout = new Button();
             pShowForm = new Panel();
+            pictureBox1 = new PictureBox();
             pSideMenu.SuspendLayout();
             pFormTitle.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // pSideMenu
             // 
+            pSideMenu.BackColor = Color.WhiteSmoke;
+            pSideMenu.Controls.Add(pictureBox1);
             pSideMenu.Controls.Add(btnFileComplaint);
             pSideMenu.Controls.Add(btnGroceries);
             pSideMenu.Controls.Add(btnChores);
@@ -62,10 +67,10 @@
             // 
             // btnFileComplaint
             // 
-            btnFileComplaint.BackColor = Color.FromArgb(214, 223, 255);
+            btnFileComplaint.BackColor = Color.White;
             btnFileComplaint.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnFileComplaint.ForeColor = Color.FromArgb(26, 37, 47);
-            btnFileComplaint.Location = new Point(3, 818);
+            btnFileComplaint.Location = new Point(3, 713);
             btnFileComplaint.Margin = new Padding(3, 20, 3, 20);
             btnFileComplaint.Name = "btnFileComplaint";
             btnFileComplaint.Size = new Size(294, 69);
@@ -76,10 +81,10 @@
             // 
             // btnGroceries
             // 
-            btnGroceries.BackColor = Color.FromArgb(214, 223, 255);
+            btnGroceries.BackColor = Color.White;
             btnGroceries.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnGroceries.ForeColor = Color.FromArgb(26, 37, 47);
-            btnGroceries.Location = new Point(3, 709);
+            btnGroceries.Location = new Point(3, 604);
             btnGroceries.Margin = new Padding(3, 20, 3, 20);
             btnGroceries.Name = "btnGroceries";
             btnGroceries.Size = new Size(294, 69);
@@ -90,10 +95,10 @@
             // 
             // btnChores
             // 
-            btnChores.BackColor = Color.FromArgb(214, 223, 255);
+            btnChores.BackColor = Color.White;
             btnChores.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnChores.ForeColor = Color.FromArgb(26, 37, 47);
-            btnChores.Location = new Point(3, 600);
+            btnChores.Location = new Point(3, 495);
             btnChores.Margin = new Padding(3, 20, 3, 20);
             btnChores.Name = "btnChores";
             btnChores.Size = new Size(294, 69);
@@ -104,10 +109,10 @@
             // 
             // btnAgreements
             // 
-            btnAgreements.BackColor = Color.FromArgb(214, 223, 255);
+            btnAgreements.BackColor = Color.White;
             btnAgreements.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnAgreements.ForeColor = Color.FromArgb(26, 37, 47);
-            btnAgreements.Location = new Point(3, 491);
+            btnAgreements.Location = new Point(3, 386);
             btnAgreements.Margin = new Padding(3, 20, 3, 20);
             btnAgreements.Name = "btnAgreements";
             btnAgreements.Size = new Size(294, 69);
@@ -118,10 +123,10 @@
             // 
             // btnHouseRules
             // 
-            btnHouseRules.BackColor = Color.FromArgb(214, 223, 255);
+            btnHouseRules.BackColor = Color.White;
             btnHouseRules.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnHouseRules.ForeColor = Color.FromArgb(26, 37, 47);
-            btnHouseRules.Location = new Point(3, 382);
+            btnHouseRules.Location = new Point(3, 277);
             btnHouseRules.Margin = new Padding(3, 20, 3, 20);
             btnHouseRules.Name = "btnHouseRules";
             btnHouseRules.Size = new Size(294, 69);
@@ -132,10 +137,10 @@
             // 
             // btnAnnouncements
             // 
-            btnAnnouncements.BackColor = Color.FromArgb(214, 223, 255);
+            btnAnnouncements.BackColor = Color.White;
             btnAnnouncements.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnAnnouncements.ForeColor = Color.FromArgb(26, 37, 47);
-            btnAnnouncements.Location = new Point(3, 273);
+            btnAnnouncements.Location = new Point(3, 168);
             btnAnnouncements.Margin = new Padding(3, 20, 3, 20);
             btnAnnouncements.Name = "btnAnnouncements";
             btnAnnouncements.Size = new Size(294, 69);
@@ -213,6 +218,16 @@
             pShowForm.Size = new Size(1598, 874);
             pShowForm.TabIndex = 2;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(14, 16);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(268, 120);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 6;
+            pictureBox1.TabStop = false;
+            // 
             // StudentNavigator
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -227,6 +242,7 @@
             pSideMenu.ResumeLayout(false);
             pFormTitle.ResumeLayout(false);
             pFormTitle.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
@@ -246,5 +262,6 @@
         private Button btnLogout;
         private Label lblLocation;
         private Label lblTitle;
+        private PictureBox pictureBox1;
     }
 }

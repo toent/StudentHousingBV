@@ -155,35 +155,38 @@
             // 
             // btnRemoveStudent
             // 
+            btnRemoveStudent.BackColor = Color.FromArgb(240, 243, 255);
             btnRemoveStudent.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnRemoveStudent.Location = new Point(765, 113);
             btnRemoveStudent.Name = "btnRemoveStudent";
             btnRemoveStudent.Size = new Size(228, 43);
             btnRemoveStudent.TabIndex = 20;
             btnRemoveStudent.Text = "Remove Student";
-            btnRemoveStudent.UseVisualStyleBackColor = true;
+            btnRemoveStudent.UseVisualStyleBackColor = false;
             btnRemoveStudent.Click += btnRemoveStudent_Click;
             // 
             // btnModifyStudent
             // 
+            btnModifyStudent.BackColor = Color.FromArgb(240, 243, 255);
             btnModifyStudent.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnModifyStudent.Location = new Point(1059, 757);
             btnModifyStudent.Name = "btnModifyStudent";
             btnModifyStudent.Size = new Size(468, 43);
             btnModifyStudent.TabIndex = 19;
             btnModifyStudent.Text = "Modify student";
-            btnModifyStudent.UseVisualStyleBackColor = true;
+            btnModifyStudent.UseVisualStyleBackColor = false;
             btnModifyStudent.Click += btnModifyStudent_Click;
             // 
             // btnAddStudent
             // 
+            btnAddStudent.BackColor = Color.FromArgb(240, 243, 255);
             btnAddStudent.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnAddStudent.Location = new Point(765, 64);
             btnAddStudent.Name = "btnAddStudent";
             btnAddStudent.Size = new Size(228, 43);
             btnAddStudent.TabIndex = 18;
             btnAddStudent.Text = "Add Student";
-            btnAddStudent.UseVisualStyleBackColor = true;
+            btnAddStudent.UseVisualStyleBackColor = false;
             btnAddStudent.Click += btnAddStudent_Click;
             // 
             // label1
