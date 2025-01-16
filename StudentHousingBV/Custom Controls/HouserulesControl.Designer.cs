@@ -36,47 +36,49 @@
             // lblDescription
             // 
             lblDescription.Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblDescription.Location = new Point(19, 0);
-            lblDescription.Margin = new Padding(2, 0, 2, 0);
+            lblDescription.Location = new Point(27, 0);
             lblDescription.Name = "lblDescription";
-            lblDescription.Size = new Size(750, 72);
+            lblDescription.Size = new Size(1071, 120);
             lblDescription.TabIndex = 0;
             lblDescription.Text = "[Description]";
             lblDescription.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // btnModify
             // 
-            btnModify.Font = new Font("Segoe UI", 16F);
-            btnModify.Location = new Point(774, 13);
+            btnModify.BackColor = Color.White;
+            btnModify.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
+            btnModify.Location = new Point(1252, 14);
+            btnModify.Margin = new Padding(4, 5, 4, 5);
             btnModify.Name = "btnModify";
-            btnModify.Size = new Size(129, 47);
+            btnModify.Size = new Size(234, 44);
             btnModify.TabIndex = 1;
             btnModify.Text = "Edit";
-            btnModify.UseVisualStyleBackColor = true;
+            btnModify.UseVisualStyleBackColor = false;
             btnModify.Click += btnModify_Click;
             // 
             // btnDelete
             // 
-            btnDelete.Font = new Font("Segoe UI", 16F);
-            btnDelete.Location = new Point(909, 13);
+            btnDelete.BackColor = Color.White;
+            btnDelete.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
+            btnDelete.Location = new Point(1252, 61);
+            btnDelete.Margin = new Padding(4, 5, 4, 5);
             btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(129, 47);
+            btnDelete.Size = new Size(234, 44);
             btnDelete.TabIndex = 2;
             btnDelete.Text = "Delete";
-            btnDelete.UseVisualStyleBackColor = true;
+            btnDelete.UseVisualStyleBackColor = false;
             btnDelete.Click += btnDelete_Click;
             // 
             // HouserulesControl
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.WhiteSmoke;
             Controls.Add(btnDelete);
             Controls.Add(btnModify);
             Controls.Add(lblDescription);
-            Margin = new Padding(2);
             Name = "HouserulesControl";
-            Size = new Size(1049, 72);
+            Size = new Size(1499, 120);
             ResumeLayout(false);
         }
 

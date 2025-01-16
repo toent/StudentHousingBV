@@ -36,41 +36,47 @@
             // tbxDescription
             // 
             tbxDescription.Font = new Font("Segoe UI", 10F);
-            tbxDescription.Location = new Point(12, 28);
+            tbxDescription.Location = new Point(17, 54);
+            tbxDescription.Margin = new Padding(4, 5, 4, 5);
             tbxDescription.Multiline = true;
             tbxDescription.Name = "tbxDescription";
-            tbxDescription.Size = new Size(398, 77);
+            tbxDescription.Size = new Size(567, 126);
             tbxDescription.TabIndex = 0;
             // 
             // lblRuleAddPageTitle
             // 
             lblRuleAddPageTitle.AutoSize = true;
             lblRuleAddPageTitle.Font = new Font("Segoe UI", 12F);
-            lblRuleAddPageTitle.Location = new Point(12, 4);
+            lblRuleAddPageTitle.Location = new Point(17, 17);
+            lblRuleAddPageTitle.Margin = new Padding(4, 0, 4, 0);
             lblRuleAddPageTitle.Name = "lblRuleAddPageTitle";
-            lblRuleAddPageTitle.Size = new Size(90, 21);
+            lblRuleAddPageTitle.Size = new Size(116, 32);
             lblRuleAddPageTitle.TabIndex = 1;
-            lblRuleAddPageTitle.Text = "Add A Rule:";
+            lblRuleAddPageTitle.Text = "Add Rule:";
             // 
             // btnAddUpdate
             // 
-            btnAddUpdate.Font = new Font("Segoe UI", 12F);
-            btnAddUpdate.Location = new Point(130, 111);
+            btnAddUpdate.BackColor = Color.FromArgb(240, 243, 255);
+            btnAddUpdate.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
+            btnAddUpdate.Location = new Point(17, 199);
+            btnAddUpdate.Margin = new Padding(4, 5, 4, 5);
             btnAddUpdate.Name = "btnAddUpdate";
-            btnAddUpdate.Size = new Size(154, 36);
+            btnAddUpdate.Size = new Size(567, 44);
             btnAddUpdate.TabIndex = 2;
             btnAddUpdate.Text = "Add Rule";
-            btnAddUpdate.UseVisualStyleBackColor = true;
+            btnAddUpdate.UseVisualStyleBackColor = false;
             btnAddUpdate.Click += btnAddUpdate_Click;
             // 
             // CompanyAddHouseRule
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(422, 154);
+            BackColor = Color.White;
+            ClientSize = new Size(603, 257);
             Controls.Add(btnAddUpdate);
             Controls.Add(lblRuleAddPageTitle);
             Controls.Add(tbxDescription);
+            Margin = new Padding(4, 5, 4, 5);
             Name = "CompanyAddHouseRule";
             Text = "CompanyAddHouseRule";
             ResumeLayout(false);

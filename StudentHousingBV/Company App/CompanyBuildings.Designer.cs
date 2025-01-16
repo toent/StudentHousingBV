@@ -65,35 +65,38 @@
             // 
             // btnAddBuilding
             // 
+            btnAddBuilding.BackColor = Color.FromArgb(240, 243, 255);
             btnAddBuilding.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnAddBuilding.Location = new Point(766, 62);
             btnAddBuilding.Name = "btnAddBuilding";
             btnAddBuilding.Size = new Size(228, 43);
             btnAddBuilding.TabIndex = 2;
             btnAddBuilding.Text = "Add building";
-            btnAddBuilding.UseVisualStyleBackColor = true;
+            btnAddBuilding.UseVisualStyleBackColor = false;
             btnAddBuilding.Click += btnAddBuilding_Click;
             // 
             // btnModifyBuilding
             // 
+            btnModifyBuilding.BackColor = Color.FromArgb(240, 243, 255);
             btnModifyBuilding.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnModifyBuilding.Location = new Point(1096, 763);
             btnModifyBuilding.Name = "btnModifyBuilding";
             btnModifyBuilding.Size = new Size(468, 43);
             btnModifyBuilding.TabIndex = 3;
             btnModifyBuilding.Text = "Modify building";
-            btnModifyBuilding.UseVisualStyleBackColor = true;
+            btnModifyBuilding.UseVisualStyleBackColor = false;
             btnModifyBuilding.Click += btnModifyBuilding_Click;
             // 
             // btnDeleteBuilding
             // 
+            btnDeleteBuilding.BackColor = Color.FromArgb(240, 243, 255);
             btnDeleteBuilding.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnDeleteBuilding.Location = new Point(766, 111);
             btnDeleteBuilding.Name = "btnDeleteBuilding";
             btnDeleteBuilding.Size = new Size(228, 43);
             btnDeleteBuilding.TabIndex = 4;
             btnDeleteBuilding.Text = "Delete building";
-            btnDeleteBuilding.UseVisualStyleBackColor = true;
+            btnDeleteBuilding.UseVisualStyleBackColor = false;
             btnDeleteBuilding.Click += btnDeleteBuilding_Click;
             // 
             // groupBox1

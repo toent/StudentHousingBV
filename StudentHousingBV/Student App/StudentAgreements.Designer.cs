@@ -41,13 +41,14 @@
             // 
             // btnAddAgreement
             // 
+            btnAddAgreement.BackColor = Color.FromArgb(240, 243, 255);
             btnAddAgreement.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnAddAgreement.Location = new Point(1338, 12);
             btnAddAgreement.Name = "btnAddAgreement";
             btnAddAgreement.Size = new Size(226, 37);
             btnAddAgreement.TabIndex = 3;
             btnAddAgreement.Text = "Add Agreement";
-            btnAddAgreement.UseVisualStyleBackColor = true;
+            btnAddAgreement.UseVisualStyleBackColor = false;
             btnAddAgreement.Click += btnAddAgreement_Click;
             // 
             // pAgreements
@@ -110,9 +111,9 @@
             lblCreatorFilter.Font = new Font("Segoe UI", 10F);
             lblCreatorFilter.Location = new Point(12, 18);
             lblCreatorFilter.Name = "lblCreatorFilter";
-            lblCreatorFilter.Size = new Size(81, 28);
+            lblCreatorFilter.Size = new Size(77, 28);
             lblCreatorFilter.TabIndex = 9;
-            lblCreatorFilter.Text = "Creator:";
+            lblCreatorFilter.Text = "Creator";
             // 
             // label2
             // 
@@ -126,13 +127,14 @@
             // 
             // btnShowMine
             // 
-            btnShowMine.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnShowMine.BackColor = Color.FromArgb(240, 243, 255);
+            btnShowMine.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
             btnShowMine.Location = new Point(360, 14);
             btnShowMine.Name = "btnShowMine";
             btnShowMine.Size = new Size(258, 37);
             btnShowMine.TabIndex = 12;
             btnShowMine.Text = "Show My Agreements";
-            btnShowMine.UseVisualStyleBackColor = true;
+            btnShowMine.UseVisualStyleBackColor = false;
             btnShowMine.Click += btnShowMine_Click;
             // 
             // StudentAgreements

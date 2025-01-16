@@ -39,9 +39,9 @@
             label1.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.Location = new Point(168, 97);
             label1.Name = "label1";
-            label1.Size = new Size(154, 25);
+            label1.Size = new Size(150, 25);
             label1.TabIndex = 0;
-            label1.Text = "Enter contract id:";
+            label1.Text = "Enter contract id";
             // 
             // txtStudentId
             // 
@@ -52,12 +52,12 @@
             // 
             // btnLogin
             // 
-            btnLogin.BackColor = Color.FromArgb(214, 223, 255);
-            btnLogin.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnLogin.BackColor = Color.FromArgb(240, 243, 255);
+            btnLogin.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
             btnLogin.Location = new Point(168, 169);
             btnLogin.Margin = new Padding(3, 10, 3, 3);
             btnLogin.Name = "btnLogin";
-            btnLogin.Size = new Size(331, 34);
+            btnLogin.Size = new Size(331, 44);
             btnLogin.TabIndex = 2;
             btnLogin.Text = "Login";
             btnLogin.UseVisualStyleBackColor = false;
@@ -67,6 +67,7 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.White;
             ClientSize = new Size(676, 337);
             Controls.Add(btnLogin);
             Controls.Add(txtStudentId);

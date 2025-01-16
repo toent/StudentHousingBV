@@ -30,13 +30,13 @@
         {
             lblAgreementCreator = new Label();
             gbAgreementProperties = new GroupBox();
+            lblAgreementTitle = new Label();
             btnDeleteAgreement = new Button();
             lblCreationDateTime = new Label();
             gbAgreementContent = new GroupBox();
             btnAgreeTo = new Button();
             lblAgreedBy = new Label();
             lblAgreementContent = new Label();
-            lblAgreementTitle = new Label();
             gbAgreementProperties.SuspendLayout();
             gbAgreementContent.SuspendLayout();
             SuspendLayout();
@@ -44,10 +44,10 @@
             // lblAgreementCreator
             // 
             lblAgreementCreator.AutoSize = true;
-            lblAgreementCreator.Font = new Font("Segoe UI", 15F);
-            lblAgreementCreator.Location = new Point(6, 247);
+            lblAgreementCreator.Font = new Font("Segoe UI", 10F);
+            lblAgreementCreator.Location = new Point(6, 319);
             lblAgreementCreator.Name = "lblAgreementCreator";
-            lblAgreementCreator.Size = new Size(265, 41);
+            lblAgreementCreator.Size = new Size(174, 28);
             lblAgreementCreator.TabIndex = 0;
             lblAgreementCreator.Text = "By: [StudentName]";
             // 
@@ -64,12 +64,21 @@
             gbAgreementProperties.TabStop = false;
             gbAgreementProperties.Text = "About";
             // 
+            // lblAgreementTitle
+            // 
+            lblAgreementTitle.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold);
+            lblAgreementTitle.Location = new Point(6, 30);
+            lblAgreementTitle.Name = "lblAgreementTitle";
+            lblAgreementTitle.Size = new Size(402, 217);
+            lblAgreementTitle.TabIndex = 5;
+            lblAgreementTitle.Text = "[Title]";
+            // 
             // btnDeleteAgreement
             // 
-            btnDeleteAgreement.Font = new Font("Segoe UI", 15F);
-            btnDeleteAgreement.Location = new Point(6, 364);
+            btnDeleteAgreement.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            btnDeleteAgreement.Location = new Point(6, 387);
             btnDeleteAgreement.Name = "btnDeleteAgreement";
-            btnDeleteAgreement.Size = new Size(402, 66);
+            btnDeleteAgreement.Size = new Size(402, 43);
             btnDeleteAgreement.TabIndex = 4;
             btnDeleteAgreement.Text = "Delete";
             btnDeleteAgreement.UseVisualStyleBackColor = true;
@@ -78,10 +87,10 @@
             // lblCreationDateTime
             // 
             lblCreationDateTime.AutoSize = true;
-            lblCreationDateTime.Font = new Font("Segoe UI", 15F);
-            lblCreationDateTime.Location = new Point(6, 302);
+            lblCreationDateTime.Font = new Font("Segoe UI", 10F);
+            lblCreationDateTime.Location = new Point(6, 347);
             lblCreationDateTime.Name = "lblCreationDateTime";
-            lblCreationDateTime.Size = new Size(163, 41);
+            lblCreationDateTime.Size = new Size(107, 28);
             lblCreationDateTime.TabIndex = 1;
             lblCreationDateTime.Text = "[DateTime]";
             // 
@@ -92,17 +101,17 @@
             gbAgreementContent.Controls.Add(lblAgreementContent);
             gbAgreementContent.Location = new Point(423, 3);
             gbAgreementContent.Name = "gbAgreementContent";
-            gbAgreementContent.Size = new Size(1074, 436);
+            gbAgreementContent.Size = new Size(1119, 436);
             gbAgreementContent.TabIndex = 3;
             gbAgreementContent.TabStop = false;
             gbAgreementContent.Text = "Content";
             // 
             // btnAgreeTo
             // 
-            btnAgreeTo.Font = new Font("Segoe UI", 15F);
-            btnAgreeTo.Location = new Point(800, 364);
+            btnAgreeTo.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            btnAgreeTo.Location = new Point(885, 387);
             btnAgreeTo.Name = "btnAgreeTo";
-            btnAgreeTo.Size = new Size(268, 66);
+            btnAgreeTo.Size = new Size(228, 43);
             btnAgreeTo.TabIndex = 6;
             btnAgreeTo.Text = "(Un)Agree";
             btnAgreeTo.UseVisualStyleBackColor = true;
@@ -110,29 +119,21 @@
             // 
             // lblAgreedBy
             // 
-            lblAgreedBy.Location = new Point(6, 364);
+            lblAgreedBy.Font = new Font("Segoe UI", 10F);
+            lblAgreedBy.Location = new Point(6, 319);
             lblAgreedBy.Name = "lblAgreedBy";
-            lblAgreedBy.Size = new Size(788, 66);
+            lblAgreedBy.Size = new Size(873, 111);
             lblAgreedBy.TabIndex = 5;
             lblAgreedBy.Text = "Agreed by: [StudentNameList]";
             // 
             // lblAgreementContent
             // 
-            lblAgreementContent.Font = new Font("Segoe UI", 15F);
+            lblAgreementContent.Font = new Font("Segoe UI", 10F);
             lblAgreementContent.Location = new Point(6, 30);
             lblAgreementContent.Name = "lblAgreementContent";
-            lblAgreementContent.Size = new Size(1062, 334);
+            lblAgreementContent.Size = new Size(1107, 245);
             lblAgreementContent.TabIndex = 4;
             lblAgreementContent.Text = "[Content]";
-            // 
-            // lblAgreementTitle
-            // 
-            lblAgreementTitle.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
-            lblAgreementTitle.Location = new Point(6, 30);
-            lblAgreementTitle.Name = "lblAgreementTitle";
-            lblAgreementTitle.Size = new Size(402, 217);
-            lblAgreementTitle.TabIndex = 5;
-            lblAgreementTitle.Text = "[Title]";
             // 
             // AgreementControl
             // 
@@ -141,7 +142,7 @@
             Controls.Add(gbAgreementContent);
             Controls.Add(gbAgreementProperties);
             Name = "AgreementControl";
-            Size = new Size(1500, 442);
+            Size = new Size(1545, 442);
             gbAgreementProperties.ResumeLayout(false);
             gbAgreementProperties.PerformLayout();
             gbAgreementContent.ResumeLayout(false);

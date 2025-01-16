@@ -39,57 +39,55 @@
             // pComplaints
             // 
             pComplaints.AutoScroll = true;
-            pComplaints.Location = new Point(8, 40);
-            pComplaints.Margin = new Padding(2);
+            pComplaints.Location = new Point(11, 67);
             pComplaints.Name = "pComplaints";
-            pComplaints.Size = new Size(1086, 443);
+            pComplaints.Size = new Size(1551, 738);
             pComplaints.TabIndex = 13;
             // 
             // cbFlat
             // 
             cbFlat.FormattingEnabled = true;
-            cbFlat.Location = new Point(307, 11);
-            cbFlat.Margin = new Padding(2);
+            cbFlat.Location = new Point(439, 18);
             cbFlat.Name = "cbFlat";
-            cbFlat.Size = new Size(189, 23);
+            cbFlat.Size = new Size(268, 33);
             cbFlat.TabIndex = 12;
             cbFlat.SelectedIndexChanged += cbFlat_SelectedIndexChanged;
             // 
             // cbBuilding
             // 
             cbBuilding.FormattingEnabled = true;
-            cbBuilding.Location = new Point(66, 11);
-            cbBuilding.Margin = new Padding(2);
+            cbBuilding.Location = new Point(94, 18);
             cbBuilding.Name = "cbBuilding";
-            cbBuilding.Size = new Size(189, 23);
+            cbBuilding.Size = new Size(268, 33);
             cbBuilding.TabIndex = 11;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(274, 13);
-            label2.Margin = new Padding(2, 0, 2, 0);
+            label2.Font = new Font("Segoe UI", 10F);
+            label2.Location = new Point(389, 18);
             label2.Name = "label2";
-            label2.Size = new Size(26, 15);
+            label2.Size = new Size(44, 28);
             label2.TabIndex = 10;
             label2.Text = "Flat";
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(8, 13);
-            label1.Margin = new Padding(2, 0, 2, 0);
+            label1.Font = new Font("Segoe UI", 10F);
+            label1.Location = new Point(12, 18);
             label1.Name = "label1";
-            label1.Size = new Size(51, 15);
+            label1.Size = new Size(84, 28);
             label1.TabIndex = 9;
             label1.Text = "Building";
             // 
             // checkBoxViewAll
             // 
             checkBoxViewAll.AutoSize = true;
-            checkBoxViewAll.Location = new Point(540, 12);
+            checkBoxViewAll.Location = new Point(742, 20);
+            checkBoxViewAll.Margin = new Padding(4, 5, 4, 5);
             checkBoxViewAll.Name = "checkBoxViewAll";
-            checkBoxViewAll.Size = new Size(128, 19);
+            checkBoxViewAll.Size = new Size(189, 29);
             checkBoxViewAll.TabIndex = 14;
             checkBoxViewAll.Text = "View all complaints";
             checkBoxViewAll.UseVisualStyleBackColor = true;
@@ -97,16 +95,17 @@
             // 
             // DisplayComplaint
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1338, 593);
+            BackColor = Color.White;
+            ClientSize = new Size(1911, 988);
             Controls.Add(checkBoxViewAll);
             Controls.Add(pComplaints);
             Controls.Add(cbFlat);
             Controls.Add(cbBuilding);
             Controls.Add(label2);
             Controls.Add(label1);
-            Margin = new Padding(3, 2, 3, 2);
+            Margin = new Padding(4, 3, 4, 3);
             Name = "DisplayComplaint";
             Text = "DisplayComplaint";
             ResumeLayout(false);

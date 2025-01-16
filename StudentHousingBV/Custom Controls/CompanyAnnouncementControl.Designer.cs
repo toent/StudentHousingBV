@@ -83,9 +83,10 @@
             // rtbContent
             // 
             rtbContent.BorderStyle = BorderStyle.None;
+            rtbContent.Font = new Font("Segoe UI", 10F);
             rtbContent.Location = new Point(20, 100);
             rtbContent.Name = "rtbContent";
-            rtbContent.Size = new Size(1216, 182);
+            rtbContent.Size = new Size(1216, 127);
             rtbContent.TabIndex = 3;
             rtbContent.Text = "[Content]";
             rtbContent.TextChanged += rtbContent_TextChanged;
@@ -123,7 +124,7 @@
             Controls.Add(rtbContent);
             Controls.Add(panel1);
             Name = "CompanyAnnouncementControl";
-            Size = new Size(1499, 300);
+            Size = new Size(1499, 247);
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ResumeLayout(false);

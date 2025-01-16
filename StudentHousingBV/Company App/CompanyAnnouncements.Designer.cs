@@ -38,30 +38,33 @@
             // 
             // btnAddAnnouncement
             // 
-            btnAddAnnouncement.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnAddAnnouncement.Location = new Point(1344, 12);
+            btnAddAnnouncement.BackColor = Color.FromArgb(240, 243, 255);
+            btnAddAnnouncement.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            btnAddAnnouncement.Location = new Point(1314, 12);
             btnAddAnnouncement.Name = "btnAddAnnouncement";
-            btnAddAnnouncement.Size = new Size(220, 43);
+            btnAddAnnouncement.Size = new Size(250, 43);
             btnAddAnnouncement.TabIndex = 1;
             btnAddAnnouncement.Text = "Add Announcement";
-            btnAddAnnouncement.UseVisualStyleBackColor = true;
+            btnAddAnnouncement.UseVisualStyleBackColor = false;
             btnAddAnnouncement.Click += btnAddAnnouncement_Click;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(12, 22);
+            label1.Font = new Font("Segoe UI", 10F);
+            label1.Location = new Point(12, 19);
             label1.Name = "label1";
-            label1.Size = new Size(76, 25);
+            label1.Size = new Size(84, 28);
             label1.TabIndex = 3;
             label1.Text = "Building";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(392, 22);
+            label2.Font = new Font("Segoe UI", 10F);
+            label2.Location = new Point(388, 19);
             label2.Name = "label2";
-            label2.Size = new Size(40, 25);
+            label2.Size = new Size(44, 28);
             label2.TabIndex = 4;
             label2.Text = "Flat";
             // 
