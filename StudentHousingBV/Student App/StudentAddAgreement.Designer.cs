@@ -38,7 +38,7 @@
             // btnCreateAgreement
             // 
             btnCreateAgreement.BackColor = Color.FromArgb(240, 243, 255);
-            btnCreateAgreement.Font = new Font("Segoe UI", 12F);
+            btnCreateAgreement.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnCreateAgreement.Location = new Point(30, 553);
             btnCreateAgreement.Name = "btnCreateAgreement";
             btnCreateAgreement.Size = new Size(792, 44);

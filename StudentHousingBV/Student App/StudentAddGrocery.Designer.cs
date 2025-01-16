@@ -108,7 +108,7 @@
             // 
             btnAddReceipt.BackColor = Color.FromArgb(240, 243, 255);
             btnAddReceipt.Location = new Point(26, 140);
-            btnAddReceipt.Margin = new Padding(4, 4, 4, 4);
+            btnAddReceipt.Margin = new Padding(4);
             btnAddReceipt.Name = "btnAddReceipt";
             btnAddReceipt.Size = new Size(132, 36);
             btnAddReceipt.TabIndex = 24;
@@ -119,7 +119,7 @@
             // pictureBoxReceipt
             // 
             pictureBoxReceipt.Location = new Point(221, 140);
-            pictureBoxReceipt.Margin = new Padding(4, 4, 4, 4);
+            pictureBoxReceipt.Margin = new Padding(4);
             pictureBoxReceipt.Name = "pictureBoxReceipt";
             pictureBoxReceipt.Size = new Size(142, 142);
             pictureBoxReceipt.TabIndex = 25;
@@ -128,10 +128,10 @@
             // btnRemoveRecepit
             // 
             btnRemoveRecepit.BackColor = Color.FromArgb(240, 243, 255);
-            btnRemoveRecepit.Location = new Point(25, 184);
-            btnRemoveRecepit.Margin = new Padding(4, 4, 4, 4);
+            btnRemoveRecepit.Location = new Point(26, 184);
+            btnRemoveRecepit.Margin = new Padding(4);
             btnRemoveRecepit.Name = "btnRemoveRecepit";
-            btnRemoveRecepit.Size = new Size(130, 36);
+            btnRemoveRecepit.Size = new Size(132, 36);
             btnRemoveRecepit.TabIndex = 26;
             btnRemoveRecepit.Text = "Remove";
             btnRemoveRecepit.UseVisualStyleBackColor = false;
@@ -140,7 +140,7 @@
             // richTextBoxGroceryItems
             // 
             richTextBoxGroceryItems.Location = new Point(28, 309);
-            richTextBoxGroceryItems.Margin = new Padding(4, 4, 4, 4);
+            richTextBoxGroceryItems.Margin = new Padding(4);
             richTextBoxGroceryItems.Name = "richTextBoxGroceryItems";
             richTextBoxGroceryItems.Size = new Size(335, 208);
             richTextBoxGroceryItems.TabIndex = 22;
@@ -162,7 +162,7 @@
             Controls.Add(label4);
             Controls.Add(tBoxPaymentURL);
             Controls.Add(label1);
-            Margin = new Padding(4, 4, 4, 4);
+            Margin = new Padding(4);
             Name = "StudentAddGrocery";
             Text = "StudentAddGrocery";
             ((System.ComponentModel.ISupportInitialize)pictureBoxReceipt).EndInit();
