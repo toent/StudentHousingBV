@@ -1346,7 +1346,7 @@ namespace StudentHousingBV.Classes.Managers
             {
                 using SqlConnection connection = new(CONNECTION_STRING);
                 connection.Open();
-                string query = "INSERT INTO Complaint (Issue, AssignedFlatId) VALUES (@Issue, @FlatId, )";
+                string query = "INSERT INTO Complaint (Issue, AssignedFlatId) VALUES (@Issue, @FlatId)";
                 SqlCommand command = new(query, connection);
                 command.Parameters.AddWithValue("@Issue", complaint.Issue);
                 command.Parameters.AddWithValue("@FlatId", complaint.AssignedFlat.FlatId);
