@@ -266,7 +266,6 @@ namespace StudentHousingBV.Classes.Managers
             if (dataManager.AddComplaint(complaint))
             {
                 result = true;
-                MessageBox.Show("Saved");
             }
             return result;
         }
