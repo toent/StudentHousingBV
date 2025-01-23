@@ -49,7 +49,6 @@ Thumbs.db
 desktop.ini
 ``
 Ignore Program files
-/StudentHousingBV/Program.cs
 /StudentHousingBV/bin/Debug/net8.0-windows/StudentHousingBV.dll
 /StudentHousingBV/bin/Debug/net8.0-windows/StudentHousingBV.exe
 /StudentHousingBV/bin/Debug/net8.0-windows/StudentHousingBV.pdb
